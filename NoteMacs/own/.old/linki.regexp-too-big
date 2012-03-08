@@ -1,0 +1,196 @@
+; -*- mode: emacs-lisp -*-
+;;; linki.el --- a content management experiment
+
+;; Copyright (C) 2003  Free Software Foundation, Inc.
+
+;; Author: Patrick Anderson <patware@freeshell.org>
+;; Keywords: multimedia, PIM
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;;; Commentary:
+;; very incomplete.  for entertainment purposes only.
+
+;;; Version:
+;; 0 brute force (broken links)
+
+;;; Todo:
+;; fix link breakage
+;; cross-reference: sub-tokens, back-links (pages containing this token)
+;; local media (auto-insert tokens found in .media)
+;; cookie backed stylesheet selection
+;; "http://www.google.com/search?q=" token
+;; "http://images.google.com/search?q=" token
+;; "http://dictionary.reference.com/search?q=" token
+;; "http://thesaurus.reference.com/search?q=" token
+
+;;; Customizations:
+(defcustom linki-output-dir "../" "where to write the output")
+
+
+;;; Code:
+(defvar linki-mapping nil)
+(defvar linki-regexp nil)
+(defvar linki-replace nil)
+
+(defun linki ()
+  (interactive)
+  (setq linki-mapping
+ 		'(
+ 		  ("\n" " <br>\n")
+ 		  ("	" "&nbsp;&nbsp;&nbsp;&nbsp;")
+ 		  ("  " " &nbsp;")
+ 		  ("http:[^ 	
+ ]+" "<a href=\"\\&\">\\&</a>")))
+
+  (linki-add-ls-rules ".")
+
+;sort by token length
+
+;create giant regexp
+  (setq linki-regexp nil)
+  (setq linki-replace nil)
+
+  (mapcar
+   (lambda (mapping)
+	 (setq linki-regexp (concat "\\(" (car mapping) "\\)" 
+									 (if linki-regexp "\\|" nil) 
+									 linki-regexp))
+	 (setq linki-replace (cons (car (cdr mapping)) linki-replace)))
+   linki-mapping)
+
+  (linki-make-pages))
+
+;file-relative-name file dir)
+(defun linki-recurse (process-file)
+  (mapcar
+   (lambda (token)
+	 (if (not (file-directory-p token))
+			  (funcall process-file token)))
+   (directory-files ".")))
+
+
+(defun linki-add-ls-rules (dir)
+  (linki-recurse
+   (lambda (token)
+	 (setq linki-mapping (cons (list (regexp-quote token) (concat "<a href=\"" token ".htm\">" token "</a>"))
+	 linki-mapping)))))
+
+(defun linki-make-pages ()
+  (linki-recurse
+   (lambda (token)
+	 (let* ((outpath (concat linki-output-dir token))
+			(htm (concat outpath ".htm")))
+	   (if (char-equal (string-to-char token) ?.) ; if a 'dot' file
+		   (copy-file token outpath t)
+		 (progn
+		   (copy-file token htm t)
+		   (save-excursion
+			 (set-buffer (find-file-noselect htm))
+
+;problem:
+;longer tokens may contain sub-tokens
+;solution: linkify only the longest match by sorting the rules list by length and
+
+;problem:
+;urls like http://www.globalexchange.org/campaigns/brazil/20020603_91.html are broken in many places as `re-search' finds sub-tokens.
+;solution: linki-URL-rule
+
+			 
+			 (goto-char (point-min))
+
+  (while (re-search-forward linki-regexp nil t)
+	(let ((num 1)
+		  (linki-replace-len (length linki-replace)))
+	  (while 
+		  (and (<= num linki-replace-len) ;not at end of list
+			   (not (match-string num))) ;not yet found
+		(setq num (+ num 1)))
+	  (if (<= num linki-replace-len)
+		  (progn
+			(message (match-string 1))
+			(replace-match (nth (- num 1) linki-replace) t nil)))))
+
+;; 			 (mapcar
+;; 			  (lambda (mapping)
+;; 				(let ((token (car mapping))
+;; 					  (link (car (cdr mapping))))
+;; 				  (goto-char (point-min))
+;; 				  (while (re-search-forward token nil t)
+;; 					(replace-match link t nil))))
+;; 			  linki-mapping)
+
+			 (goto-char (point-max))
+			 (insert-file-contents ".linki/.linki/footer")
+
+			 (goto-char (point-min))
+			 (insert-file-contents ".linki/.linki/header")
+
+			 (goto-char (point-max))
+
+
+;;  			 (let ((linki-google 
+;; 					(open-network-stream token (current-buffer) "www.google.com" 80)))
+			   
+
+
+;; ;; 			   (set-process-filter 
+;; ;; 				linki-google 
+;; ;; 				(lambda (proc string)
+;; ;; 				  (with-current-buffer (process-buffer proc)
+;; ;; 					(save-excursion
+;; ;; 					  ;; Insert the text, advancing the process marker.
+;; ;; 					  (goto-char (process-mark proc))
+;; ;; 					  (insert string)
+;; ;; 					  (set-marker (process-mark proc) (point)))
+;; ;; 					(goto-char (process-mark proc)))))
+
+
+
+
+;;  			   (set-process-sentinel
+;;  				linki-google
+;;  				(lambda (process event)
+;; 				  (if (compare-strings event 0 5 "exited" 0 nil t )
+;; 					  ;save, kill buffer
+;;  				  ))
+
+;; "finished\n"'.
+
+
+
+;; 			   (process-send-string 
+;; 				linki-google
+;; 				(concat
+;; 										;  "GET / HTTP/1.1\r\n"
+;; 				 "GET /search?q=" token " HTTP/1.1\r\n"
+;; 				 "Connection: keep-alive\r\n"
+;;  				 "\r\n")))
+			   
+			 (save-buffer)
+			 (kill-buffer (current-buffer))
+)))))))
+
+
+(provide 'linki)
+;;; linki.el ends here
+
+
+(defun linki-test ()
+  (interactive)
+  (find-file "~/recursi/.linki/kino")
+  (goto-char (point-min))
+  (while (re-search-forward linki-regexp nil t)
+	(let ((num 1)
+		  (linki-replace-len (length linki-replace)))
+	  (while 
+		  (and (<= num linki-replace-len) ;not at end of list
+			   (not (match-string num))) ;not yet found
+		(setq num (+ num 1)))
+	  (if (<= num linki-replace-len)
+		  (progn
+			(message (match-string 1))
+			(replace-match (nth (- num 1) linki-replace) t nil))))))

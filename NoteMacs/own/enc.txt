@@ -1,0 +1,23 @@
+imap: 143
+	login username password
+	select some-folder
+	fetch 1438 rfc822
+	fetch 1000 rfc822.header.lines (text subject from)
+	fetch 1465:1472 (flags rfc822.header.lines (subject from))
+	search flagged since 1-feb-1994 not from "smith"
+	search body "term" from "someone@somewhere.org"
+	store 1469 +flags (\deleted)
+	expunge
+	create some-folder
+	copy 1547 personal
+
+
+ftp: 21
+
+telnet: 23
+
+smtp: 25
+
+http: 80
+	GET / HTTP/1.1\r\n
+	PUT

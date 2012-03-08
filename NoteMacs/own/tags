@@ -1,0 +1,384 @@
+appt-list	appointments.el	/^(defun appt-list()$/
+appt-list-print	appointments.el	/^(defun appt-list-print (l)$/
+assoclist	replace-from-hash.el	/^(defvar assoclist '((x 1) (y 5) (z 1))$/
+bg-shell-command	background.el	/^(defun bg-shell-command (cmd &optional watch)$/
+bookmark-delete-by-line	w32-dev.el	/^(defun bookmark-delete-by-line()$/
+bookmark-delete-by-line	bookmark-iterator.el	/^(defun bookmark-delete-by-line()$/
+bookmark-get-next	w32-dev.el	/^(defun bookmark-get-next()$/
+bookmark-get-next	bookmark-iterator.el	/^(defun bookmark-get-next()$/
+bookmark-make-name	w32-dev.el	/^(defun bookmark-make-name() ;todo:  this doesn't a/
+bookmark-make-name	bookmark-iterator.el	/^(defun bookmark-make-name() ;todo:  this doesn't a/
+bookmark-name-next	w32-dev.el	/^(defvar bookmark-name-next 0$/
+bookmark-name-next	bookmark-iterator.el	/^(defvar bookmark-name-next 0$/
+bookmark-set-by-line	w32-dev.el	/^(defun bookmark-set-by-line()$/
+bookmark-set-by-line	bookmark-iterator.el	/^(defun bookmark-set-by-line()$/
+browse-url-emacs	browse-url-emacs.el	/^(defun browse-url-emacs(host-file)$/
+browse-url-emacs:GET	browse-url-emacs.el	/^(defun browse-url-emacs:GET (host file)$/
+c++-mode-map	estudio.el	/^(define-key c++-mode-map [(f1)] (lambda () (intera/
+c++-mode-map	estudio.el	/^(define-key c++-mode-map [(f4)] (lambda () (intera/
+c++-mode-map	estudio.el	/^(define-key c++-mode-map [(shift f4)] (lambda () (/
+c++-mode-map	estudio.el	/^(define-key c++-mode-map [(f5)] (lambda () (intera/
+c++-mode-map	estudio.el	/^(define-key c++-mode-map [(shift f5)] (lambda () (/
+c++-mode-map	estudio.el	/^(define-key c++-mode-map [(M-f7)] (lambda () (inte/
+c++-mode-map	estudio.el	/^(define-key c++-mode-map [(f9)] (lambda () (intera/
+c++-mode-map	estudio.el	/^(define-key c++-mode-map [(f10)] (lambda () (inter/
+c++-mode-map	estudio.el	/^(define-key c++-mode-map [(f11)] (lambda () (inter/
+c++-mode-map	estudio.el	/^(define-key c++-mode-map [(shift f11)] (lambda () /
+c++-mode-map	estudio.el	/^(define-key c++-mode-map [(pause)] (lambda () (int/
+c++-mode-map	estudio.el	/^(define-key c++-mode-map [(control pause)] (lambda/
+current-word-2-kill-ring	current-word-2-kill-ring.el	/^(defun current-word-2-kill-ring ()$/
+decode-chars-paste	decode-chars.el	/^(defmacro decode-chars-paste (code-point)$/
+describe-menubar	menu-control.el	/^(defun describe-menubar ()$/
+dired-mode-map	dired-sort-map.el	/^(define-key dired-mode-map "s" dired-sort-map)$/
+dired-sort-map	dired-sort-map.el	/^(defvar dired-sort-map (make-sparse-keymap))$/
+dired-sort-map	dired-sort-map.el	/^(define-key dired-sort-map "s" (lambda () "sort by/
+dired-sort-map	dired-sort-map.el	/^(define-key dired-sort-map "x" (lambda () "sort by/
+dired-sort-map	dired-sort-map.el	/^(define-key dired-sort-map "t" (lambda () "sort by/
+dired-sort-map	dired-sort-map.el	/^(define-key dired-sort-map "n" (lambda () "sort by/
+eic-messages-exists	fold-markup.el	/^(defvar eic-messages-exists nil)$/
+ewb	ewb.el	/^(defgroup ewb nil "Emacs Web Browser"$/
+ewb	ewb.el	/^(defun ewb (url &optional prefix)$/
+ewb-back	ewb.el	/^(defun ewb-back ()$/
+ewb-bookmark-add	ewb.el	/^(defun ewb-bookmark-add ()$/
+ewb-bookmark-file	ewb.el	/^(defcustom ewb-bookmark-file$/
+ewb-bookmarks	ewb.el	/^(defun ewb-bookmarks ()$/
+ewb-connection	ewb.el	/^(defvar ewb-connection nil)$/
+ewb-dir	ewb.el	/^(defvar ewb-dir nil)$/
+ewb-follow	ewb.el	/^(defun ewb-follow ()$/
+ewb-follow-mouse	ewb.el	/^(defun ewb-follow-mouse (event &optional univ)$/
+ewb-get	ewb.el	/^(defun ewb-get (host dir file buf)$/
+ewb-history	ewb.el	/^(defvar ewb-history nil)$/
+ewb-history-file	ewb.el	/^(defcustom ewb-history-file$/
+ewb-host	ewb.el	/^(defvar ewb-host nil)$/
+ewb-href	ewb.el	/^(defvar ewb-href "<a\\\\(.\\\\|\\n\\\\)*?\\\\(href\\\\|name\\\\/
+ewb-invisible-markup	ewb.el	/^(defcustom ewb-invisible-markup$/
+ewb-local	ewb.el	/^(defun ewb-local (file)$/
+ewb-markup-face	ewb.el	/^(defcustom ewb-markup-face$/
+ewb-mode	ewb.el	/^(defun ewb-mode ()$/
+ewb-mode-map	ewb.el	/^(defvar ewb-mode-map (make-sparse-keymap))$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(n)] 'pan-up)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(down)] 'pan-up)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(p)] 'pan-down)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(up)] 'pan-down)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(C)]$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(b)] 'ewb-bookmarks)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(B)] 'ewb-bookmark-add)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(o)] 'ewb)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(g)] 'ewb-revert)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(9)] 'ewb-next)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(shift 9)] 'ewb-prev)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(13)] 'ewb-follow)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(mouse-2)] 'ewb-follow-m/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(s)] 'ewb-search)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(q)] 'bury-buffer)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map " " 'scroll-up)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(u)] 'scroll-down)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(h)] (lambda () (interac/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(meta left)] 'ewb-back)$/
+ewb-mode-map	ewb.el	/^(define-key ewb-mode-map [(backspace)] 'ewb-back)$/
+ewb-next	ewb.el	/^(defun ewb-next ()$/
+ewb-note-face	ewb.el	/^(defface ewb-note-face$/
+ewb-parse-url	ewb.el	/^(defun ewb-parse-url (url)$/
+ewb-prev	ewb.el	/^(defun ewb-prev ()$/
+ewb-proto	ewb.el	/^(defvar ewb-proto nil)$/
+ewb-revert	ewb.el	/^(defun ewb-revert ()$/
+ewb-search	ewb.el	/^(defun ewb-search (str)$/
+ewb-strip-tags	ewb.el	/^(defun ewb-strip-tags ()$/
+ewb-suppressed-extensions	ewb.el	/^(defcustom ewb-suppressed-extensions $/
+ewb-url	ewb.el	/^(defvar ewb-url nil)$/
+explorer-call-process	explorer.el	/^(defun explorer-call-process (proc)$/
+explorer-context-menu	explorer.el	/^(defun explorer-context-menu (event)$/
+explorer-shell-execute	explorer.el	/^(defun explorer-shell-execute ()$/
+explorer-start-process	explorer.el	/^(defun explorer-start-process (proc)$/
+fill-paragraph-ala-mode	menu-control.el	/^(defun fill-paragraph-ala-mode (&optional arg)$/
+fm-action	fold-markup.el	/^(defvar fm-action 'font-lock-type-face)$/
+fm-after-change	fold-markup.el	/^(defun fm-after-change (start end old-len)$/
+fm-chunk-size	fold-markup.el	/^(defcustom fm-chunk-size 100$/
+fm-minor-mode	fold-markup.el	/^(defun fm-minor-mode$/
+fm-parse-buffer	fold-markup.el	/^(defun fm-parse-buffer ()$/
+fm-parse-chunk	fold-markup.el	/^(defun fm-parse-chunk ()$/
+fm-position	fold-markup.el	/^(defvar fm-position 1) ;make-local-variable$/
+fm-regexp	fold-markup.el	/^(defvar fm-regexp "\\\\* \\\\([0-9]*\\\\) EXISTS")$/
+fm-sit-for	fold-markup.el	/^(defcustom fm-sit-for 0.125$/
+fm-stealth-time	fold-markup.el	/^(defcustom fm-stealth-time 2$/
+fm-stealth-timer	fold-markup.el	/^(defvar fm-stealth-timer nil)$/
+fm-token	fold-markup.el	/^(defvar fm-token 'eic-messages-exists)$/
+fm-tokens	fold-markup.el	/^(defvar fm-tokens '($/
+fm-traverse-back	fold-markup.el	/^(defun fm-traverse-back ())$/
+fm-traverse-cur	fold-markup.el	/^(defvar fm-traverse-cur 1)$/
+fm-traverse-go	fold-markup.el	/^(defun fm-traverse-go ())$/
+fm-traverse-list	fold-markup.el	/^(defvar fm-traverse-list nil)$/
+fm-traverse-next	fold-markup.el	/^(defun fm-traverse-next ()$/
+fm-traverse-prev	fold-markup.el	/^(defun fm-traverse-prev ())$/
+fm-traverse-push	fold-markup.el	/^(defun fm-traverse-push (link beg end)$/
+font-family-string	frame-control.el	/^(defun font-family-string ()$/
+font-family-string	font-control.el	/^(defun font-family-string ()$/
+forward-token	next-token.el	/^(defun forward-token (arg)$/
+frame-control	frame-control.el	/^(defgroup frame-control nil$/
+frame-control-bind-keys?	frame-control.el	/^(defcustom frame-control-bind-keys? t$/
+frame-control-startup	frame-control.el	/^(defun frame-control-startup ()$/
+frame-control-startup?	frame-control.el	/^(defcustom frame-control-startup? t$/
+frame-font-string	frame-control.el	/^(defcustom frame-font-string nil$/
+frame-maximize	frame-control.el	/^(defun frame-maximize ()$/
+frame-restore	frame-control.el	/^(defun frame-restore ()$/
+frame-saver	frame-control.el	/^(defun frame-saver ()$/
+gen-sensible-defaults	gen-sensible-defaults.el	/^(defgroup gen-sensible-defaults nil$/
+global-map	w32-shell-execute.el	/^(define-key global-map [(control !)] 'w32-shell-ex/
+global-map	w32-dev.el	/^(define-key global-map [(f7)] 'compile)$/
+global-map	w32-dev.el	/^(define-key global-map [(f4)] 'next-error)$/
+global-map	w32-dev.el	/^(define-key global-map [(shift f4)] 'previous-erro/
+global-map	w32-dev.el	/^(define-key global-map [(meta control f12)] 'tags-/
+global-map	w32-dev.el	/^(define-key global-map [(f12)] 'tag-find-current-w/
+global-map	w32-dev.el	/^(define-key global-map [(meta control shift f12)] /
+global-map	w32-dev.el	/^(define-key global-map [(f12)] 'tag-dwim)$/
+global-map	w32-dev.el	/^(define-key global-map [(meta f12)] 'pop-tag-mark)/
+global-map	w32-dev.el	/^(define-key global-map [(control f12)] (lambda () /
+global-map	w32-dev.el	/^(define-key global-map [(shift f12)] (lambda () "f/
+global-map	w32-dev.el	/^(define-key global-map [(shift control f12)] 'sele/
+global-map	w32-dev.el	/^(define-key global-map [(shift f2)] 'bookmark-dele/
+global-map	w32-dev.el	/^(define-key global-map [(control f2)] 'bookmark-se/
+global-map	w32-dev.el	/^(define-key global-map [(f2)] 'bookmark-get-next)$/
+global-map	w32-dev.el	/^(define-key global-map [(control shift f2)] 'list-/
+global-map	menu-control.el	/^(define-key global-map [menu-bar divider] (cons "|/
+global-map	menu-control.el	/^(define-key global-map [menu-bar frames] (cons "Fr/
+global-map	menu-control.el	/^(define-key global-map [menu-bar files] (cons "Fil/
+global-map	menu-control.el	/^(define-key global-map [menu-bar edit] (cons "Edit/
+global-map	menu-control.el	/^(define-key global-map [menu-bar search] (cons "Se/
+global-map	bookmark-iterator.el	/^(define-key global-map [(shift f2)] 'bookmark-dele/
+global-map	bookmark-iterator.el	/^(define-key global-map [(control f2)] 'bookmark-se/
+global-map	bookmark-iterator.el	/^(define-key global-map [(f2)] 'bookmark-get-next)$/
+global-map	bookmark-iterator.el	/^(define-key global-map [(control shift f2)] 'list-/
+gud-minor-mode-map	gud-keys.el	/^(define-key gud-minor-mode-map [f5] 'gud-cont)$/
+gud-minor-mode-map	gud-keys.el	/^(define-key gud-minor-mode-map [f8] 'gud-step)$/
+gud-minor-mode-map	gud-keys.el	/^(define-key gud-minor-mode-map [f9] 'gud-break)$/
+gud-minor-mode-map	gud-keys.el	/^(define-key gud-minor-mode-map [shift f9] 'gud-tbr/
+gud-minor-mode-map	gud-keys.el	/^(define-key gud-minor-mode-map [f10] 'gud-next)$/
+gud-minor-mode-map	gud-keys.el	/^(define-key gud-minor-mode-map [f11] 'gud-step)$/
+gud-minor-mode-map	gud-keys.el	/^(define-key gud-minor-mode-map [S-f11] 'gud-finish/
+hands	hands.el	/^(defun hands ()$/
+http://	browse-url-emacs.el	/^(defvar http:\/\/ "http:\/\/")$/
+im-make-key	interpreter-minor.el	/^(defmacro im-make-key (mode key fn)$/
+im-make-mode	interpreter-minor.el	/^(defmacro im-make-mode (mode doc regexp follow)$/
+im-make-sym	interpreter-minor.el	/^(defun im-make-sym (mode ending)$/
+im-mm	interpreter-minor.el	/^(defun im-mm (mode) (im-make-sym mode "-mode-map")/
+kill-this-buffer	menu-control.el	/^(defun kill-this-buffer ()$/
+lines	enc.txt	/^	fetch 1000 rfc822.header.lines (text subject from/
+linki	linki.recurse.el	/^(defun linki ()$/
+linki-.link-rules	linki.recurse.el	/^(defun linki-.link-rules ()$/
+linki-global-rules	linki.recurse.el	/^(defun linki-global-rules ()$/
+linki-ls-rules	linki.recurse.el	/^(defun linki-ls-rules (dir)$/
+linki-make-pages	linki.recurse.el	/^(defun linki-make-pages ()$/
+linki-mapping	linki.recurse.el	/^(defvar linki-mapping nil)$/
+linki-output-dir	linki.recurse.el	/^(defvar linki-output-dir "~\/Homepage\/")$/
+linki-recurse	linki.recurse.el	/^(defun linki-recurse (process-file dir)$/
+menu-bar-apropos-menu	menu-control.el	/^(defvar menu-bar-apropos-menu (make-sparse-keymap /
+menu-bar-apropos-menu	menu-control.el	/^(define-key menu-bar-apropos-menu [apropos-doc] ; /
+menu-bar-apropos-menu	menu-control.el	/^(define-key menu-bar-apropos-menu [apropos-tags]$/
+menu-bar-apropos-menu	menu-control.el	/^(define-key menu-bar-apropos-menu [apropos-symbols/
+menu-bar-apropos-menu	menu-control.el	/^(define-key menu-bar-apropos-menu [apropos-variabl/
+menu-bar-apropos-menu	menu-control.el	/^(define-key menu-bar-apropos-menu [apropos-command/
+menu-bar-describe-menu	menu-control.el	/^(defconst menu-bar-describe-menu (make-sparse-keym/
+menu-bar-describe-menu	menu-control.el	/^(define-key-after menu-bar-describe-menu [describe/
+menu-bar-describe-menu	menu-control.el	/^(define-key-after menu-bar-describe-menu [describe/
+menu-bar-describe-menu	menu-control.el	/^(define-key-after menu-bar-describe-menu [describe/
+menu-bar-describe-menu	menu-control.el	/^(define-key-after menu-bar-describe-menu [describe/
+menu-bar-describe-menu	menu-control.el	/^(define-key-after menu-bar-describe-menu [list-key/
+menu-bar-describe-menu	menu-control.el	/^(define-key-after menu-bar-describe-menu [describe/
+menu-bar-divider-menu	menu-control.el	/^(defvar menu-bar-divider-menu (make-sparse-keymap /
+menu-bar-divider-menu	menu-control.el	/^(define-key menu-bar-divider-menu [menu-bar-divide/
+menu-bar-edit-fill-menu	menu-control.el	/^(defvar menu-bar-edit-fill-menu (make-sparse-keyma/
+menu-bar-edit-fill-menu	menu-control.el	/^(define-key menu-bar-edit-fill-menu [fill-nonunifo/
+menu-bar-edit-fill-menu	menu-control.el	/^(define-key menu-bar-edit-fill-menu [fill-indiv-pa/
+menu-bar-edit-fill-menu	menu-control.el	/^(define-key menu-bar-edit-fill-menu [fill-region] /
+menu-bar-edit-fill-menu	menu-control.el	/^(define-key menu-bar-edit-fill-menu [fill-para]$/
+menu-bar-edit-menu	menu-control.el	/^(defvar menu-bar-edit-menu (make-sparse-keymap "Ed/
+menu-bar-edit-menu	menu-control.el	/^(define-key-after menu-bar-edit-menu [yank-seconda/
+menu-bar-edit-menu	menu-control.el	/^(define-key-after menu-bar-edit-menu [separator-ed/
+menu-bar-edit-menu	menu-control.el	/^(define-key-after menu-bar-edit-menu [select-all]$/
+menu-bar-edit-menu	menu-control.el	/^(define-key-after menu-bar-edit-menu [flush-lines]/
+menu-bar-edit-menu	menu-control.el	/^(define-key-after menu-bar-edit-menu [keep-lines] /
+menu-bar-edit-menu	menu-control.el	/^(define-key-after menu-bar-edit-menu [separator-ed/
+menu-bar-edit-menu	menu-control.el	/^(define-key-after menu-bar-edit-menu [props] '("Te/
+menu-bar-edit-menu	menu-control.el	/^(define-key-after menu-bar-edit-menu [fill]$/
+menu-bar-edit-menu	menu-control.el	/^(define-key-after menu-bar-edit-menu [region]$/
+menu-bar-edit-menu	menu-control.el	/^(define-key-after menu-bar-edit-menu [sort]$/
+menu-bar-edit-region-menu	menu-control.el	/^(defvar menu-bar-edit-region-menu (make-sparse-key/
+menu-bar-edit-region-menu	menu-control.el	/^(defalias 'menu-bar-edit-region-menu (symbol-value/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [unaccent-re/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [capitalize-/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [downcase-re/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [upcase-regi/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [separator-c/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [unhighlight/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [highlight-r/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [highlight-r/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [separator-h/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [untabify-re/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [tabify-regi/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [comment-reg/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [center-regi/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [indent-rigi/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [indent-regi/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [separator-i/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [abbrevs-reg/
+menu-bar-edit-region-menu	menu-control.el	/^(define-key menu-bar-edit-region-menu [macro-regio/
+menu-bar-edit-sort-menu	menu-control.el	/^(defvar menu-bar-edit-sort-menu (make-sparse-keyma/
+menu-bar-edit-sort-menu	menu-control.el	/^(defalias 'menu-bar-edit-sort-menu (symbol-value '/
+menu-bar-edit-sort-menu	menu-control.el	/^(define-key menu-bar-edit-sort-menu [sort-regexp-f/
+menu-bar-edit-sort-menu	menu-control.el	/^(define-key menu-bar-edit-sort-menu [sort-pages]$/
+menu-bar-edit-sort-menu	menu-control.el	/^(define-key menu-bar-edit-sort-menu [sort-paragrap/
+menu-bar-edit-sort-menu	menu-control.el	/^(define-key menu-bar-edit-sort-menu [sort-numeric-/
+menu-bar-edit-sort-menu	menu-control.el	/^(define-key menu-bar-edit-sort-menu [sort-fields]$/
+menu-bar-edit-sort-menu	menu-control.el	/^(define-key menu-bar-edit-sort-menu [sort-columns]/
+menu-bar-edit-sort-menu	menu-control.el	/^(define-key menu-bar-edit-sort-menu [sort-lines]$/
+menu-bar-edit-sort-menu	menu-control.el	/^(define-key menu-bar-edit-sort-menu [reverse-regio/
+menu-bar-emacs-lisp-manual-menu	menu-control.el	/^(defvar menu-bar-emacs-lisp-manual-menu (make-spar/
+menu-bar-emacs-lisp-manual-menu	menu-control.el	/^(define-key menu-bar-emacs-lisp-manual-menu [emacs/
+menu-bar-emacs-lisp-manual-menu	menu-control.el	/^(define-key menu-bar-emacs-lisp-manual-menu [finde/
+menu-bar-emacs-lisp-manual-menu	menu-control.el	/^(define-key menu-bar-emacs-lisp-manual-menu [locat/
+menu-bar-emacs-lisp-manual-menu	menu-control.el	/^(define-key menu-bar-emacs-lisp-manual-menu [emacs/
+menu-bar-emacs-manual-menu	menu-control.el	/^(defvar menu-bar-emacs-manual-menu (make-sparse-ke/
+menu-bar-emacs-manual-menu	menu-control.el	/^(define-key menu-bar-emacs-manual-menu [emacs-faq]/
+menu-bar-emacs-manual-menu	menu-control.el	/^(define-key menu-bar-emacs-manual-menu [emacs-news/
+menu-bar-emacs-manual-menu	menu-control.el	/^(define-key menu-bar-emacs-manual-menu [emacs-manu/
+menu-bar-emacs-manual-menu	menu-control.el	/^(define-key menu-bar-emacs-manual-menu [key]$/
+menu-bar-emacs-manual-menu	menu-control.el	/^(define-key menu-bar-emacs-manual-menu [command]$/
+menu-bar-emacs-manual-menu	menu-control.el	/^(define-key menu-bar-emacs-manual-menu [emacs-tuto/
+menu-bar-files-menu	menu-control.el	/^(defvar menu-bar-files-menu (make-sparse-keymap "F/
+menu-bar-files-menu	menu-control.el	/^(define-key menu-bar-files-menu [open-file]$/
+menu-bar-files-menu	menu-control.el	/^(define-key-after menu-bar-files-menu [dired]$/
+menu-bar-files-menu	menu-control.el	/^(define-key-after menu-bar-files-menu [save-buffer/
+menu-bar-files-menu	menu-control.el	/^(define-key-after menu-bar-files-menu [write-file]/
+menu-bar-files-menu	menu-control.el	/^(define-key-after menu-bar-files-menu [revert-buff/
+menu-bar-files-menu	menu-control.el	/^(define-key-after menu-bar-files-menu [insert-file/
+menu-bar-files-menu	menu-control.el	/^(define-key-after menu-bar-files-menu [separator-f/
+menu-bar-files-menu	menu-control.el	/^(define-key-after menu-bar-files-menu [one-window]/
+menu-bar-files-menu	menu-control.el	/^(define-key-after menu-bar-files-menu [split-windo/
+menu-bar-files-menu	menu-control.el	/^(define-key-after menu-bar-files-menu [separator-e/
+menu-bar-files-menu	menu-control.el	/^(define-key-after menu-bar-files-menu [exec-cmd]$/
+menu-bar-files-menu	menu-control.el	/^(define-key-after menu-bar-files-menu [repeat-cmd]/
+menu-bar-files-menu	menu-control.el	/^(define-key-after menu-bar-files-menu [separator-e/
+menu-bar-files-menu	menu-control.el	/^(define-key menu-bar-files-menu [kill-buffer]$/
+menu-bar-files-menu	menu-control.el	/^(define-key menu-bar-files-menu [exit-emacs]$/
+menu-bar-frames-menu	menu-control.el	/^(defvar menu-bar-frames-menu (make-sparse-keymap "/
+menu-bar-frames-menu	menu-control.el	/^(define-key menu-bar-frames-menu [iconify-everythi/
+menu-bar-frames-menu	menu-control.el	/^(define-key menu-bar-frames-menu [show-hide]$/
+menu-bar-frames-menu	menu-control.el	/^(define-key menu-bar-frames-menu [shrink-frame-to-/
+menu-bar-help-menu	menu-control.el	/^(define-key menu-bar-help-menu [separator-genl-hel/
+menu-bar-help-menu	menu-control.el	/^(define-key menu-bar-help-menu [save-*Help*-buffer/
+menu-bar-help-menu	menu-control.el	/^(define-key menu-bar-help-menu [show-*Help*-buffer/
+menu-bar-help-menu	menu-control.el	/^(define-key menu-bar-help-menu [help-for-help]$/
+menu-bar-help-menu	menu-control.el	/^(define-key menu-bar-help-menu [finder-by-keyword]/
+menu-bar-help-menu	menu-control.el	/^(define-key menu-bar-help-menu [emacs-tutorial] ni/
+menu-bar-help-menu	menu-control.el	/^(define-key menu-bar-help-menu [sep2] nil)$/
+menu-bar-help-menu	menu-control.el	/^(define-key menu-bar-help-menu [whereami]$/
+menu-bar-help-menu	menu-control.el	/^(define-key-after menu-bar-help-menu [apropos]$/
+menu-bar-help-menu	menu-control.el	/^(define-key-after menu-bar-help-menu [describe]$/
+menu-bar-help-menu	menu-control.el	/^(define-key-after menu-bar-help-menu [manuals]$/
+menu-bar-help-menu	menu-control.el	/^(define-key-after menu-bar-help-menu [separator-ma/
+menu-bar-manuals-menu	menu-control.el	/^(defconst menu-bar-manuals-menu (make-sparse-keyma/
+menu-bar-manuals-menu	menu-control.el	/^(define-key menu-bar-manuals-menu [man]$/
+menu-bar-manuals-menu	menu-control.el	/^(define-key menu-bar-manuals-menu [info]$/
+menu-bar-manuals-menu	menu-control.el	/^(define-key menu-bar-manuals-menu [emacs-faq] nil)/
+menu-bar-manuals-menu	menu-control.el	/^(define-key menu-bar-manuals-menu [emacs-news] nil/
+menu-bar-manuals-menu	menu-control.el	/^(define-key menu-bar-manuals-menu [key] nil)$/
+menu-bar-manuals-menu	menu-control.el	/^(define-key menu-bar-manuals-menu [command] nil)$/
+menu-bar-manuals-menu	menu-control.el	/^(define-key menu-bar-manuals-menu [emacs-lisp-manu/
+menu-bar-manuals-menu	menu-control.el	/^(define-key menu-bar-manuals-menu [emacs-manual]$/
+menu-bar-options-menu	menu-control.el	/^(define-key menu-bar-options-menu [all-options-sep/
+menu-bar-options-menu	menu-control.el	/^(define-key menu-bar-options-menu [edit-options]$/
+menu-bar-search-menu	menu-control.el	/^(defconst menu-bar-search-menu (make-sparse-keymap/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [reminder6] '(" "/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [reminder5]$/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [reminder4]$/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [reminder3]$/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [reminder2]$/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [reminder1] '(" "/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [separator-search/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [bookmark]$/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [tags]$/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [occur] '("Occurr/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [grep] '("Grep.../
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [separator-search/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [replace]$/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [separator-search/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [repeat-word-sear/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [word-search-back/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [repeat-word-sear/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [word-search-fwd]/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [separator-search/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [repeat-regexp-ba/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [re-search-backwa/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [repeat-regexp-fw/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [re-search-forwar/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [separator-search/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [repeat-search-ba/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [search-backward]/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [repeat-search-fw/
+menu-bar-search-menu	menu-control.el	/^(define-key menu-bar-search-menu [search-forward]$/
+menu-bar-search-replace-menu	menu-control.el	/^(defvar menu-bar-search-replace-menu (make-sparse-/
+menu-bar-search-replace-menu	menu-control.el	/^(defalias 'menu-bar-search-replace-menu (symbol-va/
+menu-bar-search-replace-menu	menu-control.el	/^(define-key menu-bar-search-replace-menu [replace-/
+menu-bar-search-replace-menu	menu-control.el	/^(define-key menu-bar-search-replace-menu [replace-/
+menu-bar-search-replace-menu	menu-control.el	/^(define-key menu-bar-search-replace-menu [separato/
+menu-bar-search-replace-menu	menu-control.el	/^(define-key menu-bar-search-replace-menu [tags-que/
+menu-bar-search-replace-menu	menu-control.el	/^(define-key menu-bar-search-replace-menu [map-quer/
+menu-bar-search-replace-menu	menu-control.el	/^(define-key menu-bar-search-replace-menu [query-re/
+menu-bar-search-tags-menu	menu-control.el	/^(defvar menu-bar-search-tags-menu (make-sparse-key/
+menu-bar-search-tags-menu	menu-control.el	/^(defalias 'menu-bar-search-tags-menu$/
+menu-bar-search-tags-menu	menu-control.el	/^(define-key menu-bar-search-tags-menu [tags-search/
+menu-bar-search-tags-menu	menu-control.el	/^(define-key menu-bar-search-tags-menu [find-tag-re/
+menu-bar-search-tags-menu	menu-control.el	/^(define-key menu-bar-search-tags-menu [find-tag-ot/
+menu-bar-whereami-menu	menu-control.el	/^(defvar menu-bar-whereami-menu (make-sparse-keymap/
+menu-bar-whereami-menu	menu-control.el	/^(define-key menu-bar-whereami-menu [view-lossage]$/
+menu-bar-whereami-menu	menu-control.el	/^(define-key menu-bar-whereami-menu [top-level]$/
+menu-bar-whereami-menu	menu-control.el	/^(define-key menu-bar-whereami-menu [keyboard-quit]/
+mwe:*command-log-buffer*	command-log.el	/^(defvar mwe:*command-log-buffer* nil$/
+mwe:*command-repetitions*	command-log.el	/^(defvar mwe:*command-repetitions* 0$/
+mwe:*last-keyboard-command*	command-log.el	/^(defvar mwe:*last-keyboard-command* nil$/
+mwe:*log-command-exceptions*	command-log.el	/^(defvar mwe:*log-command-exceptions*$/
+mwe:*log-keyboard-commands*	command-log.el	/^(defvar mwe:*log-keyboard-commands* nil$/
+mwe:+log-command-indentation+	command-log.el	/^(defconst mwe:+log-command-indentation+ 10$/
+mwe:buffer-log-command-p	command-log.el	/^(defun mwe:buffer-log-command-p (cmd &optional buf/
+mwe:log-keyboard-commands	command-log.el	/^(defun mwe:log-keyboard-commands (&optional arg)$/
+mwe:open-command-log-buffer	command-log.el	/^(defun mwe:open-command-log-buffer (&optional arg)/
+mwe:scroll-buffer-window	command-log.el	/^(defun mwe:scroll-buffer-window (buffer &optional /
+mwe:with-command-log-buffer	command-log.el	/^(defmacro mwe:with-command-log-buffer (&rest body)/
+mwe:with-saved-command-environment	command-log.el	/^(defmacro mwe:with-saved-command-environment (&res/
+my-fontset-menu	font-control.el	/^(defun my-fontset-menu ()$/
+nonincremental-repeat-word-search-backward	menu-control.el	/^(defun nonincremental-repeat-word-search-backward /
+nonincremental-repeat-word-search-forward	menu-control.el	/^(defun nonincremental-repeat-word-search-forward (/
+popular-options	popular-options.el	/^(defgroup popular-options nil "popular options"$/
+replace-from-hash	replace-from-hash.el	/^(defun replace-from-hash (hashassoc)$/
+rtsp	rtsp.el	/^(defun rtsp (host)$/
+rtsp	rtsp.el	/^(defun rtsp (host)$/
+rtsp	rtsp.el	/^(defun rtsp (host)$/
+rtsp-connection	rtsp.el	/^(defvar rtsp-connection nil)$/
+sic	sic.el	/^(defgroup sic nil "simple IMAP client" :group 'mai/
+sic-connect	sic.el	/^(defun sic-connect (host port)$/
+sic-connection	sic.el	/^(defvar sic-connection nil) ;todo: should be list /
+sic-del-pending	sic.el	/^(defvar sic-del-pending nil "list of messages to b/
+sic-exists	sic.el	/^(defvar sic-exists nil)$/
+sic-follow	sic.el	/^(defun sic-follow ()$/
+sic-host	sic.el	/^(defcustom sic-host "mail.freeshell.org" "imap ser/
+sic-list	sic.el	/^(defun sic-list ()$/
+sic-mode-map	sic.el	/^(define-key sic-mode-map [(d)]$/
+sic-mode-map	sic.el	/^(define-key sic-mode-map [(c)]$/
+sic-mode-map	sic.el	/^(define-key sic-mode-map [(meta control backspace)/
+sic-mode-map	sic.el	/^(define-key sic-mode-map [(g)] 'sic-revert)$/
+sic-mode-map	sic.el	/^(define-key sic-mode-map [(l)] 'sic-list)$/
+sic-mode-map	sic.el	/^(define-key sic-mode-map [(o)] 'sic-open)$/
+sic-mode-map	sic.el	/^(define-key sic-mode-map [(s)] 'sic-send)$/
+sic-open	sic.el	/^(defun sic-open (msg)$/
+sic-revert	sic.el	/^(defun sic-revert ()$/
+sic-send	sic.el	/^(defun sic-send (msg)$/
+sic-update-exists	sic.el	/^(defun sic-update-exists ()$/
+sic-update-interval	sic.el	/^(defcustom sic-update-interval 240 "seconds betwee/
+tag-find-current-word	w32-dev.el	/^(defun tag-find-current-word (&optional next-p reg/
+tags-build-tags-table	w32-dev.el	/^(defun tags-build-tags-table (dir)$/
+time-insert	time-insert.el	/^(defun time-insert ()$/
+vlc	vlc-control.el	/^(defun vlc ()$/
+w32-shell-execute-history	w32-shell-execute.el	/^(defvar w32-shell-execute-history '("open" "edit" /
+w32-shell-execute-verb	w32-shell-execute.el	/^(defun w32-shell-execute-verb (verb)$/
+weather	browse-url-emacs.el	/^(defun weather()$/
+xml-beautify	xml-control.el	/^(defun xml-beautify ()$/

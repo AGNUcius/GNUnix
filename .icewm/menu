@@ -1,0 +1,30 @@
+# see /usr/share/icewm/preferences and /etc/X11/icewm/menu
+
+prog Internet chromium-browser chromium-browser
+
+separator
+
+menu Accessories accessories.ico {
+ prog Calculator calculator.ico xcalc
+ prog "Command Prompt" xterm xterm
+ prog Editor leafpad leafpad
+ prog Magnifier xmag xmag
+ prog NoteMacs emacs emacs --maximized
+ prog "File Browser [PCManFM]" pcmanfm pcmanfm
+ prog "File Browser [ROX-Filer]" rox-filer rox-filer
+}
+
+menu System /usr/share/icons/wm-icons/16x16-general/system {
+ prog "Manage Tasks" manage.ico xterm -e htop
+ prog "Check Battery" manage.ico xterm -e yacpi
+ prog "Lock Computer" manage.ico xterm -e xlock
+# prog "Adjust Volume" manage.ico xterm -e aumix
+separator
+ prog Restart restart xterm -e sudo shutdown -r now
+ prog Shutdown shutdown xterm -e sudo shutdown now
+ prog RootMacs emacs xterm -e sudo emacs --maximized --eval '(set-background-color "darkred")'
+}
+
+menuprog Gnome folder icewm-menu-gnome1 --list
+menuprog Gnome folder icewm-menu-gnome2 --list
+menuprog KDE folder icewm-menu-gnome --list

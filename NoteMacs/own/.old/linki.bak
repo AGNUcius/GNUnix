@@ -1,0 +1,124 @@
+; -*- mode: emacs-lisp -*-
+;;; linki.el --- a content management experiment
+
+;; Copyright (C) 2003  Free Software Foundation, Inc.
+
+;; Author: Patrick Anderson <patware@freeshell.org>
+;; Keywords: multimedia, PIM
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;;; Commentary:
+;; very incomplete.  for entertainment purposes only.
+
+;;; Version:
+;; 1 brute force (broken links)
+
+;;; Todo:
+;to fix link breakage: ... this will need to be lexed and parsed.  
+
+;the problem: when a regexp is matched, there is a good should subexpression be links somehow stacked together onto the also, with a way of accessing both the parent and it siblings from the main document?  I think that would be too messy.  Instead, only linkify insert the links in the document with the longest(?) name.  
+
+;;; autoinsert
+;; sublinks.  example: [food sovereignty] may include [food], and [sovereignty].  [sovereignty] may include sovereign.
+;; 2 local images
+;; 3 dot paren
+;; 4 google links, google images
+
+;;; Customizations:
+(defcustom linki-output-dir "../" "where to write the output")
+(defcustom linki.safe=off "safe=off" "return uncensored google results.")
+
+;;; Code:
+(defvar linki-mapping nil)
+
+(defun linki ()
+  (interactive)
+  (setq linki-mapping nil)
+  (linki-global-rules)
+  (linki-add-ls-rules ".")
+  (linki-make-pages))
+
+;file-relative-name file dir)
+(defun linki-recurse (process-file)
+  (mapcar
+   (lambda (token)
+	 (if (not (file-directory-p token))
+			  (funcall process-file token)))
+   (directory-files ".")))
+
+
+(defun linki-add-ls-rules (dir)
+  (linki-recurse
+   (lambda (token)
+	 (setq linki-mapping (cons (list (regexp-quote token) (concat "<a href=\"" token ".htm\">" token "</a>"))
+	 linki-mapping)))))
+
+(defun linki-dot-paren ()
+  "execute embeded elisp"
+  )
+
+(defun linki-make-pages ()
+  (linki-recurse
+   (lambda (token)
+	 (let* ((outpath (concat linki-output-dir token))
+			(htm (concat outpath ".htm")))
+	   (if (char-equal (string-to-char token) ?.) ; if a 'dot' file
+		   (copy-file token outpath t)
+		 (progn
+		   (copy-file token htm t)
+		   (save-excursion
+			 (set-buffer (find-file-noselect htm))
+
+			 (mapcar
+			  (lambda (mapping)
+				(let ((token (car mapping))
+					  (link (car (cdr mapping))))
+				  (goto-char (point-min))
+				  (while (re-search-forward token nil t)
+					(replace-match link t nil))))
+			  linki-mapping)
+
+			 (goto-char (point-max))
+
+			 (insert-file-contents ".linki/.linki/footer")
+
+			 (goto-char (point-min))
+			 (insert-file-contents ".linki/.linki/header")
+
+;			 (goto-char (point-max))
+
+;;  			 (net.get.http (current-buffer)
+;;  						   (buffer-name)
+;;  						   "images.google.com" 
+;;  						   80 
+;;  						   (concat 
+;;  						;"http://images.google.com/images?safe=off&q=" 
+;;  							"http://images.google.com/images?q=%22"
+;;  							(replace-regexp-in-string " " "+" token);nil t)
+;;  							"%22&"
+;;  							linki.safe=off))
+			 (save-buffer)
+			 (kill-buffer (current-buffer))
+			 ;(copy-file "./.linki/*" outpath)
+)))))))
+
+(defun linki-global-rules ()
+  (mapcar 
+   (lambda (regexp)
+	 (setq linki-mapping
+		   (cons
+			regexp
+			linki-mapping)))
+   '(
+	 ("\n" " <br>\n")
+	 ("	" "&nbsp;&nbsp;&nbsp;&nbsp;")
+	 ("  " " &nbsp;")
+	 ("\\(http:[^ 	
+]+\\)" "<a href=\"\\1\">\\1</a>"))))
+
+(provide 'linki)
+;;; linki.el ends here

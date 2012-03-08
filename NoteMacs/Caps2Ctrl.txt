@@ -1,0 +1,131 @@
+==XWindow:
+
+===Use setxkbmap
+Add this line to your ~/.xsession (without the preceeding $)
+
+$ setxkbmap -option ctrl:nocaps
+
+
+===Create ~/.xmodmap
+remove Lock = Caps_Lock
+remove Control = Control_L
+!keysym Control_L = Caps_Lock
+keysym Caps_Lock = Control_L
+!add Lock = Caps_Lock
+add Control = Control_L
+
+Then run from a terminal:
+xmodmap ~/.xmodmap
+
+===Change xorg.conf
+  Section "InputDevice"
+    Driver "keyboard"
+    Option "XkbRules" [...]
+    Option "XkbOptions" "ctrl:nocaps"
+
+$ sudo dumpkeys | head -1 > /usr/share/keymaps/Caps2Ctrl.map
+
+Then add the following lines to that file:
+ keycode 58 = Control #This makes Caps act as Ctrl
+ # keycode 29 = Caps_Lock #This makes Ctrl act as Caps
+ # alt_is_meta #This fixes the Alt key
+
+Then run loadkeys on that file:
+$ sudo loadkeys /usr/share/keymaps/Caps2Ctrl.map
+
+To revert run:
+$ sudo loadkeys -d #load default keymap file
+
+For more extensive editing try:
+$ dumpkeys > my_keymap
+$ cp my_keymap trial_keymap
+$ edit trial_keymap
+$ sudo loadkeys trial_keymap
+
+$ man keymaps
+  It should be noted that using numeric notation for the
+  keysyms is highly unportable as the key action numbers
+  To find out what keysyms there are available  for  use
+  in keymaps files, use the command
+
+        dumpkeys --long-info
+
+  Unfortunately,  there  is  currently no description of
+  what each symbol does. It has to be guessed  from  the
+  name or figured out from the kernel sources.
+
+On Debian GNU/Linux (console-setup method, newer)
+
+To make CAPS LOCK another control key, edit the file /etc/default/keyboard and change the line which reads
+
+ XKBOPTIONS=""
+
+to
+
+ XKBOPTIONS="ctrl:nocaps"		# Some people prefer "ctrl:swapcaps"
+
+
+To make the change effective:
+
+$ sudo dpkg-reconfigure -phigh console-setup
+
+On Debian GNU/Linux (console-tools method, older)
+
+To make Caps Lock another control, add/uncomment the following line in /etc/console-tools/remap
+
+ s/keycode  58 = Caps_Lock/keycode  58 = Control/;
+
+To make the change effective:
+
+$ sudo invoke-rc.d console-screen.sh restart
+
+On Ubuntu GNU/Linux virtual terminal
+
+1. Edit /etc/default/console-setup and add an X11 style caps lock modification:
+
+$ diff -U0 /etc/default/{console-setup.orig,console-setup}
+ --- /etc/default/console-setup.orig     2009-02-09 03:05:27.000000000 -0500
+ +++ /etc/default/console-setup  2009-02-09 04:11:20.000000000 -0500
+ @@ -40 +40 @@
+ -XKBOPTIONS=""
+ +XKBOPTIONS="ctrl:nocaps"
+
+
+2. Trick dpkg into integrating your changes:
+
+$ sudo dpkg-reconfigure console-setup
+
+and choose all the defaults.
+
+(The above is a brief version of a bug comment)
+===On Gentoo Linux
+
+For i386 systems, to make Caps Lock another control: In /etc/conf.d/keymaps set
+
+  KEYMAP="emacs"
+
+Then run # /etc/init.d/keymaps restart (or reboot). See /usr/share/keymaps/i386/qwerty/emacs.map.gz for more information.
+On Slackware GNU/Linux
+
+Similar to Gentoo, you can add Caps Lock as another control key:
+
+As super-user:
+
+$ loadkeys emacs
+$ echo "loadkeys emacs" >> /etc/rc.d/rc.local
+
+You can just issue the second command and re-run rc.local, however that will initiate any commands in rc.local. This differs from my X setup where the menu key is used as Caps Lock. Currently for the virtual console there is no Caps Lock (any suggestions on this?) --JoelAdamson
+
+
+
+==NetBSD console
+
+To /etc/wscons.conf add:
+
+    mapfile /usr/share/wscons/keymaps/pckbd.c2c
+
+then create the file /usr/share/wscons/keymaps/pckbd.c2c with the single line:
+
+    keysym Caps_Lock = Control_L
+
+This can also be tested immediately (doesn't require reboot) and temporarily (won't survive a reboot) with: wsconsctl -w map+="keysym Caps_Lock = Control_L"

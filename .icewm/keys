@@ -1,0 +1,12 @@
+# see /usr/share/icewm/keys
+
+key "Ctrl+Shift+Esc" xterm -name htop -title htop -maximized -e htop
+key "Super+b" xterm -e yacpi
+key "Super+e" emelfm2
+key "Super+l" xterm -e xlock
+key "Super+v" xterm -e aumix
+key "Super+w" xterm -e wicd-curses
+key "XF86Sleep" xterm -e sudo pm-suspend-hybrid
+
+# key "Super+r" KeySysAddressBar # see ./preferences
+# key "Super+m" KeySysShowDesktop # see ./preferences

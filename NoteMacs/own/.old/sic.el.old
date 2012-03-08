@@ -1,0 +1,102 @@
+;;; sic.el --- simple imap client
+
+;; Copyright (C) 2002  Patware Unc.
+
+;; Author: Patrick Anderson <patware@freeshell.org>
+;; Keywords: mail
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+
+(defvar sic-mode-map (make-sparse-keymap))
+
+(define-key sic-mode-map [(9)]
+  (lambda ()
+	 (interactive)
+	 (re-search-forward "^\* ")
+	 (message (match-string 1))))
+
+(define-key ctl-x-map [(M)] (lambda () (interactive) (switch-to-buffer (process-buffer sic-connection))))
+(define-key sic-mode-map [(c)] 'sic-connect)
+(define-key sic-mode-map [(r)] (lambda () (interactive)(find-file "~/dev/doc/rfc/rfc1730.txt.bz2")))
+(define-key sic-mode-map [(e)] (lambda () (interactive)(find-file "~/emacs/own-lisp/sic.el")))
+(define-key sic-mode-map [(d)]
+  (lambda () (interactive)
+	 (sic-send (concat "store " (current-word) " +flags (\\deleted)"))))
+
+(define-key sic-mode-map [(D)]
+  (lambda () (interactive)
+	 (sic-send (concat "store " (current-word) " -flags (\\deleted)"))))
+
+(define-key sic-mode-map [(x)]
+  (lambda () (interactive)
+	 (sic-send "expunge")))
+
+(define-key sic-mode-map [(13)]
+  (lambda () (interactive)
+	 (sic-send (concat "fetch " (current-word) " rfc822"))))
+
+(define-key sic-mode-map [(g)] 'sic-revert)
+(defun sic-revert ()
+  (interactive)
+  (sic-send "select inbox"))
+
+(define-key sic-mode-map [(l)] 'sic-list)
+(defun sic-list ()
+  (interactive)
+  (sic-update-exists)
+  (sic-send (concat "fetch " (int-to-string (- sic-exists 5))  ":" (int-to-string sic-exists) " (flags rfc822.header.lines (subject from))"))
+  (goto-char (point-min)))
+
+(define-key sic-mode-map [(q)] 'bury-buffer)
+(define-key sic-mode-map [(s)] 'sic-send)
+(define-key sic-mode-map [(f)]
+  (lambda ()
+	 (interactive)
+	 (goto-char (point-min))
+	 (while (re-search-forward "=.*\n" nil t)
+	   (replace-match " " nil nil))
+	 (goto-char (point-min))))
+
+(defgroup sic nil "simple IMAP client" :group 'mail)
+(defcustom sic-host "iceman.none.com" "imap server")
+(defcustom sic-update-interval 240 "seconds between updates")
+
+(defvar sic-exists nil)
+
+(defun sic-mode ()
+  (interactive)
+  (kill-all-local-variables)
+  (use-local-map sic-mode-map)
+  (setq mode-name "sic")
+  (setq major-mode 'sic-mode))
+
+(defvar sic-connection nil) ;todo: should be list of processes
+
+(defun sic-update-exists ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+	(if (re-search-forward "\\* \\([0-9]*\\) EXISTS" nil t)
+		(setq sic-exists (string-to-int (match-string 1))))))
+
+(defun sic-connect (host port)
+  (interactive "sHost: \nnPort: ")
+  (let ((buf (get-buffer-create (concat "*sic "host ":" (int-to-string port) "*"))))
+	(setq sic-connection (open-network-stream "sic-connection" buf host port)) ;todo broken interactive number
+	(switch-to-buffer buf)
+	(erase-buffer)
+	(sic-mode)
+	(run-at-time sic-update-interval sic-update-interval 'sic-revert)))
+
+(defun sic-send (msg)
+  (interactive "sMessage: ")
+  (with-current-buffer (process-buffer sic-connection)
+	(erase-buffer)
+	(process-send-string sic-connection (concat "a "msg "\r\n"))))
+
+(provide 'sic)
+;;; sic.el ends here

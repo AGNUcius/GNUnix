@@ -1,0 +1,10 @@
+cd ~
+git commit
+# 7z a .GNUnix.7z .GNUnix .emacs NoteMacs .icewm contacts.csv .archive .profile .bashrc .xinitrc .eshell .isyncrc .conkyrc .htoprc
+
+# 7z a doc.7z doc
+# 7z a mail.7z mail
+
+# wput .GNUnix.7z GNUnix.sf.net
+# wput doc.7z GNUnix.sf.net
+

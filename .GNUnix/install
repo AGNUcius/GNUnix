@@ -1,0 +1,19 @@
+sudo apt-get install git
+cd ~
+git clone https://github.com/AGNUcius/GNUnix.git
+
+echo pkg.up
+echo pkg.add xinit xorg icewm slim big-cursor xlock
+echo pkg.add htop emacs chromium-browser aumix p7zip-full
+echo pkg.add pm-utils
+echo pkg.add moc gom dhex
+
+if (laptop)
+{
+ echo pkg.add yacpi wicd-curses wireless-regdb crda iw rfkill
+ rfkill list all
+}
+
+sudo add user audio
+
+echo cat ~/.GNUnix/README.txt

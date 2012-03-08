@@ -1,0 +1,65 @@
+;;; explorer.el --- act more like MicroSCOft's explorer.exe
+
+;; Copyright (C) 2004  Free Software Foundation, Inc.
+
+;; Author:  <>
+;; Keywords: 
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; This file is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to
+;; the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
+
+;;; Commentary:
+
+;; 
+
+;;; Code:
+
+;;stolen from dired-+.el
+(defun explorer (event)
+  "Right-click menu."
+  (interactive "e")
+  (let (selection)
+	(let* ((mouse-pos (event-start event))
+		   (file/dir-name
+			(save-excursion
+			  (goto-char (posn-point mouse-pos))
+			  (and (not (eobp)) (dired-get-filename nil t)))))
+	  (sit-for 0)
+	  (setq selection
+			(x-popup-menu
+			 (and file/dir-name event)
+               (list
+                file/dir-name
+                (if file/dir-name
+                    (list
+                     file/dir-name
+                     '("Open" . dired-mouse-find-file)
+                     '("--")            ; Separator.
+                     '("View (Read Only)" . dired-mouse-view-file)
+                     '("Rename to..." . dired-mouse-do-rename)
+                     '("Shell Command..." . dired-mouse-do-shell-command)
+                     '("Compress/Decompress" . dired-mouse-do-compress)
+                     '("Change Mode..." . dired-mouse-do-chmod)
+                     '("Change Group..." . dired-mouse-do-chgrp)
+                     '("Change Owner..." . dired-mouse-do-chown)
+                     )
+                  '("" (""))))))        ; No menu: not on a file line.
+)))
+
+  
+
+
+(provide 'explorer)
+;;; explorer.el ends here
