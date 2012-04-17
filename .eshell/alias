@@ -1,0 +1,2 @@
+alias pkg.files dpkg -L $*
+alias pkg.info dpkg -S $*
