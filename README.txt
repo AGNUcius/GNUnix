@@ -11,3 +11,6 @@ Archive: remastersys, isync
 
 See ThinkWiki.org/wiki/How_to_save_memory for other suggestions.
 
+Update to the most recent version:
+$ cd ~/
+$ git fetch

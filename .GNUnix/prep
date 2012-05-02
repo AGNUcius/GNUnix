@@ -7,3 +7,4 @@ wget Archive.UBUNTU.com/ubuntu/dists/%dist%/main/installer-%ARCH%/current/images
 
 cat README.txt
 
+

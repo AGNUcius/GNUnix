@@ -1,2 +1,10 @@
-alias pkg.files dpkg -L $*
+alias pkg.install xterm -e sudo apt-get install  $*
+alias pkg.update xterm -e sudo apt-get update; apt-get upgrade
+alias pkg.search apt-cache search $*
+alias pkg.list.installed dpkg -l $*
+alias pkg.list.available dpkg -l \* $*
 alias pkg.info dpkg -S $*
+alias pkg.files dpkg -L $*
+alias pkg.del xterm -e sudo apt-get --purge remove $*
+alias pkg.add sudo apt-get install $*
+alias mail.sync offlineimap $*

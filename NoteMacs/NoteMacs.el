@@ -1,18 +1,17 @@
-;;; NoteMacs.el --- Make Emacs more accessible to not Emacs users.  -*- emacs-lisp -*-
+;;; NoteMac.el --- Make Emacs a little easier to use.
 
-;; Copyright (C) 2004 -> oo  Personal Sovereignty Foundation, Incooporated
+;; Copyright (C): Social Sufficiency Coalition
 
-;; Author: Patrick Anderson (concat (nreverse (string-to-list ">moc.liamG@suicUNGA<")))
+;; Author: Patrick Anderson <AGNUcius@Gmail.com>
 
-;; This file is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2, or (at your option) any later version.
-
-;(setq debug-on-error t)
-
+;; This file is Free Software.
+;; You can Use, Modify, Copy and Share it under the terms
+;; of the GNU Affero General Public License as published
+;; by the Free Software Foundation; either version 3, or
+;; (at your option) any later version.
 
 ;;; Commentary:
 ;;  NoteMacs is an attempt to tame the One True Editor.
-
-;; GOALS
 ;; 0. NoteMacs shall not bother current church members.
 ;; 1. NoteMacs seeks unification and orthogonalization.
 ;; 2. NotEmacs pleases some CUA/Microsoft expectations.
@@ -20,14 +19,10 @@
 ;; 4. NoteMacs provides advanced options for old-timer.
 
 ;;; Installation:
-;; Unpack NoteMacs.tar.bz2 to your home directory (~/).
-;; Create an ~/.emacs with the following line: (without the ;;)
-;;(load-file "~/NoteMacs/NoteMacs.el")
-
-
-;;; Todo:
-;; Generate a menu with more of the available commands through a regexp scrape.
-;; Use the minibuffer or maybe a dedicated window to scroll help tips for the current active modes.
+;; cd ~/
+;; git clone git://github.com/AGNUcius/GNUnix
+;; mv GNUnix/* .
+;; mv GNUnix/.* .
 
 
 ;;; Customizations:
@@ -42,12 +37,20 @@
 (add-to-list 'load-path "~/NoteMacs/own")
 (add-to-list 'load-path "~/NoteMacs/site")
 
-(if (file-exists-p "~/NoteMacs/site/emacs-w3m")
-	(progn
-	  (add-to-list 'load-path "~/NoteMacs/site/emacs-w3m")
-	  (require 'w3m-load)
-	  ))
+(setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
+						 ("gnu" . "http://elpa.gnu.org/packages/")
+						 ("marmalade" . "http://marmalade-repo.org/packages/")))
 
+(autoload 'list-packages "package" nil t)
+
+
+(when (eq system-type 'darwin)
+ (setq mac-command-modifier 'meta)
+;; Go to "System Preferences"|Keyboard|Keyboard|Modifier Keys
+;; Change 'Caps-Lock' to send 'Control'
+;; Change 'Option' to send 'Command'
+;; Change 'Command' to send 'Option'
+)
 
 ;;; Harmless changes
 ;; The goal is to make all harmless changes within this section.
@@ -64,11 +67,6 @@
 ;; user runs the NoteMacs-wizard).
 
 
-;;(if (= platform 'win32)
-(if (file-exists-p "~/NoteMacs/own/w32-shell-execute.el")
-    (require 'w32-shell-execute)
-  (message "w32-shell-execute unavailable"))
-
 
 (autoload 'gtags-find-tag-from-here "global-mode" nil t)
 (define-key global-map [(f12)] 'gtags-find-tag-from-here)
@@ -76,9 +74,6 @@
 (autoload 'hexview-find-file "hexview-mode" nil t)
 
 (autoload 'time-insert "time-insert" nil t)
-(autoload 'powershell "powershell" nil t)
-
-(autoload 'nsi-mode "nsi-mode" "Edit .nsi files." t)
 (autoload 'global-whitespace-mode "whitespace" "Toggle whitespace visualization." t)
 (autoload 'javascript-mode "javascript" nil t)
 (autoload 'tabbar-mode "tabbar" nil t)
@@ -89,9 +84,7 @@
 (define-key global-map [(meta o)] 'other-window)
 (define-key global-map [(shift meta o)] 'dired-omit-mode) ;;alternate omit
 
-;;(define-key ctl-x-map [(control b)] 'ibuffer)
-
-(define-key ctl-x-map [(p)] 'list-processes)
+(define-key ctl-x-map [(p)] 'proced)
 (defun kill-process(proc) (interactive "sProcess Name: ") (delete-process proc))
 (define-key ctl-x-map [(P)] 'kill-process)
 
@@ -255,10 +248,6 @@
 
 (autoload 'io-mode "io-mode" "" t)
 
-;; (add-to-list 'load-path "~/NoteMacs/site/predictive")
-;; (autoload 'predictive-mode "predictive" "" t)
-
-
 
 ;; Kill saved and file-less buffers without prompt
 (if NoteMacs-old-timer
@@ -337,7 +326,7 @@
 		  (revert-buffer nil t t)
 		  (toggle-read-only nil)))
 
-;;      (define-key nxml-mode-map [(meta h)] 'backward-kill-word)
+	  ;;(define-key nxml-mode-map [(meta h)] 'backward-kill-word) 
 
 	  ;;These hooks are executed every time we enter that mode!
 	  (add-hook 'archive-mode-hook
@@ -390,11 +379,11 @@
       (define-key global-map [(<)] 'skeleton-pair-insert-maybe)
       ;;(define-key global-map [(\")] 'skeleton-pair-insert-maybe)
 
-      (require 'bs)
-      (global-set-key (kbd "C-x C-b") 'bs-show)
-      (define-key bs-mode-map " " 'scroll-up)
-      (define-key bs-mode-map "u" 'scroll-down)
-      (define-key bs-mode-map "c" 'bs-unmark-current)
+	  (add-to-list 'same-window-buffer-names "*Buffer List*")
+	  ;; (require 'buff-menu+)
+      (define-key Buffer-menu-mode-map " " 'scroll-up)
+      (define-key Buffer-menu-mode-map "u" 'scroll-down)
+      (define-key Buffer-menu-mode-map "c" 'Buffer-menu-unmark)
       ))
 
 ;;; Enable advanced keys and behavior.
@@ -415,16 +404,10 @@
 	  ;;      (require 'frame-control)
 
       ;; Make C-h the traditional 'Backspace'
-      (keyboard-translate ?\C-h ?\C-?)            ;; use F1 instead,
-      (define-key global-map [(control H)] 'help) ;; or hold SHIFT too
+      (keyboard-translate ?\C-h ?\C-?) ;;was: Help
+      (define-key global-map [(control H)] 'help) ;; hold SHIFT or use F1 instead
 
-;;; from: http://web.mit.edu/answers/emacs/dialup_bs.html
-      ;; (setq term-setup-hook
-      ;;     '(lambda ()
-      ;;  (setq keyboard-translate-table "\C-@\C-a\C-b\C-c\C-d\C-e\C-f\C-g\C-?")
-      ;;  (global-set-key "\M-h" 'help-for-help)))
-
-      ;; This seems obvious to me
+      ;; Analogous to C-h, but for words
       (define-key global-map [(meta h)] 'backward-kill-word) ;;was: mark-paragraph
 
       ;; Could cause accidents
@@ -439,29 +422,8 @@
       ;;chars, especially '-', but maybe this is not what we want?
       (defalias 'minibuffer-complete-word 'minibuffer-complete)
 
-      ;;CAUTION: this is a bit like using `find-file-literally' on every file
+      ;;This is a bit like using `find-file-literally' on every file
       ;;(setq-default enable-multibyte-characters nil)
-
-;;; I don't fully understand character encoding
-	  ;;    (prefer-coding-system 'latin-1) ;is this ISO-8859-1?
-	  ;;    (set-buffer-multibyte nil)
-	  ;;    (standard-display-8bit 0 255) ;this breaks next-line in my environment...
-	  ;;    (setq unibyte-display-via-language-environment t)
-
-	  ;; (prefer-coding-system 'utf-8)
-	  ;; (set-language-environment 'UTF-8)
-	  ;; (set-default-coding-systems 'utf-8)
-	  ;; (setq file-name-coding-system 'utf-8)
-	  ;; (setq default-buffer-file-coding-system 'utf-8)
-	  ;; (setq coding-system-for-write 'utf-8)
-	  ;; (set-keyboard-coding-system 'utf-8)
-	  ;; (set-terminal-coding-system 'utf-8)
-	  ;; (set-clipboard-coding-system 'utf-8)
-	  ;; (set-selection-coding-system 'utf-8)
-	  ;; (setq default-process-coding-system '(utf-8 . utf-8))
-	  ;; (add-to-list 'auto-coding-alist '("." . utf-8))
-
-	  ;;    (standard-display-european 1)
 
       ;;(setq-default debug-on-quit t)
       ;;(setq-default debug-on-error t)
@@ -542,12 +504,8 @@
 ;; 	"dired"
 ;;  '(lambda ()
 (progn
-    ;;(eshell-init-ls-highlight-alist)
-
 	(load "dired-x")
 	(load "dired-aux")
-
-	;;   (define-key dired-mode-map [(I)] (lambda () (interactive) (info (dired-get-filename))))
 
 	(define-key dired-mode-map [(delete)] 'dired-do-delete)
 	(define-key dired-mode-map "\M-\r" 'browse-url-of-dired-file)
@@ -583,9 +541,9 @@
 	(if NoteMacs-old-timer
 		(progn
 
-		  ;;         (autoload 'wdired-change-to-wdired-mode "wdired" "Make all `dired' filenames editable." t)
-		  ;;         (define-key dired-mode-map [(f2)] 'wdired-change-to-wdired-mode)
-		  ;;(define-key dired-mode-map [(control x control q)] 'wdired-change-to-wdired-mode)
+		  ;; (autoload 'wdired-change-to-wdired-mode "wdired" "Make all `dired' filenames editable." t)
+		  ;; (define-key dired-mode-map [(f2)] 'wdired-change-to-wdired-mode)
+		  ;; (define-key dired-mode-map [(control x control q)] 'wdired-change-to-wdired-mode)
 
 		  ;;         (define-key dired-mode-map "E" 'ediff-files)
 
@@ -612,44 +570,6 @@
       ;; ESC means "Cancel" ;could use C-g instead. was: alternate to Meta
 	  ;;        (setq w32-quit-key 27) ;;maybe needed on windows?
       (global-set-key [escape] 'keyboard-quit)
-
-	  ;;       (require 'explorer) ;; messes with `dired-mode-map' bindings:
-
-;;; Making C-x=cut and C-c=copy has historically been difficult for Emacs because those keys are _the_ major 'prefix' keys used by Emacs and its addons to access commands which take more than one keystroke, but `cua-mode' addresses this carefully.  cua-base.el says (edited):
-	  ;;>> Only when the region is currently active (and highlighted since
-	  ;;>> transient-mark-mode is used), the C-x and C-c keys will work as CUA
-	  ;;>> keys
-	  ;;>>    C-x -> cut
-	  ;;>>    C-c -> copy
-	  ;;>> When the region is not active, C-x and C-c are prefix keys as normal.
-	  ;;>> ...
-	  ;;>> If you really need to perform a command which starts with one of
-	  ;;>> the prefix keys even when the region is active, you have three options:
-	  ;;>> - press the prefix key twice very quickly (within 0.2 seconds),
-	  ;;>> - press the prefix key and the following key within 0.2 seconds), or
-	  ;;>> - Use the SHIFT key with the prefix key, i.e. C-X or C-C
-
-      ;; key | new function | why | notes
-      ;; C-x cut ;use C-w instead. C-x is the primary prefix key. C-xC-x (quickly) to access.
-      ;; C-c copy ;use M-w instead. C-c is the 'user' prefix key(?). C-cC-c (quickly) to access.
-      ;; C-v paste ;use C-y instead. pgdown is too far away
-      ;; M-v paste-pop;use M-y instead. pgup is too far away
-      ;; C-z undo ;use C-/ or C-_ instead. bound to EShell later in this file
-
-	  ;;    (defun net-get (URL dest)
-	  ;;      "only HTTP for now"
-	  ;;      http-get URL dest)
-
-	  ;;    (defun autodownload (URL dest)
-	  ;;      (if (not exists dest) ;;if not yet here
-	  ;;          (net-get URL dest)) ;;pull from net
-	  ;;      (autoload dest)) ;;now make available
-
-	  ;;    (autodownload "cua.dk/cua.el" "~/NoteMacs/site")
-	  ;; if CUA does not work try `cua-lite' instead:
-	  ;;    (autodownload "northbound-train.com" "/emacs/cua-lite.el" "site")
-	  ;;    (autodownload "northbound-train.com" "/emacs/cua-lite-bootstrap.el" "site")
-	  ;;    (require 'cua-lite-bootstrap)
 
       (if (< emacs-major-version 22)
           (progn (require 'cua) (CUA-mode t)) ;;use old version
@@ -721,15 +641,6 @@
 
 
 ;;; Customized variables
-;; Using customize for `smtpmail-auth-credentials' writes your password to disk!
-
-;; Try this to force use of ls.exe on W32
-;;(setq ls-lisp-use-insert-directory-program "ls")
-
-;; '(ls-lisp-emulation (quote MS-Windows))
-;; '(ls-lisp-ignore-case t)
-;; '(eshell-ls-use-in-dired t nil (em-ls))
-
 ;;  press f1 v RET  while over any variable name
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
@@ -880,28 +791,36 @@
        auto-mode-alist))
 
 
+(run-with-idle-timer
+ .1 nil
+ (lambda ()
+   (message
+    (concat "This is "
+            (if NoteMacs-NotEmacs
+                "NotEmacs"
+              "NoteMacs")
+            ".  Keys are "
+            (if (not NoteMacs-unified-keys) "not ")
+            "unified; "
+            "you are "
+            (if (not NoteMacs-apprentice) "not ")
+            "an apprentice and "
+            (if (not NoteMacs-old-timer) "not ")
+            "a guru."))))
+
+;;see `list-colors-display'
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(default ((t (:stipple nil :background "#555" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight bold :height 120 :width normal :foundry "unknown" :family "FreeMono"))))
+ '(cursor ((t (:background "yellow"))))
+ '(font-lock-comment-face ((t (:foreground "#333"))))
+ '(region (( t (:inverse-video t))))
+ '(trailing-whitespace ((t (:background "#666")))))
 
 
-;; (defun eshell-init-ls-highlight-alist ()
-;;   "adapted from http://www-xray.ast.cam.ac.uk/~gmorris/dotemacs.txt"
-;;   (setq eshell-ls-highlight-alist nil)
-;;   (mapcar (lambda (element)
-;;             (let ((list (car element))
-;;                   (face (cdr element)))
-;;               (add-to-list 'eshell-ls-highlight-alist
-;;                            (cons `(lambda (file attr)
-;;                                     (string-match
-;;                                      (concat "\\." (regexp-opt ,list t) "$")
-;;                                      file))
-;;                                  face))))
-;;           '(
-;;             ('("exe" "bat" "cmd" "pif" "com") . eshell-ls-executable-face)
-;;             ('("avi" "mp." "m3u" "ogg" "jpg" "png" "gif" "fig" "xpm" "ico") . font-lock-type-face)
-;;             ('("c" "cc" "cpp" "h" "hh" "hpp" "vb" "vbs" "js" "el" "asm" "inc" "idl") . font-lock-variable-name-face)
-;;             ('("dsp" "dsw" "mak" "mk" "sln" "vcproj" "makefile" "config") . font-lock-constant-face)
-;;             ('("diz" "nfo" "txt" "doc" "pdf" "ps" "chm" "html" "htm" "xml" "xsl" "asp" "dtd" "readme" "ChangeLog") . font-lock-builtin-face)
-;;             ('("plg" "bin" "elc" "o" "obj" "a" "lib" "res" "dep" "ncb" "opt" "aps" "pdb" "pch" "sbr" "idb" "ilk" "tlb" "tlh" "tli" "exp" "sys" "log" "out" "tmp") . eshell-ls-unreadable-face)))
-;;   )
 
 
 ;;; Important keys:
@@ -969,114 +888,5 @@
 ;; + add directory
 ;; ! shell command on file
 
-;;; About functions and Commands:
-;; A Command is a function that been `defun'ed using the special form
-;; `interactive'.  This allows it to be called by the user through at
-;; least M-x or a mouse binding.  Furthermore, you may only
-;; `define-key' functions that include `interactive'.
-
-;; STATE PERSISTENCE:
-;;(require 'desktop)
-;;(desktop-load-default)
-;;(desktop-read)
-;;(setq desktop-enable t)
-
-;; from http://www.jurta.org/emacs/dotemacs.en.html
-;; (setq desktop-globals-to-save
-;; (append
-;; '(buffer-name-history
-;; command-history
-;; compile-history
-;; extended-command-history
-;; file-name-history
-;; find-args-history
-;; grep-history
-;; Info-search-history
-;; locate-history-list
-;; my-dict-history
-;; minibuffer-history
-;; query-replace-history
-;; read-expression-history
-;; dired-shell-command-history ;; TODO: join with shell-command-history
-;; shell-command-history
-;; search-ring
-;; regexp-search-ring)
-;; (delq 'register-alist desktop-globals-to-save)))
-
-;;adapted from http://213.97.131.125/misc/emacs-file
-;; (add-to-list 'desktop-globals-to-save
-;; (buffer-name-history . 20)
-;; (dired-regexp-history . 20)
-;; (extended-command-history . 30)
-;; (file-name-history . 100)
-;; (grep-history . 30)
-;; (minibuffer-history . 50)
-;; (query-replace-history . 60)
-;; (read-expression-history . 60)
-;; (regexp-history . 60)
-;; (regexp-search-ring . 20)
-;; (search-ring . 20)
-;; (shell-command-history . 50))
-
-;; (add-hook 'kill-emacs-hook
-;; (lambda ()
-;; (desktop-truncate search-ring 3)
-;; (desktop-truncate regexp-search-ring 3)))
-
-(run-with-idle-timer
- .1 nil
- (lambda ()
-   (message
-    (concat "This is "
-            (if NoteMacs-NotEmacs
-                "NotEmacs"
-              "NoteMacs")
-            ".  Keys are "
-            (if (not NoteMacs-unified-keys) "not ")
-            "unified; "
-            "you are "
-            (if (not NoteMacs-apprentice) "not ")
-            "an apprentice and "
-            (if (not NoteMacs-old-timer) "not ")
-            "a guru."))))
-
-
-;;see `list-colors-display'
-;; (query-replace-regexp "((class color \\(grayscale) \\)?\\((min-colors 88) \\)?(background light))" "t")
-;; (query-replace-regexp "((class \\(grayscale color) \\)?\\((min-colors 88) \\)?(background light))" "t")
-
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "#555" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 142 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
- '(font-lock-comment-face ((t (:foreground "#333"))))
- '(trailing-whitespace ((t (:background "#666")))))
-
-;; (custom-set-faces
-;;   ;; custom-set-faces was added by Custom.
-;;   ;; If you edit it by hand, you could mess it up, so be careful.
-;;   ;; Your init file should contain only one such instance.
-;;   ;; If there is more than one, they won't work right.
-;;  '(default ((t (:background "#555" :weight bold :height 181 :width normal :foundry "outline" :family "Courier New"))))
-;;  '(custom-button ((((type x w32 mac) (class color)) (:background "#d6d3ce" :foreground "black" :box (:line-width 2 :style released-button)))))
-;;  '(font-lock-builtin-face ((t (:foreground "#ffffcc"))))
-;;  '(font-lock-comment-face ((t (:foreground "#333"))))
-;;  '(font-lock-constant-face ((t (:foreground "cyan"))))
-;;  '(font-lock-function-name-face ((t (:foreground "darkblue"))))
-;;  '(font-lock-keyword-face ((t (:foreground "#ffccff"))))
-;;  '(font-lock-preprocessor-face ((t (:background "yellow" :foreground "black"))))
-;;  '(font-lock-string-face ((t (:background "#777" :underline t))))
-;;  '(font-lock-type-face ((t (:foreground "green"))))
-;;  '(font-lock-variable-name-face ((t (:foreground "#ffcccc"))))
-;;  '(font-lock-warning-face ((t (:background "red" :weight bold))))
-;;  '(fringe ((t (:inherit mode-line))))
-;;  '(mode-line ((nil (:inverse-video t :box (:line-width 2 :style released-button)))))
-;;  '(region ((t (:inverse-video t))))
-;;  '(scroll-bar ((t (:inherit mode-line))))
-;;  '(shadow ((t (:inherit font-lock-comment-face))))
-;;  '(trailing-whitespace ((t (:background "#777"))))
-;;  '(widget-single-line-field ((t (:inverse-video t)))))
 
 ;;; NoteMacs.el ends here

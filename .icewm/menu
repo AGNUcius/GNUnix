@@ -4,12 +4,17 @@ prog Internet chromium-browser chromium-browser
 
 separator
 
+menu Work work.ico {
+ prog Blender blender blender
+}
+
 menu Accessories accessories.ico {
  prog Calculator calculator.ico xcalc
  prog "Command Prompt" xterm xterm
  prog Editor leafpad leafpad
  prog Magnifier xmag xmag
  prog NoteMacs emacs emacs --maximized
+ prog "File Browser [emelFM2]" emelfm2 emelfm2
  prog "File Browser [PCManFM]" pcmanfm pcmanfm
  prog "File Browser [ROX-Filer]" rox-filer rox-filer
 }

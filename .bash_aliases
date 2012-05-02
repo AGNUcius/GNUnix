@@ -24,6 +24,3 @@ alias pkg.add='sudo apt-get install'
 
 # Uninstall
 alias pkg.del='sudo apt-get --purge remove'
-
-# Uninstall by registered NAME:
-alias pkg.del='sudo apt-get --purge remove'

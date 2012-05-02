@@ -10,10 +10,11 @@ echo pkg.add moc gom dhex
 
 if (laptop)
 {
- echo pkg.add yacpi wicd-curses wireless-regdb crda iw rfkill
- rfkill list all
+ pkg.add yacpi wicd-curses wireless-regdb crda iw rfkill
+ sudo rfkill list all
+ sudo pm-powersave
 }
 
 sudo add user audio
 
-echo cat ~/.GNUnix/README.txt
+cat ~/.GNUnix/README.txt

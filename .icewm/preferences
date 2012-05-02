@@ -28,16 +28,22 @@ QuickSwitchFillSelection=1
 # TaskBarKeepBelow=0
 
 #  Auto hide task bar after delay
-# TaskBarAutoHide=0
+# TaskBarAutoHide=1
+
+#  Delay before task bar is hidden
+# AutoHideDelay=300 # [0-5000]
+
+#  Delay before task bar is shown
+# AutoShowDelay=500 # [0-5000]
 
 #  Auto show task bar when fullscreen window active
-TaskBarFullscreenAutoShow=1
+#TaskBarFullscreenAutoShow=1
 
 #  Clock Time format (strftime format string)
 TimeFormat="%l:%M %p"
 
 #  Show programs submenu
-ShowProgramsMenu=1
+#ShowProgramsMenu=1
 
 ShowSettingsMenu=0
 ShowFocusModeMenu=0
@@ -94,7 +100,7 @@ CPUStatusCommand="xterm -name htop -title htop -maximized -e htop "
 TrayDrawBevel=1
 
 #  Background of text entry fields (e.g. the addressbar)
-ColorInput="rgb:ff/00/00"
+ColorInput="rgb:ff/ff/00"
 
 #  Textcolor of text entry fields (e.g. the addressbar)
 ColorInputText="rgb:00/00/00"
@@ -105,7 +111,7 @@ ColorClockText="rgb:00/00/00"
 
 
 KeySysShowDesktop="Super+m"
-KeySysAddressBar="Super+R"
+KeySysAddressBar="Super+r"
 KeyWinFullscreen="Super+F11"
 
 KeyWinClose="Alt+F4"
