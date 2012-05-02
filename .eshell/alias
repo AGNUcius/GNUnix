@@ -8,3 +8,4 @@ alias pkg.files dpkg -L $*
 alias pkg.del xterm -e sudo apt-get --purge remove $*
 alias pkg.add sudo apt-get install $*
 alias mail.sync offlineimap $*
+
