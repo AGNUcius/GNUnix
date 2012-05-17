@@ -6,6 +6,7 @@ separator
 
 menu Work work.ico {
  prog Blender blender blender
+ prog "Circuit Sim" qucs qucs
 }
 
 menu Accessories accessories.ico {

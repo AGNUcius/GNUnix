@@ -1,10 +1,11 @@
-sudo apt-get install git
+apt-get install git
 cd ~
 git clone https://github.com/AGNUcius/GNUnix.git
 
-echo pkg.up
-echo pkg.add xinit xorg icewm slim big-cursor xlock
-echo pkg.add htop emacs chromium-browser aumix p7zip-full
+pkg.up
+pkg.add xinit xterm icewm wdm big-cursor xlock #slim lightdm
+pkg.add git  
+pkg.add htop emacs chromium-browser p7zip-full
 echo pkg.add pm-utils
 echo pkg.add moc gom dhex
 

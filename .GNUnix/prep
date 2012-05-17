@@ -3,7 +3,9 @@ if not set, set ARCH=i386
 if not set, set boot-source=mini.iso
 if not set, set OUT=~/%dist%-%ARCH%-%boot-source%
 
-wget Archive.UBUNTU.com/ubuntu/dists/%dist%/main/installer-%ARCH%/current/images/%boot-source% --output-file=%OUT%
+# wget Archive.UBUNTU.com/ubuntu/dists/%dist%/main/installer-%ARCH%/current/images/%boot-source% --output-file=%OUT%
+
+echo now based on debian.wheezy
 
 cat README.txt
 
