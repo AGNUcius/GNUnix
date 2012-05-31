@@ -1,21 +1,43 @@
-apt-get install git
-cd ~
-git clone https://github.com/AGNUcius/GNUnix.git
+#!/usr/bin/pseudocode
+This is not yet a runnable script
 
-pkg.up
-pkg.add xinit xterm icewm wdm big-cursor xlock #slim lightdm
-pkg.add git  
-pkg.add htop emacs chromium-browser p7zip-full
-echo pkg.add pm-utils
-echo pkg.add moc gom dhex
+$ sudo apt-get update; apt-get upgrade
+$ sudo apt-get install git
+$ cd ~
+$ git clone git://github.com/AGNUcius/GNUnix.git
 
-if (laptop)
-{
- pkg.add yacpi wicd-curses wireless-regdb crda iw rfkill
- sudo rfkill list all
- sudo pm-powersave
-}
+$ mv GNUnix/* .
+$ mv GNUnix/.* .
 
-sudo add user audio
 
-cat ~/.GNUnix/README.txt
+This gives you a complete desktop
+Maybe try 'slim' or 'lightdm' instead of 'wdm'
+Maybe try 'urxvt' or 'aterm' instead of 'xterm'
+$ sudo apt-get install xinit xterm icewm big-cursor xlock htop wdm
+
+
+This gives you a web browser
+Maybe try 'firefox' or 'iceweasle' instead
+$ sudo apt-get install chromium-browser
+
+
+The following are tools I must have
+$ sudo apt-get install emacs p7zip-full moc gom dhex
+
+
+$ if (laptop)
+$ {
+$  sudo apt-get install pm-utils yacpi wicd-curses wireless-regdb crda iw rfkill
+$  sudo rfkill list all
+$  sudo pm-powersave
+$ }
+
+
+This might fix sound problems
+$ sudo add user audio
+
+
+For the first login (if using wdm), you will need to select "icewm-session" from the "Start WM" button.
+
+
+See ../README.txt for more info

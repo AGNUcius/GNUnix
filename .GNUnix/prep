@@ -1,12 +1,24 @@
-if not set, set dist=oneiric
-if not set, set ARCH=i386
-if not set, set boot-source=mini.iso
-if not set, set OUT=~/%dist%-%ARCH%-%boot-source%
+#!/usr/bin/pseudocode
+This is not yet a runnable script
 
-# wget Archive.UBUNTU.com/ubuntu/dists/%dist%/main/installer-%ARCH%/current/images/%boot-source% --output-file=%OUT%
+Download the UBUNTU "network mini" install .iso
 
-echo now based on debian.wheezy
+$ wget archive.ubuntu.com/ubuntu/dists/precise/main/installer-i386/current/images/netboot/mini.iso --output-document=precise-i386-mini.iso
 
-cat README.txt
+Burn to CD or use UNetBootin.net to write to a USB key.
+
+Put the media in the target machine and reboot.
+
+You may need to enter the BIOS to change the "Boot Order".
+You might be able to press F12 to bring-up a "Boot Menu".
 
 
+During the install, most of the default settings are fine (if you are English), but make sure to uncheck all the 'suggested packages' near the end of the install.
+
+
+If you installed from USB, may need to run
+$ grub-install /dev/sda
+$ sudo update-grub
+
+
+See ./install for the next step

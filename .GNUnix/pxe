@@ -1,2 +1,4 @@
+This is just an idea for now
+
 set boot-source=netboot.tar.gz
 call ~/.GNUnix/prep
