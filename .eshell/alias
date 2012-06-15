@@ -1,4 +1,3 @@
-alias pkg.install xterm -e sudo apt-get install  $*
 alias pkg.update xterm -e sudo apt-get update; apt-get upgrade
 alias pkg.search apt-cache search $*
 alias pkg.search-new man apt-file
@@ -7,7 +6,7 @@ alias pkg.list.available dpkg -l \* $*
 alias pkg.info dpkg -S $*
 alias pkg.files dpkg -L $*
 alias pkg.del xterm -e sudo apt-get --purge remove $*
-alias pkg.add sudo apt-get --no-install-recommends install $*
-alias pkg.cleanup apt-get autoremove; dpkg --get-selections | grep deinstall | cut -f1 | xargs dpkg --purge; apt-get clean
+alias pkg.install xterm -e sudo apt-get install  $*
+alias pkg.add pkg.install
 alias pkg.cleanup-new man deborphan
 alias mail.sync offlineimap $*

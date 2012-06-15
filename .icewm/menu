@@ -4,33 +4,42 @@ prog Internet chromium-browser chromium-browser
 
 separator
 
-menu Work work.ico {
- prog Blender blender blender
- prog "Circuit Sim" qucs qucs
-}
-
-menu Accessories accessories.ico {
- prog Calculator calculator.ico xcalc
- prog "Command Prompt" xterm xterm
- prog Editor leafpad leafpad
- prog Magnifier xmag xmag
+menu Programs work.ico {
  prog NoteMacs emacs emacs --maximized
- prog "File Browser [emelFM2]" emelfm2 emelfm2
- prog "File Browser [PCManFM]" pcmanfm pcmanfm
- prog "File Browser [ROX-Filer]" rox-filer rox-filer
+ prog Blender blender blender
+ prog Gimp gimp gimp
+ prog Fotoxx fotoxx fotoxx
+ prog "Circuit Sim" qucs qucs
+ menu Accessories accessories.ico {
+  prog "File Browser" xfe xfe
+  prog "Text Editor" xfw xfw
+  prog "Command Prompt" xterm xterm
+  prog Calculator calculator.ico xcalc
+  prog Magnifier xmag xmag
+ }
 }
 
-menu System /usr/share/icons/wm-icons/16x16-general/system {
- prog "Manage Tasks" manage.ico xterm -e htop
- prog "Check Battery" manage.ico xterm -e yacpi
- prog "Lock Computer" manage.ico xterm -e xlock
-# prog "Adjust Volume" manage.ico xterm -e aumix
+menu Games games {
+ prog minetest minetest minetest
+}
+
+menu System system {
+ prog "Manage Tasks" htop xterm -maximized -e htop
+ prog "Power Settings" powertop xterm -maximized -e sudo powertop
+ prog "Mouse Settings" tpconfig xterm -e tpconfig
+ prog "Check Battery" yacpi xterm -e yacpi
+ prog "Adjust Volume" alsamixer xterm -e alsamixer
 separator
+ prog "Backup to LiveCD" xterm xterm -e sudo ~/down/tux2live/tux2live
+separator
+ prog Lock xlock xlock
  prog Restart restart xterm -e sudo shutdown -r now
  prog Shutdown shutdown xterm -e sudo shutdown now
- prog RootMacs emacs xterm -e sudo emacs --maximized --eval '(set-background-color "darkred")'
+separator
+ prog RootMacs emacs xterm -e sudo emacs --maximized --eval '(set-background-color "darkgreen")'
+ prog "VNC Server" x11vnc xterm -e x11vnc -xkb -forever -usepw -ncache 10
 }
 
-menuprog Gnome folder icewm-menu-gnome1 --list
-menuprog Gnome folder icewm-menu-gnome2 --list
-menuprog KDE folder icewm-menu-gnome --list
+# menuprog Gnome folder icewm-menu-gnome1 --list
+# menuprog Gnome folder icewm-menu-gnome2 --list
+# menuprog KDE folder icewm-menu-gnome --list

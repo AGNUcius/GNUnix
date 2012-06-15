@@ -1,14 +1,25 @@
 # see /usr/share/icewm/keys
 
-key "Ctrl+Shift+Esc" xterm -name htop -title htop -maximized -e htop
+key "Ctrl+Shift+Esc" xterm -maximized -e htop
 key "Super+p" xterm -maximized -e sudo powertop
 key "Super+b" xterm -e yacpi
-key "Super+e" emelfm2
-key "Super+l" xterm -e xlock
-key "Super+v" xterm -e aumix
+key "Super+e" xfe
+key "Super+l" xlock
+key "Super+v" xterm -e alsamixer
 key "Super+w" xterm -e wicd-curses
 key "XF86Sleep" xterm -e sudo pm-suspend
 key "XF86PowerOff" xterm -e sudo pm-suspend
 
-# key "Super+r" KeySysAddressBar # see ./preferences
-# key "Super+m" KeySysShowDesktop # see ./preferences
+key "XF86AudioRaiseVolume" amixer set Master Playback 1+
+key "XF86AudioLowerVolume" amixer set Master Playback 1-
+
+
+# from ./preferences
+# KeySysShowDesktop="Super+m"
+# KeySysAddressBar="Super+r"
+# KeyWinFullscreen="Super+F11"
+
+# KeyWinClose="Alt+F4"
+# KeyWinMenu="Alt+Space"
+# KeySysSwitchNext="Alt+Tab"
+# KeySysSwitchLast="Alt+Shift+Tab"

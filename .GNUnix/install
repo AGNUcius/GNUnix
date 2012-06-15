@@ -10,34 +10,51 @@ $ mv GNUnix/* .
 $ mv GNUnix/.* .
 
 
-This gives you a complete desktop
-Maybe try 'slim' or 'lightdm' instead of 'wdm'
-Maybe try 'urxvt' or 'aterm' instead of 'xterm'
-$ sudo apt-get install xinit xterm icewm big-cursor xlock htop wdm
+Basic Desktop:
+ wdm alternatives: slim, lightdm
+ xterm alternatives: urxvt, aterm
+$ sudo apt-get install xinit xterm icewm wdm big-cursor
 
 
-This gives you a web browser
-Maybe try 'firefox' or 'iceweasle' instead
+Manage: Files, Processess, Power, Screen, Audio
+$ sudo apt-get install emelfm2 htop pm-utils xlockmore alsamixer
+
+File manager more like Windows Explorer
+$ sudo apt-get --no-install-recommends install xfe
+
+
+Web browser
+Alternatives: firefox, iceweasle
 $ sudo apt-get install chromium-browser
 
 
-The following are tools I must have
-$ sudo apt-get install emacs p7zip-full moc gom dhex
+Extra tools that I use
+$ sudo apt-get install emacs p7zip-full dhex
 
+
+Enable backup to LiveCD
+$ mkdir ~/down
+$ cd ~/down
+$ wget http://downloads.sourceforge.net/project/tux2live/Tux2live/Stable/tux2live-v1.2.0-50.tgz
+$ tar xzvf tux2live-v1.2.0-50.tgz
+$ cd tux2live
+$ pkg.install squashfs-tools genisoimage live-boot live-boot-initramfs-tools
+$ pkg.cleanup
+$ sudo ./tux2live
 
 $ if (laptop)
 $ {
-$  sudo apt-get install pm-utils yacpi wicd-curses wireless-regdb crda iw rfkill
+$  sudo apt-get install yacpi wicd-curses wireless-regdb crda iw rfkill
 $  sudo rfkill list all
 $  sudo pm-powersave
 $ }
 
 
-This might fix sound problems
-$ sudo add user audio
+For the first login (if using wdm), select "icewm-session" from the "Start WM" button.
 
 
-For the first login (if using wdm), you will need to select "icewm-session" from the "Start WM" button.
+Needed to play audio as non-root
+$ sudo add UserName audio
 
 
 See ../README.txt for more info

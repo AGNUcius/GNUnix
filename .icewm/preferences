@@ -43,14 +43,14 @@ QuickSwitchFillSelection=1
 TimeFormat="%l:%M %p"
 
 #  Show programs submenu
-#ShowProgramsMenu=1
+ShowProgramsMenu=0
 
 ShowSettingsMenu=0
 ShowFocusModeMenu=0
 ShowThemesMenu=0
 ShowHelp=0
 ShowAbout=0
-ShowRun=0
+ShowRun=1
 ShowWindowList=0
 ShowLogoutMenu=0
 ShowLogoutSubMenu=0
@@ -61,6 +61,7 @@ TaskBarShowTransientWindows=0
 
 
 #  Enable address bar functionality in taskbar
+#  This is the 'Run' area
 # EnableAddressBar=1
 
 #  Show address bar in task bar
@@ -70,7 +71,7 @@ TaskBarShowTransientWindows=0
 # MultiByte=1
 
 #  Preselect to Cancel (0) or the OK (1) button in message boxes
-MsgBoxDefaultAction=1 # [0-1]
+MsgBoxDefaultAction=1
 
 #  default number of tasks in taskbar
 # TaskbarButtonWidthDivisor=3 # [1-25]

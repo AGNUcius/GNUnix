@@ -3,7 +3,7 @@ This is not yet a runnable script
 
 Download the UBUNTU "network mini" install .iso
 
-$ wget archive.ubuntu.com/ubuntu/dists/precise/main/installer-i386/current/images/netboot/mini.iso --output-document=precise-i386-mini.iso
+$ wget archive.ubuntu.com/ubuntu/dists/precise/main/installer-i386/current/images/netboot/mini.iso --output-document=UBUNTU-Precise-i386-mini.iso
 
 Burn to CD or use UNetBootin.net to write to a USB key.
 
