@@ -801,8 +801,8 @@
               "NoteMacs")
             ".  Keys are "
             (if (not NoteMacs-unified-keys) "not ")
-            "unified; "
-            "you are "
+            "unified.  "
+            "You are "
             (if (not NoteMacs-apprentice) "not ")
             "an apprentice and "
             (if (not NoteMacs-old-timer) "not ")

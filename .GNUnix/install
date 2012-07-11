@@ -20,8 +20,10 @@ Manage: Files, Processess, Power, Screen, Audio
 $ sudo apt-get install emelfm2 htop pm-utils xlockmore alsamixer
 
 File manager more like Windows Explorer
-$ sudo apt-get --no-install-recommends install xfe
+$ sudo apt-get install --no-install-recommends xfe
 
+Add/Remove Programs
+$ sudo apt-get install --no-install-recommends synaptic
 
 Web browser
 Alternatives: firefox, iceweasle
@@ -30,6 +32,9 @@ $ sudo apt-get install chromium-browser
 
 Extra tools that I use
 $ sudo apt-get install emacs p7zip-full dhex
+
+$ sudo mv /usr/bin/icewmbg /usr/bin/icewmbg.off
+$ sudo mv /usr/bin/icewmtray /usr/bin/icewmtray.off
 
 
 Enable backup to LiveCD
@@ -53,8 +58,11 @@ $ }
 For the first login (if using wdm), select "icewm-session" from the "Start WM" button.
 
 
-Needed to play audio as non-root
-$ sudo add UserName audio
+To play audio as non-root
+$ sudo adduser USERNAME audio
 
+To capture video as non-root
+$ sudo adduser USERNAME video
+$ sudo chmod 666 /dev/video0
 
 See ../README.txt for more info

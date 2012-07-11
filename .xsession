@@ -1,2 +1,2 @@
 setxkbmap -option ctrl:nocaps
-xsetroot -solid darkblue
+xsetroot -solid darkcyan

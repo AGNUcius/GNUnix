@@ -7,6 +7,6 @@ alias pkg.info dpkg -S $*
 alias pkg.files dpkg -L $*
 alias pkg.del xterm -e sudo apt-get --purge remove $*
 alias pkg.install xterm -e sudo apt-get install  $*
-alias pkg.add pkg.install
+alias pkg.add xterm -e sudo apt-get install  $*
 alias pkg.cleanup-new man deborphan
 alias mail.sync offlineimap $*

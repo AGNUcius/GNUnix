@@ -2,7 +2,8 @@
 # .GNUnix .emacs NoteMacs .icewm contacts.csv .archive .profile .bashrc .xinitrc .eshell .isyncrc .conkyrc .htoprc
 
 cd ~
-git commit
+git commit -a -m "some message"
+git push
 
 
 # 7z a doc.7z doc

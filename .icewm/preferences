@@ -110,6 +110,8 @@ ColorInputText="rgb:00/00/00"
 ColorClock=""
 ColorClockText="rgb:00/00/00"
 
+#  Show 'show desktop' button on taskbar
+TaskBarShowShowDesktopButton=0
 
 KeySysShowDesktop="Super+m"
 KeySysAddressBar="Super+r"
