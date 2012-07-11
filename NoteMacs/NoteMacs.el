@@ -1,4 +1,4 @@
-;;; NoteMac.el --- Make Emacs a little easier to use.
+;;; NoteMacs.el --- Make Emacs a little easier to use.
 
 ;; Copyright (C): Social Sufficiency Coalition
 
@@ -67,9 +67,41 @@
 ;; user runs the NoteMacs-wizard).
 
 
+(setq debug-on-error nil)
 
-(autoload 'gtags-find-tag-from-here "global-mode" nil t)
-(define-key global-map [(f12)] 'gtags-find-tag-from-here)
+;(autoload 'gtags-find-tag-from-here "global-mode" nil t)
+; Use "Exuberant CTags" from Cygwin.com as:
+; ctags.exe -Re
+
+(define-key global-map [(meta shift f12)]
+  (lambda ()
+	(interactive)
+	(shell-command "ctags -Re")))
+
+(define-key global-map [(shift f12)]
+  (lambda ()
+	(interactive)
+	(tags-reset-tags-tables)))
+
+(defun find-tag-at-point ()
+  "Jump to tag of the string under the cursor."
+  (interactive)
+  (find-tag (thing-at-point 'symbol)))
+
+(define-key global-map [(f12)] 'find-tag-at-point)
+
+
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta))
+
+;; $ cp $FILE ~/keys-binary.plist
+;; $ plutil -convert xml1 -o ~/keys-xml.plist ~/keys-binary.plist
+;; Open the resulting XML file and locate the com.apple.keyboard.modifiermapping key. Its value is an array containing several entries, each in turn containing HIDKeyboardModifierMappingSrc and HIDKeyboardModifierMappingDst keys. The values of those keys are described in the table above. Make the changes you wish to make, and save your work.
+
+;; Convert the file back to the binary property list format, and put it back in the correct location:
+;; $ plutil -convert binary1 -o ~/keys-binary.plist ~/keys-xml.plist
+;; $ cp ~/keys-binary.plist $FILE
+
 
 (autoload 'hexview-find-file "hexview-mode" nil t)
 
@@ -326,7 +358,9 @@
 		  (revert-buffer nil t t)
 		  (toggle-read-only nil)))
 
-	  ;;(define-key nxml-mode-map [(meta h)] 'backward-kill-word) 
+	  (add-hook 'nxml-mode-hook
+				(lambda ()
+				(define-key nxml-mode-map [(meta h)] 'backward-kill-word)))
 
 	  ;;These hooks are executed every time we enter that mode!
 	  (add-hook 'archive-mode-hook
@@ -731,7 +765,12 @@
  '(newsticker-html-renderer (quote newsticker-htmlr-render))
  '(next-line-add-newlines nil)
  '(parens-require-spaces nil)
- '(pc-selection-mode t nil (pc-select))
+ '(pc-selection-mode t)
+ '(rcirc-default-nick "AGNUcius")
+ '(rcirc-default-server "irc.oftc.net")
+ '(rcirc-default-user-full-name "AGNUcius")
+ '(rcirc-default-user-name "AGNUcius")
+ '(rcirc-startup-channels-alist (quote (("^irc.gnu.org$" "#rcirc"))))
  '(read-quoted-char-radix 10)
  '(scroll-conservatively 50)
  '(scroll-preserve-screen-position t)
