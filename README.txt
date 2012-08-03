@@ -1,4 +1,4 @@
-GNUnix is not GNU/Linux
+GNUnix is not Linux
 
 GNUnix is an Operating System construction kit
 that starts as a very lightweight distribution
@@ -51,4 +51,4 @@ after X days of disuse", "sort menu entries
 by popularity", etc.
 
 
-See ./.GNUnix/prep to begin
+See .GNUnix/prep to begin

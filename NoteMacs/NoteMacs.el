@@ -44,14 +44,6 @@
 (autoload 'list-packages "package" nil t)
 
 
-(when (eq system-type 'darwin)
- (setq mac-command-modifier 'meta)
-;; Go to "System Preferences"|Keyboard|Keyboard|Modifier Keys
-;; Change 'Caps-Lock' to send 'Control'
-;; Change 'Option' to send 'Command'
-;; Change 'Command' to send 'Option'
-)
-
 ;;; Harmless changes
 ;; The goal is to make all harmless changes within this section.
 
@@ -91,8 +83,14 @@
 (define-key global-map [(f12)] 'find-tag-at-point)
 
 
+;; Mac OS X stuff
 (when (eq system-type 'darwin)
-  (setq mac-command-modifier 'meta))
+ (setq mac-command-modifier 'meta))
+
+;; Go to "System Preferences"|Keyboard|Keyboard|Modifier Keys
+;; Change 'Caps-Lock' to send 'Control'
+;; Change 'Option' to send 'Command'
+;; Change 'Command' to send 'Option'
 
 ;; $ cp $FILE ~/keys-binary.plist
 ;; $ plutil -convert xml1 -o ~/keys-xml.plist ~/keys-binary.plist

@@ -11,6 +11,7 @@ menu Programs work.ico {
   prog "Command Prompt" xterm xterm
   prog Calculator calculator.ico xcalc
   prog Magnifier xmag xmag
+  prog RDesktop rdesktop rdesktop
   prog NoteMacs emacs emacs --maximized
  }
  menu Art art {
@@ -26,14 +27,16 @@ menu Programs work.ico {
 }
 
 menu System system {
+ prog "Add/Remove Programs" synaptic xterm -e sudo synaptic
+separator
  prog "Manage Tasks" htop xterm -maximized -e htop
  prog "Power Settings" powertop xterm -maximized -e sudo powertop
  prog "Mouse Settings" tpconfig xterm -e tpconfig
  prog "Check Battery" yacpi xterm -e yacpi
  prog "Adjust Volume" alsamixer xterm -e alsamixer
-separator
- prog "Make LiveCD" xterm xterm -e cd ~/down/tux2live/tux2live; echo type ./tux2live to begin
-separator
+# separator
+# prog "Make LiveCD" xterm xterm -e 
+# separator
  prog Lock xlock xlock
  prog Shutdown shutdown xterm -e sudo shutdown now
  prog Restart restart xterm -e sudo shutdown -r now
@@ -41,8 +44,6 @@ separator
 separator
  prog RootMacs emacs xterm -e sudo emacs --maximized --eval '(set-background-color "darkgreen")'
  prog "VNC Server" x11vnc xterm -e x11vnc -xkb -forever -usepw -ncache 10
-separator
- prog "Add/Remove Programs" synaptic xterm -e sudo synaptic
 }
 
 # menuprog Gnome folder icewm-menu-gnome1 --list

@@ -1,5 +1,3 @@
-alias cmd='xterm'
-
 # Update all installed software:
 alias pkg.update='sudo apt-get update; sudo apt-get upgrade'
 
@@ -12,7 +10,6 @@ alias pkg.list.installed='dpkg -l'
 # List all available software:
 alias pkg.list.available='dpkg -l \*'
 
-
 # Files in this pkg
 alias pkg.info='dpkg -S'
 
@@ -24,3 +21,6 @@ alias pkg.add='sudo apt-get install'
 
 # Uninstall
 alias pkg.del='sudo apt-get --purge remove'
+
+# Cleanup
+alias pkg.clean='sudo apt-get clean'

@@ -49,14 +49,13 @@ $ sudo ./tux2live
 
 $ if (laptop)
 $ {
-$  sudo apt-get install yacpi wicd-curses wireless-regdb crda iw rfkill
+$  sudo apt-get install laptop-mode-tools yacpi wicd-curses wireless-regdb crda iw rfkill
 $  sudo rfkill list all
 $  sudo pm-powersave
 $ }
 
 
 For the first login (if using wdm), select "icewm-session" from the "Start WM" button.
-
 
 To play audio as non-root
 $ sudo adduser USERNAME audio
