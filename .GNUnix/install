@@ -17,7 +17,7 @@ $ sudo apt-get install xinit xterm icewm wdm big-cursor
 
 
 Manage: Files, Processess, Power, Screen, Audio
-$ sudo apt-get install emelfm2 htop pm-utils xlockmore alsamixer
+$ sudo apt-get install emelfm2 htop pm-utils xlockmore alsa-utils
 
 File manager more like Windows Explorer
 $ sudo apt-get install --no-install-recommends xfe

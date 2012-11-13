@@ -8,7 +8,6 @@ TitleButtonsRight="xmi"
 #  Icon search path (colon separated)
 # IconPath="/usr/share/icons/wm-icons/16x16-general"
 
-
 # System Menu: Restore, Move, Size, miNimize, maXimize, Close, Fullscreen
 WinMenuItems="rmsnxcf"
 

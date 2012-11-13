@@ -1,0 +1,9 @@
+#! /bin/bash
+
+if [ $# -ne 5 ]
+then
+ echo Usage: $0 SHARENAME
+else
+ echo sudo mkdir /mnt/$1
+ echo sudo mount -t vboxsf $1 /mnt/$1
+fi

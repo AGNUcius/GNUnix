@@ -765,7 +765,7 @@
  '(parens-require-spaces nil)
  '(pc-selection-mode t)
  '(rcirc-default-nick "AGNUcius")
- '(rcirc-default-server "irc.oftc.net")
+ '(rcirc-default-server "irc.freenode.net")
  '(rcirc-default-user-full-name "AGNUcius")
  '(rcirc-default-user-name "AGNUcius")
  '(rcirc-startup-channels-alist (quote (("^irc.gnu.org$" "#rcirc"))))

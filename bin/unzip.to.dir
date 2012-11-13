@@ -1,0 +1,2 @@
+
+for i in *.zip; do 7z x $i -o${i/%.zip/}; done

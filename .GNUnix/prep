@@ -12,13 +12,10 @@ Put the media in the target machine and reboot.
 You may need to enter the BIOS to change the "Boot Order".
 You might be able to press F12 to bring-up a "Boot Menu".
 
-
 During the install, most of the default settings are fine (if you are English), but make sure to uncheck all the 'suggested packages' near the end of the install.
-
 
 If you installed from USB, may need to run
 $ grub-install /dev/sda
 $ sudo update-grub
-
 
 See ./install for the next step

@@ -3,6 +3,7 @@ alias pkg.update='sudo apt-get update; sudo apt-get upgrade'
 
 # Search all available software:
 alias pkg.search='apt-cache search'
+alias pkg.find='apt-cache search'
 
 # List all installed software:
 alias pkg.list.installed='dpkg -l'
@@ -18,6 +19,7 @@ alias pkg.files='dpkg -L'
 
 # Install by registered NAME:
 alias pkg.add='sudo apt-get install'
+alias pkg.install='sudo apt-get install'
 
 # Uninstall
 alias pkg.del='sudo apt-get --purge remove'

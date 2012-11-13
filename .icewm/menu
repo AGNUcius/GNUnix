@@ -4,34 +4,56 @@ prog Internet chromium-browser chromium-browser
 
 separator
 
-menu Programs work.ico {
- menu Accessories accessories.ico {
+menu Programs Programs {
+ menu Accessories Accessories {
   prog "File Browser" xfe xfe
-  prog "Text Editor" xfw xfw
+  prog "Text Editor [xfw]" xfw xfw
+  prog "Text Editor [leafpad]" leafpad leafpad
+  prog "Rich Text Editor [abiword]" abiword abiword
   prog "Command Prompt" xterm xterm
-  prog Calculator calculator.ico xcalc
+  prog Calculator calculator xcalc
   prog Magnifier xmag xmag
-  prog RDesktop rdesktop rdesktop
+  prog "Remote Desktop" rdesktop rdesktop
   prog NoteMacs emacs emacs --maximized
  }
  menu Art art {
+  prog mtpaint mtpaint mtpaint
+  prog pencil pencil pencil
+  prog tuxpaint tuxpaint tuxpaint --fullscreen
   prog kino kino kino
+  prog Inkscape inkscape inkscape
   prog Blender blender blender
   prog Gimp gimp gimp
   prog Fotoxx fotoxx fotoxx
   prog "Circuit Sim" qucs qucs
  }
+ menu Dev dev {
+  prog scratch scratch scratch
+  prog squeak squeak squeak
+  prog etoys etoys etoys
+  prog turtleart turtleart turtleart
+ }
  menu Games games {
+  prog xevil xevil xevil
+  prog TIM TIM dosbox /home/user/down/games/dos/TIM2/TIM2.EXE -fullscreen
+  prog xracer xracer xracer
   prog minetest minetest minetest
+  prog njam njam njam
+  prog C64 x64 x64
+  prog zsnes zsnes zsnes
  }
 }
 
 menu System system {
+ prog "App Shop" software-center software-center
  prog "Add/Remove Programs" synaptic xterm -e sudo synaptic
 separator
+ prog "Manage Printers" cups chromium-browser http://localhost:631
  prog "Manage Tasks" htop xterm -maximized -e htop
  prog "Power Settings" powertop xterm -maximized -e sudo powertop
  prog "Mouse Settings" tpconfig xterm -e tpconfig
+ prog "Fix Whacky Mouse" mouse xterm -e sudo modprobe -r psmouse; modprobe psmouse
+ prog "Fix Acer One Laptop Screen" screen xrandr --output  LVDS1 --mode 1024x600
  prog "Check Battery" yacpi xterm -e yacpi
  prog "Adjust Volume" alsamixer xterm -e alsamixer
 # separator
