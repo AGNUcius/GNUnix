@@ -5,42 +5,81 @@ prog Internet chromium-browser chromium-browser
 separator
 
 menu Programs Programs {
- menu Accessories Accessories {
+ menu Office Office {
+  prog LibreOffice libreoffice libreoffice
   prog "File Browser" xfe xfe
-  prog "Text Editor [xfw]" xfw xfw
-  prog "Text Editor [leafpad]" leafpad leafpad
-  prog "Rich Text Editor [abiword]" abiword abiword
+  prog "Text Editor xfwrite" xfwrite xfwrite
   prog "Command Prompt" xterm xterm
-  prog Calculator calculator xcalc
+  prog Calculator xcalc xcalc
   prog Magnifier xmag xmag
   prog "Remote Desktop" rdesktop rdesktop
   prog NoteMacs emacs emacs --maximized
  }
  menu Art art {
-  prog mtpaint mtpaint mtpaint
-  prog pencil pencil pencil
-  prog tuxpaint tuxpaint tuxpaint --fullscreen
-  prog kino kino kino
-  prog Inkscape inkscape inkscape
+  prog numptyphysics numptyphysics numptyphysics
   prog Blender blender blender
-  prog Gimp gimp gimp
   prog Fotoxx fotoxx fotoxx
-  prog "Circuit Sim" qucs qucs
+  prog Gimp gimp gimp
+  prog Inkscape inkscape inkscape
+  prog Kino kino kino
+  prog MTPaint mtpaint mtpaint
+  prog Pencil pencil pencil
+  prog QUCS qucs qucs
+  prog TuxPaint tuxpaint tuxpaint --fullscreen
+  prog Wings3D wings3d wings3d
+  prog XaraLX xaralx xaralx
+  prog JAPA japa japa -A
  }
  menu Dev dev {
-  prog scratch scratch scratch
-  prog squeak squeak squeak
-  prog etoys etoys etoys
-  prog turtleart turtleart turtleart
+  prog Basic256 basic256 basic256
+  prog Scratch scratch scratch
+  prog Squeak squeak squeak
+  prog EToys etoys etoys
+  prog TurtleArt turtleart turtleart
  }
  menu Games games {
-  prog xevil xevil xevil
-  prog TIM TIM dosbox /home/user/down/games/dos/TIM2/TIM2.EXE -fullscreen
-  prog xracer xracer xracer
-  prog minetest minetest minetest
-  prog njam njam njam
+  prog "NeoGeo MrDo" mame mame -rompath /home/user/games/MAME/roms neomrdo
+  prog "DOOM Ulimate" DOOM dosbox /home/user/games/dos/doom-ult/DOOM.EXE -fullscreen -exit
   prog C64 x64 x64
+  prog diggers-2-extractors H2O dosbox /home/user/games/dos/diggers-2-extractors/XTRACTOR.EXE -fullscreen -exit
+  prog H2O H2O dosbox /home/user/games/dos/H2O/H2O.EXE -fullscreen -exit
+  prog heroes heroes heroes --full-screen --double
+  prog minetest minetest minetest
+  prog mu-cade mu-cade mu-cade
+  prog NJAM njam njam
+  prog overgod overgod overgod
+  prog pixbros pixbros pixbros
+  prog qonk qonk qonk
+  prog rockdodger rockdodger rockdodger
+  prog rrootage rrootage rrootage
+  prog smc smc smc
+  prog supertux supertux supertux
+  prog supertuxkart supertuxkart supertuxkart
+  prog "The Incredible Machine 2" TIM dosbox /home/user/games/dos/the-incredible-machine-2/TIM2.EXE -fullscreen -exit
+  prog torcs torcs torcs
+  prog trackballs trackballs trackballs
+  prog triplane triplane triplane
+  prog trophy trophy trophy
+  prog "Tubular Worlds" TUB dosbox /home/user/games/dos/tubular-worlds/TUBWORLD.BAT -fullscreen -exit
+  prog Tumiki-Fighters tumiki-fighters tumiki-fighters
+  prog val-and-rick val-and-rick val-and-rick
+  prog vectoroids vectoroids vectoroids
+  prog vor vor vor
+  prog wing wing wing
+  prog xball  xball  xball
+  prog xblast xblast xblast
+  prog xbubble xbubble xbubble
+  prog "X Com 2 - Terror From The Deep" H2O dosbox /home/user/games/dos/X-Com-2-Terror-From-The-Deep/TERROR.COM -fullscreen -exit
+  prog xevil xevil xevil
+  prog xgalaga xgalaga xgalaga
+  prog xracer xracer xracer
   prog zsnes zsnes zsnes
+#  prog Ultima8 Ultima8 dosbox /home/user/games/dos/ultima8/U8.EXE -fullscreen -exit
+# williams-arcade-classics/ARCADE/ARCADE.EXE
+# offroad/IRONMAN.BAT
+  prog Cosmo1 cosmo dosbox /home/user/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode1/COSMO1.EXE -fullscreen -exit
+  prog Cosmo2 cosmo dosbox /home/user/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode2/COSMO2.EXE -fullscreen -exit
+  prog Cosmo3 cosmo dosbox /home/user/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode3/COSMO3.EXE -fullscreen -exit
  }
 }
 
@@ -50,9 +89,11 @@ menu System system {
 separator
  prog "Manage Printers" cups chromium-browser http://localhost:631
  prog "Manage Tasks" htop xterm -maximized -e htop
+ prog "Murder Window" xkill xterm -e sudo xkill
  prog "Power Settings" powertop xterm -maximized -e sudo powertop
  prog "Mouse Settings" tpconfig xterm -e tpconfig
  prog "Fix Whacky Mouse" mouse xterm -e sudo modprobe -r psmouse; modprobe psmouse
+ prog "Fix Philips TV Screen" xrandr /home/user/.screenlayout/1280x768.sh
  prog "Fix Acer One Laptop Screen" screen xrandr --output  LVDS1 --mode 1024x600
  prog "Check Battery" yacpi xterm -e yacpi
  prog "Adjust Volume" alsamixer xterm -e alsamixer
@@ -62,7 +103,7 @@ separator
  prog Lock xlock xlock
  prog Shutdown shutdown xterm -e sudo shutdown now
  prog Restart restart xterm -e sudo shutdown -r now
- prog Suspend suspend xterm -e sudo pm-supend
+ prog Suspend suspend xterm -e sudo pm-suspend
 separator
  prog RootMacs emacs xterm -e sudo emacs --maximized --eval '(set-background-color "darkgreen")'
  prog "VNC Server" x11vnc xterm -e x11vnc -xkb -forever -usepw -ncache 10

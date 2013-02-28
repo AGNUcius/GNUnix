@@ -9,35 +9,32 @@ $ git clone git://github.com/AGNUcius/GNUnix.git
 $ mv GNUnix/* .
 $ mv GNUnix/.* .
 
+Basic Desktop to manage files, processess, packages, power, screen, audio, web
+$ sudo apt-get install xinit xterm icewm wdm big-cursor xlockmore pm-utils htop alsa-utils xfe synaptic chromium-browser
 
-Basic Desktop:
- wdm alternatives: slim, lightdm
- xterm alternatives: urxvt, aterm
-$ sudo apt-get install xinit xterm icewm wdm big-cursor
+$ if (laptop)
+$ {
+$  sudo apt-get install yacpi wicd-curses wireless-regdb crda iw rfkill
+$  sudo rfkill list all
+$  sudo pm-powersave
+$ }
+
+If using wdm, select "icewm-session" from the "Start WM" button for the first login.
+
+To play audio as non-root
+$ sudo adduser USERNAME audio
+
+To capture video as non-root
+$ sudo adduser USERNAME video
+$ sudo chmod 666 /dev/video0
 
 
-Manage: Files, Processess, Power, Screen, Audio
-$ sudo apt-get install emelfm2 htop pm-utils xlockmore alsa-utils
-
-File manager more like Windows Explorer
-$ sudo apt-get install --no-install-recommends xfe
-
-Add/Remove Programs
-$ sudo apt-get install --no-install-recommends synaptic
-
-Web browser
-Alternatives: firefox, iceweasle
-$ sudo apt-get install chromium-browser
-
-
-Extra tools that I use
+Extra settings that I use
 $ sudo apt-get install emacs p7zip-full dhex
-
 $ sudo mv /usr/bin/icewmbg /usr/bin/icewmbg.off
 $ sudo mv /usr/bin/icewmtray /usr/bin/icewmtray.off
 
-
-Enable backup to LiveCD
+Experimental backup to LiveCD
 $ mkdir ~/down
 $ cd ~/down
 $ wget http://downloads.sourceforge.net/project/tux2live/Tux2live/Stable/tux2live-v1.2.0-50.tgz
@@ -46,22 +43,5 @@ $ cd tux2live
 $ pkg.install squashfs-tools genisoimage live-boot live-boot-initramfs-tools
 $ pkg.cleanup
 $ sudo ./tux2live
-
-$ if (laptop)
-$ {
-$  sudo apt-get install laptop-mode-tools yacpi wicd-curses wireless-regdb crda iw rfkill
-$  sudo rfkill list all
-$  sudo pm-powersave
-$ }
-
-
-For the first login (if using wdm), select "icewm-session" from the "Start WM" button.
-
-To play audio as non-root
-$ sudo adduser USERNAME audio
-
-To capture video as non-root
-$ sudo adduser USERNAME video
-$ sudo chmod 666 /dev/video0
 
 See ../README.txt for more info

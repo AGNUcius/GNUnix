@@ -9,6 +9,7 @@ alias pkg.install xterm -e sudo apt-get install  $*
 alias pkg.list.available dpkg -l \* $*
 alias pkg.list.installed dpkg -l $*
 alias pkg.search apt-cache search $*
+alias pkg.source apt-get source $*
 alias pkg.find apt-cache search $*
 alias pkg.search-new man apt-file
-alias pkg.update xterm -e sudo apt-get update; apt-get upgrade
+alias pkg.update xterm -e sudo apt-get update; sudo apt-get upgrade
