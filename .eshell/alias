@@ -4,7 +4,7 @@ alias pkg.clean xterm -e sudo apt-get clean
 alias pkg.cleanup-new man deborphan
 alias pkg.del xterm -e sudo apt-get --purge remove $*
 alias pkg.files dpkg -L $*
-alias pkg.info dpkg -S $*
+alias pkg.info apt-cache show $*
 alias pkg.install xterm -e sudo apt-get install  $*
 alias pkg.list.available dpkg -l \* $*
 alias pkg.list.installed dpkg -l $*

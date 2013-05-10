@@ -1,5 +1,5 @@
 setxkbmap -option ctrl:nocaps
-xsetroot -solid darkcyan
+xsetroot -solid darkblue
 
 # export PATH=$PATH:/home/user/bin
 # powernap

@@ -1,8 +1,5 @@
 # related: ~/.icewm/prefoverride and /usr/share/icewm/preferences
 
-ThemeDescription="NT theme"
-ThemeAuthor="user"
-Look=NT
 TitleButtonsRight="xmi"
 
 #  Icon search path (colon separated)
