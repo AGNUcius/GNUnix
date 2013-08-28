@@ -9,7 +9,7 @@ $ git clone git://github.com/AGNUcius/GNUnix.git
 $ mv GNUnix/* .
 $ mv GNUnix/.* .
 
-Basic Desktop to manage files, processess, packages, power, screen, audio, web
+basic desktop to manage files, processess, packages, power, screen, audio, web
 $ sudo apt-get install xinit xterm icewm wdm big-cursor xlockmore pm-utils htop alsa-utils xfe synaptic chromium-browser
 
 $ if (laptop)
@@ -28,9 +28,7 @@ To capture video as non-root
 $ sudo adduser USERNAME video
 $ sudo chmod 666 /dev/video0
 
-
-Extra settings that I use
-$ sudo apt-get install emacs p7zip-full dhex
+$ sudo apt-get install emacs p7zip-full
 $ sudo mv /usr/bin/icewmbg /usr/bin/icewmbg.off
 $ sudo mv /usr/bin/icewmtray /usr/bin/icewmtray.off
 

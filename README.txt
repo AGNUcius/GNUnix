@@ -5,7 +5,7 @@ that starts as a very lightweight distribution
 then morphs into whatever you want during use.
 
 For now it is just a 'mini' install of UBUNTU
-Precise 12.04 with IceWM and Chromium.
+with IceWM, Emacs, Chromium, htop, etc.
 
 The core idea (only partly implemented) is
 "Install And Launch When Attempted" (IALWA)
