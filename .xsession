@@ -1,5 +1,7 @@
 setxkbmap -option ctrl:nocaps
-xsetroot -solid darkblue
+xsetroot -solid black
 
-# export PATH=$PATH:/home/user/bin
-# powernap
+# You can set the path for your entire X session by
+# adjusting the "DisplayManager*userPath" variable
+# found at /etc/X11/wdm/wdm-config (if using wdm)
+
