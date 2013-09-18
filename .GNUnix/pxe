@@ -1,4 +1,6 @@
+#!/usr/bin/pseudocode
+
 This is just an idea for now
 
-set boot-source=netboot.tar.gz
-call ~/.GNUnix/prep
+$ set boot-source=netboot.tar.gz
+$ ~/.GNUnix/prep

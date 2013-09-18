@@ -851,11 +851,15 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "#555" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 142 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
- '(cursor ((t (:background "yellow"))))
- '(font-lock-comment-face ((t (:foreground "#333"))))
+
+;;;;for little monitor
+;; '(default ((t (:background "#444" :height 142 :family "DejaVu Sans Mono"))))
+;;;;for big monitor
+ '(default ((t (:background "#444" :height 181 :weight bold :family "Courier New"))))
+ '(cursor ((t (:background "green"))))
+ '(font-lock-comment-face ((t (:foreground "#222"))))
  '(region ((t (:inverse-video t))))
- '(trailing-whitespace ((t (:background "#666")))))
+ '(trailing-whitespace ((t (:background "#555")))))
 
 
 

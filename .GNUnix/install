@@ -1,4 +1,5 @@
 #!/usr/bin/pseudocode
+
 This is not yet a runnable script
 
 $ sudo apt-get update; apt-get upgrade
@@ -9,17 +10,25 @@ $ git clone git://github.com/AGNUcius/GNUnix.git
 $ mv GNUnix/* .
 $ mv GNUnix/.* .
 
-basic desktop to manage files, processess, packages, power, screen, audio, web
-$ sudo apt-get install xinit xterm icewm wdm big-cursor xlockmore pm-utils htop alsa-utils xfe synaptic chromium-browser
+Basic X desktop with audio
+$ sudo apt-get install xinit xterm xlockmore icewm wdm big-cursor alsa-utils
+
+This is what I use to deal with files, processes and the web
+$ sudo apt-get install emacs p7zip-full htop chromium-browser
+
+Some other package managers: software-center, synaptic, aptitude, smartpm
+
+Some other file managers: xfe, thunar, xfm, tuxcmd, rox-filer, pcmanfm, mc, lfm, krusader, gentoo, emelfm2, clex, nautilus, konqueror, dolphin
 
 $ if (laptop)
 $ {
-$  sudo apt-get install yacpi wicd-curses wireless-regdb crda iw rfkill
+$  sudo apt-get install yacpi wicd-curses wireless-regdb crda iw rfkill pm-utils
 $  sudo rfkill list all
 $  sudo pm-powersave
 $ }
 
-If using wdm, select "icewm-session" from the "Start WM" button for the first login.
+
+Make sure to select "icewm-session" from the "Start WM" button during first login.
 
 To play audio as non-root
 $ sudo adduser USERNAME audio
@@ -28,7 +37,6 @@ To capture video as non-root
 $ sudo adduser USERNAME video
 $ sudo chmod 666 /dev/video0
 
-$ sudo apt-get install emacs p7zip-full
 $ sudo mv /usr/bin/icewmbg /usr/bin/icewmbg.off
 $ sudo mv /usr/bin/icewmtray /usr/bin/icewmtray.off
 
@@ -42,4 +50,6 @@ $ pkg.install squashfs-tools genisoimage live-boot live-boot-initramfs-tools
 $ pkg.cleanup
 $ sudo ./tux2live
 
-See ../README.txt for more info
+Another approach to LiveCD backup: http://hg.slitaz.org/tazlito/raw-file/tip/doc/tazlito.en.html
+
+See ../README.txt to begin
