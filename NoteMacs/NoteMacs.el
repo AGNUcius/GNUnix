@@ -37,11 +37,14 @@
 (add-to-list 'load-path "~/NoteMacs/own")
 (add-to-list 'load-path "~/NoteMacs/site")
 
-(setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
-						 ("gnu" . "http://elpa.gnu.org/packages/")
-						 ("marmalade" . "http://marmalade-repo.org/packages/")))
-
 (autoload 'list-packages "package" nil t)
+
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  )
+
 
 
 ;;; Harmless changes
@@ -186,6 +189,8 @@
 (autoload 'etym-mode "etym.el" "" t)
 (autoload 'etym "etym.el" "" t)
 
+(autoload 'lens-mode "lens.el" "" t)
+(autoload 'lens "lens.el" "" t)
 
 (autoload 'xml-beautify "xml-control" "unwind and indent" t)
 (autoload 'sic-connect "sic" "simple IMAP client" t)
@@ -284,6 +289,19 @@
     (defun kill-current-buffer ()
       (interactive)
       (kill-buffer (current-buffer))))
+
+(if NoteMacs-NotEmacs
+	(progn
+	  (global-set-key [(f5)] 'gud-cont)
+	  (global-set-key [(f7)] 'compile)
+	  ;;	(global-set-key [(f9)] 'gdb-toggle-breakpoint)
+	  (global-set-key [(f9)] 'gud-break)
+	  (global-set-key [(shift f9)] 'gud-tbreak)
+	  (global-set-key [(f10)] (lambda () (interactive) (progn (gud-next 1) (gud-refresh))))
+	  (global-set-key [(f11)] (lambda () (interactive) (progn (gud-step 1) (gud-refresh))))
+	  (global-set-key [(shift f11)] (lambda () (interactive) (progn (gud-finish 1) (gud-refresh))))
+))
+
 
 
 (defun pan-up ()
@@ -770,6 +788,7 @@
  '(rcirc-default-user-name "AGNUcius")
  '(rcirc-startup-channels-alist (quote (("^irc.gnu.org$" "#rcirc"))))
  '(read-quoted-char-radix 10)
+ '(scroll-bar-mode (quote left))
  '(scroll-conservatively 50)
  '(scroll-preserve-screen-position t)
  '(scroll-step 1)

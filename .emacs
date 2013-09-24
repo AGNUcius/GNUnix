@@ -2,4 +2,7 @@
 
 (load-file "~/NoteMacs/NoteMacs.el")
 
-;; You may create your %HOME% environment variable in Windows by pressing the key combo [Windows]-[Pause], then choose  | Advanced Settings | Environment Variables | New .
+;; To create the %HOME% environment variable in Windows(TM):
+;;  Execute the following from within cmd.exe  setx HOME %USERPROFILE%
+;;  Or press the key-combo [Windows]-[Pause], then choose  | Advanced Settings | Environment Variables | New
+
