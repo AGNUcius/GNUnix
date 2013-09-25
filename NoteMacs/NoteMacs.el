@@ -37,15 +37,11 @@
 (add-to-list 'load-path "~/NoteMacs/own")
 (add-to-list 'load-path "~/NoteMacs/site")
 
-(autoload 'list-packages "package" nil t)
-
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
-
-
+;; (when (>= emacs-major-version 24)
+;;   (require 'package)
+;;   (package-initialize)
+;;   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;   )
 
 ;;; Harmless changes
 ;; The goal is to make all harmless changes within this section.

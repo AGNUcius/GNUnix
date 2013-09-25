@@ -3,7 +3,6 @@
  (progn
    (message "Using older etym interpreter.")
 
-
 ;;; etym.el --- Lingua translucent. -*- emacs-lisp -*-
 
 ;; Copyright (C) 2007->oo  Personal Sovereignty Foundation, Inc.
@@ -285,7 +284,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
 (defconst etym-implicit-HTTP
 ;;   "\\([a-zA-Z][a-zA-Z0-9_-]*\\.[a-zA-Z0-9-_]+\\)[^])}>:,; \t\n\r]+"
-  "\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|am\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|no\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n\r]*"
+  "\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|am\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|no\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n\r]*"
 ;;maybe use `regexp-opt' here?
   "Characters ])}>:,; \\t\\r\\n end the implicit HTTP URL.")
 
@@ -454,7 +453,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 		   "<a class=\"ext\" href=\"\\&\">\\&</a>")
 		 ;;see `etym-implicit-HTTP'
 		 ;;("\\([a-zA-Z][a-zA-Z0-9_-]*\\.[a-zA-Z0-9-_]+\\)[^])}>:,; \t\n\r]+"
-		 ("\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n\r]*"
+		 ("\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n\r]*"
 		  "<a class=\"ext\" href=\"http://\\&\">\\&</a>")
 
 		 ;;XML entities
@@ -466,8 +465,6 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
  		 ("<b>" "&lt;b><span class=\"bold\">")
  		 ("</b>" "</span>&lt;/b>")
-
-;; 		 ("\n" "\n")
 
 		 ;;whitespace is now preserved in preferred.css/white-space:pre-wrap
 		 ("\n" "<br/>\n")
@@ -507,7 +504,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 	;;))
 
 	(copy-file "../.code/index.source.htm" (concat etym-output-dir "/index.htm") t)
-	(copy-file "../.code/index.source.htm" (concat etym-output-dir "/index.html") t)
+;;	(copy-file "../.code/index.source.htm" (concat etym-output-dir "/index.html") t)
 
 
 	;;     (message
@@ -607,7 +604,6 @@ All terms less than this match only at the beginning of words (using `\\b')")
                   (if (not found) ;;if no match was found
                       (forward-char))))
 
-
 ;;header
               (goto-char (point-min))
               (insert
@@ -622,82 +618,29 @@ All terms less than this match only at the beginning of words (using `\\b')")
 			   (if etym-global-page-title
 				   etym-global-page-title
 				 file)
-			   "</title>\n"
-
-			   ;; 			   "    <script type=\"text/javascript\" src=\".code/libreria.sf.net.js\"/>\n"
-
-			   "    <link href=\"" etym-default-stylesheet "\" rel=\"stylesheet\" type=\"text/css\"/>\n"
-			   ;; 			   "<link rel=\"alternate stylesheet\" type=\"text/css\" href=\"../code/alternate.css\" title=\"alternate\"/>\n"
-			   ;; 			   "<script src=\"../code/styleswitcher.js\" type=\"text/javascript\"></script>\n"
-
+			   "  </title>\n"
+			   "  <link href=\"" etym-default-stylesheet "\" rel=\"stylesheet\" type=\"text/css\"/>\n"
                "</head>\n"
                "\n"
                "<body>\n"
-;; 			   "<div align=\"right\">\n"
-			   ;; 			   "<input type=\"button\" value=\"preferred\" onclick=\"setActiveStyleSheet('preferred')\"/><br/>\n"
-			   ;; 			   "<input type=\"button\" value=\"alternate\" onclick=\"setActiveStyleSheet('alternate')\"/><br/>\n"
-;; 			   "</div>\n"
 			   )
 
 ;;top menu
               (insert
 			   (concat
-;; 				"<table border=\"0\" width=\"100%\">\n"
-;; 				"<tr>\n"
-;; 				"<td>\n"
-				"<div id=\"header\">\n"
+				"<p class='header'>\n"
 				"<a href=\"_home.htm\">Home</a> |"
-				;; " <a href=\"_news.htm\">News</a> |"
-				 " <a href=\"_faq.htm\">FAQ</a> |"
-				 " <a href=\"_thesis.htm\">Thesis</a> |"
-				 " <a href=\"_diary.htm\">Diary</a> |"
+				" <a href=\"_faq.htm\">FAQ</a> |"
+				" <a href=\"_thesis.htm\">Thesis</a> |"
+				" <a href=\"_diary.htm\">Diary</a> |"
 				" <a href=\"_projects.htm\">Projects</a> |"
-;;				" <a href=\"game.htm\">Game</a> |"
-;;				" <a href=\"music.htm\">Music</a> |"
-;;				" <a href=\"vid.htm\">Video</a> |"
-;;				" <a href=\"media.htm\">Media</a> |"
+				" <a href=\"resume.htm\">Resume</a> |"
 				" <a href=\"_todo.htm\">Todo</a> |"
-;; 				" <a href=\"_test.htm\">Test</a> |"
 				" <a href=\"_index.htm\">Index</a> |"
-;;				" <a href=\"_changes.htm\">Changes</a> |"
-;;				" <a href=\"_about.htm\">About</a> |"
-;; 				" <a href=\".off\">.off</a> |"
-;; 				" <a href=\"mailto:"
-;; 				etym-host-mail
-;; 				"?subject=etym.edit:"
-;; 				(replace-regexp-in-string
-;; 				 " " "%20" file nil t)
-;; 				"&amp;body=Edits are considered 'by hand' and committed every few days or weeks."
-;; 				"\">Edit</a>"
-
-;; 				"<a href=\"etym.pl?action=edit;id="
-;; 				(replace-regexp-in-string " " "%20" file nil t)
-;; 				"\">Edit</a>"
-
-;; 				(insert (concat "<img src=\"" etym-img-dir "/_top.gif\" alt=\"\"/>"))
-				"</div>\n"
-;; 				"</td>\n"
-
-;; 				"<form method=\"post\" action=\"etym.pl?"
-;; 				(replace-regexp-in-string
-;; 				 " " "%20" file nil t)
-;; 				"&action=comment\">"
-;; 				"<textarea name=\"comment\" cols=\"20\" rows=\"0\">Comment</textarea>"
-;; 				"<input type=\"submit\" value=\"SEND\">"
-;; 				"</form>"
-
-;; 			   "  <a href=\"http://www.google.com/search?q=site%3A"
-;; 			   etym-host-site
-;; 			   "+%22"
-;; 			   (replace-regexp-in-string
-;; 				" " "+" file nil t)
-;; 			   "%22\">find</a>"
-
-;; 				"</tr>\n"
-;; 				"</table>\n"
+				"<p>\n"
 				))
 
-			  (insert "<div id=\"main\">")
+			  (insert "<p class='main'>")
 
 ;;images
               (mapcar
@@ -708,43 +651,23 @@ All terms less than this match only at the beginning of words (using `\\b')")
 					  (concat etym-img-dir "/" file "." type)))
                      (insert (concat "<img src=\"" etym-img-dir "/" file "." type "\" alt=\"\"/>"))))
 
-               '("jpg"
-                 "gif"
-                 "png"))
+               '("jpg" "gif" "png"))
 
 ;;footer
               (goto-char (point-max))
               (insert
-			   "</div>\n"
+			   "</p>\n"
 
-;; 			   "<table border=\"0\" width=\"100%\">\n"
-;; 			   "<tr>\n"
-
-;; 			   "<td>\n"
-;; 				"<span class=\"footer\">\n"
-;; 			   " <input size=\"40\" value=\"Comments are not working yet.\"/><br/>\n"
-;; 			   "</span>\n"
-;; 			   "</td>\n"
-;; 			   "<td style=\"text-align:right\">\n"
-				"<div id=\"footer\">\n"
-			   "  <a href=\".text/" file "\">Source</a> "
-;;  protected by <a href=\"general public law.htm\">GNU General Public Law</a>. &nbsp;
-			   "last modified: " modified
-			   "</div>\n"
-;; 			   "</td>\n"
-
-;; 			   "</tr>\n"
-;; 			   "</table>\n"
+				"<p class='footer'>\n"
+				" Page generated from <a href=\".text/" file "\">" file "</a> by <a href=\".code/etym.el\">etym</a>."
+			   "</p>\n"
 
 			   "</body>\n"
 			   "</html>\n")
 
               (save-buffer)
               (kill-buffer (current-buffer))
-              )))
-
-	  ;;(rename-file new-file (concat new-file process) t)
-	  )))
+              ))))))
 
 
 ;; generate placeholders for image files that don't yet have commentary
@@ -788,7 +711,6 @@ All terms less than this match only at the beginning of words (using `\\b')")
 				etym-font-lock "zzzzzzzz\\)")))
 ;; what a mess.
 
-
 (defun etym-follow ()
   (save-excursion
     (re-search-forward etym-font-lock nil t))
@@ -804,9 +726,6 @@ All terms less than this match only at the beginning of words (using `\\b')")
 			  (if (file-exists-p (upcase match))
 				  (find-file-read-only (upcase match))
 				(find-file-read-only (downcase match)))))))))
-
-
-
 
 (defun etym-mode-rebuild-mode ()
   (interactive)
