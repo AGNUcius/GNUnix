@@ -29,7 +29,7 @@
 
 (defun time-insert ()
   (interactive)
-  (insert (format-time-string "%b-%d-%Y: ")))
+  (insert (format-time-string "%Y-%m-%d: ")))
 
 
 (provide 'time-insert)

@@ -1,3 +1,8 @@
+(if (file-exists-p "~/doc/.src/lens.el")
+ (load-file "~/doc/.src/lens.el")
+ (progn
+   (message "Using older lens interpreter.")
+
 ;;; lens.el --- Focus on text. -*- emacs-lisp -*-
 
 ;; Copyright (C) 2012->oo  Social Sufficiency Coalition
@@ -27,7 +32,7 @@
 ;;; INSTALLATION
 ;; Try something like this in your .emacs:
 
-;; (autoload 'lens-mode "~/lens/.code/lens.el" "lens" t)
+;; (autoload 'lens-mode "~/doc/.src/lens.el" "lens" t)
 ;; (setq auto-mode-alist'
 ;;    (append
 ;;     '((".lens" . lens-mode))
@@ -88,20 +93,17 @@
 
 ;;; CUSTOMIZATIONS:
 (defcustom lens-global-page-title nil "Title of _all_ generated pages.  If set to `nil' the title is the name of the input file.")
-(defcustom lens-output-dir "." "where to write the output")
+(defcustom lens-output-dir ".." "where to write the output")
 (defcustom lens-img-dir ".data" "where <img> content is located")
-(defcustom lens-default-stylesheet ".code/preferred.css" "stylesheet")
-
+(defcustom lens-css ".src/preferred.css" "stylesheet")
 (defcustom lens-host-mail "AGNUcius@Gmail.com" "mail address to send edits")
-
 (defcustom lens-shortest-inner
-  ;; 3 ;to many inner matches
+  ;; 3 ;too many inner matches
   4 ;not enough prefix coverage
   "Shortest term to match _within_ other terms.
 All terms less than this match only at the beginning of words (using `\\b')")
 
-(defcustom lens-encoding "UTF-8" ;"ISO-8859-1"
-  "XML encoding attribute")
+(defcustom lens-encoding "UTF-8" "XML encoding attribute") ;"ISO-8859-1"
 
 
 ;;; CODE:
@@ -111,19 +113,11 @@ All terms less than this match only at the beginning of words (using `\\b')")
 ;; The following effect only `font-lock'
 ;; KLUDGE: see `lens-build-mapping' for HTML regexps
 
-;; (defconst lens-local-*nix-path
-;;   ;; ../ or ./ followed by anything but |, >, or whitespace
-;; ;;  "\\(\\.\\./\\|\\./\\|/\\)[^|> \t\n\r]*"
-;; ;;"\\(\\.\\./\\|\\./\\)[^|> \t\n\r]*"
-;;   "/[^]):,;? \t\n\r]+"
-;;   "Path on local hard drive")
-
 (defconst lens-quoted-local-M$-path
   "\"\\([a-zA-Z]:\\\\.+?\\)\""
   "Quoted path on local hard drive")
 
 (defconst lens-local-M$-path
-  ;;"\\\\[^\\\\].+?[^]):,;? \t\n\r]+"
   "[a-zA-Z]:\\\\[^]):,;? \t\n\r]+"
   "Path on local hard drive")
 
@@ -136,13 +130,11 @@ All terms less than this match only at the beginning of words (using `\\b')")
   "UNC path on MS network")
 
 (defconst lens-explicit-URL
-;;  "\\(file\\|ftp\\|https?\\)://[^ \t\n\r]+"
   "\\([a-zA-Z0-9]\\)+://[^ \t\n\r]*"
   "Specify protocol to include chars banned from implicit-HTTP.")
 
 (defconst lens-implicit-HTTP
-;;   "\\([a-zA-Z][a-zA-Z0-9_-]*\\.[a-zA-Z0-9-_]+\\)[^])}>:,; \t\n\r]+"
-  "\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|am\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|no\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n\r]*"
+  "\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|am\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|no\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n\r]*"
 ;;maybe use `regexp-opt' here?
   "Characters ])}>:,; \\t\\r\\n end the implicit HTTP URL.")
 
@@ -153,71 +145,12 @@ All terms less than this match only at the beginning of words (using `\\b')")
 <html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\" xml:lang=\"en\">
  <head>
    <title></title>
-   <meta http-equiv=\"REFRESH\" content=\"0; URL=_home.htm\"/>
+   <meta http-equiv=\"REFRESH\" content=\"0; URL=.home.htm\"/>
  </head>
 <body/>
-</html>"
-"Redirect to real start page")
-
-(defvar lens-css
-  "
-body
-{
-	font-family:monospace;
-	font-size:120%;
-}
-
-#main {padding-left:4px;}
-#header {border-bottom:solid; font-family:arial, san-serif;}
-#footer {border-top:solid; font-family:arial, san-serif; font-size:50%;}
-
-span.bullet{margin-left:1%;font-size:150%;}
-span.indent{margin-left:1%;}
-
-span.quot,span.quot2,span.quot3{
-	font-weight:normal;
-	font-style:italic;
-	font-size:100%;
-}
-
-span.italic{font-style:italic;}
-span.bold{font-weight:bold;}
-
-span.h1, span.h2, span.h3, span.h4 {font-family:arial, san-serif; background:#ddd;}
-span.h1{font-size:300%;}
-span.h2{font-size:250%;}
-span.h3{font-size:200%;}
-span.h4{font-size:150%;}
-
-a{text-decoration:none;}
-a:visited{text-decoration:none;}
-a:hover,a:focus{text-decoration:none;}
-
-input{font-size:65%;}
-img{float:right;}
-
-span.rel{background:#070; color:#fff;}
-span.date{background:#000; color:#fff;}
-
-span.quot{background:#ffe;}
-span.quot2{background:#eff;}
-span.quot3{background:#fef;}
-
-span.shell{background:#ddd;}
-span.cmnt{background:#dfd;}
-span.type{background:#9bf;}
-
-a{color:#060;}
-a:visited{color:#606;}
-a.ext{color:#77f;}
-a:hover, a:focus{background:#006; color:#ff0;}
-a.ext:hover, a.ext:focus{background:#77f; color:#ff0;}
+</html>
 "
-"embeded css")
-
-
-
-
+"Redirect to real start page")
 
 (defvar lens-mapping nil)
 (defvar lens-input-dirs '("."))
@@ -275,12 +208,9 @@ a.ext:hover, a.ext:focus{background:#77f; color:#ff0;}
 ;;  		 ("^.*?:" "<span class=\"h4\">\\&" "</span>");anything followed by a : is a title?
 
  		 ;;see `lens-*nix-path'
-;; 		 ("\\(/\\|\./\\|\.\./\\)[^]):,;? \t\n\r]+"
-;; 		  "<a class=\"ext\" href=\"file:///\\&\">\\&</a>")
 
  		 ("^Related:" "<span class=\"rel\">\\&</span>")
-		 ;;("^Related:" "<span class=\"rel\">\\&" "</span>")
- 		 ("^[a-z]\\{3\\}-[0-9]\\{1,2\\}-[0-9]\\{2,4\\}:" "<hr/><span class=\"date\">\\&</span>")
+		 ("^[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}:" "<hr/><span class=\"date\">\\&</span>")
  		 ("^>" "<span class=\"quot\">\\&" "</span>")
 
  		 ("^=" "<span class=\"h1\">\\&" "</span>")
@@ -342,7 +272,7 @@ a.ext:hover, a.ext:focus{background:#77f; color:#ff0;}
 		  "<a class=\"ext\" href=\"\\&\">\\&</a>")
 
 		 ;;see `lens-implicit-HTTP'
-		 ("\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n\r]*"
+		 ("\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n\r]*"
 		  "<a class=\"ext\" href=\"http://\\&\">\\&</a>")
 
 		 ;;XML entities
@@ -357,8 +287,7 @@ a.ext:hover, a.ext:focus{background:#77f; color:#ff0;}
 
 		 ;;whitespace is now preserved in preferred.css/white-space:pre-wrap
 		 ("\n" "<br/>\n")
-		 ("\r" "")
-
+		 ("\r\n" "<br/>\n")
 
 ;;;;;;;; ---- ADD TERMS ABOVE THIS LINE ---- ;;;;;;;;
 ;;;;;;;; Note: Entries at the BOTTOM of this list have HIGHEST priority
@@ -378,10 +307,7 @@ a.ext:hover, a.ext:focus{background:#77f; color:#ff0;}
     (lens-recurse
 	 'lens-make-page-internal)
 
-  (let ((new-file (concat lens-output-dir "/index.htm")))
-	(set-buffer (find-file-literally new-file))
-	(insert-string lens-index.htm)
-	(copy-file new-file (concat new-file "l") t))
+	(copy-file "../.src/index.src" (concat lens-output-dir "/index.htm") t)
 
     (message
      (concat "lens started at "
@@ -452,11 +378,11 @@ a.ext:hover, a.ext:focus{background:#77f; color:#ff0;}
 							(if closing
 								;;prepended to the current string so it closes first
 								(setq lens-closing (concat (car closing) lens-closing)))
-
-							(if (and (string= regexp "\n") ;if at EOL,
-									 lens-closing);and there are tags to close,
+							(if (and (or (string= regexp "\n")
+										 (string= regexp "\r\n"))
+									 lens-closing) ;and there are tags to close,
 								(progn
-								  ;;close tags and follow with \n replacement
+								  ;;close tags and follow with EOL replacement
 								  ;;(insert lens-closing replacement)
 								  (insert lens-closing)
 								  (setq lens-closing nil);empty our bucket
@@ -490,10 +416,7 @@ a.ext:hover, a.ext:focus{background:#77f; color:#ff0;}
 				   lens-global-page-title
 				 file)
 			   "</title>\n"
-			   " <style type=\"css\">\n"
-			   lens-css
-			   " </style>\n"
-
+			   "  <link href=\"" lens-css "\" rel=\"stylesheet\" type=\"text/css\"/>\n"
                "</head>\n"
                "\n"
                "<body>\n"
@@ -502,56 +425,41 @@ a.ext:hover, a.ext:focus{background:#77f; color:#ff0;}
 ;;top menu
               (insert
 			   (concat
-				"<div id=\"header\">\n"
-				"<a href=\"_home.htm\">Home</a> |"
-				;; " <a href=\"_news.htm\">News</a> |"
-				 " <a href=\"_faq.htm\">FAQ</a> |"
-				 " <a href=\"_thesis.htm\">Thesis</a> |"
-				 " <a href=\"_diary.htm\">Diary</a> |"
+				"<p class='header'>\n"
+				" <a href=\"_home.htm\">Home</a> |"
+				" <a href=\"_faq.htm\">FAQ</a> |"
+				" <a href=\"_diary.htm\">Diary</a> |"
 				" <a href=\"_projects.htm\">Projects</a> |"
-;;				" <a href=\"game.htm\">Game</a> |"
-;;				" <a href=\"music.htm\">Music</a> |"
-;;				" <a href=\"note.htm\">Note</a> |"
-;;				" <a href=\"vid.htm\">Video</a> |"
-;;				" <a href=\"media.htm\">Media</a> |"
 				" <a href=\"_todo.htm\">Todo</a> |"
-;; 				" <a href=\"_test.htm\">Test</a> |"
 				" <a href=\"_index.htm\">Index</a> |"
-;;				" <a href=\"_changes.htm\">Changes</a> |"
-;;				" <a href=\"_about.htm\">About</a> |"
-				"</div>\n"
+				"</p>\n"
 				))
 
-			  (insert "<div id=\"main\">")
+			  (insert "<p class='main'>")
 
 ;;images
               (mapcar
                (lambda (type)
                  (if (and (file-exists-p lens-img-dir)
 					 (file-exists-p
-;;(concat lens-output-dir "/" lens-img-dir "/" file "." type))
 					  (concat lens-img-dir "/" file "." type)))
                      (insert (concat "<img src=\"" lens-img-dir "/" file "." type "\" alt=\"\"/>"))))
-
-               '("jpg"
-                 "gif"
-                 "png"))
+               '("jpg" "gif" "png"))
 
 ;;footer
               (goto-char (point-max))
               (insert
-			   "</div>\n"
-				"<div id=\"footer\">\n"
-			   "  <a href=\".text/" file "\">Source</a> "
-			   "last modified: " modified
-			   "</div>\n"
+			   "</p>\n"
+				"<p class='footer'>\n"
+				" Page generated from <a href=\".text/" file "\">" file "</a> by <a href=\".src/lens.el\">lens.el</a>."
+			   "</p>\n"
+
 			   "</body>\n"
 			   "</html>\n")
 
               (save-buffer)
               (kill-buffer (current-buffer))
-              )))
-	  )))
+              ))))))
 
 
 ;; generate placeholders for image files that don't yet have commentary
@@ -647,3 +555,4 @@ a.ext:hover, a.ext:focus{background:#77f; color:#ff0;}
 (provide 'lens)
 
 ;;; lens.el ends here
+))

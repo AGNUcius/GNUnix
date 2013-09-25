@@ -101,7 +101,6 @@
 
 
 (autoload 'hexview-find-file "hexview-mode" nil t)
-
 (autoload 'time-insert "time-insert" nil t)
 (autoload 'global-whitespace-mode "whitespace" "Toggle whitespace visualization." t)
 (autoload 'javascript-mode "javascript" nil t)
@@ -182,8 +181,8 @@
 (define-key global-map [(control \()] 'match-paren)
 
 
-(autoload 'etym-mode "etym.el" "" t)
-(autoload 'etym "etym.el" "" t)
+;; (autoload 'etym-mode "etym.el" "" t)
+;; (autoload 'etym "etym.el" "" t)
 
 (autoload 'lens-mode "lens.el" "" t)
 (autoload 'lens "lens.el" "" t)
@@ -505,15 +504,13 @@
       (define-key global-map [(meta n)] 'forward-paragraph)
       (define-key global-map [(meta p)] 'backward-paragraph)
 
-
       ;;calendar
       (define-key ctl-x-map [(l)] 'calendar)
-
 
       (defun diary-prepend-entry (file)
         (find-file file) ;;open to our diary file - which is a list of files corresponding to monthly divisions
         (beginning-of-buffer) ;;
-		(etym-follow) ;;go to the most recent month
+		(lens-follow) ;;go to the most recent month
         (beginning-of-buffer)
 		(toggle-read-only nil)
 		(next-line)
@@ -525,7 +522,7 @@
        'calendar-load-hook
        (lambda ()
          (progn
-           (define-key calendar-mode-map "it" (lambda nil (interactive) (find-file "~/doc/.text/_todo")))
+           (define-key calendar-mode-map "it" (lambda nil (interactive) (find-file "~/doc/.txt/_todo")))
            ;;insert daily
            (define-key calendar-mode-map "id"
              (lambda nil (interactive)
@@ -720,7 +717,7 @@
  '(confirm-kill-emacs (quote yes-or-no-p))
  '(custom-file "~/NoteMacs/NoteMacs.el")
  '(delete-selection-mode t nil (delsel))
- '(diary-file "~/doc/.text/_diary")
+ '(diary-file "~/doc/.txt/_diary")
  '(diary-hook (quote (appt-make-list)))
  '(dired-at-point-require-prefix t)
  '(dired-omit-files "^\\.\\|^#")
@@ -839,7 +836,7 @@
          ("rfc.*\\'" . rfcview-mode)
          (".sources\\'" . makefile-mode)
          ("\\.cl\\'" . lisp-mode)
-         ("\\.text.*?/.*" . etym-mode))
+         ("/\\.txt/.*" . lens-mode))
        auto-mode-alist))
 
 
