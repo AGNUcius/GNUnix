@@ -864,15 +864,11 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
 
-;;;;for little monitor
-;; '(default ((t (:background "#444" :height 142 :family "DejaVu Sans Mono"))))
-;;;;for big monitor
- '(default ((t (:background "#444" :height 181 :weight bold :family "Courier New"))))
- '(cursor ((t (:background "green"))))
+ '(default ((t (:background "#444" :height 180 :weight bold :family "DejaVu Sans Mono"))))
+ '(cursor ((t (:background "magenta"))))
  '(font-lock-comment-face ((t (:foreground "#222"))))
  '(region ((t (:inverse-video t))))
  '(trailing-whitespace ((t (:background "#555")))))
-
 
 
 

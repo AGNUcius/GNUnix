@@ -30,8 +30,11 @@ menu Programs Programs {
   prog NoteMacs emacs emacs --maximized
  }
  menu Art art {
-  prog performous performous performous
-  prog numptyphysics numptyphysics numptyphysics
+  menu Audio audio {
+   prog Performous performous performous
+   prog Qtractor qtractor qtractor
+   prog JAPA japa japa -A
+  }
   prog Blender blender blender
   prog Fotoxx fotoxx fotoxx
   prog Gimp gimp gimp
@@ -43,9 +46,9 @@ menu Programs Programs {
   prog TuxPaint tuxpaint tuxpaint --fullscreen
   prog Wings3D wings3d wings3d
   prog XaraLX xaralx xaralx
-  prog JAPA japa japa -A
  }
  menu Dev dev {
+  prog numptyphysics numptyphysics numptyphysics
   prog Basic256 basic256 basic256
   prog Scratch scratch scratch
   prog Squeak squeak squeak
