@@ -37,50 +37,11 @@
 (add-to-list 'load-path "~/NoteMacs/own")
 (add-to-list 'load-path "~/NoteMacs/site")
 
-;; (when (>= emacs-major-version 24)
-;;   (require 'package)
-;;   (package-initialize)
-;;   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;;   )
-
-;;; Harmless changes
-;; The goal is to make all harmless changes within this section.
-
-;; For now there are somewhat inappropriate changes - especially
-;; within the custom variables list... that conflict with the Emacs
-;; Manual, or conflict with the documentation for that package, or are
-;; just generally not good defaults.  This is a problem because
-;; `customize' is a valuable tool...
-
-;; What should probably happen: Do not use `custom-set-variables' and
-;; `custom-set-faces' in the NoteMacs distro.  Set `custom-file' to
-;; some 'user' file located outside of the distro (created after the
-;; user runs the NoteMacs-wizard).
-
+;; android dev
+(defun android-dev () (interactive)
+  (setq eshell-path-env (concat eshell-path-env ":/home/user/work/android/adt/sdk/tools:/home/user/work/android/adt/sdk/platform-tools")))
 
 (setq debug-on-error nil)
-
-;(autoload 'gtags-find-tag-from-here "global-mode" nil t)
-; Use "Exuberant CTags" from Cygwin.com as:
-; ctags.exe -Re
-
-(define-key global-map [(meta shift f12)]
-  (lambda ()
-	(interactive)
-	(shell-command "ctags -Re")))
-
-(define-key global-map [(shift f12)]
-  (lambda ()
-	(interactive)
-	(tags-reset-tags-tables)))
-
-(defun find-tag-at-point ()
-  "Jump to tag of the string under the cursor."
-  (interactive)
-  (find-tag (thing-at-point 'symbol)))
-
-(define-key global-map [(f12)] 'find-tag-at-point)
-
 
 ;; Mac OS X stuff
 (when (eq system-type 'darwin)
@@ -100,14 +61,65 @@
 ;; $ cp ~/keys-binary.plist $FILE
 
 
+(autoload 'lens-mode "lens.el" "" t)
+(autoload 'lens "lens.el" "" t)
+(autoload 'xml-beautify "xml-control" "unwind and indent" t)
+(autoload 'sic-connect "sic" "simple IMAP client" t)
+(autoload 'ewb "ewb" "Emacs Web Browser" t)
+(autoload 'hands "hands" "image preview" t)
+
+(autoload 'browse-kill-ring "browse-kill-ring" nil t)
+(define-key global-map [(meta control y)] 'browse-kill-ring)
+
+(autoload 'findr "findr" "Find file name." t)
+(define-key global-map [(meta control S)] 'findr)
+(autoload 'findr-search "findr" "Find text in files." t)
+(define-key global-map [(meta control s)] 'findr-search)
+(autoload 'findr-query-replace "findr" "Replace text in files." t)
+(define-key global-map [(meta control r)] 'findr-query-replace)
+
 (autoload 'hexview-find-file "hexview-mode" nil t)
 (autoload 'time-insert "time-insert" nil t)
 (autoload 'global-whitespace-mode "whitespace" "Toggle whitespace visualization." t)
 (autoload 'javascript-mode "javascript" nil t)
 (autoload 'tabbar-mode "tabbar" nil t)
 (autoload 'powershell-mode "powershell-mode" nil t)
-
 (autoload 'w3m "w3m" nil t)
+
+;;(require 'generic-x)
+(autoload 'bat-generic-mode "generic-x" "" t)
+(autoload 'ini-generic-mode "generic-x" "" t)
+(autoload 'inf-generic-mode "generic-x" "" t)
+(autoload 'rc-generic-mode "generic-x" "" t)
+(autoload 'reg-generic-mode "generic-x" "" t)
+(autoload 'rul-generic-mode "generic-x" "" t)
+(autoload 'hosts-generic-mode "generic-x" "" t)
+(autoload 'apache-conf-mode "generic-x" "" t)
+(autoload 'apache-log-generic-mode "generic-x" "" t)
+(autoload 'apache-conf-generic-mode "generic-x" "" t)
+(autoload 'apache-log-generic-mode "generic-x" "" t)
+(autoload 'samba-generic-mode "generic-x" "" t)
+(autoload 'hosts-generic-mode "generic-x" "" t)
+(autoload 'fvwm-generic-mode "generic-x" "" t)
+(autoload 'x-resource-generic-mode "generic-x" "" t)
+(autoload 'alias-generic-mode "generic-x" "" t)
+(autoload 'inetd-conf-generic-mode "generic-x" "" t)
+(autoload 'etc-services-generic-mode "generic-x" "" t)
+(autoload 'etc-passwd-generic-mode "generic-x" "" t)
+(autoload 'etc-fstab-generic-mode "generic-x" "" t)
+(autoload 'io-mode "io-mode" "" t)
+
+(autoload 'rfcview-mode "rfcview" "" t)
+(autoload 'css-mode "css-mode-min")
+(autoload 'htmlize-buffer "htmlize" "" t)
+(autoload 'htmlize-file "htmlize" "" t)
+(autoload 'csharp-mode "csharp-mode" "csharp-mode" t)
+(autoload 'malyon "malyon" "malyon" t)
+(autoload 'ascii-display "ascii" "Toggle on ASCII code display." t)
+
+
+(load "dired-x")
+(load "dired-aux")
 
 (define-key global-map [(meta o)] 'other-window)
 (define-key global-map [(shift meta o)] 'dired-omit-mode) ;;alternate omit
@@ -128,37 +140,9 @@
     (let ((fill-column (point-max)))
       (fill-paragraph nil))))
 
-
-(autoload 'browse-kill-ring "browse-kill-ring" nil t)
-(define-key global-map [(meta control y)] 'browse-kill-ring)
-
 (defadvice query-replace-read-args (before barf-if-buffer-read-only activate)
   "Signal a `buffer-read-only' error if the current buffer is read-only."
   (barf-if-buffer-read-only))
-
-
-
-;; M-C-s search recursively in files for regexp. M-, to repeat.
-;; M-C-r replace recursively in files. M-, to repeat.
-;; M-C-S search recursively for filename. M-, to repeat.
-(autoload 'findr "findr" "Find file name." t)
-(define-key global-map [(meta control S)] 'findr)
-
-(autoload 'findr-search "findr" "Find text in files." t)
-(define-key global-map [(meta control s)] 'findr-search)
-
-(autoload 'findr-query-replace "findr" "Replace text in files." t)
-(define-key global-map [(meta control r)] 'findr-query-replace)
-
-;; (autoload 'global-grep-and-replace "globrep"
-;;           "grep and query-replace across files" t)
-;; (define-key global-map [(meta control r)] 'global-grep-and-replace)
-
-;; (autoload 'moccur-grep-find "color-moccur"
-;;           "grep and query-replace across files" t)
-;; (define-key global-map [(meta control r)] 'moccur-grep-find)
-
-
 
 ;;(setq w32-lwindow-modifier 'hyper)
 ;; w32-pass-alt-to-system
@@ -181,58 +165,12 @@
 (define-key global-map [(control \()] 'match-paren)
 
 
-;; (autoload 'etym-mode "etym.el" "" t)
-;; (autoload 'etym "etym.el" "" t)
-
-(autoload 'lens-mode "lens.el" "" t)
-(autoload 'lens "lens.el" "" t)
-
-(autoload 'xml-beautify "xml-control" "unwind and indent" t)
-(autoload 'sic-connect "sic" "simple IMAP client" t)
-(autoload 'ewb "ewb" "Emacs Web Browser" t)
-(autoload 'hands "hands" "image preview" t)
-
-;; (if (file-exists-p "~/NoteMacs/own/w32-dev.el")
-;;     (require 'w32-dev)
-;;   (message "w32-dev unavailable"))
-
-
-(if (file-exists-p "~/NoteMacs/own/edebug-control.el")
-    (require 'edebug-control)
-  (message "edebug-control unavailable"))
-
-;; (eval-after-load "edebug"
-;;   (load "edebug-control.el"))
-
-;; (autoload 'kmacro-end-or-call-macro "kmacro" "" t)
-;; (define-key global-map [(meta P)] 'kmacro-end-or-call-macro)
-
 (defadvice isearch-exit (after my-goto-match-beginning activate) ;this put the point at the _beginning_ of the match
   "Go to beginning of match."
   (when isearch-forward (goto-char isearch-other-end)))
 
 
-
-(autoload 'rfcview-mode "rfcview" "" t)
-(autoload 'css-mode "css-mode-min")
-(autoload 'htmlize-buffer "htmlize" "" t)
-(autoload 'htmlize-file "htmlize" "" t)
-(autoload 'csharp-mode "csharp-mode" "csharp-mode" t)
-(autoload 'malyon "malyon" "malyon" t)
-
-;; (unify-8859-on-decoding-mode)
-
-(autoload 'ascii-display "ascii" "Toggle on ASCII code display." t)
-
-;; (setq eshell-prompt-function
-;; (lambda ()
-;; (concat "[" (getenv "USER") "@" (getenv "HOSTNAME") "] "
-;; "(" (format-time-string "%a %b %e %l:%M %p") ") "
-;; (eshell/pwd) (if (= (user-uid) 0) " # " " $ "))))
-;; ))
-
 ;; from http://www.emacswiki.org/cgi-bin/wiki.pl?EshellFunctions
-;; I use the following code. It makes C-a go to the beginning of the command line, unless it is already there, in which case it goes to the beginning of the line. So if you are at the end of the command line and want to go to the real beginning of line, hit C-a twice:;-- ZwaX
 (add-hook 'eshell-mode-hook
           (lambda ()
             (define-key eshell-mode-map "\C-a"
@@ -243,7 +181,6 @@
                   (if (= p (point))
                       (beginning-of-line)))))))
 
-
 (defun delete-file-of-buffer(b)
   "delete the file associated with this buffer (if present)"
   (interactive "b")
@@ -253,99 +190,36 @@
   (interactive)
   (query-replace-regexp "^\\(   \\| \\)+" ""))
 
-;;(require 'generic-x)
-(autoload 'bat-generic-mode "generic-x" "" t)
-(autoload 'ini-generic-mode "generic-x" "" t)
-(autoload 'inf-generic-mode "generic-x" "" t)
-(autoload 'rc-generic-mode "generic-x" "" t)
-(autoload 'reg-generic-mode "generic-x" "" t)
-(autoload 'rul-generic-mode "generic-x" "" t)
-(autoload 'hosts-generic-mode "generic-x" "" t)
-(autoload 'apache-conf-mode "generic-x" "" t)
-(autoload 'apache-log-generic-mode "generic-x" "" t)
-
-(autoload 'apache-conf-generic-mode "generic-x" "" t)
-(autoload 'apache-log-generic-mode "generic-x" "" t)
-(autoload 'samba-generic-mode "generic-x" "" t)
-(autoload 'hosts-generic-mode "generic-x" "" t)
-(autoload 'fvwm-generic-mode "generic-x" "" t)
-(autoload 'x-resource-generic-mode "generic-x" "" t)
-(autoload 'alias-generic-mode "generic-x" "" t)
-(autoload 'inetd-conf-generic-mode "generic-x" "" t)
-(autoload 'etc-services-generic-mode "generic-x" "" t)
-(autoload 'etc-passwd-generic-mode "generic-x" "" t)
-(autoload 'etc-fstab-generic-mode "generic-x" "" t)
-
-(autoload 'io-mode "io-mode" "" t)
-
-
-;; Kill saved and file-less buffers without prompt
-(if NoteMacs-old-timer
-    (defun kill-current-buffer ()
-      (interactive)
-      (kill-buffer (current-buffer))))
-
-(if NoteMacs-NotEmacs
-	(progn
-	  (global-set-key [(f5)] 'gud-cont)
-	  (global-set-key [(f7)] 'compile)
-	  ;;	(global-set-key [(f9)] 'gdb-toggle-breakpoint)
-	  (global-set-key [(f9)] 'gud-break)
-	  (global-set-key [(shift f9)] 'gud-tbreak)
-	  (global-set-key [(f10)] (lambda () (interactive) (progn (gud-next 1) (gud-refresh))))
-	  (global-set-key [(f11)] (lambda () (interactive) (progn (gud-step 1) (gud-refresh))))
-	  (global-set-key [(shift f11)] (lambda () (interactive) (progn (gud-finish 1) (gud-refresh))))
-))
-
-
-
-(defun pan-up ()
-  (interactive)
-  (scroll-down -1)
-  (next-line))
-
-(defun pan-down ()
-  (interactive)
-  (scroll-down 1)
-  (next-line -1))
-
+(defun pan-up () (interactive) (scroll-down -1) (next-line))
+(defun pan-down () (interactive) (scroll-down 1) (next-line -1))
+(defun kill-current-buffer () (interactive) (kill-buffer (current-buffer)))
 
 (if NoteMacs-unified-keys
     (progn
-	  
+	  (define-key dired-mode-map [(delete)] 'dired-do-delete)
+	  (define-key dired-mode-map "\M-\r" 'browse-url-of-dired-file)
+	  (define-key dired-mode-map "\M-o" 'other-window)
+	  (define-key dired-mode-map "w" 'woman-dired-find-file)
+	  (define-key dired-mode-map " " 'scroll-up)
+	  (define-key dired-mode-map "u" 'scroll-down)
+	  (define-key dired-mode-map "l" 'recenter)
+	  (define-key dired-mode-map "c" 'dired-unmark)	;; c clear mark
+	  (define-key dired-mode-map "q" 'kill-current-buffer)
+	  (define-key dired-mode-map "U" 'dired-up-directory)
+
 	  ;;kill buffers instead of burying them
 	  (fset 'quit-window 'kill-current-buffer)
-	  ;; (defun dired-efap-click nil
-      ;;   "Don't open a file because of a single `down-mouse-1'!"
-      ;;   (interactive))
-
-	  ;; (defun dired-mouse-find-file-other-window (event)
-      ;;   "Don't open a file because of a single `down-mouse-1'!"
-	  ;; 	(interactive) nil)
 
       ;; CUA OpenFile.  Also touched in `dired' (see below)
       (define-key global-map [(control o)] 'ffap)
 
-;; 	  (define-key global-map [(mouse-1)] nil)
-;; 	  (define-key global-map [(down-mouse-1)] nil)
-
-	  ;;    (autoload 'view "view-mode" "" t)
-      (require 'view) ;;why does autoload not work?
-
-	  ;; this doesn't work either
-	  ;;       (eval-after-load "view"
-	  ;;      (progn
-
-	  ;;       (add-hook
-	  ;;        'view-mode-hook
-	  ;;        (lambda ()
+      (require 'view) ;;autoload doesn't work here
 	  (define-key view-mode-map " " 'scroll-up)	  ;;page down
 	  (define-key view-mode-map "u" 'scroll-down) ;;page up
 	  (define-key view-mode-map [(backspace)] 'scroll-down) ;; page up
-
 	  (define-key view-mode-map "q" 'kill-current-buffer)
 
-	  ;; Act as though CTRL were being held:
+	  ;; Act as though CTRL is being held:
 	  (define-key view-mode-map "v" 'scroll-up) ;;page down
 	  (define-key view-mode-map "k" 'kill-line)
 	  (define-key view-mode-map "l" 'recenter)
@@ -394,7 +268,6 @@
 
 	  (add-hook 'Info-mode-hook
 				(lambda ()
-				  ;;(define-key Info-mode-map [(v)] 'Info-follow-nearest-node)
 				  (define-key Info-mode-map [(u)] 'Info-scroll-down)
 				  (define-key Info-mode-map [(U)] 'Info-up)
 				  (define-key Info-mode-map [(backspace)] 'Info-last)
@@ -409,13 +282,16 @@
 				  (define-key tar-mode-map " " 'scroll-up)
 				  (define-key tar-mode-map "u" 'scroll-down)
 				  (define-key tar-mode-map "q" 'kill-current-buffer)))
-))
 
+	  (if (file-exists-p "~/NoteMacs/own/w32-dev.el")
+		  (require 'w32-dev) (message "w32-dev unavailable"))
+	  (if (file-exists-p "~/NoteMacs/own/edebug-control.el")
+		  (require 'edebug-control) (message "edebug-control unavailable"))
+))
 
 (if NoteMacs-apprentice
     (progn
       (define-key global-map "\M-\r" 'browse-url-at-point)
-
       (autoload 'skeleton-pair-insert-maybe "skeleton" "" t)
       (setq skeleton-pair t)
       (define-key global-map [(\()] 'skeleton-pair-insert-maybe)
@@ -423,20 +299,18 @@
       (define-key global-map [({)] 'skeleton-pair-insert-maybe)
       (define-key global-map [(<)] 'skeleton-pair-insert-maybe)
       ;;(define-key global-map [(\")] 'skeleton-pair-insert-maybe)
-
 	  (add-to-list 'same-window-buffer-names "*Buffer List*")
-	  ;; (require 'buff-menu+)
       (define-key Buffer-menu-mode-map " " 'scroll-up)
       (define-key Buffer-menu-mode-map "u" 'scroll-down)
       (define-key Buffer-menu-mode-map "c" 'Buffer-menu-unmark)
-      ))
+	  (autoload 'dired-efap "dired-efap" "Make current `dired' filename editable." t)
+	  (define-key dired-mode-map [(f2)] 'dired-efap)))
 
 ;;; Enable advanced keys and behavior.
 (if NoteMacs-old-timer
     (progn
-
 	  (define-key global-map [(f4)] 'next-error)
-	  (define-key global-map [(shift f4)] 
+	  (define-key global-map [(shift f4)]
 		(lambda ()
 		  (interactive)
 		  (next-error -1)))
@@ -444,15 +318,11 @@
       ;; If you have the memory this speeds things up?
       ;; (setq-default gc-cons-threshold 50000000) ;; This looks strange and dangerous
 
-      ;; binds M-SPC, messes with frame size/position, and may restore the
-      ;; `font-family' of the default face.
-	  ;;      (require 'frame-control)
-
       ;; Make C-h the traditional 'Backspace'
       (keyboard-translate ?\C-h ?\C-?) ;;was: Help
       (define-key global-map [(control H)] 'help) ;; hold SHIFT or use F1 instead
 
-      ;; Analogous to C-h, but for words
+      ;; Like C-h, but for words
       (define-key global-map [(meta h)] 'backward-kill-word) ;;was: mark-paragraph
 
       ;; Could cause accidents
@@ -469,14 +339,6 @@
 
       ;;This is a bit like using `find-file-literally' on every file
       ;;(setq-default enable-multibyte-characters nil)
-
-      ;;(setq-default debug-on-quit t)
-      ;;(setq-default debug-on-error t)
-      ;;(edebug-all-defuns)
-
-      ;;(setq pop-up-windows nil)
-      ;;(setq ring-bell-function 'ignore)
-      ;;(set-message-beep 'asterisk)
 
       (define-key global-map [(control K)] 'kill-current-buffer)
       (define-key global-map [(control R)] 'query-replace-regexp)
@@ -513,16 +375,15 @@
 		(lens-follow) ;;go to the most recent month
         (beginning-of-buffer)
 		(toggle-read-only nil)
-		(next-line)
-		(newline)
-        (time-insert)
-		)
+		(newline 2)
+		(forward-line -2)
+        (time-insert))
 
       (add-hook
        'calendar-load-hook
        (lambda ()
          (progn
-           (define-key calendar-mode-map "it" (lambda nil (interactive) (find-file "~/doc/.txt/_todo")))
+           (define-key calendar-mode-map "it" (lambda nil (interactive) (find-file "~/doc/.txt/todo")))
            ;;insert daily
            (define-key calendar-mode-map "id"
              (lambda nil (interactive)
@@ -532,79 +393,7 @@
       (add-hook 'ediff-load-hook
                 (lambda ()
                   (defun ediff-window-display-p nil))) ;force single frame
-
-      ;;    (put 'downcase-region 'disabled nil)
-      ;;    (put 'upcase-region 'disabled nil)
-      ;;    (put 'narrow-to-region 'disabled nil)
-      )
-
-  ;;else, not an old-timer, so disable advanced keys and behavior.
-  )
-
-
-;;;Dired changes
-;; (eval-after-load
-;; 	"dired"
-;;  '(lambda ()
-(progn
-	(load "dired-x")
-	(load "dired-aux")
-
-	(define-key dired-mode-map [(delete)] 'dired-do-delete)
-	(define-key dired-mode-map "\M-\r" 'browse-url-of-dired-file)
-
-	(if NoteMacs-NotEmacs
-		(progn
-		  (define-key dired-mode-map [(f5)] 'revert-buffer)
-		  (define-key dired-mode-map [(control o)] 'ffap)))
-
-	(if NoteMacs-unified-keys
-		(progn
-		  ;; f2 rename files. RET to accept, ESC to cancel
-		  ;; C-! explorer verb on file
-		  ;; BkS unmark file backwards
-		  ;; W woman == view man pages without a man
-;;; 		 (define-key dired-mode-map "\r" 'dired-do-shell-command)
-		  (define-key dired-mode-map "\M-o" 'other-window)
-		  (define-key dired-mode-map "w" 'woman-dired-find-file)
-		  (define-key dired-mode-map " " 'scroll-up)
-		  (define-key dired-mode-map "u" 'scroll-down)
-		  (define-key dired-mode-map "l" 'recenter)
-		  (define-key dired-mode-map "c" 'dired-unmark)	;; c clear mark
-		  (define-key dired-mode-map "q" 'kill-current-buffer)
-		  (define-key dired-mode-map "U" 'dired-up-directory)))
-
-
-	(if NoteMacs-apprentice
-		(progn
-		  (autoload 'dired-efap "dired-efap" "Make current `dired' filename editable." t)
-		  (define-key dired-mode-map [(f2)] 'dired-efap)))
-
-
-	(if NoteMacs-old-timer
-		(progn
-
-		  ;; (autoload 'wdired-change-to-wdired-mode "wdired" "Make all `dired' filenames editable." t)
-		  ;; (define-key dired-mode-map [(f2)] 'wdired-change-to-wdired-mode)
-		  ;; (define-key dired-mode-map [(control x control q)] 'wdired-change-to-wdired-mode)
-
-		  ;;         (define-key dired-mode-map "E" 'ediff-files)
-
-		  ;; This doesn't work?
-		  ;;   (autoload 'bg-shell-command "bg-shell-command" "" t)
-		  ;;   (global-set-key [(meta !)] 'bg-shell-command)
-
-		  ;; or this?
-		  ;;    (define-key dired-mode-map [(meta !)]
-		  ;;      (lambda (cmd)
-		  ;;        (interactive "sShell command: ")
-		  ;;        (bg-shell-command (concat cmd " \"" (dired-get-filename) "\""))))
-
-		  )))
-
-
-
-
+      ))
 
 ;;;These settings are for those accustomed to Not Emacs behavior.
 ;; This section is below other NoteMacs levels to ensure priority for key assignments (such as C-z) that are defined in both.
@@ -648,12 +437,9 @@
 
       ;; M-f4 exit Emacs;use C-x C-c instead. was: `undefined'
       (define-key global-map [(meta f4)] 'save-buffers-kill-emacs) ;;this may work anyway if your window manager is catching this key and sending a 'quit' to Emacs.
+	  (define-key dired-mode-map [(f5)] 'revert-buffer)
+	  (define-key dired-mode-map [(control o)] 'ffap)
       ))
-
-
-
-
-
 
 ;;; Cosmetics
 ;; Frame Title (Also see `mode-line-format')
@@ -672,15 +458,6 @@
       (require 'pc-bufsw)
       (pc-bufsw::bind-keys [C-tab] [C-S-tab]))
   (message "C-Tab buffer switching unavailable"))
-
-
-;;(autoload 'iflipb-next-buffer "iflipb" nil t)
-;;(autoload 'iflipb-previous-buffer "iflipb" nil t)
-;; (require 'iflipb)
-
-;; (global-set-key (kbd "<C-tab>") 'iflipb-next-buffer)
-;; (global-set-key (kbd "<C-S-iso-lefttab>") 'iflipb-previous-buffer)
-
 
 
 ;;; Customized variables
@@ -717,7 +494,7 @@
  '(confirm-kill-emacs (quote yes-or-no-p))
  '(custom-file "~/NoteMacs/NoteMacs.el")
  '(delete-selection-mode t nil (delsel))
- '(diary-file "~/doc/.txt/_diary")
+ '(diary-file "~/doc/.txt/diary")
  '(diary-hook (quote (appt-make-list)))
  '(dired-at-point-require-prefix t)
  '(dired-omit-files "^\\.\\|^#")
@@ -864,11 +641,13 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
 
- '(default ((t (:background "#444" :height 180 :weight bold :family "DejaVu Sans Mono"))))
- '(cursor ((t (:background "magenta"))))
+; '(default ((t (:background "#444" :height 180 :weight bold :family "DejaVu Sans Mono"))))
+ '(default ((t (:background "lightskyblue" :height 180 :weight bold :family "DejaVu Sans Mono"))))
+ '(cursor ((t (:background "red"))))
  '(font-lock-comment-face ((t (:foreground "#222"))))
  '(region ((t (:inverse-video t))))
- '(trailing-whitespace ((t (:background "#555")))))
+ '(trailing-whitespace ((t (:background "green")))))
+; '(trailing-whitespace ((t (:background "#555")))))
 
 
 
@@ -930,6 +709,9 @@
 ;; C-R   query and replace regexp through buffer
 ;; C-(   match parens
 ;; C-x g goto line
+;; M-C-s search recursively in files for regexp. M-, to repeat.
+;; M-C-r replace recursively in files. M-, to repeat.
+;; M-C-S search recursively for filename. M-, to repeat.
 
 ;;; Within `dired':
 ;; m mark file

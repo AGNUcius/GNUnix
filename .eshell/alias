@@ -1,15 +1,16 @@
-alias mail.sync offlineimap $*
-alias pkg.add xterm -e sudo apt-get install  $*
-alias pkg.clean xterm -e sudo apt-get clean
-alias pkg.cleanup-new man deborphan
-alias pkg.del xterm -e sudo apt-get --purge remove $*
-alias pkg.files dpkg -L $*
-alias pkg.info apt-cache show $*
-alias pkg.install xterm -e sudo apt-get install  $*
-alias pkg.list.available dpkg -l \* $*
-alias pkg.list.installed dpkg -l $*
-alias pkg.search apt-cache search $*
-alias pkg.source apt-get source $*
-alias pkg.find apt-cache search $*
+alias nil  $*
+alias pkg.update xterm -e "sudo apt-get update; sudo apt-get upgrade"
 alias pkg.search-new man apt-file
-alias pkg.update xterm -e sudo apt-get update; sudo apt-get upgrade
+alias pkg.find apt-cache search $*
+alias pkg.source apt-get source $*
+alias pkg.search apt-cache search $*
+alias pkg.list.installed dpkg -l $*
+alias pkg.list.available dpkg -l \* $*
+alias pkg.install xterm -e sudo apt-get install  $*
+alias pkg.info apt-cache show $*
+alias pkg.files dpkg -L $*
+alias pkg.del xterm -e sudo apt-get --purge remove $*
+alias pkg.cleanup-new man deborphan
+alias pkg.clean xterm -e sudo apt-get clean
+alias pkg.add xterm -e sudo apt-get install  $*
+alias mail.sync offlineimap $*
