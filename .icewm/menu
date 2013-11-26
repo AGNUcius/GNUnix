@@ -2,7 +2,7 @@
 
 # pkg.add rockdodger vor laby freedroidrpg billiard-gl foobillard childsplay krank extremetuxracer egoboo cultivation garden-of-coloured-lights bouncy criticalmass smc rocksndiamonds supertuxkart frogatto
 
-# Wolfenstein: Enemy Territory, Smokin-Guns.org, UrbanTerror.info
+# Wolfenstein: Enemy Territory, Smokin-Guns.org, urbanterror.info
 # command and conquer: tiberian sun, theseus,
 # nexius, openarena, xonotic, alien arena, tremulous, world of padman,
 # tagap, arcan, red alert: a path beyond,
@@ -14,7 +14,7 @@
 # S.W.I.N.E., Sonic Robo Blast, soulfu
 # chromium B.S.U., yoda soccer, super methane bros
 # hedgewars, gianas return, bontago
-# widelands, clonk endeavour, yo frankie, open ttd, cube trains
+# yo frankie, open ttd, cube trains
 
 prog Internet chromium-browser chromium-browser
 separator
@@ -29,6 +29,7 @@ menu Programs Programs {
   prog "Remote Desktop" rdesktop rdesktop
   prog NoteMacs emacs emacs --maximized
  }
+
  menu Art art {
   menu Audio audio
   {
@@ -61,6 +62,7 @@ menu Programs Programs {
   prog QUCS qucs qucs
   prog XaraLX xaralx xaralx
  }
+
  menu Dev dev {
   prog numptyphysics numptyphysics numptyphysics
   prog Basic256 basic256 basic256
@@ -69,59 +71,115 @@ menu Programs Programs {
   prog EToys etoys etoys
   prog TurtleArt turtleart turtleart
  }
+
  menu Network network {
-  prog amule amule amule
+  prog "VNC Server" x11vnc xterm -e x11vnc -xkb -forever -usepw -ncache 10
+  prog rdesktop rdesktop rdesktop
   prog qbittorrent qbittorrent qbittorrent
  }
+
  menu Games games {
-  prog wordwarvi wordwarvi /home/user/games/wordwarvi/wordwarvi --fullscreen
-  prog "DOOM Ulimate" DOOM dosbox /home/user/games/dos/doom-ult/DOOM.EXE -fullscreen -exit
-  prog C64 x64 x64
+  prog abe abe abe
+  prog abuse abuse abuse
+  prog airstrike airstrike airstrike
+  prog alex4 alex4 alex4
+  prog amphetamine amphetamine amphetamine
+  prog balazar balazar balazar
+  prog barrage barrage barrage
+  prog beneath-a-steel-sky beneath-a-steel-sky beneath-a-steel-sky
+  prog berusky berusky berusky
+  prog billard-gl billard-gl billard-gl
+  prog blobandconquer blobandconquer blobandconquer
+  prog btanks btanks btanks
+  prog bubbros bubbros bubbros
+  prog bugsquish bugsquish bugsquish
+  prog bumprace bumprace bumprace
+  prog burgerspace burgerspace burgerspace
+  prog c64 x64 x64
+  prog chromium-bsu chromium-bsu chromium-bsu
+  prog circuslinux circuslinux circuslinux
+  prog cosmo1 cosmo dosbox /home/user/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode1/COSMO1.EXE -fullscreen -exit
+  prog cosmo2 cosmo dosbox /home/user/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode2/COSMO2.EXE -fullscreen -exit
+  prog cosmo3 cosmo dosbox /home/user/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode3/COSMO3.EXE -fullscreen -exit
+  prog csmash csmash csmash
+  prog cultivation cultivation cultivation
+  prog cytadela cytadela cytadela
+  prog defendguin defendguin defendguin
   prog diggers-2-extractors H2O dosbox /home/user/games/dos/diggers-2-extractors/XTRACTOR.EXE -fullscreen -exit
+  prog egoboo egoboo egoboo
+  prog enigma enigma enigma
+  prog epiphany epiphany epiphany
+  prog flare flare flare
+  prog flight-of-the-amazon-queen flight-of-the-amazon-queen flight-of-the-amazon-queen
+  prog fofix fofix fofix
+  prog freedroidrpg freedroidrpg freedroidrpg
+  prog freegish freegish freegish
   prog frogatto frogatto frogatto
-  prog H2O H2O dosbox /home/user/games/dos/H2O/H2O.EXE -fullscreen -exit
+  prog frozen-bubble frozen-bubble frozen-bubble
+  prog garden-of-coloured-lights garden-of-coloured-lights garden-of-coloured-lights
+  prog gravitation gravitation gravitation
+  prog gweled gweled gweled
+  prog h2o H2O dosbox /home/user/games/dos/H2O/H2O.EXE -fullscreen -exit
+  prog heroes heroes heroes
   prog heroes heroes heroes --full-screen --double
+  prog jumpnbump jumpnbump jumpnbump
+  prog kraptor kraptor kraptor
+  prog liquidwar liquidwar liquidwar
   prog maelstrom maelstrom maelstrom
   prog minetest minetest minetest
   prog mu-cade mu-cade mu-cade
-  prog "NeoGeo MrDo" mame mame -rompath /home/user/games/MAME/roms neomrdo
-  prog NJAM njam njam
+  prog njam njam njam
+  prog openclonk openclonk openclonk
+  prog out-of-order out-of-order out-of-order
   prog overgod overgod overgod
+  prog passage passage passage
   prog pixbros pixbros pixbros
-  prog quake quake quake
+  prog powermanga powermanga powermanga
   prog qonk qonk qonk
-  prog rockdodger rockdodger rockdodger
+  prog quake quake quake
+  prog ri-li ri-li ri-li
+  prog rocksndiamonds rocksndiamonds rocksndiamonds
   prog rrootage rrootage rrootage
+  prog singularity singularity singularity
+  prog slingshot slingshot slingshot
   prog smc smc smc
-  prog "Smokin' Guns" /usr/games/smokinguns/sg_48.png /usr/games/smokinguns/smokinguns.i386
+  prog spacearyarya spacearyarya spacearyarya
+  prog spout spout spout
+  prog stormbaancoureur stormbaancoureur stormbaancoureur
+  prog supertransball2 supertransball2 supertransball2
   prog supertux supertux supertux
   prog supertuxkart supertuxkart supertuxkart
-  prog "The Incredible Machine 2" TIM dosbox /home/user/games/dos/the-incredible-machine-2/TIM2.EXE -fullscreen -exit
+  prog swell-foop swell-foop swell-foop
+  prog tenmado tenmado tenmado
   prog torcs torcs torcs
   prog trackballs trackballs trackballs
   prog triplane triplane triplane
   prog trophy trophy trophy
-  prog "Tubular Worlds" TUB dosbox /home/user/games/dos/tubular-worlds/TUBWORLD.BAT -fullscreen -exit
-  prog Tumiki-Fighters tumiki-fighters tumiki-fighters
+  prog tumiki-fighters tumiki-fighters tumiki-fighters
   prog val-and-rick val-and-rick val-and-rick
   prog vectoroids vectoroids vectoroids
   prog vor vor vor
   prog widelands widelands widelands
   prog wing wing wing
+  prog wordwarvi wordwarvi /home/user/games/wordwarvi/wordwarvi --fullscreen
   prog xball  xball  xball
   prog xblast xblast xblast
   prog xbubble xbubble xbubble
-  prog "X Com 2 - Terror From The Deep" H2O dosbox /home/user/games/dos/X-Com-2-Terror-From-The-Deep/TERROR.COM -fullscreen -exit
   prog xevil xevil xevil
   prog xgalaga xgalaga xgalaga
   prog xracer xracer xracer
+  prog xscavenger xscavenger xscavenger
   prog zsnes zsnes zsnes
-#  prog Ultima8 Ultima8 dosbox /home/user/games/dos/ultima8/U8.EXE -fullscreen -exit
-# williams-arcade-classics/ARCADE/ARCADE.EXE
+
+  prog "DOOM Ulimate" DOOM dosbox /home/user/games/dos/doom-ult/DOOM.EXE -fullscreen -exit
+  prog "NeoGeo MrDo" mame mame -rompath /home/user/games/MAME/roms neomrdo
+  prog "Smokin' Guns" /usr/games/smokinguns/sg_48.png /usr/games/smokinguns/smokinguns.i386
+  prog "The Incredible Machine 2" TIM dosbox /home/user/games/dos/the-incredible-machine-2/TIM2.EXE -fullscreen -exit
+  prog "Tubular Worlds" TUB dosbox /home/user/games/dos/tubular-worlds/TUBWORLD.BAT -fullscreen -exit
+  prog "X Com 2 - Terror From The Deep" H2O dosbox /home/user/games/dos/X-Com-2-Terror-From-The-Deep/TERROR.COM -fullscreen -exit
+#  prog ultima8 Ultima8 dosbox /home/user/games/dos/ultima8/U8.EXE -fullscreen -exit
 # offroad/IRONMAN.BAT
-  prog Cosmo1 cosmo dosbox /home/user/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode1/COSMO1.EXE -fullscreen -exit
-  prog Cosmo2 cosmo dosbox /home/user/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode2/COSMO2.EXE -fullscreen -exit
-  prog Cosmo3 cosmo dosbox /home/user/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode3/COSMO3.EXE -fullscreen -exit
+# williams-arcade-classics/ARCADE/ARCADE.EXE
  }
 }
 
@@ -133,22 +191,23 @@ menu System system {
   prog Shutdown shutdown xterm -e sudo shutdown -P now
   prog "Power Settings" powertop xterm -maximized -e sudo powertop
  }
+
  menu Programs programs {
   prog "App Shop" software-center software-center
   prog "Add/Remove Programs" synaptic xterm -e sudo synaptic
  }
+
  prog "Manage Printers" cups chromium-browser http://localhost:631
  prog "Manage Tasks" htop xterm -maximized -e htop
  prog "Murder Window" xkill xterm -e sudo xkill
  prog "Fix Whacky Mouse" mouse xterm -e "sudo modprobe -r psmouse; sudo modprobe psmouse"
- prog "Fix Philips TV Screen" xrandr /home/user/.screenlayout/1280x768.sh
+ prog "Fix Philips TV Screen" xrandr --output VGA1 --mode 1024x768
  prog "Fix Acer One Laptop Screen" screen xrandr --output  LVDS1 --mode 1024x600
  prog "Check Battery" yacpi xterm -e yacpi
  prog "Adjust Volume" alsamixer xterm -e alsamixer
 # separator
 # prog "Make LiveCD" xterm xterm -e
 # separator
- prog "VNC Server" x11vnc xterm -e x11vnc -xkb -forever -usepw -ncache 10
  prog RootMacs emacs xterm -e sudo emacs --maximized --eval '(set-background-color "darkgreen")'
 }
 
