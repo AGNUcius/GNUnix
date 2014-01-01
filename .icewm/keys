@@ -1,12 +1,14 @@
 # see /usr/share/icewm/keys
 
 key "Ctrl+Shift+Esc" xterm -maximized -e htop
-key "Super+p" xterm -maximized -e sudo powertop
+key "Super+p" xterm -e sudo powertop
 key "Super+b" xterm -e yacpi
 key "Super+e" xfe
 key "Super+l" xlock
 key "Super+v" xterm -e alsamixer
 key "Super+w" xterm -e wicd-curses
+key "Super+z" xterm -maximized -fa "DejaVu Sans Mono:size=16"
+
 key "XF86Sleep" xterm -e sudo pm-suspend
 key "XF86PowerOff" xterm -e sudo pm-suspend
 

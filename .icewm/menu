@@ -16,7 +16,8 @@
 # hedgewars, gianas return, bontago
 # yo frankie, open ttd, cube trains
 
-prog Internet chromium-browser chromium-browser
+prog Chrome chromium-browser chromium-browser
+prog FireFox firefox firefox
 separator
 menu Programs Programs {
  menu Office Office {

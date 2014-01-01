@@ -634,6 +634,7 @@
             (if (not NoteMacs-old-timer) "not ")
             "a guru."))))
 
+
 ;;see `list-colors-display'
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -642,12 +643,14 @@
   ;; If there is more than one, they won't work right.
 
 ; '(default ((t (:background "#444" :height 180 :weight bold :family "DejaVu Sans Mono"))))
- '(default ((t (:background "lightskyblue" :height 180 :weight bold :family "DejaVu Sans Mono"))))
+; '(default ((t (:foreground "#000000" :background "lightskyblue"))))
+; '(default ((t (:foreground "color-16" :background "lightskyblue" :height 180 :weight bold :family "DejaVu Sans Mono"))))
+ '(default ((t (:foreground "#000" :background "lightskyblue" :height 180 :weight bold :family "DejaVu Sans Mono"))))
  '(cursor ((t (:background "red"))))
- '(font-lock-comment-face ((t (:foreground "#222"))))
+ '(font-lock-comment-face ((t (:foreground "#333"))))
  '(region ((t (:inverse-video t))))
  '(trailing-whitespace ((t (:background "green")))))
-; '(trailing-whitespace ((t (:background "#555")))))
+
 
 
 
