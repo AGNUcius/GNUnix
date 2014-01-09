@@ -74,9 +74,11 @@ menu Programs Programs {
  }
 
  menu Network network {
+  prog "Manage Printers" cups chromium-browser http://localhost:631
   prog "VNC Server" x11vnc xterm -e x11vnc -xkb -forever -usepw -ncache 10
   prog rdesktop rdesktop rdesktop
   prog qbittorrent qbittorrent qbittorrent
+  prog skype skype skype
  }
 
  menu Games games {
@@ -127,6 +129,7 @@ menu Programs Programs {
   prog kraptor kraptor kraptor
   prog liquidwar liquidwar liquidwar
   prog maelstrom maelstrom maelstrom
+  prog M.A.M.E mame mame -rompath /home/user/games/MAME/roms
   prog minetest minetest minetest
   prog mu-cade mu-cade mu-cade
   prog njam njam njam
@@ -190,22 +193,27 @@ menu System system {
   prog Suspend suspend xterm -e sudo pm-suspend
   prog Restart restart xterm -e sudo shutdown -r now
   prog Shutdown shutdown xterm -e sudo shutdown -P now
-  prog "Power Settings" powertop xterm -maximized -e sudo powertop
+  prog Settings powertop xterm -maximized -e sudo powertop
  }
 
  menu Programs programs {
+  prog "Manage Tasks" htop xterm -maximized -e htop
+  prog "Kill Window" xkill xterm -e sudo xkill
   prog "App Shop" software-center software-center
   prog "Add/Remove Programs" synaptic xterm -e sudo synaptic
  }
 
- prog "Manage Printers" cups chromium-browser http://localhost:631
- prog "Manage Tasks" htop xterm -maximized -e htop
- prog "Murder Window" xkill xterm -e sudo xkill
- prog "Fix Whacky Mouse" mouse xterm -e "sudo modprobe -r psmouse; sudo modprobe psmouse"
- prog "Fix Philips TV Screen" xrandr --output VGA1 --mode 1024x768
- prog "Fix Acer One Laptop Screen" screen xrandr --output  LVDS1 --mode 1024x600
+ menu Video video {
+  prog "Fix Philips TV Screen"  xrandr xrandr --output VGA1 --mode 1024x768
+  prog "Fix Acer Laptop Screen" xrandr xrandr --output LVDS1 --mode 1024x600
+  prog "Fix ASUS Monitor"       xrandr xrandr --output VGA1 --mode 1920x1080 --output LVDS1 --off
+ }
+
  prog "Check Battery" yacpi xterm -e yacpi
  prog "Adjust Volume" alsamixer xterm -e alsamixer
+ prog "Fix Whacky Mouse" mouse xterm -e "sudo modprobe -r psmouse; sudo modprobe psmouse"
+ prog "CapsLock=>Ctrl" setxkbmap setxkbmap -option ctrl:nocaps
+
 # separator
 # prog "Make LiveCD" xterm xterm -e
 # separator

@@ -1,6 +1,9 @@
 
-! To reload immediately:
+! To reload immediately
 ! xrdb -load ~/.Xresources
+
+xterm*background: black
+xterm*foreground: gray
 
 xterm*faceName: DejaVu Sans Mono
 xterm*faceSize: 14

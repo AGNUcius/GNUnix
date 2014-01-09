@@ -374,7 +374,7 @@
         (beginning-of-buffer) ;;
 		(lens-follow) ;;go to the most recent month
         (beginning-of-buffer)
-		(toggle-read-only nil)
+		(toggle-read-only -1)
 		(newline 2)
 		(forward-line -2)
         (time-insert))
@@ -388,6 +388,9 @@
            (define-key calendar-mode-map "id"
              (lambda nil (interactive)
                (diary-prepend-entry diary-file)))
+           (define-key calendar-mode-map "is"
+             (lambda nil (interactive)
+               (diary-prepend-entry "~/work/doc/.txt/status")))
            )))
 
       (add-hook 'ediff-load-hook
