@@ -65,6 +65,7 @@ menu Programs Programs {
  }
 
  menu Dev dev {
+  prog virtualbox virtualbox virtualbox
   prog numptyphysics numptyphysics numptyphysics
   prog Basic256 basic256 basic256
   prog Scratch scratch scratch
@@ -189,7 +190,8 @@ menu Programs Programs {
 
 menu System system {
  menu Power power {
-  prog Lock xlock xlock
+ # really want to use  xscreensaver-command -lock
+  prog Lock xtrlock xtrlock
   prog Suspend suspend xterm -e sudo pm-suspend
   prog Restart restart xterm -e sudo shutdown -r now
   prog Shutdown shutdown xterm -e sudo shutdown -P now
@@ -206,7 +208,8 @@ menu System system {
  menu Video video {
   prog "Fix Philips TV Screen"  xrandr xrandr --output VGA1 --mode 1024x768
   prog "Fix Acer Laptop Screen" xrandr xrandr --output LVDS1 --mode 1024x600
-  prog "Fix ASUS Monitor"       xrandr xrandr --output VGA1 --mode 1920x1080 --output LVDS1 --off
+  prog "Fix ASUS Monitor"       xrandr xrandr --output VGA1 --mode 1920x1080 --output eDP1 --off
+  prog "Fix lenovo Laptop Screen" xrandr xrandr --output VGA1 --off --output eDP1 --mode 1920x1080
  }
 
  prog "Check Battery" yacpi xterm -e yacpi

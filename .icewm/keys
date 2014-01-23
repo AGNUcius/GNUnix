@@ -4,7 +4,8 @@ key "Ctrl+Shift+Esc" xterm -maximized -e htop
 key "Super+p" xterm -e sudo powertop
 key "Super+b" xterm -e yacpi
 key "Super+e" xfe
-key "Super+l" xlock
+# really want to use  xscreensaver-command -lock
+key "Super+l" xtrlock
 key "Super+v" xterm -e alsamixer
 key "Super+w" xterm -e wicd-curses
 key "Super+z" xterm -maximized -fa "DejaVu Sans Mono:size=16"

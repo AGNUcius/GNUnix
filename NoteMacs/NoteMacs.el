@@ -36,6 +36,9 @@
 ;;; Code:
 (add-to-list 'load-path "~/NoteMacs/own")
 (add-to-list 'load-path "~/NoteMacs/site")
+(add-to-list 'load-path "~/NoteMacs/site/git-modes")
+(add-to-list 'load-path "~/NoteMacs/site/magit")
+(autoload 'magit-status "magit" nil t)
 
 ;; android dev
 (defun android-dev () (interactive)
@@ -60,6 +63,14 @@
 ;; $ plutil -convert binary1 -o ~/keys-binary.plist ~/keys-xml.plist
 ;; $ cp ~/keys-binary.plist $FILE
 
+;; (require 'package)
+;; (add-to-list 'package-archives
+;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+;; (if (>= emacs-major-version 24)
+;; 	(progn
+;; 	  (package-initialize)
+;; 	  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))))
 
 (autoload 'lens-mode "lens.el" "" t)
 (autoload 'lens "lens.el" "" t)
@@ -71,12 +82,14 @@
 (autoload 'browse-kill-ring "browse-kill-ring" nil t)
 (define-key global-map [(meta control y)] 'browse-kill-ring)
 
-(autoload 'findr "findr" "Find file name." t)
-(define-key global-map [(meta control S)] 'findr)
-(autoload 'findr-search "findr" "Find text in files." t)
-(define-key global-map [(meta control s)] 'findr-search)
-(autoload 'findr-query-replace "findr" "Replace text in files." t)
-(define-key global-map [(meta control r)] 'findr-query-replace)
+;; (autoload 'findr "findr" "Find file name." t)
+;; (define-key global-map [(meta control S)] 'findr)
+;; (autoload 'findr-search "findr" "Find text in files." t)
+;; (define-key global-map [(meta control s)] 'findr-search)
+;; (autoload 'findr-query-replace "findr" "Replace text in files." t)
+;; (define-key global-map [(meta control r)] 'findr-query-replace)
+
+(define-key global-map [(meta control s)] 'grep-find)
 
 (autoload 'hexview-find-file "hexview-mode" nil t)
 (autoload 'time-insert "time-insert" nil t)
@@ -108,6 +121,7 @@
 (autoload 'etc-passwd-generic-mode "generic-x" "" t)
 (autoload 'etc-fstab-generic-mode "generic-x" "" t)
 (autoload 'io-mode "io-mode" "" t)
+(autoload 'visual-basic-mode "visual-basic-mode" "" t)
 
 (autoload 'rfcview-mode "rfcview" "" t)
 (autoload 'css-mode "css-mode-min")
@@ -648,12 +662,12 @@
 ; '(default ((t (:background "#444" :height 180 :weight bold :family "DejaVu Sans Mono"))))
 ; '(default ((t (:foreground "#000000" :background "lightskyblue"))))
 ; '(default ((t (:foreground "color-16" :background "lightskyblue" :height 180 :weight bold :family "DejaVu Sans Mono"))))
- '(default ((t (:foreground "#000" :background "lightskyblue" :height 180 :weight bold :family "DejaVu Sans Mono"))))
+; '(default ((t (:foreground "#000" :background "lightskyblue" :height 180 :weight bold :family "DejaVu Sans Mono"))))
+ '(default ((t (:foreground "#000" :background "gray25" :height 180 :weight bold))))
  '(cursor ((t (:background "red"))))
- '(font-lock-comment-face ((t (:foreground "#333"))))
+ '(font-lock-comment-face ((t (:foreground "gray15"))))
  '(region ((t (:inverse-video t))))
- '(trailing-whitespace ((t (:background "green")))))
-
+ '(trailing-whitespace ((t (:background "gray35")))))
 
 
 
