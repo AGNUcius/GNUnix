@@ -1,6 +1,14 @@
 # related: ~/.icewm/prefoverride and /usr/share/icewm/preferences
 
+TaskBarShowAPMStatus=1
+
+#  Titlebar buttons from right to left (x=close, m=max, i=min, h=hide, r=rollup, s=sysmenu, d=depth)
 TitleButtonsRight="xmi"
+
+#  Background of the titlebar of active windows
+# XP=10,36,106
+# Win7Classic=8,36,107="rgb:08/24/6B"
+ColorActiveTitleBar="rgb:08/24/6B"
 
 #  Icon search path (colon separated)
 # IconPath="/usr/share/icons/wm-icons/16x16-general"
@@ -189,4 +197,4 @@ KeySysMinimizeAll=""
 KeySysHideAll=""
 KeySysUndoArrange=""
 KeySysCollapseTaskBar=""
-TaskBarShowAPMStatus=1
+

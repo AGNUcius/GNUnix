@@ -1,14 +1,13 @@
 ;;; NoteMacs.el --- Make Emacs a little easier to use.
 
-;; Copyright (C): Social Sufficiency Coalition
-
+;; Copyright (C): Product Futures Foundation
 ;; Author: Patrick Anderson <AGNUcius@Gmail.com>
 
 ;; This file is Free Software.
-;; You can Use, Modify, Copy and Share it under the terms
-;; of the GNU Affero General Public License as published
-;; by the Free Software Foundation; either version 3, or
-;; (at your option) any later version.
+;;  You can Use, Modify, Copy and Share it under the
+;; terms of the GNU Affero General Public License as
+;; published by the Free Software Foundation; either
+;; version 3, or (at your option) any later version.
 
 ;;; Commentary:
 ;;  NoteMacs is an attempt to tame the One True Editor.
@@ -44,8 +43,6 @@
 (defun android-dev () (interactive)
   (setq eshell-path-env (concat eshell-path-env ":/home/user/work/android/adt/sdk/tools:/home/user/work/android/adt/sdk/platform-tools")))
 
-(setq debug-on-error nil)
-
 ;; Mac OS X stuff
 (when (eq system-type 'darwin)
  (setq mac-command-modifier 'meta))
@@ -63,27 +60,19 @@
 ;; $ plutil -convert binary1 -o ~/keys-binary.plist ~/keys-xml.plist
 ;; $ cp ~/keys-binary.plist $FILE
 
-;; (require 'package)
-;; (add-to-list 'package-archives
-;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-;; (if (>= emacs-major-version 24)
-;; 	(progn
-;; 	  (package-initialize)
-;; 	  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))))
 
 (autoload 'lens-mode "lens.el" "" t)
 (autoload 'lens "lens.el" "" t)
-(autoload 'xml-beautify "xml-control" "unwind and indent" t)
 (autoload 'sic-connect "sic" "simple IMAP client" t)
 (autoload 'ewb "ewb" "Emacs Web Browser" t)
 (autoload 'hands "hands" "image preview" t)
 
 (autoload 'browse-kill-ring "browse-kill-ring" nil t)
 (define-key global-map [(meta control y)] 'browse-kill-ring)
+(autoload 'xml-beautify "xml-control" "unwind and indent" t)
 
-;; (autoload 'findr "findr" "Find file name." t)
-;; (define-key global-map [(meta control S)] 'findr)
+(autoload 'findr "findr" "Find file name." t)
+(define-key global-map [(meta control S)] 'findr)
 ;; (autoload 'findr-search "findr" "Find text in files." t)
 ;; (define-key global-map [(meta control s)] 'findr-search)
 ;; (autoload 'findr-query-replace "findr" "Replace text in files." t)
@@ -480,12 +469,11 @@
 ;;; Customized variables
 ;;  press f1 v RET  while over any variable name
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(Info-scroll-prefer-subnodes nil)
- '(ahk-syntax-directory "/Program Files (x86)/AutoHotkey/Extras/Editors/Syntax/")
  '(ange-ftp-dumb-unix-host-regexp "netbsd\\|freeshell")
  '(ange-ftp-generate-anonymous-password "none@aol.com")
  '(appt-message-warning-time 2)
@@ -530,12 +518,15 @@
  '(eol-mnemonic-undecided "?")
  '(eol-mnemonic-unix "/")
  '(fill-column 54)
- '(frame-font-string "-outline-NSimSun-normal-r-normal-normal-29-217-96-96-c-*-iso8859-1")
  '(garbage-collection-messages t)
  '(gdb-show-main t)
  '(generic-define-unix-modes t)
  '(global-font-lock-mode t nil (font-lock))
  '(global-hl-line-mode t nil (hl-line))
+ '(grep-command "grep -inH -e ")
+ '(grep-find-command (quote ("find . -type f -exec grep -inH -e  {} +" . 35)))
+ '(grep-find-template "find . <X> -type f <F> -exec grep <C> -inH -e <R> {} +")
+ '(grep-template "grep <X> <C> -inH -e <R> <F>")
  '(gud-cdb-directories (quote (".\\" "..\\")))
  '(gud-chdir-before-run nil)
  '(hi-lock-mode t t (hi-lock))
@@ -600,8 +591,6 @@
  '(x-stretch-cursor t))
 
 
-
-
 ;;;; FILE->MODE ASSOCIATIONS:
 (setq auto-mode-alist
       (append
@@ -654,20 +643,15 @@
 
 ;;see `list-colors-display'
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-
-; '(default ((t (:background "#444" :height 180 :weight bold :family "DejaVu Sans Mono"))))
-; '(default ((t (:foreground "#000000" :background "lightskyblue"))))
-; '(default ((t (:foreground "color-16" :background "lightskyblue" :height 180 :weight bold :family "DejaVu Sans Mono"))))
-; '(default ((t (:foreground "#000" :background "lightskyblue" :height 180 :weight bold :family "DejaVu Sans Mono"))))
- '(default ((t (:foreground "#000" :background "gray25" :height 180 :weight bold))))
- '(cursor ((t (:background "red"))))
- '(font-lock-comment-face ((t (:foreground "gray15"))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:foreground "#000" :background "gray35" :height 180 :weight bold))))
+ '(cursor ((t (:background "green"))))
+ '(font-lock-comment-face ((t (:foreground "gray25"))))
  '(region ((t (:inverse-video t))))
- '(trailing-whitespace ((t (:background "gray35")))))
+ '(trailing-whitespace ((t (:background "gray45")))))
 
 
 

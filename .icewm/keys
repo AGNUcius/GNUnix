@@ -1,14 +1,14 @@
 # see /usr/share/icewm/keys
 
 key "Ctrl+Shift+Esc" xterm -maximized -e htop
+key "Ctrl+~" xterm -maximized -e glances
 key "Super+p" xterm -e sudo powertop
 key "Super+b" xterm -e yacpi
 key "Super+e" xfe
-# really want to use  xscreensaver-command -lock
-key "Super+l" xtrlock
+key "Super+l" xscreensaver-command -lock
 key "Super+v" xterm -e alsamixer
 key "Super+w" xterm -e wicd-curses
-key "Super+z" xterm -maximized -fa "DejaVu Sans Mono:size=16"
+key "Super+z" xterm -maximized
 
 key "XF86Sleep" xterm -e sudo pm-suspend
 key "XF86PowerOff" xterm -e sudo pm-suspend

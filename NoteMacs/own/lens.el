@@ -5,7 +5,7 @@
 
 ;;; lens.el --- Focus on text. -*- emacs-lisp -*-
 
-;; Copyright (C) 2012->oo  Social Sufficiency Coalition
+;; Copyright (C) 2013->oo Product Futures Foundation
 
 ;;  This program is free software: you can
 ;;  redistribute it and/or modify it under the
@@ -23,13 +23,12 @@
 ;;
 ;;  You should have received a copy of the GNU
 ;;  Affero General Public License along with this
-;;  program.  If not, see
-;;  http://www.GNU.org/licenses
+;;  program.  If not, see http://GNU.org/licenses
 
-;;; FEATURES
+;;; Features
 ;; autolink plain-text documents
 
-;;; INSTALLATION
+;;; Installation
 ;; Try something like this in your .emacs:
 
 ;; (autoload 'lens-mode "~/doc/.src/lens.el" "lens" t)
@@ -53,11 +52,12 @@
 ;; RET      Follow link
 ;; C-m      Insert line-feed (\n)
 
+;;;; Features
 
-;;; FORMATTING
-;; Whitespace is preserved.
+;;; Formatting
+;; All whitespace preserved
 
-;; At beginning of line (BOL)
+;;; At beginning of line (BOL)
 ;;  = Header1
 ;;  == Header2
 ;;  === Header3
@@ -69,7 +69,7 @@
 ;;  . bullet
 ;;  > quote
 
-;; Anywhere
+;;; Anywhere
 ;;  >> quote2
 ;;  >>> quote3
 ;;  "'quote'"
@@ -88,13 +88,14 @@
 ;; Explicit URLs: [file|https?|ftp]://
 
 
-;;; VERSION:
+;;; Version:
 ;; .01 new
+;; .02 cleanup
 
-;;; CUSTOMIZATIONS:
+;;; Customizations:
 (defcustom lens-global-page-title nil "Title of _all_ generated pages.  If set to `nil' the title is the name of the input file.")
 (defcustom lens-output-dir ".." "where to write the output")
-(defcustom lens-img-dir ".data" "where <img> content is located")
+(defcustom lens-img-dir ".img" "where <img> content is located")
 (defcustom lens-css ".src/preferred.css" "stylesheet")
 (defcustom lens-host-mail "AGNUcius@Gmail.com" "mail address to send edits")
 (defcustom lens-shortest-inner
@@ -118,7 +119,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
   "Quoted path on local hard drive")
 
 (defconst lens-local-M$-path
-  "[a-zA-Z]:\\\\[^]):,;? \t\n\r]+"
+  "[a-zA-Z]:\\\\[^]):,;? \t\n]+"
   "Path on local hard drive")
 
 (defconst lens-quoted-UNC-path
@@ -126,31 +127,18 @@ All terms less than this match only at the beginning of words (using `\\b')")
   "Quoted UNC")
 
 (defconst lens-UNC-path
-  "\\\\\\\\[^]):,;? \t\n\r]+"
+  "\\\\\\\\[^]):,;? \t\n]+"
   "UNC path on MS network")
 
 (defconst lens-explicit-URL
-  "\\([a-zA-Z0-9]\\)+://[^ \t\n\r]*"
+  "\\([a-zA-Z0-9]\\)+://[^ \t\n]*"
   "Specify protocol to include chars banned from implicit-HTTP.")
 
 (defconst lens-implicit-HTTP
-  "\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|am\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|no\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n\r]*"
+  "\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|am\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|no\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n]*"
 ;;maybe use `regexp-opt' here?
-  "Characters ])}>:,; \\t\\r\\n end the implicit HTTP URL.")
+  "Characters ])}>:,; \\t\\\n end the implicit HTTP URL.")
 
-(defconst lens-index.htm
-  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"
-\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">
-<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\" xml:lang=\"en\">
- <head>
-   <title></title>
-   <meta http-equiv=\"REFRESH\" content=\"0; URL=.home.htm\"/>
- </head>
-<body/>
-</html>
-"
-"Redirect to real start page")
 
 (defvar lens-mapping nil)
 (defvar lens-input-dirs '("."))
@@ -203,7 +191,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 	   '(
 		 ;;The first entry here has LOWEST priority.
 		 ;;must appear at BOL
-;;   		 ("^.[^ \n\r\t]+?:" "<span class=\"type\">\\&" "</span>")
+;;   		 ("^.[^ \n\t]+?:" "<span class=\"type\">\\&" "</span>")
 
 ;;  		 ("^.*?:" "<span class=\"h4\">\\&" "</span>");anything followed by a : is a title?
 
@@ -255,7 +243,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 		  "<a class=\"ext\" href=\"file:///\\1\">\\&</a>")
 
 ;; 		 ;;see `lens-local-M$-path'
-		 ("[a-zA-Z]:\\\\[^]):,;? \t\n\r]+"
+		 ("[a-zA-Z]:\\\\[^]):,;? \t\n]+"
 		  "<a class=\"ext\" href=\"file:///\\&\">\\&</a>")
 
 		 ;;see `lens-quoted-UNC-path'
@@ -263,16 +251,16 @@ All terms less than this match only at the beginning of words (using `\\b')")
 		  "<a class=\"ext\" href=\"file:///\\1\">\\&</a>")
 
 		 ;;see `lens-UNC-path'
-		 ("\\\\\\\\[^]):,;? \t\n\r]+"
+		 ("\\\\\\\\[^]):,;? \t\n]+"
 		  "<a class=\"ext\" href=\"file:///\\&\">\\&</a>")
 
 		 ;;TODO: encode & to &amp;
 		 ;;see `lens-explicit-URL'
-		 ("\\([a-zA-Z0-9]\\)+://[^ \t\n\r]*"
+		 ("\\([a-zA-Z0-9]\\)+://[^ \t\n]*"
 		  "<a class=\"ext\" href=\"\\&\">\\&</a>")
 
 		 ;;see `lens-implicit-HTTP'
-		 ("\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n\r]*"
+		 ("\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n]*"
 		  "<a class=\"ext\" href=\"http://\\&\">\\&</a>")
 
 		 ;;XML entities
@@ -287,7 +275,6 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
 		 ;;whitespace is now preserved in preferred.css/white-space:pre-wrap
 		 ("\n" "<br/>\n")
-		 ("\r\n" "<br/>\n")
 
 ;;;;;;;; ---- ADD TERMS ABOVE THIS LINE ---- ;;;;;;;;
 ;;;;;;;; Note: Entries at the BOTTOM of this list have HIGHEST priority
@@ -298,7 +285,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
   (interactive)
   (let ((lens-started (current-time)))
     (lens-gen-missing-image-files)
-    (shell-command "ls -1 > _index") ;;BUGBUG
+    (shell-command "ls -1 > pages") ;;BUGBUG
     (lens-build-mapping)
 
     (if (not (file-exists-p lens-output-dir))
@@ -378,9 +365,9 @@ All terms less than this match only at the beginning of words (using `\\b')")
 							(if closing
 								;;prepended to the current string so it closes first
 								(setq lens-closing (concat (car closing) lens-closing)))
-							(if (and (or (string= regexp "\n")
-										 (string= regexp "\r\n"))
-									 lens-closing) ;and there are tags to close,
+
+							(if (and (string= regexp "\n") ;if at EOL,
+									 lens-closing);and there are tags to close,
 								(progn
 								  ;;close tags and follow with EOL replacement
 								  ;;(insert lens-closing replacement)
@@ -426,12 +413,12 @@ All terms less than this match only at the beginning of words (using `\\b')")
               (insert
 			   (concat
 				"<p class='header'>\n"
-				" <a href=\"_home.htm\">Home</a> |"
-				" <a href=\"_faq.htm\">FAQ</a> |"
-				" <a href=\"_diary.htm\">Diary</a> |"
-				" <a href=\"_projects.htm\">Projects</a> |"
-				" <a href=\"_todo.htm\">Todo</a> |"
-				" <a href=\"_index.htm\">Index</a> |"
+				" <a href=\"home.htm\">Home</a> |"
+				" <a href=\"faq.htm\">FAQ</a> |"
+				" <a href=\"diary.htm\">Diary</a> |"
+				" <a href=\"projects.htm\">Projects</a> |"
+				" <a href=\"todo.htm\">Todo</a> |"
+				" <a href=\"pages.htm\">Pages</a> |"
 				"</p>\n"
 				))
 
@@ -451,7 +438,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
               (insert
 			   "</p>\n"
 				"<p class='footer'>\n"
-				" Page generated from <a href=\".text/" file "\">" file "</a> by <a href=\".src/lens.el\">lens.el</a>."
+				" Page generated from <a href=\".txt/" file "\">" file "</a> by <a href=\".src/lens.el\">lens.el</a>."
 			   "</p>\n"
 
 			   "</body>\n"
@@ -474,7 +461,8 @@ All terms less than this match only at the beginning of words (using `\\b')")
              (insert " ")
              (save-buffer)
              (kill-buffer (current-buffer))))))
-   (directory-files (concat lens-output-dir "/" lens-img-dir))))
+   (if (file-exists-p lens-img-dir)
+	   (directory-files (concat lens-output-dir "/" lens-img-dir)))))
 
 
 ;;lens-mode
@@ -493,7 +481,6 @@ All terms less than this match only at the beginning of words (using `\\b')")
 ;;encase and terminate
   (setq lens-font-lock
         (concat "\\(\\)\\("
-; 				lens-local-*nix-path "\\|"
 				lens-quoted-local-M$-path "\\|"
 				lens-local-M$-path "\\|"
 				lens-quoted-UNC-path "\\|"
@@ -526,7 +513,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 (defun lens-mode-rebuild-mode ()
   (interactive)
   (lens-build-font-lock)
-  (im-make-mode lens "lens --- Exposing connections." lens-font-lock lens-follow)
+  (im-make-mode lens "lens --- focus on text." lens-font-lock lens-follow)
   (lens-mode))
 
 ;; KLUDGE: lens.el needs to be rewritten as a minor mode.

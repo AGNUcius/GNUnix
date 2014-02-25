@@ -8,6 +8,8 @@ alias pkg.find='apt-cache search'
 # List all installed software:
 alias pkg.list.installed='dpkg -l'
 
+alias pkg.list.added="( zcat $( ls -tr /var/log/apt/history.log*.gz ) ; cat /var/log/apt/history.log ) | egrep '^(Start-Date:|Commandline:)' | grep -v aptdaemon | egrep '^Commandline:'"
+
 # List all available software:
 alias pkg.list.available='dpkg -l \*'
 

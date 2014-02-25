@@ -1,4 +1,3 @@
-
 ! To reload immediately
 ! xrdb -load ~/.Xresources
 
@@ -14,3 +13,8 @@ xterm*savelines: 16384
 xterm*scrollTtyOutput: false
 xterm*jumpScroll: true
 xterm*multiScroll: true
+
+
+rxvt*background: black
+rxvt*foreground: gray
+

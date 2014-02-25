@@ -1,5 +1,9 @@
 # see /usr/share/icewm/preferences and /etc/X11/icewm/menu
 
+#NOTES:
+# https://github.com/ssokolow/profile/blob/master/home/.icewm/icewm-xdg-menu
+
+
 # pkg.add rockdodger vor laby freedroidrpg billiard-gl foobillard childsplay krank extremetuxracer egoboo cultivation garden-of-coloured-lights bouncy criticalmass smc rocksndiamonds supertuxkart frogatto
 
 # Wolfenstein: Enemy Territory, Smokin-Guns.org, urbanterror.info
@@ -21,14 +25,14 @@ prog FireFox firefox firefox
 separator
 menu Programs Programs {
  menu Office Office {
-  prog LibreOffice libreoffice libreoffice
+  prog NoteMacs emacs emacs --maximized
   prog "File Browser" xfe xfe
   prog "Text Editor xfwrite" xfwrite xfwrite
   prog "Command Prompt" xterm xterm
   prog Calculator xcalc xcalc
   prog Magnifier xmag xmag
-  prog "Remote Desktop" rdesktop rdesktop
-  prog NoteMacs emacs emacs --maximized
+  prog LibreOffice libreoffice libreoffice
+  prog tkremind tkremind tkremind
  }
 
  menu Art art {
@@ -41,22 +45,29 @@ menu Programs Programs {
   menu 3D 3D {
    prog Blender blender blender
    prog Wings3D wings3d wings3d
+   prog K3D k3d k3d
   }
   menu Photo Photo {
    prog Fotoxx fotoxx fotoxx
    prog flphoto flphoto flphoto
   }
   menu Camera Camera {
+   prog guvcview guvcview guvcview
+   prog fswebcam fswebcam fswebcam
    prog qcam qcam qcam
    prog gtkam gtkam gtkam
-  }
+   }
   prog Gimp gimp gimp
   prog Inkscape inkscape inkscape
   menu Video Video {
    prog Kino kino kino
   }
   menu Draw Draw {
+   prog grafx2 grafx2 grafx2
+   prog Tupi tupi tupi
+   prog Pinta pinta pinta
    prog MTPaint mtpaint mtpaint
+   prog MyPaing mypaint mypaint
    prog Pencil pencil pencil
    prog TuxPaint tuxpaint tuxpaint --fullscreen
   }
@@ -64,20 +75,30 @@ menu Programs Programs {
   prog XaraLX xaralx xaralx
  }
 
+ menu Time time {
+  prog tkremind tkremind tkremind
+  prog wyrd wyrd wyrd
+  prog taskcoach taskcoach taskcoach
+ }
+
  menu Dev dev {
   prog virtualbox virtualbox virtualbox
+  prog virt-manager virt-manager virt-manager
   prog numptyphysics numptyphysics numptyphysics
   prog Basic256 basic256 basic256
   prog Scratch scratch scratch
   prog Squeak squeak squeak
   prog EToys etoys etoys
   prog TurtleArt turtleart turtleart
+  prog CodeBlocks codeblocks codeblocks
+  prog nemiver nemiver nemiver
+  prog gvrng gvrng gvrng
  }
 
  menu Network network {
+  prog "Connect to Remote Desktop" rdesktop rdesktop
   prog "Manage Printers" cups chromium-browser http://localhost:631
   prog "VNC Server" x11vnc xterm -e x11vnc -xkb -forever -usepw -ncache 10
-  prog rdesktop rdesktop rdesktop
   prog qbittorrent qbittorrent qbittorrent
   prog skype skype skype
  }
@@ -102,14 +123,15 @@ menu Programs Programs {
   prog c64 x64 x64
   prog chromium-bsu chromium-bsu chromium-bsu
   prog circuslinux circuslinux circuslinux
-  prog cosmo1 cosmo dosbox /home/user/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode1/COSMO1.EXE -fullscreen -exit
-  prog cosmo2 cosmo dosbox /home/user/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode2/COSMO2.EXE -fullscreen -exit
-  prog cosmo3 cosmo dosbox /home/user/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode3/COSMO3.EXE -fullscreen -exit
+  prog cosmo1 cosmo dosbox ~/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode1/COSMO1.EXE -fullscreen -exit
+  prog cosmo2 cosmo dosbox ~/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode2/COSMO2.EXE -fullscreen -exit
+  prog cosmo3 cosmo dosbox ~/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode3/COSMO3.EXE -fullscreen -exit
   prog csmash csmash csmash
   prog cultivation cultivation cultivation
   prog cytadela cytadela cytadela
   prog defendguin defendguin defendguin
-  prog diggers-2-extractors H2O dosbox /home/user/games/dos/diggers-2-extractors/XTRACTOR.EXE -fullscreen -exit
+  prog diggers-2-extractors H2O dosbox ~/games/dos/diggers-2-extractors/XTRACTOR.EXE -fullscreen -exit
+  prog dreamchess dreamchess dreamchess
   prog egoboo egoboo egoboo
   prog enigma enigma enigma
   prog epiphany epiphany epiphany
@@ -123,16 +145,17 @@ menu Programs Programs {
   prog garden-of-coloured-lights garden-of-coloured-lights garden-of-coloured-lights
   prog gravitation gravitation gravitation
   prog gweled gweled gweled
-  prog h2o H2O dosbox /home/user/games/dos/H2O/H2O.EXE -fullscreen -exit
+  prog h2o H2O dosbox ~/games/dos/H2O/H2O.EXE -fullscreen -exit
   prog heroes heroes heroes
   prog heroes heroes heroes --full-screen --double
   prog jumpnbump jumpnbump jumpnbump
   prog kraptor kraptor kraptor
   prog liquidwar liquidwar liquidwar
   prog maelstrom maelstrom maelstrom
-  prog M.A.M.E mame mame -rompath /home/user/games/MAME/roms
+  prog M.A.M.E mame mame -rompath ~/games/MAME/roms
   prog minetest minetest minetest
   prog mu-cade mu-cade mu-cade
+  prog Mupen64Plus mupen64plus /usr/games/mupen64plus 
   prog njam njam njam
   prog openclonk openclonk openclonk
   prog out-of-order out-of-order out-of-order
@@ -166,7 +189,7 @@ menu Programs Programs {
   prog vor vor vor
   prog widelands widelands widelands
   prog wing wing wing
-  prog wordwarvi wordwarvi /home/user/games/wordwarvi/wordwarvi --fullscreen
+  prog wordwarvi wordwarvi ~/games/wordwarvi/wordwarvi --fullscreen
   prog xball  xball  xball
   prog xblast xblast xblast
   prog xbubble xbubble xbubble
@@ -176,13 +199,13 @@ menu Programs Programs {
   prog xscavenger xscavenger xscavenger
   prog zsnes zsnes zsnes
 
-  prog "DOOM Ulimate" DOOM dosbox /home/user/games/dos/doom-ult/DOOM.EXE -fullscreen -exit
-  prog "NeoGeo MrDo" mame mame -rompath /home/user/games/MAME/roms neomrdo
+  prog "DOOM Ulimate" DOOM dosbox ~/games/dos/doom-ult/DOOM.EXE -fullscreen -exit
+  prog "NeoGeo MrDo" mame mame -rompath ~/games/MAME/roms neomrdo
   prog "Smokin' Guns" /usr/games/smokinguns/sg_48.png /usr/games/smokinguns/smokinguns.i386
-  prog "The Incredible Machine 2" TIM dosbox /home/user/games/dos/the-incredible-machine-2/TIM2.EXE -fullscreen -exit
-  prog "Tubular Worlds" TUB dosbox /home/user/games/dos/tubular-worlds/TUBWORLD.BAT -fullscreen -exit
-  prog "X Com 2 - Terror From The Deep" H2O dosbox /home/user/games/dos/X-Com-2-Terror-From-The-Deep/TERROR.COM -fullscreen -exit
-#  prog ultima8 Ultima8 dosbox /home/user/games/dos/ultima8/U8.EXE -fullscreen -exit
+  prog "The Incredible Machine 2" TIM dosbox ~/games/dos/the-incredible-machine-2/TIM2.EXE -fullscreen -exit
+  prog "Tubular Worlds" TUB dosbox ~/games/dos/tubular-worlds/TUBWORLD.BAT -fullscreen -exit
+  prog "X Com 2 - Terror From The Deep" H2O dosbox ~/games/dos/X-Com-2-Terror-From-The-Deep/TERROR.COM -fullscreen -exit
+#  prog ultima8 Ultima8 dosbox ~/games/dos/ultima8/U8.EXE -fullscreen -exit
 # offroad/IRONMAN.BAT
 # williams-arcade-classics/ARCADE/ARCADE.EXE
  }
@@ -200,16 +223,17 @@ menu System system {
 
  menu Programs programs {
   prog "Manage Tasks" htop xterm -maximized -e htop
+  prog "Manage Tasks as root" htop xterm -maximized -e sudo htop
   prog "Kill Window" xkill xterm -e sudo xkill
   prog "App Shop" software-center software-center
   prog "Add/Remove Programs" synaptic xterm -e sudo synaptic
  }
 
  menu Video video {
-  prog "Fix Philips TV Screen"  xrandr xrandr --output VGA1 --mode 1024x768
+  prog "Fix Philips TV for Acer"  xrandr xrandr --output VGA1 --mode 1024x768
   prog "Fix Acer Laptop Screen" xrandr xrandr --output LVDS1 --mode 1024x600
-  prog "Fix ASUS Monitor"       xrandr xrandr --output VGA1 --mode 1920x1080 --output eDP1 --off
-  prog "Fix lenovo Laptop Screen" xrandr xrandr --output VGA1 --off --output eDP1 --mode 1920x1080
+  prog "Fix Work Screen for lenovo"       xrandr xrandr --output VGA1 --mode 1920x1080 --output eDP1 --off
+  prog "Fix lenovo Laptop Screen" xrandr xrandr --output VGA1 --off --output eDP1 --mode 1360x768
  }
 
  prog "Check Battery" yacpi xterm -e yacpi
