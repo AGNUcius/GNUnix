@@ -6,9 +6,10 @@ TaskBarShowAPMStatus=1
 TitleButtonsRight="xmi"
 
 #  Background of the titlebar of active windows
-# XP=10,36,106
-# Win7Classic=8,36,107="rgb:08/24/6B"
-ColorActiveTitleBar="rgb:08/24/6B"
+# Win7Classic
+#ColorActiveTitleBar="rgb:08/24/6B"
+# XP
+ColorActiveTitleBar="rgb:0a/24/6A"
 
 #  Icon search path (colon separated)
 # IconPath="/usr/share/icons/wm-icons/16x16-general"

@@ -510,6 +510,7 @@
  '(display-time-format "%l:%M %p  %A, %B %e %Y")
  '(display-time-mode t nil (time))
  '(dmoccur-maximum-size 5000)
+ '(ediff-diff-options "-w")
  '(ediff-ignore-similar-regions t t)
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(emacs-lisp-mode-hook (quote (turn-on-eldoc-mode checkdoc-minor-mode)))

@@ -57,22 +57,22 @@ menu Programs Programs {
    prog qcam qcam qcam
    prog gtkam gtkam gtkam
    }
-  prog Gimp gimp gimp
-  prog Inkscape inkscape inkscape
   menu Video Video {
    prog Kino kino kino
   }
   menu Draw Draw {
+   prog Gimp gimp gimp
+   prog Inkscape inkscape inkscape
    prog grafx2 grafx2 grafx2
    prog Tupi tupi tupi
    prog Pinta pinta pinta
    prog MTPaint mtpaint mtpaint
-   prog MyPaing mypaint mypaint
    prog Pencil pencil pencil
+   prog krita krita krita
    prog TuxPaint tuxpaint tuxpaint --fullscreen
+   prog XaraLX xaralx xaralx
   }
   prog QUCS qucs qucs
-  prog XaraLX xaralx xaralx
  }
 
  menu Time time {
@@ -101,6 +101,7 @@ menu Programs Programs {
   prog "VNC Server" x11vnc xterm -e x11vnc -xkb -forever -usepw -ncache 10
   prog qbittorrent qbittorrent qbittorrent
   prog skype skype skype
+  prog pidgin pidgin pidgin
  }
 
  menu Games games {
@@ -232,8 +233,8 @@ menu System system {
  menu Video video {
   prog "Fix Philips TV for Acer"  xrandr xrandr --output VGA1 --mode 1024x768
   prog "Fix Acer Laptop Screen" xrandr xrandr --output LVDS1 --mode 1024x600
-  prog "Fix Work Screen for lenovo"       xrandr xrandr --output VGA1 --mode 1920x1080 --output eDP1 --off
-  prog "Fix lenovo Laptop Screen" xrandr xrandr --output VGA1 --off --output eDP1 --mode 1360x768
+  prog "Fix Work Screen for lenovo" xrandr xrandr --output VGA1 --mode 1440x900 --output eDP1 --off
+  prog "Fix lenovo Laptop Screen" xrandr xrandr --output eDP1 --mode 1360x768 --output VGA1 --off
  }
 
  prog "Check Battery" yacpi xterm -e yacpi

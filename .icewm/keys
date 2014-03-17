@@ -1,14 +1,24 @@
 # see /usr/share/icewm/keys
 
+# from ./preferences
+# KeySysShowDesktop="Super+m"
+# KeySysAddressBar="Super+r"
+# KeyWinFullscreen="Super+F11"
+# KeyWinClose="Alt+F4"
+# KeyWinMenu="Alt+Space"
+# KeySysSwitchNext="Alt+Tab"
+# KeySysSwitchLast="Alt+Shift+Tab"
+
 key "Ctrl+Shift+Esc" xterm -maximized -e htop
-key "Ctrl+~" xterm -maximized -e glances
+#key "Ctrl+Shift+`" xterm -maximized -e glances
 key "Super+p" xterm -e sudo powertop
-key "Super+b" xterm -e yacpi
 key "Super+e" xfe
 key "Super+l" xscreensaver-command -lock
+key "Super+b" wmctrl -r :ACTIVE: -b toggle,below
+key "Super+t" wmctrl -r :ACTIVE: -b toggle,above
 key "Super+v" xterm -e alsamixer
 key "Super+w" xterm -e wicd-curses
-key "Super+z" xterm -maximized
+key "Super+z" xterm
 
 key "XF86Sleep" xterm -e sudo pm-suspend
 key "XF86PowerOff" xterm -e sudo pm-suspend
@@ -17,12 +27,3 @@ key "XF86AudioRaiseVolume" amixer set Master Playback 1+
 key "XF86AudioLowerVolume" amixer set Master Playback 1-
 
 
-# from ./preferences
-# KeySysShowDesktop="Super+m"
-# KeySysAddressBar="Super+r"
-# KeyWinFullscreen="Super+F11"
-
-# KeyWinClose="Alt+F4"
-# KeyWinMenu="Alt+Space"
-# KeySysSwitchNext="Alt+Tab"
-# KeySysSwitchLast="Alt+Shift+Tab"

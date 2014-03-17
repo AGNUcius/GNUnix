@@ -2,7 +2,9 @@
 
 Download the UBUNTU mini .iso such as the 13.04 "raring"
 
-$ wget archive.ubuntu.com/ubuntu/dists/raring/main/installer-i386/current/images/netboot/mini.iso --output-document=UBUNTU-13.04-i386-mini.iso
+$ export name=trusty
+$ export plat=amd64
+$ wget archive.ubuntu.com/ubuntu/dists/${name}/main/installer-${plat}/current/images/netboot/mini.iso --output-document=UBUNTU-${name}-${plat}-mini.iso
 
 Burn to CD or use UNetBootin.net to write to a USB key.
 
