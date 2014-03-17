@@ -56,7 +56,9 @@ menu Programs Programs {
    prog fswebcam fswebcam fswebcam
    prog qcam qcam qcam
    prog gtkam gtkam gtkam
-   }
+  }
+  prog Gimp gimp gimp
+  prog Inkscape inkscape inkscape
   menu Video Video {
    prog Kino kino kino
   }
@@ -83,7 +85,6 @@ menu Programs Programs {
 
  menu Dev dev {
   prog virtualbox virtualbox virtualbox
-  prog virt-manager virt-manager virt-manager
   prog numptyphysics numptyphysics numptyphysics
   prog Basic256 basic256 basic256
   prog Scratch scratch scratch
@@ -235,6 +236,7 @@ menu System system {
   prog "Fix Acer Laptop Screen" xrandr xrandr --output LVDS1 --mode 1024x600
   prog "Fix Work Screen for lenovo" xrandr xrandr --output VGA1 --mode 1440x900 --output eDP1 --off
   prog "Fix lenovo Laptop Screen" xrandr xrandr --output eDP1 --mode 1360x768 --output VGA1 --off
+ prog "Disable Screen Blanking" xset xterm -e "xset s noblank; xset -dpms; xset s off"
  }
 
  prog "Check Battery" yacpi xterm -e yacpi

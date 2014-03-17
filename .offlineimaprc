@@ -11,7 +11,7 @@ localfolders = ~/Maildir
 
 [Repository Gmail.Remote]
 ui=Blinkenlights
-folderfilter = lambda folder: folder in ['[Gmail]/Sent Mail', '[Gmail]/Drafts']
+folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Sent Mail', '[Gmail]/Drafts']
 type = IMAP
 ssl=yes
 remotehost = imap.gmail.com
