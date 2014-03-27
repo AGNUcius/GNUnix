@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.15 for user on Wed Jan 29 19:10:02 2014.
+# Written by xscreensaver-demo 5.15 for user on Tue Mar 18 18:23:45 2014.
 # http://www.jwz.org/xscreensaver/
 
 timeout:	0:10:00
@@ -244,6 +244,29 @@ programs:								      \
   GL: 				hilbert -root				    \n\
   GL: 				tronbit -root				    \n\
 				unicode -root				    \n\
+  GL: 				hyperspace --root			    \n\
+  GL: 				colorfire --root			    \n\
+  GL: 				fieldlines --root			    \n\
+  GL: 			"BioF" 	biof --root				    \n\
+  GL: 				sundancer2 --root			    \n\
+  GL: 		  "Pixel City" 	pixelcity --root			    \n\
+  GL: 		"Hufo's Smoke" 	hufo_smoke --root			    \n\
+  GL: 				euphoria --root				    \n\
+  GL: 				lattice --root				    \n\
+  GL: 				flocks --root				    \n\
+  GL: 				flux --root				    \n\
+  GL: 				skyrocket --root			    \n\
+  GL: 				plasma --root				    \n\
+  GL: 				cyclone --root				    \n\
+  GL: 	       "Hufo's Tunnel" 	hufo_tunnel --root			    \n\
+  GL: 		 "SpirographX" 	spirographx --root			    \n\
+  GL: 		 "BusySpheres" 	busyspheres --root			    \n\
+  GL: 				drempels --root				    \n\
+  GL: 				helios --root				    \n\
+  GL: 				feedback --root				    \n\
+  GL: 				lorenz --root				    \n\
+  GL: 				solarwinds --root			    \n\
+  GL: 		  "MatrixView" 	matrixview --root			    \n\
 
 
 pointerPollTime:    0:00:05

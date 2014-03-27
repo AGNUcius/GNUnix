@@ -5,21 +5,26 @@
 PATH=$PATH:$HOME/bin
 BASHRC=YES
 
-function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-}
-function gd2 {
- echo branch \($1\) has these commits and \($2\) does not
- git log $2..$1 --no-merges --format='%h | Author:%an | Date:%ad | %s' --date=local
-}
-function grin {
- git fetch origin master
- gd2 FETCH_HEAD $(parse_git_branch)
-}
-function grout {
- git fetch origin master
- gd2 $(parse_git_branch) FETCH_HEAD
-}
+
+
+# source /usr/share/git-core/contrib/completion/git-prompt.sh
+# export PS1='[\u@\h \W]$(__git_ps1 "\[\e[36;22m\]%s\[\e[0m\]")\$ '
+
+# function parse_git_branch {
+#   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+# }
+# function gd2 {
+#  echo branch \($1\) has these commits and \($2\) does not
+#  git log $2..$1 --no-merges --format='%h | Author:%an | Date:%ad | %s' --date=local
+# }
+# function grin {
+#  git fetch origin master
+#  gd2 FETCH_HEAD $(parse_git_branch)
+# }
+# function grout {
+#  git fetch origin master
+#  gd2 $(parse_git_branch) FETCH_HEAD
+# }
 
 
 ####
@@ -58,7 +63,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then

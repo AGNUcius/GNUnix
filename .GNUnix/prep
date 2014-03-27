@@ -1,6 +1,6 @@
 #!/usr/bin/pseudocode
 
-Download the UBUNTU mini .iso such as the 13.04 "raring"
+Download the UBUNTU mini.iso
 
 $ export name=trusty
 $ export plat=amd64

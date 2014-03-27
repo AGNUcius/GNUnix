@@ -10,15 +10,20 @@ $ git clone git://github.com/AGNUcius/GNUnix.git
 $ mv GNUnix/* .
 $ mv GNUnix/.* .
 
-Basic X desktop with audio
-$ sudo apt-get install xinit xterm xlockmore icewm wdm big-cursor alsa-utils
+Lockable desktop with task manager and sound
+$ pkg.add xinit xterm icewm wdm wmctrl xscreensaver big-cursor htop alsa-utils
 
-This is what I use to deal with files, processes and the web
-$ sudo apt-get install emacs p7zip-full htop chromium-browser
+Web Browser
+$ pkg.add chromium-browser flashplugin-installer
 
-Some other package managers: software-center, synaptic, aptitude, smartpm
+Developer tools
+$ pkg.add emacs p7zip-full
 
-Some other file managers: xfe, thunar, xfm, tuxcmd, rox-filer, pcmanfm, mc, lfm, krusader, gentoo, emelfm2, clex, nautilus, konqueror, dolphin
+Tools for a more fancy experience
+$ pkg.add software-center
+
+File managers:
+$ pkg.add xfe thunar xfm tuxcmd rox-filer pcmanfm mc lfm krusader gentoo emelfm2 clex nautilus konqueror dolphin
 
 $ if (laptop)
 $ {

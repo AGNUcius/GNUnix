@@ -47,30 +47,30 @@
 
 
 ;; ;; Bookmarks
-;; (define-key global-map [(shift f2)]
-;;   (lambda () (interactive) (bookmark-delete (bookmark-make-name))))
-;; (define-key global-map [(control f2)]
-;;   (lambda () (interactive) (bookmark-set (bookmark-make-name))))
-;; (define-key global-map [(f2)] 'bookmark-get-next)
-;; (define-key global-map [(control shift f2)] 'list-bookmarks)
+(define-key global-map [(shift f2)]
+  (lambda () (interactive) (bookmark-delete (bookmark-make-name))))
+(define-key global-map [(control f2)]
+  (lambda () (interactive) (bookmark-set (bookmark-make-name))))
+(define-key global-map [(f2)] 'bookmark-get-next)
+(define-key global-map [(control shift f2)] 'list-bookmarks)
 
-;; (defun bookmark-make-name() ;todo:  this doesn't always work when deleting, because if the file has been edited, the name and location may be out of synch.  try using 'bookmark-current-bookmark
-;;   "create bookmark name based on file/line"
-;;   (interactive)
-;;   (concat (bookmark-buffer-file-name) ": "(what-line)))
+(defun bookmark-make-name() ;todo:  this doesn't always work when deleting, because if the file has been edited, the name and location may be out of synch.  try using 'bookmark-current-bookmark
+  "create bookmark name based on file/line"
+  (interactive)
+  (concat (bookmark-buffer-file-name) ": "(what-line)))
 
-;; (defvar bookmark-name-next 0
-;;   "this is the zero-based integer representing the 'next' bookmark")
+(defvar bookmark-name-next 0
+  "this is the zero-based integer representing the 'next' bookmark")
 
-;; (defun bookmark-get-next()
-;;   "Get the next bookmark as we traverse them all.
-;; Jump to the first when we reach the end."
-;;   (interactive)
-;;   (if (< bookmark-name-next (- (safe-length (bookmark-all-names)) 1))
-;; 	  (setq bookmark-name-next (+ 1 bookmark-name-next))
-;; 	(setq bookmark-name-next 0))
-;;   (bookmark-jump
-;;    (nth bookmark-name-next (bookmark-all-names))))
+(defun bookmark-get-next()
+  "Get the next bookmark as we traverse them all.
+Jump to the first when we reach the end."
+  (interactive)
+  (if (< bookmark-name-next (- (safe-length (bookmark-all-names)) 1))
+	  (setq bookmark-name-next (+ 1 bookmark-name-next))
+	(setq bookmark-name-next 0))
+  (bookmark-jump
+   (nth bookmark-name-next (bookmark-all-names))))
 
 (provide 'w32-dev)
 ;;; w32-dev.el ends here

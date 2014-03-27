@@ -6,11 +6,11 @@ alias pkg.source apt-get source $*
 alias pkg.search apt-cache search $*
 alias pkg.list.installed dpkg -l $*
 alias pkg.list.available dpkg -l \* $*
-alias pkg.install xterm -e sudo apt-get install  $*
+alias pkg.install xterm -e sudo apt-get install --no-install-recommends $*
 alias pkg.info apt-cache show $*
 alias pkg.files dpkg -L $*
-alias pkg.del xterm -e sudo apt-get --purge remove $*
+alias pkg.del xterm -e "sudo apt-get --purge remove $*; sudo apt-get autoremove"
 alias pkg.cleanup-new man deborphan
-alias pkg.clean xterm -e sudo apt-get clean
+alias pkg.clean xterm -e "sudo apt-get clean; sudo apt-get autoremove"
 alias pkg.add xterm -e sudo apt-get install  $*
 alias mail.sync offlineimap $*
