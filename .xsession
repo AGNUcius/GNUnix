@@ -1,6 +1,6 @@
 setxkbmap -option ctrl:nocaps
 xsetroot -solid gray25
-xscreensaver -no-splash&
+#xscreensaver -no-splash&
 
 # this is harmless if the VGA port is not in use
 # xrandr --output VGA1 --mode 1024x768

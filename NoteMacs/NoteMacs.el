@@ -469,10 +469,10 @@
 ;;; Customized variables
 ;;  press f1 v RET  while over any variable name
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
  '(Info-scroll-prefer-subnodes nil)
  '(ange-ftp-dumb-unix-host-regexp "netbsd\\|freeshell")
  '(ange-ftp-generate-anonymous-password "none@aol.com")
@@ -489,6 +489,8 @@
  '(bookmark-bmenu-toggle-filenames nil)
  '(bookmark-sort-flag nil)
  '(browse-kill-ring-quit-action (quote kill-and-delete-window))
+ '(browse-url-browser-function (quote browse-url-generic))
+ '(browse-url-generic-program "chromium-browser")
  '(c-default-style "user")
  '(c-echo-syntactic-information-p t)
  '(c-mode-common-hook (quote (hs-minor-mode)))
@@ -499,7 +501,7 @@
  '(confirm-kill-emacs (quote yes-or-no-p))
  '(custom-file "~/NoteMacs/NoteMacs.el")
  '(delete-selection-mode t nil (delsel))
- '(diary-file "~/doc/.txt/diary")
+ '(diary-file "~/doc/.txt/-diary")
  '(diary-hook (quote (appt-make-list)))
  '(dired-at-point-require-prefix t)
  '(dired-omit-files "^\\.\\|^#")
@@ -517,7 +519,7 @@
  '(eol-mnemonic-mac ":")
  '(eol-mnemonic-undecided "?")
  '(eol-mnemonic-unix "/")
- '(fill-column 54)
+ '(fill-column 50)
  '(garbage-collection-messages t)
  '(gdb-show-main t)
  '(generic-define-unix-modes t)
@@ -643,14 +645,17 @@
 
 ;;see `list-colors-display'
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:foreground "#000" :background "gray35" :height 180 :weight bold))))
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(default ((t (:foreground "gray0" :background "gray35" :height 180 :weight bold))))
+; '(default ((t (:foreground "gray0" :background "sky blue" :height 180 :weight bold))))
  '(cursor ((t (:background "green"))))
- '(font-lock-comment-face ((t (:foreground "gray25"))))
+; '(font-lock-comment-face ((t (:foreground "gray25"))))
+ '(font-lock-comment-face ((t (:foreground "#000040"))))
  '(region ((t (:inverse-video t))))
+; '(trailing-whitespace ((t (:background "yellow")))))
  '(trailing-whitespace ((t (:background "gray45")))))
 
 

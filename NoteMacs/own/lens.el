@@ -39,7 +39,6 @@
 
 ;; Now create a .lens file such as:
 
-
 ;;  Main entry points are `lens', `lens-mode', `lens-make-page'
 ;;  `lens-dired-make-marked-pages' and `lens-clean'
 
@@ -87,7 +86,6 @@
 ;; Implicit URLs: `lens-implicit-HTTP'
 ;; Explicit URLs: [file|https?|ftp]://
 
-
 ;;; Version:
 ;; .01 new
 ;; .02 cleanup
@@ -113,7 +111,6 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
 ;; The following effect only `font-lock'
 ;; KLUDGE: see `lens-build-mapping' for HTML regexps
-
 (defconst lens-quoted-local-M$-path
   "\"\\([a-zA-Z]:\\\\.+?\\)\""
   "Quoted path on local hard drive")
@@ -132,11 +129,15 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
 (defconst lens-explicit-URL
   "\\([a-zA-Z0-9]\\)+://[^ \t\n]*"
-  "Specify protocol to include chars banned from implicit-HTTP.")
+  "This is to include chars banned from implicit-HTTP.")
+
+(defconst lens-email-link
+  "\\([a-zA-Z0-9\.]\\)+@[^ \t\n]*"
+  "email addrs")
 
 (defconst lens-implicit-HTTP
   "\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|am\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|no\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n]*"
-;;maybe use `regexp-opt' here?
+  ;;maybe use `regexp-opt' here?
   "Characters ])}>:,; \\t\\\n end the implicit HTTP URL.")
 
 
@@ -180,20 +181,20 @@ All terms less than this match only at the beginning of words (using `\\b')")
 			 (lens-shortest-inner file)
 			 (concat
 			  "<a href=\"" file ".htm"
-;; 			  (if (file-name-extension file)
-;; 				  nil
-;; 				".htm")
-				   "\">\\&</a>"))
-                 lens-mapping))))
+			  ;; 			  (if (file-name-extension file)
+			  ;; 				  nil
+			  ;; 				".htm")
+			  "\">\\&</a>"))
+			lens-mapping))))
 
   (dolist
 	  (term
 	   '(
 		 ;;The first entry here has LOWEST priority.
 		 ;;must appear at BOL
-;;   		 ("^.[^ \n\t]+?:" "<span class=\"type\">\\&" "</span>")
+		 ;;   		 ("^.[^ \n\t]+?:" "<span class=\"type\">\\&" "</span>")
 
-;;  		 ("^.*?:" "<span class=\"h4\">\\&" "</span>");anything followed by a : is a title?
+		 ;;  		 ("^.*?:" "<span class=\"h4\">\\&" "</span>");anything followed by a : is a title?
 
  		 ;;see `lens-*nix-path'
 
@@ -211,10 +212,10 @@ All terms less than this match only at the beginning of words (using `\\b')")
 		 ;;("^[ \t]*\\([0-9]\\|[A-Z]\\|[a-z]\\)+\\(\\.\\|:\\)$" "<span class=\"bullet\">\\&</span>")
 
  		 ("^[ \t]*\\(:\\|\\*\\|\\+\\|\\.\\)" "<span class=\"bullet\">\\&</span>")
-;; 		 ("^[ \t]*:" "<span class=\"indent\">\\&</span>")
+		 ;;("^[ \t]*:" "<span class=\"indent\">\\&</span>")
 
  		 ("^::" "<span class=\"cmnt\">\\&" "</span>") ;;Batch-file comments
-;;  		 ("^REM" "<span class=\"cmnt\">\\&" "</span>") ;;Batch-file comments
+		 ;;  		 ("^REM" "<span class=\"cmnt\">\\&" "</span>") ;;Batch-file comments
 
  		 ("(\\|{\\|\\[" "<small>\\&")
  		 (")\\|\\}\\|]" "\\&</small>")
@@ -225,9 +226,9 @@ All terms less than this match only at the beginning of words (using `\\b')")
 		 ;;This is not correct.  We should emit to align at column mod(4)
 		 ;;Wikipedia.org/wiki/Tab_key#Tabs_in_HTML
 		 ("\t" "&nbsp;&nbsp;&nbsp;&nbsp;") ;;TAB
-;; 		 ("\t" "\t") ;;doesn't align
-;; 		 ("\t" "&#09;") ;;same as \t
-;; 		 ("\t" "&#11;") ;;disallowed in SGML (HTML) and XML 1.0
+		 ;; 		 ("\t" "\t") ;;doesn't align
+		 ;; 		 ("\t" "&#09;") ;;same as \t
+		 ;; 		 ("\t" "&#11;") ;;disallowed in SGML (HTML) and XML 1.0
 
 		 ("  " "&nbsp;&nbsp;")
 		 ("^ " "&nbsp;")
@@ -242,7 +243,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 		 ("\"\\([a-zA-Z]:\\\\.+?\\)\""
 		  "<a class=\"ext\" href=\"file:///\\1\">\\&</a>")
 
-;; 		 ;;see `lens-local-M$-path'
+		 ;;see `lens-local-M$-path'
 		 ("[a-zA-Z]:\\\\[^]):,;? \t\n]+"
 		  "<a class=\"ext\" href=\"file:///\\&\">\\&</a>")
 
@@ -258,6 +259,12 @@ All terms less than this match only at the beginning of words (using `\\b')")
 		 ;;see `lens-explicit-URL'
 		 ("\\([a-zA-Z0-9]\\)+://[^ \t\n]*"
 		  "<a class=\"ext\" href=\"\\&\">\\&</a>")
+
+		 ;;TODO: encode & to &amp;
+		 ;;see `lens-email-link'
+		 ("\\([a-zA-Z0-9\.]\\)+@[^ \t\n]*"
+		  "<a class=\"eml\" href=\"mailto:\\&\">\\&</a>")
+
 
 		 ;;see `lens-implicit-HTTP'
 		 ("\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n]*"
@@ -285,7 +292,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
   (interactive)
   (let ((lens-started (current-time)))
     (lens-gen-missing-image-files)
-    (shell-command "ls -1 > pages") ;;BUGBUG
+    (shell-command "ls -1 > -pages") ;;BUGBUG
     (lens-build-mapping)
 
     (if (not (file-exists-p lens-output-dir))
@@ -340,7 +347,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
           (let ((found nil))
             (save-excursion)
             (set-buffer (find-file-literally new-file))
-;;			(setq buffer-file-coding-system default-buffer-file-coding-system)
+			;;			(setq buffer-file-coding-system default-buffer-file-coding-system)
             (setq case-fold-search t)
             (goto-char (point-min))
             (let ((term-count (length lens-mapping)))
@@ -357,9 +364,9 @@ All terms less than this match only at the beginning of words (using `\\b')")
                       (if (looking-at regexp)
                           (progn ;;found the term
 
-;;if `cur-term' represents a file (not just a regexp)
-;;  then add `file' to `cur-term's backlink list
-;;after `lens-make-pages' is complete, iterate through all files again, appending all found backlinks
+							;;if `cur-term' represents a file (not just a regexp)
+							;;  then add `file' to `cur-term's backlink list
+							;;after `lens-make-pages' is complete, iterate through all files again, appending all found backlinks
 
 							;;if this map has a closing tag
 							(if closing
@@ -379,7 +386,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
                             (setq cur-term term-count) ;;break out of while
                             (setq found t)
-;;`re-search-forward' already set the point to the end of the replacement text
+							;;`re-search-forward' already set the point to the end of the replacement text
                             )
                         (setq cur-term (+ 1 cur-term))) ;;didn't find a match, so try the next term at the same point
                       ))
@@ -388,7 +395,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
                       (forward-char))))
 
 
-;;header
+			  ;;header
               (goto-char (point-min))
               (insert
 			   "<?xml version=\"1.0\" encoding=\"" lens-encoding "\"?>\n"
@@ -409,36 +416,37 @@ All terms less than this match only at the beginning of words (using `\\b')")
                "<body>\n"
 			   )
 
-;;top menu
+			  ;;top menu
               (insert
 			   (concat
 				"<p class='header'>\n"
-				" <a href=\"home.htm\">Home</a> |"
-				" <a href=\"faq.htm\">FAQ</a> |"
-				" <a href=\"diary.htm\">Diary</a> |"
-				" <a href=\"projects.htm\">Projects</a> |"
-				" <a href=\"todo.htm\">Todo</a> |"
-				" <a href=\"pages.htm\">Pages</a> |"
+				" <a href=\"-home.htm\">Home</a> |"
+				;; " <a href=\"-faq.htm\">FAQ</a> |"
+				" <a href=\"-diary.htm\">Diary</a> |"
+				" <a href=\"-projects.htm\">Projects</a> |"
+				" <a href=\"-todo.htm\">Todo</a> |"
+				" <a href=\"-pages.htm\">Pages</a> |"
+				" <a href=\"-about.htm\">About</a> |"
 				"</p>\n"
 				))
 
 			  (insert "<p class='main'>")
 
-;;images
+			  ;;images
               (mapcar
                (lambda (type)
                  (if (and (file-exists-p lens-img-dir)
-					 (file-exists-p
-					  (concat lens-img-dir "/" file "." type)))
+						  (file-exists-p
+						   (concat lens-img-dir "/" file "." type)))
                      (insert (concat "<img src=\"" lens-img-dir "/" file "." type "\" alt=\"\"/>"))))
                '("jpg" "gif" "png"))
 
-;;footer
+			  ;;footer
               (goto-char (point-max))
               (insert
 			   "</p>\n"
-				"<p class='footer'>\n"
-				" Page generated from <a href=\".txt/" file "\">" file "</a> by <a href=\".src/lens.el\">lens.el</a>."
+			   "<p class='footer'>\n"
+			   " Page generated from <a href=\".txt/" file "\">" file "</a> by <a href=\".src/lens.el\">lens.el</a>."
 			   "</p>\n"
 
 			   "</body>\n"
@@ -478,7 +486,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 			(lens-shortest-inner term)
 			"\\|" lens-font-lock)))) ;;fill with filenames
 
-;;encase and terminate
+  ;;encase and terminate
   (setq lens-font-lock
         (concat "\\(\\)\\("
 				lens-quoted-local-M$-path "\\|"
@@ -486,6 +494,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 				lens-quoted-UNC-path "\\|"
 				lens-UNC-path "\\|"
 				lens-explicit-URL "\\|"
+				lens-email-link "\\|"
 				lens-implicit-HTTP "\\|"
 				lens-font-lock "zzzzzzzz\\)")))
 ;; what a mess.
@@ -509,7 +518,6 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
 
 
-
 (defun lens-mode-rebuild-mode ()
   (interactive)
   (lens-build-font-lock)
@@ -526,13 +534,16 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
 (define-key lens-C-c-map [(control c)]
   (lambda () (interactive) "Compile this file."
+	(save-buffer)
     (lens-make-page buffer-file-name)))
 
 (define-key lens-C-c-map [(control p)]
   (lambda () (interactive)
 	"Browse generated HTML."
+	(save-buffer)
+    (lens-make-page buffer-file-name)
     (browse-url-of-file
-;;(message
+	 ;;(message
      (file-truename
       (concat
 	   lens-output-dir "/"

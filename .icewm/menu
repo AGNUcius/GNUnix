@@ -185,13 +185,13 @@ menu Programs Programs {
   prog trackballs trackballs trackballs
   prog triplane triplane triplane
   prog trophy trophy trophy
-  prog tumiki-fighters tumiki-fighters tumiki-fighters
+  prog tumiki-fighters tumiki-fighters tumiki-fighters -fullscreen
   prog val-and-rick val-and-rick val-and-rick
   prog vectoroids vectoroids vectoroids
   prog vor vor vor
   prog widelands widelands widelands
   prog wing wing wing
-  prog wordwarvi wordwarvi ~/games/wordwarvi/wordwarvi --fullscreen
+  prog wordwarvi wordwarvi xterm -e "cd ~/games/wordwarvi; ./wordwarvi --fullscreen"
   prog xball  xball  xball
   prog xblast xblast xblast
   prog xbubble xbubble xbubble
@@ -215,7 +215,6 @@ menu Programs Programs {
 
 menu System system {
  menu Power power {
- # really want to use  xscreensaver-command -lock
   prog Lock xtrlock xtrlock
   prog Suspend suspend xterm -e sudo pm-suspend
   prog Restart restart xterm -e sudo shutdown -r now
@@ -232,10 +231,9 @@ menu System system {
  }
 
  menu Video video {
-  prog "Fix Philips TV for Acer"  xrandr xrandr --output VGA1 --mode 1024x768
+  prog "Fix Dell square for Acer" xrandr xrandr --output VGA1 --mode 1024x768
+  prog "Fix Philips TV for Acer" xrandr xrandr --output VGA1 --mode 1024x768
   prog "Fix Acer Laptop Screen" xrandr xrandr --output LVDS1 --mode 1024x600
-  prog "Fix Work Screen for lenovo" xrandr xrandr --output VGA1 --mode 1440x900 --output eDP1 --off
-  prog "Fix lenovo Laptop Screen" xrandr xrandr --output eDP1 --mode 1360x768 --output VGA1 --off
  prog "Disable Screen Blanking" xset xterm -e "xset s noblank; xset -dpms; xset s off"
  }
 

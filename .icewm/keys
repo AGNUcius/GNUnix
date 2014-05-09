@@ -13,7 +13,7 @@ key "Ctrl+Shift+Esc" xterm -maximized -e htop
 #key "Ctrl+Shift+`" xterm -maximized -e glances
 key "Super+p" xterm -e sudo powertop
 key "Super+e" xfe
-key "Super+l" xscreensaver-command -lock
+key "Super+l" xtrlock -b
 key "Super+b" wmctrl -r :ACTIVE: -b toggle,below
 key "Super+t" wmctrl -r :ACTIVE: -b toggle,above
 key "Super+v" xterm -e alsamixer
