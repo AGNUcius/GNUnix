@@ -1,9 +1,0 @@
-#! /bin/bash
-
-if [ $# -ne 5 ]
-then
- echo Usage: $0 MACHINE SHARE DOMAIN USER PASS
-else
- echo sudo mkdir /mnt/$1/$2
- echo sudo mount -t cifs //$1/$2 /mnt/$1/$2 -o domain=$3,user=$4,pass=$5
-fi

@@ -10,11 +10,11 @@ $ git clone git://github.com/AGNUcius/GNUnix.git
 $ mv GNUnix/* .
 $ mv GNUnix/.* .
 
-Lockable desktop with task manager and sound
-$ pkg.add xinit xterm icewm wdm wmctrl xscreensaver big-cursor htop alsa-utils
+Lockable desktop with task manager
+$ pkg.add xinit xterm icewm wdm wmctrl xtlock big-cursor htop wmctrl
 
-Web Browser
-$ pkg.add chromium-browser flashplugin-installer
+Web Browser and sound
+$ pkg.add chromium-browser flashplugin-installer alsa-utils
 
 Developer tools
 $ pkg.add emacs p7zip-full

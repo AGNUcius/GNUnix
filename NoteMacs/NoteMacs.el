@@ -39,6 +39,47 @@
 (add-to-list 'load-path "~/NoteMacs/site/magit")
 (autoload 'magit-status "magit" nil t)
 
+(add-to-list 'load-path "~/NoteMacs/site/mu4e")
+(autoload 'mu4e "mu4e" nil t)
+
+;; $ mu index --maildir=~/Maildir
+;; $ mu index --rebuild
+;; $ mu index
+
+(setq mu4e-maildir "~/Maildir")
+(setq mu4e-drafts-folder "/[Gmail].Drafts")
+(setq mu4e-sent-folder   "/[Gmail].Sent Mail")
+(setq mu4e-trash-folder  "/[Gmail].Trash")
+
+(setq mu4e-maildir-shortcuts
+      '( ("/INBOX"               . ?i)
+         ("/[Gmail].Sent Mail"   . ?s)
+         ("/[Gmail].Trash"       . ?t)
+         ("/[Gmail].All Mail"    . ?a)))
+
+;; ;; allow for updating mail using 'U' in the main view:
+;; (setq mu4e-get-mail-command "offlineimap")
+
+;; (setq
+;;  user-mail-address "renws1990@gmail.com"
+;;  user-full-name  "任文山 (Ren Wenshan)"
+;;  message-signature
+;;  (concat
+;;   "任文山 (Ren Wenshan)\n"
+;;   "Email: renws1990@gmail.com\n"
+;;   "Blog: wenshanren.org\n"
+;;   "Douban: www.douban.com/people/renws"
+;;   "\n"))
+
+;; ;; alternatively, for emacs-24 you can use:
+;; (setq message-send-mail-function 'smtpmail-send-it
+;;     smtpmail-stream-type 'starttls
+;;     smtpmail-default-smtp-server "smtp.gmail.com"
+;;     smtpmail-smtp-server "smtp.gmail.com"
+;;     smtpmail-smtp-service 587)
+
+
+
 ;; android dev
 (defun android-dev () (interactive)
   (setq eshell-path-env (concat eshell-path-env ":/home/user/work/android/adt/sdk/tools:/home/user/work/android/adt/sdk/platform-tools")))
@@ -61,8 +102,8 @@
 ;; $ cp ~/keys-binary.plist $FILE
 
 
-(autoload 'lens-mode "lens.el" "" t)
-(autoload 'lens "lens.el" "" t)
+(autoload 'lens-mode "lens" "" t)
+(autoload 'lens "lens" "" t)
 (autoload 'sic-connect "sic" "simple IMAP client" t)
 (autoload 'ewb "ewb" "Emacs Web Browser" t)
 (autoload 'hands "hands" "image preview" t)
@@ -655,7 +696,6 @@
 ; '(font-lock-comment-face ((t (:foreground "gray25"))))
  '(font-lock-comment-face ((t (:foreground "#000040"))))
  '(region ((t (:inverse-video t))))
-; '(trailing-whitespace ((t (:background "yellow")))))
  '(trailing-whitespace ((t (:background "gray45")))))
 
 

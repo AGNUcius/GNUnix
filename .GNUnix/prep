@@ -2,8 +2,8 @@
 
 Download the UBUNTU mini.iso
 
-$ export name=trusty
-$ export plat=amd64
+$ name=trusty
+$ plat=amd64
 $ wget archive.ubuntu.com/ubuntu/dists/${name}/main/installer-${plat}/current/images/netboot/mini.iso --output-document=UBUNTU-${name}-${plat}-mini.iso
 
 Burn to CD or use UNetBootin.net to write to a USB key.

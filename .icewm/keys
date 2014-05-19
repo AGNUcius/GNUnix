@@ -14,8 +14,13 @@ key "Ctrl+Shift+Esc" xterm -maximized -e htop
 key "Super+p" xterm -e sudo powertop
 key "Super+e" xfe
 key "Super+l" xtrlock -b
+
+#Mark window as "always on bottom"
 key "Super+b" wmctrl -r :ACTIVE: -b toggle,below
+
+#Mark window as "always on top"
 key "Super+t" wmctrl -r :ACTIVE: -b toggle,above
+
 key "Super+v" xterm -e alsamixer
 key "Super+w" xterm -e wicd-curses
 key "Super+z" xterm

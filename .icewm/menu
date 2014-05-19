@@ -84,6 +84,7 @@ menu Programs Programs {
  }
 
  menu Dev dev {
+  prog Eclipse eclipse eclipse
   prog virtualbox virtualbox virtualbox
   prog numptyphysics numptyphysics numptyphysics
   prog Basic256 basic256 basic256
@@ -97,12 +98,23 @@ menu Programs Programs {
  }
 
  menu Network network {
-  prog "Connect to Remote Desktop" rdesktop rdesktop
+  menu "Browse Web" chromium-browser {
+   prog Chrome chromium-browser chromium-browser
+   prog FireFox firefox firefox
+  }
+  menu "Remote Desktop" rdesktop {
+   prog "Connect to RDP with rdesktop" rdesktop rdesktop
+   prog "Connect to VNC with xvnc4viewer" xvnc4viewer xvnc4viewer
+   prog "Connect to VNC with xtightvncviewer" xtightvncviewer xtightvncviewer
+   prog "Start VNC Server" x11vnc xterm -e x11vnc -xkb -forever -usepw -ncache 10
+  }
   prog "Manage Printers" cups chromium-browser http://localhost:631
-  prog "VNC Server" x11vnc xterm -e x11vnc -xkb -forever -usepw -ncache 10
   prog qbittorrent qbittorrent qbittorrent
-  prog skype skype skype
-  prog pidgin pidgin pidgin
+  menu Chat pidgin {
+   prog skype skype skype
+   prog pidgin pidgin pidgin
+  }
+  prog wireshark wireshark wireshark
  }
 
  menu Games games {
@@ -217,9 +229,10 @@ menu System system {
  menu Power power {
   prog Lock xtrlock xtrlock
   prog Suspend suspend xterm -e sudo pm-suspend
-  prog Restart restart xterm -e sudo shutdown -r now
+  prog Reboot reboot xterm -e sudo shutdown -r now
   prog Shutdown shutdown xterm -e sudo shutdown -P now
-  prog Settings powertop xterm -maximized -e sudo powertop
+  prog Refresh refresh killall -SIGHUP icewm
+  prog Powertop powertop xterm -maximized -e sudo powertop
  }
 
  menu Programs programs {
@@ -234,7 +247,10 @@ menu System system {
   prog "Fix Dell square for Acer" xrandr xrandr --output VGA1 --mode 1024x768
   prog "Fix Philips TV for Acer" xrandr xrandr --output VGA1 --mode 1024x768
   prog "Fix Acer Laptop Screen" xrandr xrandr --output LVDS1 --mode 1024x600
- prog "Disable Screen Blanking" xset xterm -e "xset s noblank; xset -dpms; xset s off"
+  prog "Fix Work Screen for lenovo" xrandr xrandr --output VGA1 --mode 1440x900 --output eDP1 --off
+  prog "Fix lenovo Laptop Screen" xrandr xrandr --output eDP1 --mode 1360x768 --output VGA1 --off
+  prog "Disable Screen Blanking" xset xterm -e "xset s noblank; xset -dpms; xset s off"
+  prog "ReEnable Screen Blanking" xset xterm -e "xset s blank; xset +dpms; xset s on"
  }
 
  prog "Check Battery" yacpi xterm -e yacpi
