@@ -57,12 +57,14 @@ menu Programs Programs {
    prog qcam qcam qcam
    prog gtkam gtkam gtkam
   }
-  prog Gimp gimp gimp
-  prog Inkscape inkscape inkscape
   menu Video Video {
    prog Kino kino kino
+   prog OpenShot openshot openshot
   }
   menu Draw Draw {
+   prog XPaint xpaint xpaint
+   prog GPaint gpaint gpaint
+   prog Alchemy alchemy alchemy
    prog Gimp gimp gimp
    prog Inkscape inkscape inkscape
    prog grafx2 grafx2 grafx2

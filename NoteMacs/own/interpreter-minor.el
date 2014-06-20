@@ -42,9 +42,9 @@
 	   (setq font-lock-defaults
 ;;; Use `list-faces-display' to browse the available faces
 ;; 			 '('((,(eval regexp) (0 eshell-ls-executable-face font-lock-function-name-face))) t t nil))
-;;			 '('((,(eval regexp) (0 font-lock-keyword-face))) t t nil))
+			 '('((,(eval regexp) (0 font-lock-keyword-face))) t t nil))
 ;;			 '('((,(eval regexp) (0 font-lock-string-face))) t t nil))
- 			 '('((,(eval regexp) (0 font-lock-comment-face))) t t nil))
+;; 			 '('((,(eval regexp) (0 font-lock-comment-face))) t t nil))
 ;; 			 '('((,(eval regexp) (0 font-lock-function-name-face))) t t nil))
 ;;			 '('((,(eval regexp) (0 font-lock-preprocessor-face))) t t nil))
 ;; 			 '('((,(eval regexp) (0 mode-line-highlight))) t t nil))

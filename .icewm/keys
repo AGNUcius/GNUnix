@@ -21,12 +21,13 @@ key "Super+b" wmctrl -r :ACTIVE: -b toggle,below
 #Mark window as "always on top"
 key "Super+t" wmctrl -r :ACTIVE: -b toggle,above
 
+key "Super+p" xterm -e sudo pm-suspend
 key "Super+v" xterm -e alsamixer
 key "Super+w" xterm -e wicd-curses
 key "Super+z" xterm
 
-key "XF86Sleep" xterm -e sudo pm-suspend
-key "XF86PowerOff" xterm -e sudo pm-suspend
+# key "XF86Sleep" xterm -e sudo pm-suspend
+# key "XF86PowerOff" xterm -e sudo pm-suspend
 
 key "XF86AudioRaiseVolume" amixer set Master Playback 1+
 key "XF86AudioLowerVolume" amixer set Master Playback 1-
