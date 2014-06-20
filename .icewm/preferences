@@ -15,7 +15,7 @@ ColorActiveTitleBar="rgb:0a/24/6A"
 # IconPath="/usr/share/icons/wm-icons/16x16-general"
 
 # System Menu: Restore, Move, Size, miNimize, maXimize, Close, Fullscreen
-WinMenuItems="rmsnxcf"
+WinMenuItems="rmsnxcft"
 
 #  Treat Super/Win modifier as Ctrl+Alt
 ModSuperIsCtrlAlt=0
@@ -60,8 +60,21 @@ ShowWindowList=0
 ShowLogoutMenu=0
 ShowLogoutSubMenu=0
 TaskBarShowWindowListMenu=0
-ShowWorkspaceStatus=0
-TaskBarShowWorkspaces=0
+
+WorkspaceNames="work", "play"
+
+TaskBarWorkspacesLeft=0
+
+#  Show a mini desktop preview on each workspace button
+PagerShowPreview=1
+
+#  Show name of current workspace while switching
+ShowWorkspaceStatus=1
+
+#  Show workspace switching buttons on task bar
+TaskBarShowWorkspaces=1
+
+#  Show transient (dialogs, ...) windows on task bar
 TaskBarShowTransientWindows=0
 
 
@@ -103,10 +116,10 @@ CPUStatusCommand="xterm -name htop -title htop -maximized -e htop "
 
 
 #  Surround the tray with plastic border
-TrayDrawBevel=1
+TrayDrawBevel=0
 
 #  Background of text entry fields (e.g. the addressbar)
-ColorInput="rgb:ff/ff/00"
+ColorInput="rgb:00/ff/00"
 
 #  Textcolor of text entry fields (e.g. the addressbar)
 ColorInputText="rgb:00/00/00"
@@ -159,7 +172,7 @@ KeySysMenu=""
 KeySysWindowList=""
 KeySysWinListMenu=""
 
-KeySysWorkspacePrev=""
+KeySysWorkspacePrev="Super+n"
 KeySysWorkspaceNext=""
 KeySysWorkspaceLast=""
 KeySysWorkspacePrevTakeWin=""

@@ -65,6 +65,7 @@ menu Programs Programs {
    prog XPaint xpaint xpaint
    prog GPaint gpaint gpaint
    prog Alchemy alchemy alchemy
+   prog aseprite aseprite aseprite -resolution 1024x768
    prog Gimp gimp gimp
    prog Inkscape inkscape inkscape
    prog grafx2 grafx2 grafx2

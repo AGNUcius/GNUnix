@@ -11,18 +11,18 @@ $ mv GNUnix/* .
 $ mv GNUnix/.* .
 
 Lockable desktop with task manager
-$ pkg.add xinit xterm icewm wdm wmctrl xtlock big-cursor htop wmctrl
-
-Web Browser and sound
-$ pkg.add chromium-browser flashplugin-installer alsa-utils
+$ pkg.add xinit xterm icewm wdm wmctrl xtrlock big-cursor htop
 
 Developer tools
 $ pkg.add emacs p7zip-full
 
-Tools for a more fancy experience
+Web browser and sound
+$ pkg.add chromium-browser flashplugin-installer alsa-utils
+
+Fancy package manager:
 $ pkg.add software-center
 
-File managers:
+Various file managers:
 $ pkg.add xfe thunar xfm tuxcmd rox-filer pcmanfm mc lfm krusader gentoo emelfm2 clex nautilus konqueror dolphin
 
 $ if (laptop)
