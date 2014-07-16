@@ -46,13 +46,18 @@
 ;;(define-key global-map [(f4)] 'tags-loop-continue) ;M-,
 
 
+;; bm-bookmark
+(global-set-key (kbd "<C-f2>") 'bm-toggle)
+(global-set-key (kbd "<f2>")   'bm-next)
+(global-set-key (kbd "<S-f2>") 'bm-previous)
+
 ;; ;; Bookmarks
-(define-key global-map [(shift f2)]
-  (lambda () (interactive) (bookmark-delete (bookmark-make-name))))
-(define-key global-map [(control f2)]
-  (lambda () (interactive) (bookmark-set (bookmark-make-name))))
-(define-key global-map [(f2)] 'bookmark-get-next)
-(define-key global-map [(control shift f2)] 'list-bookmarks)
+;; (define-key global-map [(shift f2)]
+;;   (lambda () (interactive) (bookmark-delete (bookmark-make-name))))
+;; (define-key global-map [(control f2)]
+;;   (lambda () (interactive) (bookmark-set (bookmark-make-name))))
+;; (define-key global-map [(f2)] 'bookmark-get-next)
+;; (define-key global-map [(control shift f2)] 'list-bookmarks)
 
 (defun bookmark-make-name() ;todo:  this doesn't always work when deleting, because if the file has been edited, the name and location may be out of synch.  try using 'bookmark-current-bookmark
   "create bookmark name based on file/line"

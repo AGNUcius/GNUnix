@@ -2,9 +2,13 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-PATH=$PATH:$HOME/bin
-BASHRC=YES
 
+export PATH="$PATH:$HOME/bin"
+export OOC_LIBS="$HOME/ooc"
+export PATH="$PATH:$OOC_LIBS/bin"
+export PATH="$PATH:$OOC_LIBS/sam"
+
+BASHRC=YES
 
 
 # source /usr/share/git-core/contrib/completion/git-prompt.sh
@@ -128,11 +132,3 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-
-# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-export COCOS_CONSOLE_ROOT=/home/user/down/cocos2d-x-3.0/tools/cocos2d-console/bin
-export PATH=$COCOS_CONSOLE_ROOT:$PATH
-
-# Add environment variable ANT_ROOT for cocos2d-x
-export ANT_ROOT=/usr/bin
-export PATH=$ANT_ROOT:$PATH

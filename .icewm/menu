@@ -62,6 +62,7 @@ menu Programs Programs {
    prog OpenShot openshot openshot
   }
   menu Draw Draw {
+   prog AzPainter azpainter azpainter
    prog XPaint xpaint xpaint
    prog GPaint gpaint gpaint
    prog Alchemy alchemy alchemy

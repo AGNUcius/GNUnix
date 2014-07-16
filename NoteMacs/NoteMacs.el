@@ -46,6 +46,14 @@
 ;; $ mu index --rebuild
 ;; $ mu index
 
+
+(when (> emacs-major-version 23)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives
+			   '("melpa" . "http://melpa.milkbox.net/packages/")
+			   'APPEND))
+
 (setq mu4e-maildir "~/Maildir")
 (setq mu4e-drafts-folder "/[Gmail].Drafts")
 (setq mu4e-sent-folder   "/[Gmail].Sent Mail")
@@ -78,7 +86,7 @@
 ;;     smtpmail-smtp-server "smtp.gmail.com"
 ;;     smtpmail-smtp-service 587)
 
-
+(setenv "PATH" (concat (getenv "PATH") ":~/bin"))
 
 ;; android dev
 (defun android-dev () (interactive)
@@ -217,6 +225,7 @@
 ;; from http://www.emacswiki.org/cgi-bin/wiki.pl?EshellFunctions
 (add-hook 'eshell-mode-hook
           (lambda ()
+			(setq eshell-path-env (concat eshell-path-env ":~/bin"))
             (define-key eshell-mode-map "\C-a"
               (lambda ()
                 (interactive)
@@ -510,10 +519,10 @@
 ;;; Customized variables
 ;;  press f1 v RET  while over any variable name
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(Info-scroll-prefer-subnodes nil)
  '(ange-ftp-dumb-unix-host-regexp "netbsd\\|freeshell")
  '(ange-ftp-generate-anonymous-password "none@aol.com")
@@ -527,6 +536,7 @@
  '(blink-cursor-interval 0.333)
  '(blink-matching-paren-dont-ignore-comments t)
  '(blink-matching-paren-on-screen nil)
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(bookmark-bmenu-toggle-filenames nil)
  '(bookmark-sort-flag nil)
  '(browse-kill-ring-quit-action (quote kill-and-delete-window))
@@ -686,18 +696,20 @@
 
 ;;see `list-colors-display'
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-; '(default ((t (:foreground "gray0" :background "gray35" :height 180 :weight bold))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
 ; '(default ((t (:foreground "gray0" :background "sky blue" :height 180 :weight bold))))
- '(default ((t (:foreground "gray0" :background "#DDDDDD" :height 180 :weight bold))))
+; '(default ((t (:foreground "gray0" :background "#DDDDDD" :height 180 :weight bold))))
+ '(default ((t (:foreground "gray0" :background "#595959" :height 180 :weight bold))))
  '(cursor ((t (:background "magenta"))))
- '(font-lock-keyword-face ((t (:foreground "#000070" :background "#D4D4DD"))))
+ '(font-lock-comment-face ((t (:foreground "gray25"))))
+; '(font-lock-keyword-face ((t (:foreground "#000070" :background "#D4D4DD"))))
+ '(font-lock-keyword-face ((t (:foreground "#000059" :background "#595966"))))
  '(region ((t (:inverse-video t))))
-; '(trailing-whitespace ((t (:background "gray45")))))
- '(trailing-whitespace ((t (:background "yellow")))))
+ '(trailing-whitespace ((t (:background "gray45")))))
+; '(trailing-whitespace ((t (:background "yellow")))))
 
 
 

@@ -1,5 +1,5 @@
 alias nil  $*
-alias pkg.update xterm -e "sudo apt-get update; sudo apt-get upgrade"
+alias pkg.update xterm -e sudo apt-get update; xterm -e sudo apt-get upgrade
 alias pkg.search-new man apt-file
 alias pkg.find apt-cache search $*
 alias pkg.source apt-get source $*
@@ -9,8 +9,8 @@ alias pkg.list.available dpkg -l \* $*
 alias pkg.install xterm -e sudo apt-get install --no-install-recommends $*
 alias pkg.info apt-cache show $*
 alias pkg.files dpkg -L $*
-alias pkg.del xterm -e "sudo apt-get --purge remove $*; sudo apt-get autoremove"
+alias pkg.del xterm -e sudo apt-get --purge remove $*; xterm -e sudo apt-get autoremove
 alias pkg.cleanup-new man deborphan
-alias pkg.clean xterm -e "sudo apt-get clean; sudo apt-get autoremove"
-alias pkg.add xterm -e sudo apt-get install  $*
+alias pkg.clean xterm -e sudo apt-get clean; xterm -e sudo apt-get autoremove
+alias pkg.add xterm -e sudo apt-get install $*
 alias mail.sync offlineimap $*
