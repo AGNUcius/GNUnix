@@ -189,6 +189,7 @@ menu Programs Programs {
   prog singularity singularity singularity
   prog slingshot slingshot slingshot
   prog smc smc smc
+  prog smw smw xterm -e "cd ~/games/supermariowar; ./smw"
   prog spacearyarya spacearyarya spacearyarya
   prog spout spout spout
   prog stormbaancoureur stormbaancoureur stormbaancoureur
@@ -248,11 +249,10 @@ menu System system {
  }
 
  menu Video video {
-  prog "Fix Dell square for Acer" xrandr xrandr --output VGA1 --mode 1024x768
-  prog "Fix Philips TV for Acer" xrandr xrandr --output VGA1 --mode 1024x768
-  prog "Fix Acer Laptop Screen" xrandr xrandr --output LVDS1 --mode 1024x600
-  prog "Fix Work Screen for lenovo" xrandr xrandr --output VGA1 --mode 1440x900 --output eDP1 --off
-  prog "Fix lenovo Laptop Screen" xrandr xrandr --output eDP1 --mode 1360x768 --output VGA1 --off
+  prog "Reset Acer Laptop" xrandr xrandr --output LVDS1 --mode 1024x600 --output VGA1 --off
+  prog "1024x768 on VGA1"  xrandr xrandr --output LVDS1 --off --output VGA1 --mode 1024x768
+  prog "1280x1024 on VGA1" xrandr xrandr --output LVDS1 --off --output VGA1 --mode 1280x1024
+separator
   prog "Disable Screen Blanking" xset xterm -e "xset s noblank; xset -dpms; xset s off"
   prog "ReEnable Screen Blanking" xset xterm -e "xset s blank; xset +dpms; xset s on"
  }

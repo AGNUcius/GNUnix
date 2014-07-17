@@ -696,21 +696,17 @@
 
 ;;see `list-colors-display'
 (custom-set-faces
+
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-; '(default ((t (:foreground "gray0" :background "sky blue" :height 180 :weight bold))))
-; '(default ((t (:foreground "gray0" :background "#DDDDDD" :height 180 :weight bold))))
  '(default ((t (:foreground "gray0" :background "#595959" :height 180 :weight bold))))
  '(cursor ((t (:background "magenta"))))
  '(font-lock-comment-face ((t (:foreground "gray25"))))
-; '(font-lock-keyword-face ((t (:foreground "#000070" :background "#D4D4DD"))))
  '(font-lock-keyword-face ((t (:foreground "#000059" :background "#595966"))))
  '(region ((t (:inverse-video t))))
  '(trailing-whitespace ((t (:background "gray45")))))
-; '(trailing-whitespace ((t (:background "yellow")))))
-
 
 
 ;;; Important keys:
