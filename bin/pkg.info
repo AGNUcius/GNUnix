@@ -1,0 +1,2 @@
+# info about this pkg
+dpkg -S $*

@@ -1,0 +1,1 @@
+dism /Get-MountedWimInfo

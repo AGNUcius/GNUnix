@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# man deborphan
+# apt-get autoremove; dpkg --get-selections | grep deinstall | cut -f1 | xargs dpkg --purge; apt-get clean
+
+sudo apt-get clean
+sudo apt-get autoremove

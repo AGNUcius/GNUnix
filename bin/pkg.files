@@ -1,0 +1,2 @@
+# Files in this pkg
+dpkg -L $*

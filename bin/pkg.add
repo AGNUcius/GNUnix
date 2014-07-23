@@ -1,0 +1,2 @@
+# Install by registered NAME:
+sudo apt-get install --no-install-recommends $*

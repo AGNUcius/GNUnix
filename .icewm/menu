@@ -20,6 +20,7 @@
 # hedgewars, gianas return, bontago
 # yo frankie, open ttd, cube trains
 
+prog Midori midori midori
 prog Chrome chromium-browser chromium-browser
 prog FireFox firefox firefox
 separator
@@ -265,7 +266,7 @@ separator
 # separator
 # prog "Make LiveCD" xterm xterm -e
 # separator
- prog RootMacs emacs xterm -e sudo emacs --maximized --eval '(set-background-color "darkgreen")'
+ prog RootMacs emacs xterm -e sudo emacs --maximized --eval '(set-background-color "skyblue")'
 }
 
 # menuprog Gnome folder icewm-menu-gnome1 --list
