@@ -1,0 +1,1 @@
+iscsiadm -m discovery -p 127.0.0.1 -o delete

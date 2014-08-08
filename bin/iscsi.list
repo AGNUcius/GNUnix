@@ -1,0 +1,1 @@
+iscsiadm -m discovery -t st -p 127.0.0.1

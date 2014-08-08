@@ -1,1 +1,1 @@
-apt-get --purge remove
+sudo apt-get --purge remove $*

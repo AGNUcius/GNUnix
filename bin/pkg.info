@@ -1,2 +1,2 @@
 # info about this pkg
-dpkg -S $*
+apt-cache show $*

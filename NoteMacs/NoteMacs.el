@@ -555,6 +555,7 @@
  '(diary-file "~/doc/.txt/-diary")
  '(diary-hook (quote (appt-make-list)))
  '(dired-at-point-require-prefix t)
+ '(dired-listing-switches "-alh")
  '(dired-omit-files "^\\.\\|^#")
  '(dired-recursive-copies (quote always))
  '(dired-recursive-deletes (quote top))
@@ -696,7 +697,6 @@
 
 ;;see `list-colors-display'
 (custom-set-faces
-
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -704,10 +704,9 @@
  '(default ((t (:foreground "gray0" :background "#595959" :height 180 :weight bold))))
  '(cursor ((t (:background "magenta"))))
  '(font-lock-comment-face ((t (:foreground "gray25"))))
- '(font-lock-keyword-face ((t (:foreground "#000059" :background "#595966"))))
+ '(font-lock-keyword-face ((t (:foreground "#000080" :background "#505059"))))
  '(region ((t (:inverse-video t))))
  '(trailing-whitespace ((t (:background "gray45")))))
-
 
 ;;; Important keys:
 

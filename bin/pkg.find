@@ -1,2 +1,2 @@
 # Search all available software:
-apt-cache search $* | grep -i $*
+apt-cache search "$*" | grep -i "$*"
