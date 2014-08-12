@@ -1,0 +1,16 @@
+[user]
+	name = patrick.anderson
+	email = patrick.anderson@rackwareinc.com
+[core]
+	editor = emacs
+	pager =
+[merge]
+	tool = ediff
+[push]
+	default = current
+[alias]
+	lg = log --oneline --abbrev-commit --all --graph --decorate --color
+    graph = log --graph --date-order -C -M '--pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\"' --all --date=rfc
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat --date=rfc
+    undelete = log --graph --oneline --decorate $(git rev-parse $(git fsck --no-reflog | grep "dangling commit" | cut -f 3 -d ' ') --not HEAD)
+	find = grep --ignore-case --line-number -I

@@ -1,0 +1,3 @@
+# Install by registered NAME:
+sudo add-apt-repository $*
+sudo apt-get-update

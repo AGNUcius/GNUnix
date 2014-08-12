@@ -340,7 +340,26 @@
 		  (require 'w32-dev) (message "w32-dev unavailable"))
 	  (if (file-exists-p "~/NoteMacs/own/edebug-control.el")
 		  (require 'edebug-control) (message "edebug-control unavailable"))
+
+	  (add-hook 'w3m-mode-hook
+				(lambda ()
+				  (define-key w3m-mode-map [(u)] 'scroll-down)
+				  (define-key w3m-mode-map [(U)] 'w3m-view-parent-page)
+				  (define-key w3m-mode-map [(backspace)] 'w3m-view-previous-page)
+				  (define-key w3m-mode-map [(meta left)] 'w3m-view-previous-page)
+				  (define-key w3m-mode-map [(meta n)] nil) ;unmask my global key
+				  (define-key w3m-mode-map [(n)] 'next-line)
+				  (define-key w3m-mode-map [(p)] 'previous-line)
+				  (define-key w3m-mode-map [(control t)] 'w3m-goto-url-new-session)
+				  (define-key w3m-mode-map [(control w)] 'w3m-delete-buffer)
+				  (define-key w3m-mode-map [(control o)] 'w3m-goto-url)
+				  (define-key w3m-mode-map [(o)] 'w3m-goto-url)
+;				  (define-key w3m-mode-map [(control l)] 'w3m-goto-url)
+				  (define-key w3m-mode-map [(control k)] 'w3m-search)
+				  (define-key w3m-mode-map [(g)] 'w3m-reload-this-page)
+				  ))
 ))
+
 
 (if NoteMacs-apprentice
     (progn
@@ -640,6 +659,7 @@
  '(vc-default-back-end (quote RCS))
  '(view-read-only t)
  '(visible-bell t)
+ '(w3m-session-crash-recovery nil)
  '(winner-mode t nil (winner))
  '(woman-use-own-frame nil)
  '(x-stretch-cursor t))
@@ -706,7 +726,8 @@
  '(font-lock-comment-face ((t (:foreground "gray25"))))
  '(font-lock-keyword-face ((t (:foreground "#000080" :background "#505059"))))
  '(region ((t (:inverse-video t))))
- '(trailing-whitespace ((t (:background "gray45")))))
+ '(trailing-whitespace ((t (:background "gray45"))))
+ '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
 
 ;;; Important keys:
 

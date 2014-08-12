@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e #exit on any error
+
+if (( $# < 2)); then
+	echo Param1=Name
+	echo Param2=Size
+	echo Param2=Loop#
+	exit 22
+fi
+
+#create sparse file
+truncate --size $2 $1
+
+#mount file as device
+sudo losetup /dev/loop${3} $1
+
+#create filesystem on device
+sudo mkfs --type ext4 -v /dev/loop${3}
+
+#mount device to directory
+sudo mkdir /mnt/$1
+sudo mount /dev/loop${3} /mnt/$1
