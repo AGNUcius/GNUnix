@@ -5,18 +5,19 @@ if (( $# < 1)); then
 	echo "Param2: user (defaults to Administrator)"
 	echo "Param3: pass (defaults to Rackware123)"
 	echo "Param4: sharename (defaults to c$)"
-else
-	ip=$1
-
-	user='Administrator'
-	(( $# < 2 )) || user=${2}
-
-	pass='Rackware123'
-	(( $# < 3 )) || pass=${3}
-
-	share='c$'
-	(( $# < 4 )) || share=${4}
-
-	mkdir /mnt/${ip}
-	mount -t cifs "//${ip}/${share}" /mnt/${ip} -o user=${user},pass=${pass}
+	exit 22
 fi
+
+ip=$1
+user='Administrator'
+(( $# < 2 )) || user=${2}
+
+pass='Rackware123'
+(( $# < 3 )) || pass=${3}
+
+share='c$'
+(( $# < 4 )) || share=${4}
+
+mkdir /mnt/${ip}
+mount -t cifs "//${ip}/${share}" /mnt/${ip} -o user=${user},pass=${pass}
+

@@ -1,10 +1,13 @@
+echo this does not actually work yet
+exit 1
+
 #!/bin/bash
 set -e #exit on any error
 
 if (( $# < 2)); then
 	echo Param1=Name
 	echo Param2=Size
-	echo Param2=Loop#
+	echo Param3=Loop#
 	exit 22
 fi
 
