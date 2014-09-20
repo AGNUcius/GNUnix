@@ -1,5 +1,6 @@
-rpm -qf /etc/dbus-1/system.d/bluez-hcid.conf
-/usr/sbin/hcid
-/usr/share/man/man5/hcid.conf.5.gz
-/usr/share/man/man8/hcid.8.gz
-/usr/src/kernels/2.6.18-371.4.1.el5-x86_64/include/config/bt/hcidtl1.h
+if [ -f /etc/redhat-release ]; then
+ rpm -qf $*
+ yum provides $*
+else
+ 
+fi

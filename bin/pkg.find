@@ -1,2 +1,6 @@
-# Search all available software:
-apt-cache search "$*" | grep -i "$*"
+
+if [ -f /etc/redhat-release ]; then
+ yum search $*
+else
+ apt-cache search "$*" | grep -i "$*"
+fi

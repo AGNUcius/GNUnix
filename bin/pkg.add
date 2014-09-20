@@ -1,2 +1,5 @@
-# Install by registered NAME:
-sudo apt-get install --no-install-recommends $*
+if [ -f /etc/redhat-release ]; then
+ sudo yum install $*
+else
+ sudo apt-get install --no-install-recommends $*
+fi

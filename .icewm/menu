@@ -112,6 +112,7 @@ menu Programs Programs {
    prog "Connect to VNC with xvnc4viewer" xvnc4viewer xvnc4viewer
    prog "Connect to VNC with xtightvncviewer" xtightvncviewer xtightvncviewer
    prog "Start VNC Server" x11vnc xterm -e x11vnc -xkb -forever -usepw -ncache 10
+   prog "Start VNC Tunnel" x11vnc xterm -e x11vnc -xkb -forever -nopw  -ncache 0 -localhost -bg
   }
   prog "Manage Printers" cups chromium-browser http://localhost:631
   prog qbittorrent qbittorrent qbittorrent

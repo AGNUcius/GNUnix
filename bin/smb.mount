@@ -20,4 +20,3 @@ share='c$'
 
 mkdir /mnt/${ip}
 mount -t cifs "//${ip}/${share}" /mnt/${ip} -o user=${user},pass=${pass}
-

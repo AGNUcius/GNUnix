@@ -1,5 +1,9 @@
 # man deborphan
 # apt-get autoremove; dpkg --get-selections | grep deinstall | cut -f1 | xargs dpkg --purge; apt-get clean
 
-sudo apt-get clean
-sudo apt-get autoremove
+if [ -f /etc/redhat-release ]; then
+ sudo yum clean
+else
+ sudo apt-get clean
+ sudo apt-get autoremove
+fi
