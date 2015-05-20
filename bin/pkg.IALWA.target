@@ -1,9 +1,0 @@
-#!/bin/bash
-pkg.IALWA $(basename $0)
-
-# copy this file and pkg.IALWA to /usr/bin as:
-#  sudo cp pkg.IALWA* /usr/bin
-
-# Then link to this file for each the binary you want to prep.
-# for example:
-#  sudo ln -s /usr/bin/pkg.IALWA.target /usr/games/njam

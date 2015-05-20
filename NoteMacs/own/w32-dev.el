@@ -15,6 +15,8 @@
 ;;; Code:
 
 (define-key global-map [(f4)] 'next-error)
+(global-set-key [(C-f4)] (kbd "C-u M-."))
+
 (define-key global-map [(shift f4)] 'previous-error)
 
 (global-set-key [(f5)] 'gud-cont)

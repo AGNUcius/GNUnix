@@ -1,3 +1,0 @@
-
-iscsiadm -m discovery -p 127.0.0.1 -o delete
-iscsiadm -m discovery -t sendtargets -p 127.0.0.1:3260 -o delete

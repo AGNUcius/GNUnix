@@ -1,7 +1,0 @@
-if (( $# < 1)); then
-	echo Param1: new branch name
-	exit 22
-fi
-
-git checkout -b $1
-git push --set-upstream origin $1

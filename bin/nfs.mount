@@ -1,0 +1,6 @@
+echo untested
+exit 1
+
+ip=${1}
+mkdir -p ${ip}
+mount -t nfs ${ip}:/ /mnt/${ip}

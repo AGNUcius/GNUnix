@@ -1,7 +1,0 @@
-# Update all installed software
-if [ -f /etc/redhat-release ]; then
- sudo yum update
-else
- sudo apt-get update
- sudo apt-get upgrade
-fi

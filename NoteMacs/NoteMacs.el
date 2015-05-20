@@ -88,6 +88,9 @@
 
 (setenv "PATH" (concat (getenv "PATH") ":~/bin"))
 
+;; fix git's weird pager behavior
+(setenv "PAGER" "cat")
+
 ;; android dev
 (defun android-dev () (interactive)
   (setq eshell-path-env (concat eshell-path-env ":/home/user/work/android/adt/sdk/tools:/home/user/work/android/adt/sdk/platform-tools")))
@@ -136,31 +139,6 @@
 (autoload 'tabbar-mode "tabbar" nil t)
 (autoload 'powershell-mode "powershell-mode" nil t)
 (autoload 'w3m "w3m" nil t)
-
-;;(require 'generic-x)
-(autoload 'bat-generic-mode "generic-x" "" t)
-(autoload 'ini-generic-mode "generic-x" "" t)
-(autoload 'inf-generic-mode "generic-x" "" t)
-(autoload 'rc-generic-mode "generic-x" "" t)
-(autoload 'reg-generic-mode "generic-x" "" t)
-(autoload 'rul-generic-mode "generic-x" "" t)
-(autoload 'hosts-generic-mode "generic-x" "" t)
-(autoload 'apache-conf-mode "generic-x" "" t)
-(autoload 'apache-log-generic-mode "generic-x" "" t)
-(autoload 'apache-conf-generic-mode "generic-x" "" t)
-(autoload 'apache-log-generic-mode "generic-x" "" t)
-(autoload 'samba-generic-mode "generic-x" "" t)
-(autoload 'hosts-generic-mode "generic-x" "" t)
-(autoload 'fvwm-generic-mode "generic-x" "" t)
-(autoload 'x-resource-generic-mode "generic-x" "" t)
-(autoload 'alias-generic-mode "generic-x" "" t)
-(autoload 'inetd-conf-generic-mode "generic-x" "" t)
-(autoload 'etc-services-generic-mode "generic-x" "" t)
-(autoload 'etc-passwd-generic-mode "generic-x" "" t)
-(autoload 'etc-fstab-generic-mode "generic-x" "" t)
-(autoload 'io-mode "io-mode" "" t)
-(autoload 'visual-basic-mode "visual-basic-mode" "" t)
-
 (autoload 'rfcview-mode "rfcview" "" t)
 (autoload 'css-mode "css-mode-min")
 (autoload 'htmlize-buffer "htmlize" "" t)
@@ -221,6 +199,14 @@
   "Go to beginning of match."
   (when isearch-forward (goto-char isearch-other-end)))
 
+
+(add-hook 'hs-minor-mode-hook
+          (lambda ()
+            (define-key hs-minor-mode-map "\M--"
+			  'hs-hide-block)
+            (define-key hs-minor-mode-map "\M-="
+			  'hs-show-block)
+			))
 
 ;; from http://www.emacswiki.org/cgi-bin/wiki.pl?EshellFunctions
 (add-hook 'eshell-mode-hook
@@ -645,6 +631,7 @@
  '(scroll-step 1)
  '(show-paren-mode t nil (paren))
  '(show-trailing-whitespace t)
+ '(sunshine-location "Salt Lake City, UT")
  '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72)))
  '(tab-width 4)
  '(tags-revert-without-query t)
@@ -665,6 +652,8 @@
  '(x-stretch-cursor t))
 
 
+;         ("\\.\\(cmd\\|bat\\)\\'" . bat-generic-mode)
+
 ;;;; FILE->MODE ASSOCIATIONS:
 (setq auto-mode-alist
       (append
@@ -672,7 +661,6 @@
          ;; ("\\.cs\\'" . csharp-mode )
          ("\\.cs\\'" . java-mode)
          ("\\.\\(scm\\|smd\\|esh\\|ss\\)\\'" . scheme-mode)
-         ("\\.\\(cmd\\|bat\\)\\'" . bat-generic-mode)
          ("\\.css\\'" . css-mode)
          ("\\.cva\\'" . ini-generic-mode)
          ("\\.rc\\'" . rc-generic-mode)
@@ -715,19 +703,71 @@
             "a guru."))))
 
 
-;;see `list-colors-display'
+;;try  M-x  list-colors-display
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:foreground "gray0" :background "#595959" :height 180 :weight bold))))
- '(cursor ((t (:background "magenta"))))
- '(font-lock-comment-face ((t (:foreground "gray25"))))
- '(font-lock-keyword-face ((t (:foreground "#000080" :background "#505059"))))
+ '(default ((t (:foreground "#000000" :background "#404040" :height 175 :weight bold))))
+ '(cursor ((t (:background "green"))))
+ '(font-lock-comment-face ((t (:foreground "#202020"))))
+ '(font-lock-keyword-face ((t (:foreground "#000080" :background "#303040"))))
  '(region ((t (:inverse-video t))))
- '(trailing-whitespace ((t (:background "gray45"))))
+ '(trailing-whitespace ((t (:background "#505050"))))
  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
+
+;; ;skyblue
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(default ((t (:foreground "#000000" :background "skyblue" :height 175 :weight bold))))
+;;  '(cursor ((t (:background "yellow"))))
+;;  '(font-lock-comment-face ((t (:foreground "#262626"))))
+;;  '(font-lock-keyword-face ((t (:foreground "#000080" :background "#909099"))))
+;;  '(region ((t (:inverse-video t))))
+;;  '(trailing-whitespace ((t (:background "yellow"))))
+;;  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
+
+;; ;darker
+;; (custom-set-faces
+;;  '(default ((t (:foreground "gray0" :background "#181818" :height 165 :weight bold))))
+;;  '(cursor ((t (:background "magenta"))))
+;;  '(font-lock-comment-face ((t (:foreground "gray25"))))
+;;  '(font-lock-keyword-face ((t (:foreground "#000080" :background "#232318"))))
+;;  '(region ((t (:inverse-video t))))
+;;  '(trailing-whitespace ((t (:background "gray45"))))
+;;  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
+
+;; (defun csf (bg cur com)
+;;   (custom-set-faces
+;;    '(default ((t (:foreground "gray0" :background bg :height 180 :weight bold))))
+;;    '(cursor ((t (:background cur))))
+;;    '(font-lock-comment-face ((t (:foreground com))))))
+
+;; aqua
+;; (csf "#005959" "yellow" "#590000")
+
+;; olive
+;; (custom-set-faces
+;;  '(default ((t (:foreground "gray0" :background "#595900" :height 180 :weight bold))))
+;;  '(cursor ((t (:background "green"))))
+;;  '(font-lock-comment-face ((t (:foreground "#000059")))))
+
+;; grape
+;; (custom-set-faces
+;;  '(default ((t (:foreground "gray0" :background "#590059" :height 180 :weight bold))))
+;;  '(cursor ((t (:background "red"))))
+;;  '(font-lock-comment-face ((t (:foreground "#005900")))))
+
+;;; sage
+;; (custom-set-faces
+;;  '(default ((t (:foreground "gray0" :background "#599959" :height 180 :weight bold))))
+;;  '(cursor ((t (:background "blue"))))
+;;  '(font-lock-comment-face ((t (:foreground "#ff99ff")))))
+
 
 ;;; Important keys:
 
@@ -799,4 +839,3 @@
 
 
 ;;; NoteMacs.el ends here
-

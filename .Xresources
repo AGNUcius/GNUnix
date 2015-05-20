@@ -1,20 +1,20 @@
 ! To reload immediately
 ! xrdb -load ~/.Xresources
 
-xterm*background: black
-xterm*foreground: gray
+*foreground: black
+*background: #494949
 
 xterm*faceName: DejaVu Sans Mono
-xterm*faceSize: 14
-
+xterm*faceSize: 16
 xterm*loginshell: true
-
 xterm*savelines: 16384
 xterm*scrollTtyOutput: false
 xterm*jumpScroll: true
 xterm*multiScroll: true
 
+! Rxvt.font: xft:bitstream vera sans mono:size=16:antialias=true
+! rxvt*font: xft:DejaVu Sans Mono:style=bold:pixelsize=16
+! rxvt*faceSize: 16
 
-rxvt*background: black
-rxvt*foreground: gray
-
+rxvt*faceName: DejaVu Sans Mono
+rxvt*faceSize: 16

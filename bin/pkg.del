@@ -1,5 +1,0 @@
-if [ -f /etc/redhat-release ]; then
- sudo yum erase $*
-else
- sudo apt-get --purge remove $*
-fi

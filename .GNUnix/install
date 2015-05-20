@@ -25,21 +25,21 @@ $ pkg.add software-center
 Various file managers:
 $ pkg.add xfe thunar xfm tuxcmd rox-filer pcmanfm mc lfm krusader gentoo emelfm2 clex nautilus konqueror dolphin
 
-$ if (laptop)
-$ {
-$  sudo apt-get install yacpi wicd-curses wireless-regdb crda iw rfkill pm-utils
-$  sudo rfkill list all
-$  sudo pm-powersave
-$ }
+if (laptop)
+{
+ sudo apt-get install yacpi wicd-curses wireless-regdb crda iw rfkill pm-utils
+ sudo rfkill list all
+ sudo pm-powersave
+}
 
 
 Make sure to select "icewm-session" from the "Start WM" button during first login.
 
 To play audio as non-root
-$ sudo adduser USERNAME audio
+$ sudo adduser USER audio
 
 To capture video as non-root
-$ sudo adduser USERNAME video
+$ sudo adduser USER video
 $ sudo chmod 666 /dev/video0
 
 $ sudo mv /usr/bin/icewmbg /usr/bin/icewmbg.off
