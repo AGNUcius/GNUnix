@@ -1,5 +1,5 @@
 if [ -f /etc/redhat-release ]; then
- sudo yum install $*
+ sudo yum -y install $*
 else
- sudo apt-get install --no-install-recommends $*
+ sudo apt-get install -y $*
 fi

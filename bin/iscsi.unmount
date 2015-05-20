@@ -1,0 +1,11 @@
+if (( $# < 2)); then
+  echo Param1: IP-ADDRESS
+  echo Param2: IQN
+  echo see /etc/ietd.conf for IQN
+  exit 22
+fi
+
+iscsiadm -m node -T $2 --logout
+iscsiadm -m discovery -p $1 -o delete
+
+ls -l /dev/disk/by-path

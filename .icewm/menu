@@ -20,9 +20,10 @@
 # hedgewars, gianas return, bontago
 # yo frankie, open ttd, cube trains
 
-prog Midori midori midori
-prog Chrome chromium-browser chromium-browser
+prog "Chrome Beta" google-chrome-beta google-chrome-beta
+prog Chromium chromium-browser chromium-browser
 prog FireFox firefox firefox
+prog Midori midori midori
 separator
 menu Programs Programs {
  menu Office Office {
@@ -117,6 +118,10 @@ menu Programs Programs {
   prog "Manage Printers" cups chromium-browser http://localhost:631
   prog qbittorrent qbittorrent qbittorrent
   menu Chat pidgin {
+   prog utox utox utox
+   prog qtox qtox qtox
+   prog ratox ratox ratox
+   prog toxic toxic toxic
    prog skype skype skype
    prog pidgin pidgin pidgin
   }
@@ -251,12 +256,14 @@ menu System system {
  }
 
  menu Video video {
-  prog "Reset Acer Laptop" xrandr xrandr --output LVDS1 --mode 1024x600 --output VGA1 --off
+  prog "Reset Acer laptop" xrandr xrandr --output LVDS1 --mode 1024x600 --output VGA1 --off
+  prog "Reset lenovo laptop" xrandr xrandr --output eDP1 --mode 1366x768
+  prog "Vizio TV" xrandr xrandr --output HDMI1 --mode 1280x720 --output eDP1 --off
   prog "1024x768 on VGA1"  xrandr xrandr --output LVDS1 --off --output VGA1 --mode 1024x768
   prog "1280x1024 on VGA1" xrandr xrandr --output LVDS1 --off --output VGA1 --mode 1280x1024
 separator
   prog "Disable Screen Blanking" xset xterm -e "xset s noblank; xset -dpms; xset s off"
-  prog "ReEnable Screen Blanking" xset xterm -e "xset s blank; xset +dpms; xset s on"
+  prog "Enable Screen Blanking" xset xterm -e "xset s blank; xset +dpms; xset s on"
  }
 
  prog "Check Battery" yacpi xterm -e yacpi

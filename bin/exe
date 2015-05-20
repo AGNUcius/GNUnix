@@ -1,0 +1,32 @@
+if [ $# -lt 2 ]; then
+  echo target
+  echo user
+  echo pass
+  echo 'command with params'
+  exit 22
+fi
+
+winexe=winexe
+target=$1; shift
+USER=$1; shift
+PASSWD=$1; shift
+
+try=10
+
+while [[ $try -ne 0 ]]; do
+	out="$(USER=$USER PASSWD=$PASSWD ${winexe} --no-pass --system //$target "cmd /c $@" 2>&1)";
+	ret=$?; [[ $ret -eq 0 ]] && break
+
+    if [[ "$winexe" == "winexe" ]] && [[ "${out}" =~ "NT_STATUS_INVALID_PARAMETER" ]]; then
+		winexe=winexe.new
+		continue
+	fi
+
+    [[ "${out}" =~ "NT_STATUS_IO_TIMEOUT" ]] && break;
+    [[ "${out}" =~ "NT_STATUS_LOGON_FAILURE" ]] && break;
+    [[ ! "${out}" =~ "NT_STATUS_" ]] && break;
+    ((try--)); sleep 3
+done
+
+echo "$out"
+exit $ret

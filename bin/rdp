@@ -1,0 +1,7 @@
+if [ $# -lt 2 ]; then
+  echo target
+  echo pass
+  exit 22
+fi
+
+rdesktop -u Administrator -p $2 -f $1

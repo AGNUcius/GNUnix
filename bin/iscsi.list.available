@@ -1,0 +1,1 @@
+iscsiadm -m discovery -t sendtargets -p localhost

@@ -1,11 +1,10 @@
-
-#exit on any error
+#!/bin/bash
 set -e
 
-if (( $# < 1)); then
-	echo "Param1: SomeFile.iso"
+if [[ $# -lt 1 ]]; then
+	echo SomeFile.iso
 	exit 22
 fi
 
-sudo mkdir /mnt/$1
+[[ -d /mnt/$1 ]] || sudo mkdir /mnt/$1
 sudo mount -o loop $1 /mnt/$1
