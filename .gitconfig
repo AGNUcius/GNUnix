@@ -1,13 +1,17 @@
 [user]
-	name = patrick.anderson
-	email = patrick.anderson@rackwareinc.com
+	name = Patrick Anderson
+	email = agnucius@gmail.com
+
+[push]
+	default = current
+
 [core]
 	editor = emacs
 	pager =
+
 [merge]
 	tool = ediff
-[push]
-	default = current
+
 [alias]
 	lg = log --oneline --abbrev-commit --all --graph --decorate --color
     graph = log --graph --date-order -C -M '--pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\"' --all --date=rfc

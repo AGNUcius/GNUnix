@@ -4,12 +4,7 @@
 
 
 export PATH="$PATH:$HOME/bin"
-export OOC_LIBS="$HOME/ooc"
-export PATH="$PATH:$OOC_LIBS/bin"
-export PATH="$PATH:$OOC_LIBS/sam"
-
 BASHRC=YES
-
 
 # source /usr/share/git-core/contrib/completion/git-prompt.sh
 # export PS1='[\u@\h \W]$(__git_ps1 "\[\e[36;22m\]%s\[\e[0m\]")\$ '

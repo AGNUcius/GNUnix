@@ -20,8 +20,8 @@
 # hedgewars, gianas return, bontago
 # yo frankie, open ttd, cube trains
 
-prog Midori midori midori
-prog Chrome chromium-browser chromium-browser
+prog Chrome google-chrome-beta google-chrome-beta
+prog Chromium chromium-browser chromium-browser
 prog FireFox firefox firefox
 separator
 menu Programs Programs {
@@ -51,6 +51,7 @@ menu Programs Programs {
   menu Photo Photo {
    prog Fotoxx fotoxx fotoxx
    prog flphoto flphoto flphoto
+   prog ristretto ristretto ristretto
   }
   menu Camera Camera {
    prog guvcview guvcview guvcview
@@ -108,6 +109,7 @@ menu Programs Programs {
    prog FireFox firefox firefox
   }
   menu "Remote Desktop" rdesktop {
+   prog "Connect to SLC with xvnc4viewer" SLC xterm -e ~/work/SLC.vnc
    prog "Connect to RDP with rdesktop" rdesktop rdesktop
    prog "Connect to VNC with xvnc4viewer" xvnc4viewer xvnc4viewer
    prog "Connect to VNC with xtightvncviewer" xtightvncviewer xtightvncviewer
@@ -232,6 +234,12 @@ menu Programs Programs {
  }
 }
 
+# menu Work work {
+#  menu net net {
+#   prog vpn.slc xterm xterm -e ~/bin/vpn slc
+# }
+
+
 menu System system {
  menu Power power {
   prog Lock xtrlock xtrlock
@@ -254,6 +262,7 @@ menu System system {
   prog "Reset Acer Laptop" xrandr xrandr --output LVDS1 --mode 1024x600 --output VGA1 --off
   prog "1024x768 on VGA1"  xrandr xrandr --output LVDS1 --off --output VGA1 --mode 1024x768
   prog "1280x1024 on VGA1" xrandr xrandr --output LVDS1 --off --output VGA1 --mode 1280x1024
+  prog "1920x1080 on VGA1" xrandr xrandr --output LVDS1 --off --output VGA1 --mode 1920x1080
 separator
   prog "Disable Screen Blanking" xset xterm -e "xset s noblank; xset -dpms; xset s off"
   prog "ReEnable Screen Blanking" xset xterm -e "xset s blank; xset +dpms; xset s on"
