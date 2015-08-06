@@ -2,5 +2,5 @@ if [ -f /etc/redhat-release ]; then
  rpm -qf $*
  yum provides $*
 else
- ;
+ echo ubuntu
 fi

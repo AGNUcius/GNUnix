@@ -1,7 +1,8 @@
 if [ $# -lt 2 ]; then
-  echo target
+  echo host
+  echo user
   echo pass
   exit 22
 fi
 
-rdesktop -u Administrator -p $2 -f $1
+rdesktop -u $2 -p $3 -f $1

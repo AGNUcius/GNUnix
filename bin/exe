@@ -1,32 +1,43 @@
-if [ $# -lt 2 ]; then
-  echo target
+#!/bin/bash
+
+host=$1; shift
+user=$1; shift
+pass=$1; shift
+
+if [[ $# -lt 1 ]]; then
+  echo host
   echo user
   echo pass
-  echo 'command with params'
+  echo command and params
   exit 22
 fi
 
+ret=0
 winexe=winexe
-target=$1; shift
-USER=$1; shift
-PASSWD=$1; shift
-
 try=10
 
-while [[ $try -ne 0 ]]; do
-	out="$(USER=$USER PASSWD=$PASSWD ${winexe} --no-pass --system //$target "cmd /c $@" 2>&1)";
-	ret=$?; [[ $ret -eq 0 ]] && break
+# set -e -o pipefail #exit on any error
 
-    if [[ "$winexe" == "winexe" ]] && [[ "${out}" =~ "NT_STATUS_INVALID_PARAMETER" ]]; then
-		winexe=winexe.new
-		continue
-	fi
+pushd $(dirname "${BASH_SOURCE[ 0]}") > /dev/null
+	PATH=${PATH}:$(pwd)
 
-    [[ "${out}" =~ "NT_STATUS_IO_TIMEOUT" ]] && break;
-    [[ "${out}" =~ "NT_STATUS_LOGON_FAILURE" ]] && break;
-    [[ ! "${out}" =~ "NT_STATUS_" ]] && break;
-    ((try--)); sleep 3
-done
+	while [[ $try -ne 0 ]]; do
 
-echo "$out"
+		out="$(USER=$user PASSWD=$pass $winexe --no-pass --system //$host "cmd /c $@" 2>&1)";
+		ret=$?; [[ $ret -eq 0 ]] && break
+
+		if [[ "$winexe" == "winexe" ]] && [[ "$out" =~ "NT_STATUS_INVALID_PARAMETER" ]]; then
+			winexe=winexe.new
+			continue
+		fi
+
+		[[ "$out" =~ "NT_STATUS_IO_TIMEOUT" ]] && break;
+		[[ "$out" =~ "NT_STATUS_LOGON_FAILURE" ]] && break;
+		[[ ! "$out" =~ "NT_STATUS_" ]] && break;
+		((try--)); sleep 3
+	done
+
+	echo "$out"
+popd > /dev/null
+
 exit $ret

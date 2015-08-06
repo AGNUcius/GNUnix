@@ -1,0 +1,6 @@
+# info about this pkg
+if [ -f /etc/redhat-release ]; then
+ yum info $*
+else
+ apt-cache show $*
+fi

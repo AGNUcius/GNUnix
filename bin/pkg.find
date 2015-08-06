@@ -1,0 +1,6 @@
+
+if [ -f /etc/redhat-release ]; then
+ yum search all $*
+else
+ apt-cache search "$*" | grep -i "$*"
+fi

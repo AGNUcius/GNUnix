@@ -1,0 +1,5 @@
+if [ -f /etc/redhat-release ]; then
+ yum list installed
+else
+ dpkg -l
+fi

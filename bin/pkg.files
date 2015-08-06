@@ -1,0 +1,10 @@
+# Files in this pkg
+if [ -f /etc/redhat-release ]; then
+ rpm -ql $*
+# rpm -qlp /path/to/fileToList.rpm
+# yumdownloader --urls
+# yum install yum-utils
+# repoquery --list packagename
+else
+ dpkg -L $*
+fi
