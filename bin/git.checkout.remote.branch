@@ -1,0 +1,3 @@
+git fetch
+git checkout BRANCHNAME, where BRANCHNAME is everything after "origin/"
+

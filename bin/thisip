@@ -1,0 +1,16 @@
+
+thisip=
+for eth in $(/sbin/ifconfig | grep eth | cut -f 1 -d' '); do
+	line=$(/sbin/ifconfig | egrep "^$eth " -A 2 | tail -n 3 | grep "inet addr:")
+	thisip=$(echo ${line##*inet addr:} | cut -f 1 -d' ')
+	[[ "$thisip" != "" ]] && break
+done
+echo $thisip
+
+# thisip=
+# for eth in $(ip a | grep eth | cut -f 1 -d'/'); do
+# 	line=$(ifconfig | egrep "^$eth " -A 2 | tail -n 3 | grep "inet ")
+# 	thisip=$(echo ${line##*inet } | cut -f 1 -d'/')
+# 	[[ "$thisip" != "" ]] && break
+# done
+

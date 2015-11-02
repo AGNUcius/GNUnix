@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo 0 > /selinux/enforce
+sed -i s/enforcing/disabled/gi /etc/selinux/config
+
+service iptables stop
+chkconfig --del iptables
+service ip6tables stop
+chkconfig --del ip6tables
+
+yum -y install samba
+
+mkdir -p /var/cache/samba/usershares
+chmod 1770 /var/cache/samba/usershares
+mkdir -p /var/lib/samba/usershares
+chmod 1770 /var/lib/samba/usershares
+
+echo "
+[global]
+  usershare allow guests = Yes
+  usershare max shares = 100
+  usershare owner only = false
+" >> /etc/samba/smb.conf
+
+smbpasswd -a root
+service smb start
+chkconfig smb on

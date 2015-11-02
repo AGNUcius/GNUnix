@@ -23,7 +23,7 @@ pushd $(dirname "${BASH_SOURCE[ 0]}") > /dev/null
 
 	while [[ $try -ne 0 ]]; do
 
-		out="$(USER=$user PASSWD=$pass $winexe --no-pass --system //$host "cmd /c $@" 2>&1)";
+		out="$(USER=$user PASSWD=$pass $winexe --uninstall --reinstall --no-pass --system //$host "cmd /c $@" 2>&1)";
 		ret=$?; [[ $ret -eq 0 ]] && break
 
 		if [[ "$winexe" == "winexe" ]] && [[ "$out" =~ "NT_STATUS_INVALID_PARAMETER" ]]; then

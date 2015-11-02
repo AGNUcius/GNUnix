@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e #exit on any error
+
+if (( $# < 2)); then
+	echo Param1=Name
+	echo Param2=Loop#
+	exit 22
+fi
+
+umount /mnt/$1
+losetup --detach /dev/loop${2}

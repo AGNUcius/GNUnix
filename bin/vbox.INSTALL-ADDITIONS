@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#yum --enablerepo rpmforge install dkms
+yum install dkms kernel-devel
+yum groupinstall "Development Tools"
+
+mkdir -p /mnt/cdrom
+
+mount /dev/cdrom /mnt/cdrom
+cd /mnt/cdrom
+./VBoxLinuxAdditions.run

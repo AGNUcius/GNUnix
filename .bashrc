@@ -2,6 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+
 export PATH="$PATH:$HOME/bin"
 BASHRC=YES
 

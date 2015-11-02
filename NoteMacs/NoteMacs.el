@@ -350,12 +350,12 @@
 (if NoteMacs-apprentice
     (progn
       (define-key global-map "\M-\r" 'browse-url-at-point)
-      (autoload 'skeleton-pair-insert-maybe "skeleton" "" t)
-      (setq skeleton-pair t)
-      (define-key global-map [(\()] 'skeleton-pair-insert-maybe)
-      (define-key global-map [(\[)] 'skeleton-pair-insert-maybe)
-      (define-key global-map [({)] 'skeleton-pair-insert-maybe)
-      (define-key global-map [(<)] 'skeleton-pair-insert-maybe)
+      ;; (autoload 'skeleton-pair-insert-maybe "skeleton" "" t)
+      ;; (setq skeleton-pair t)
+      ;; (define-key global-map [(\()] 'skeleton-pair-insert-maybe)
+      ;; (define-key global-map [(\[)] 'skeleton-pair-insert-maybe)
+      ;; (define-key global-map [({)] 'skeleton-pair-insert-maybe)
+      ;; (define-key global-map [(<)] 'skeleton-pair-insert-maybe)
       ;;(define-key global-map [(\")] 'skeleton-pair-insert-maybe)
 	  (add-to-list 'same-window-buffer-names "*Buffer List*")
       (define-key Buffer-menu-mode-map " " 'scroll-up)
@@ -430,7 +430,8 @@
       (defun diary-prepend-entry (file)
         (find-file file) ;;open to our diary file - which is a list of files corresponding to monthly divisions
         (beginning-of-buffer) ;;
-		(lens-follow) ;;go to the most recent month
+;;		(lens-follow) ;;go to the most recent month
+		(ffap)
         (beginning-of-buffer)
 		(toggle-read-only -1)
 		(newline 2)
@@ -629,6 +630,7 @@
  '(scroll-conservatively 50)
  '(scroll-preserve-screen-position t)
  '(scroll-step 1)
+ '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-mode t nil (paren))
  '(show-trailing-whitespace t)
  '(sunshine-location "Salt Lake City, UT")
@@ -709,12 +711,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:foreground "#000000" :background "#404040" :height 175 :weight bold))))
+ '(default ((t (:inherit nil :stipple nil :background "#505050" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight bold :height 212 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
  '(cursor ((t (:background "green"))))
  '(font-lock-comment-face ((t (:foreground "#202020"))))
- '(font-lock-keyword-face ((t (:foreground "#000080" :background "#303040"))))
+ '(font-lock-keyword-face ((t (:foreground "#000080" :background "#494950"))))
  '(region ((t (:inverse-video t))))
- '(trailing-whitespace ((t (:background "#505050"))))
+ '(trailing-whitespace ((t (:background "#606060"))))
  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
 
 ;; ;skyblue

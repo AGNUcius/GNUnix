@@ -28,6 +28,7 @@ separator
 menu Programs Programs {
  menu Office Office {
   prog NoteMacs emacs emacs --maximized
+  prog VideoLan vlc vlc
   prog "File Browser" xfe xfe
   prog "Text Editor xfwrite" xfwrite xfwrite
   prog "Command Prompt" xterm xterm
@@ -150,14 +151,14 @@ menu Programs Programs {
   prog c64 x64 x64
   prog chromium-bsu chromium-bsu chromium-bsu
   prog circuslinux circuslinux circuslinux
-  prog cosmo1 cosmo dosbox ~/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode1/COSMO1.EXE -fullscreen -exit
-  prog cosmo2 cosmo dosbox ~/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode2/COSMO2.EXE -fullscreen -exit
-  prog cosmo3 cosmo dosbox ~/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode3/COSMO3.EXE -fullscreen -exit
+  prog cosmo1 cosmo dosbox ~/play/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode1/COSMO1.EXE -fullscreen -exit
+  prog cosmo2 cosmo dosbox ~/play/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode2/COSMO2.EXE -fullscreen -exit
+  prog cosmo3 cosmo dosbox ~/play/games/dos/cosmos-cosmic-adventure-forbidden-planet/Episode3/COSMO3.EXE -fullscreen -exit
   prog csmash csmash csmash
   prog cultivation cultivation cultivation
   prog cytadela cytadela cytadela
   prog defendguin defendguin defendguin
-  prog diggers-2-extractors H2O dosbox ~/games/dos/diggers-2-extractors/XTRACTOR.EXE -fullscreen -exit
+  prog diggers-2-extractors H2O dosbox ~/play/games/dos/diggers-2-extractors/XTRACTOR.EXE -fullscreen -exit
   prog dreamchess dreamchess dreamchess
   prog egoboo egoboo egoboo
   prog enigma enigma enigma
@@ -172,14 +173,14 @@ menu Programs Programs {
   prog garden-of-coloured-lights garden-of-coloured-lights garden-of-coloured-lights
   prog gravitation gravitation gravitation
   prog gweled gweled gweled
-  prog h2o H2O dosbox ~/games/dos/H2O/H2O.EXE -fullscreen -exit
+  prog h2o H2O dosbox ~/play/games/dos/H2O/H2O.EXE -fullscreen -exit
   prog heroes heroes heroes
   prog heroes heroes heroes --full-screen --double
   prog jumpnbump jumpnbump jumpnbump
   prog kraptor kraptor kraptor
   prog liquidwar liquidwar liquidwar
   prog maelstrom maelstrom maelstrom
-  prog M.A.M.E mame mame -rompath ~/games/MAME/roms
+  prog M.A.M.E mame mame -rompath ~/play/games/MAME/roms
   prog minetest minetest minetest
   prog mu-cade mu-cade mu-cade
   prog Mupen64Plus mupen64plus /usr/games/mupen64plus 
@@ -198,7 +199,8 @@ menu Programs Programs {
   prog singularity singularity singularity
   prog slingshot slingshot slingshot
   prog smc smc smc
-  prog smw smw xterm -e "cd ~/games/supermariowar; ./smw"
+  prog "smw orig" smw xterm -e "cd ~/play/games/supermariowar; ./smw"
+  prog "smw fork" smw xterm -e "cd ~/play/games/super-mario-war; ./smw"
   prog spacearyarya spacearyarya spacearyarya
   prog spout spout spout
   prog stormbaancoureur stormbaancoureur stormbaancoureur
@@ -217,7 +219,7 @@ menu Programs Programs {
   prog vor vor vor
   prog widelands widelands widelands
   prog wing wing wing
-  prog wordwarvi wordwarvi xterm -e "cd ~/games/wordwarvi; ./wordwarvi --fullscreen"
+  prog wordwarvi wordwarvi xterm -e "cd ~/play/games/wordwarvi; ./wordwarvi --fullscreen"
   prog xball  xball  xball
   prog xblast xblast xblast
   prog xbubble xbubble xbubble
@@ -227,13 +229,13 @@ menu Programs Programs {
   prog xscavenger xscavenger xscavenger
   prog zsnes zsnes zsnes
 
-  prog "DOOM Ulimate" DOOM dosbox ~/games/dos/doom-ult/DOOM.EXE -fullscreen -exit
-  prog "NeoGeo MrDo" mame mame -rompath ~/games/MAME/roms neomrdo
+  prog "DOOM Ulimate" DOOM dosbox ~/play/games/dos/doom-ult/DOOM.EXE -fullscreen -exit
+  prog "NeoGeo MrDo" mame mame -rompath ~/play/games/MAME/roms neomrdo
   prog "Smokin' Guns" /usr/games/smokinguns/sg_48.png /usr/games/smokinguns/smokinguns.i386
-  prog "The Incredible Machine 2" TIM dosbox ~/games/dos/the-incredible-machine-2/TIM2.EXE -fullscreen -exit
-  prog "Tubular Worlds" TUB dosbox ~/games/dos/tubular-worlds/TUBWORLD.BAT -fullscreen -exit
-  prog "X Com 2 - Terror From The Deep" H2O dosbox ~/games/dos/X-Com-2-Terror-From-The-Deep/TERROR.COM -fullscreen -exit
-#  prog ultima8 Ultima8 dosbox ~/games/dos/ultima8/U8.EXE -fullscreen -exit
+  prog "The Incredible Machine 2" TIM dosbox ~/play/games/dos/the-incredible-machine-2/TIM2.EXE -fullscreen -exit
+  prog "Tubular Worlds" TUB dosbox ~/play/games/dos/tubular-worlds/TUBWORLD.BAT -fullscreen -exit
+  prog "X Com 2 - Terror From The Deep" H2O dosbox ~/play/games/dos/X-Com-2-Terror-From-The-Deep/TERROR.COM -fullscreen -exit
+#  prog ultima8 Ultima8 dosbox ~/play/games/dos/ultima8/U8.EXE -fullscreen -exit
 # offroad/IRONMAN.BAT
 # williams-arcade-classics/ARCADE/ARCADE.EXE
  }
@@ -264,12 +266,13 @@ menu System system {
  }
 
  menu Video video {
-  prog "Reset Acer laptop" xrandr xrandr --output LVDS1 --mode 1024x600 --output VGA1 --off
-  prog "Reset lenovo laptop" xrandr xrandr --output eDP1 --mode 1366x768
-  prog "Vizio TV" xrandr xrandr --output HDMI1 --mode 1280x720 --output eDP1 --off
-  prog "1024x768 on VGA1"  xrandr xrandr --output LVDS1 --off --output VGA1 --mode 1024x768
+  prog "1920x1080 on VGA1" xrandr xrandr --output LVDS1 --off  --output eDP1 --off --output VGA1 --mode 1920x1080
   prog "1280x1024 on VGA1" xrandr xrandr --output LVDS1 --off --output VGA1 --mode 1280x1024
-  prog "1920x1080 on VGA1" xrandr xrandr --output LVDS1 --off --output VGA1 --mode 1920x1080
+  prog "1024x768 on VGA1"  xrandr xrandr --output LVDS1 --off --output VGA1 --mode 1024x768
+  prog "Reset lenovo laptop" xrandr xrandr --output VGA1 --off --output HDMI1 --off --output eDP1 --mode 1366x768
+  prog "Reset Acer laptop" xrandr xrandr --output LVDS1 --mode 1024x600 --output VGA1 --off --output HDMI1 --off
+  prog "Vizio TV" xrandr xrandr --output HDMI1 --mode 1280x720 --output eDP1 --off  --output LVDS1 --off
+  prog "Philips TV" xrandr xrandr --output HDMI1 --mode 1680x1050 --output LVDS1 --off  --output eDP1 --off
 separator
   prog "Disable Screen Blanking" xset xterm -e "xset s noblank; xset -dpms; xset s off"
   prog "Enable Screen Blanking" xset xterm -e "xset s blank; xset +dpms; xset s on"

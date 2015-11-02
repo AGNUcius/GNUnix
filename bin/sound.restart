@@ -1,0 +1,21 @@
+echo not yet working...
+exit 1
+
+sudo alsactl -F init
+sudo alsa force-reload
+sudo /etc/init.d/alsa-utils restart
+
+
+Code:
+for ((i=1; i<=8; i++)) ; do 
+    modlist=$(lsmod | grep ^snd | awk '($3 == "0") {print $1}') 
+    [ -z "$modlist" ] && break 
+    for onemod in $modlist ; do 
+        busybox rmmod -w $onemod 
+    done 
+done
+
+
+Reloading the kernel modules is much simpler, e.g.: 
+Code:
+modprobe snd-hda-intel && modprobe snd-seq && modprobe snd-hrtimer

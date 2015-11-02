@@ -1,0 +1,10 @@
+echo only idea
+exit 1
+
+if (( $# < 1)); then
+	echo Param1: commit message
+	exit 22
+fi
+
+git commit -a -m %*
+bugzilla fix bug %1

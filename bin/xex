@@ -1,0 +1,23 @@
+#!/bin/bash
+
+host=$1; shift
+user=$1; shift
+pass=$1; shift
+
+if [[ $# -lt 1 ]]; then
+  echo host
+  echo user
+  echo pass
+  echo command and params
+  exit 22
+fi
+
+ret=0
+set -e -o pipefail #exit on any error
+pushd $(dirname "${BASH_SOURCE[ 0]}") > /dev/null
+	PATH=${PATH}:$(pwd)
+	ssh.copy.id $host $user $pass
+	ssh -nx -F ssh_config $user@$host "$@" < /dev/null
+	ret=$?
+popd > /dev/null
+exit $ret

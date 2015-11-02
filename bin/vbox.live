@@ -1,0 +1,2 @@
+vboxmanage storageattach live --storagectl IDE --type dvddrive --medium $*
+

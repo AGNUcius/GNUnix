@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#Temporary
+echo 0 > /selinux/enforce
+
+#Permanent
+sed -i s/enforcing/disabled/gi /etc/selinux/config
+
+#Verify
+getenforce

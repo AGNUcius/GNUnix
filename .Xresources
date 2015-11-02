@@ -2,7 +2,7 @@
 ! xrdb -load ~/.Xresources
 
 *foreground: black
-*background: #494949
+*background: #505050
 
 xterm*faceName: DejaVu Sans Mono
 xterm*faceSize: 16
@@ -12,9 +12,6 @@ xterm*scrollTtyOutput: false
 xterm*jumpScroll: true
 xterm*multiScroll: true
 
-! Rxvt.font: xft:bitstream vera sans mono:size=16:antialias=true
-! rxvt*font: xft:DejaVu Sans Mono:style=bold:pixelsize=16
-! rxvt*faceSize: 16
-
-rxvt*faceName: DejaVu Sans Mono
-rxvt*faceSize: 16
+urxvt*termName:    rxvt
+urxvt.font:     xft:bitstream vera sans mono:size=18:antialias=true
+urxvt.boldFont: xft:bitstream vera sans mono:bold:size=18:antialias=true

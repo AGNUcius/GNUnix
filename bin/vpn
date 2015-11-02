@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd ~/work/vpn.$1
+xterm -geometry 80x3 -e sudo openvpn --config client.ovpn

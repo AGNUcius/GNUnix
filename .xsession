@@ -2,7 +2,7 @@
 #export PATH=${PATH}:${HOME}/bin
 
 setxkbmap -option ctrl:nocaps
-xsetroot -solid '#494949'
+xsetroot -solid '#505050'
 xrdb -load ~/.Xresources
 
 # this is harmless if the VGA port is not in use

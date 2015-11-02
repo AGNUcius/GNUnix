@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if (( $# < 2)); then
+	echo "Param1: sharename"
+	echo "Param2: path"
+else
+	# net usershare add $1 $2 $2 DOMAIN\\$(whoami):f
+	net usershare add $1 $2 $2 $(whoami):f
+fi

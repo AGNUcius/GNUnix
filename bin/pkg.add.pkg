@@ -1,0 +1,6 @@
+if [ -f /etc/redhat-release ]; then
+ sudo yum -y localinstall "$@"
+else
+ sudo dpkg -i "$@"
+ sudo apt-get -f -y install
+fi

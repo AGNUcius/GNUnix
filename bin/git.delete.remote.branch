@@ -1,0 +1,6 @@
+if [[ $# -lt 1 ]]; then
+	echo branch name
+	exit 22
+fi
+
+git push origin --delete "$@"

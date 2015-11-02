@@ -11,19 +11,16 @@ if [[ -z $pass ]]; then
 	exit 22
 fi
 
-set -e -o pipefail #exit on any error
-pushd $(dirname "${BASH_SOURCE[ 0]}") > /dev/null
-	PATH=${PATH}:$(pwd)
-	[[ -f /usr/bin/sshpass ]] || yum -y install sshpass 2> /dev/null > /dev/null
-	[[ -f ~/.ssh/id_rsa ]] || ssh-keygen -q -t rsa -f ~/.ssh/id_rsa -N '' < /dev/null 2> /dev/null > /dev/null
-	ssh-keygen -R $host < /dev/null 2> /dev/null > /dev/null
-	ssh-keyscan $host 2> /dev/null >> ~/.ssh/known_hosts
-	set +e
-	ssh -qnx -F ssh_config $user@$host echo hi < /dev/null 2> /dev/null > /dev/null
-	if [[ $? -ne 0 ]]; then
-		set -e
-		SSHPASS=$pass sshpass -e ssh-copy-id $user@$host < /dev/null 2> /dev/null > /dev/null
-	fi
-	rm -fr ssh-test 2> /dev/null > /dev/null
-popd > /dev/null
-exit 0
+PATH=${PATH}:"$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+set -o pipefail
+
+PATH=${PATH}:$(pwd)
+[[ -f ~/.ssh/id_rsa ]] || ssh-keygen -q -t rsa -f ~/.ssh/id_rsa -N '' < /dev/null
+ssh-keygen -R $host < /dev/null &> /dev/null
+ssh-keyscan $host >> ~/.ssh/known_hosts 2> /dev/null
+ssh -qnx -F ssh_config $user@$host echo hi < /dev/null > /dev/null
+if [[ $? -ne 0 ]]; then
+	set -e
+	[[ -f /usr/bin/sshpass ]] || yum -y install sshpass
+	SSHPASS=$pass sshpass -e ssh-copy-id $user@$host < /dev/null &> /dev/null
+fi

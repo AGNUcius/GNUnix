@@ -1,0 +1,6 @@
+winexe --user=Administrator%$2 --uninstall --reinstall //$1 'cmd /c echo list disk > dp'
+winexe --user=Administrator%$2 --uninstall --reinstall //$1 'cmd /c echo list volume >> dp'
+winexe --user=Administrator%$2 --uninstall --reinstall //$1 'cmd /c diskpart /s dp'
+
+winexe --user=Administrator%$2 --uninstall --reinstall //$1 'cmd /c dir /ah c:\'
+winexe --user=Administrator%$2 --uninstall --reinstall //$1 'cmd /c dir /ah p:\'

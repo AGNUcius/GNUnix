@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# http://developer.android.com/sdk/installing/index.html?pkg=studio
+
+sudo apt-get install -y software-properties-common qemu-kvm
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install -y oracle-java7-installer oracle-java7-set-default
+wget https://dl.google.com/dl/android/studio/ide-zips/1.3.2.0/android-studio-ide-141.2178183-linux.zip
+7z x android-studio-ide-141.2178183-linux.zip

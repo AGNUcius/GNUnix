@@ -1,0 +1,10 @@
+BatchMode yes
+CheckHostIP no
+ConnectTimeout 60
+PasswordAuthentication no
+PreferredAuthentications publickey
+ServerAliveInterval 10
+ServerAliveCountMax 3
+StrictHostKeyChecking no
+UserKnownHostsFile /dev/null
+LogLevel quiet

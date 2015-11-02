@@ -1,0 +1,3 @@
+#!/bin/bash
+
+emacs --quick --eval '(load-file "~/NoteMacs/NotEmacs.el")'
