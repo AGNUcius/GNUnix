@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [[ $(uname) == 'Darwin' ]]; then
+    launchctl list
+fi
+
+# # RedHat/CentOS
+# if [[ -f /etc/redhat-release ]]; then
+
+# fi
+
+# # UBUNTU/Debian
+# if [[ -f /etc/lsb-release ]]; then
+
+# fi
+
+# uname | grep CYGWIN > /dev/null
+# if [[ $? == 0 ]]; then
+
+# fi

@@ -1,9 +1,25 @@
+#!/bin/bash
+
+if [[ $(uname) == 'Darwin' ]]; then
+    brew cleanup
+    brew cask cleanup
+fi
+
+# RedHat/CentOS
+if [[ -f /etc/redhat-release ]]; then
+    sudo yum clean
+fi
+
+# UBUNTU/Debian
+if [[ -f /etc/lsb-release ]]; then
 # man deborphan
 # apt-get autoremove; dpkg --get-selections | grep deinstall | cut -f1 | xargs dpkg --purge; apt-get clean
+   sudo apt-get clean
+   sudo apt-get autoremove
+fi
 
-if [ -f /etc/redhat-release ]; then
- sudo yum clean
-else
- sudo apt-get clean
- sudo apt-get autoremove
+uname | grep CYGWIN > /dev/null
+if [[ $? == 0 ]]; then
+    echo 'what to do for apt-cyg?'
+    echo 'what to do for chocolatey?'
 fi

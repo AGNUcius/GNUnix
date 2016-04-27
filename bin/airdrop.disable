@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ $1 == "" ]]; then
+	echo 'arg1: YES or NO'
+else
+    sudo defaults write /Library/Preferences/com.apple.NetworkBrowser DisableAirDrop -bool "$@"
+fi
+
+echo
+echo "Current state: $(defaults read /Library/Preferences/com.apple.NetworkBrowser)"

@@ -1,0 +1,9 @@
+set -e -o pipefail #exit on any error
+
+if [[ $# -lt 1 ]]; then
+	echo SomeFile.iso
+	exit 22
+fi
+
+[[ -d /mnt/$1 ]] || sudo mkdir /mnt/$1
+sudo mount -o loop $1 /mnt/$1

@@ -1,2 +1,26 @@
-# user-added pkgs, not including base pkgs or dependencies
-( zcat $( ls -tr /var/log/apt/history.log*.gz ) ; cat /var/log/apt/history.log ) | egrep '^(Start-Date:|Commandline:)' | grep -v aptdaemon | egrep '^Commandline:'
+#!/bin/bash
+
+if [[ $(uname) == 'Darwin' ]]; then
+    brew leaves
+    echo '----------------Cask packages----------------'
+    brew cask list
+fi
+
+# RedHat/CentOS
+if [[ -f /etc/redhat-release ]]; then
+    yum list installed
+fi
+
+# UBUNTU/Debian
+if [[ -f /etc/lsb-release ]]; then
+    # dpkg -l
+    ( zcat $( ls -tr /var/log/apt/history.log*.gz ) ; cat /var/log/apt/history.log ) | egrep '^(Start-Date:|Commandline:)' | grep -v aptdaemon | egrep '^Commandline:'
+fi
+
+# Cygwin
+uname | grep CYGWIN > /dev/null
+if [[ $? == 0 ]]; then
+    apt-cyg list
+    echo '----------------Chocolatey packages----------------'
+    choco list -localonly
+fi

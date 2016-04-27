@@ -1,5 +1,26 @@
-if [ -f /etc/redhat-release ]; then
- sudo yum -y install "$@"
-else
- sudo apt-get install -y "$@"
+#!/bin/bash
+
+if [[ $(uname) == 'Darwin' ]]; then
+    brew install "$@"
+    if [[ $? != 0 ]]; then
+        brew cask install "$@"
+    fi
+fi
+
+# RedHat/CentOS
+if [[ -f /etc/redhat-release ]]; then
+    sudo yum -y install "$@"
+fi
+
+# UBUNTU/Debian
+if [[ -f /etc/lsb-release ]]; then
+    sudo apt-get install -y "$@"
+fi
+
+uname | grep CYGWIN > /dev/null
+if [[ $? == 0 ]]; then
+    apt-cyg install "$@"
+    if [[ $? != 0 ]]; then
+        choco install "$@"
+    fi
 fi

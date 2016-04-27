@@ -1,6 +1,16 @@
-# info about this pkg
-if [ -f /etc/redhat-release ]; then
- yum info $*
+#!/bin/bash
+
+if [[ $(uname) == 'Darwin' ]]; then
+    export HOMEBREW_GITHUB_API_TOKEN=24d01dfc692625c85af24ca7725bdcb28ffae18e
+    brew info $@
+    if [[ $? == 1 ]]; then
+        brew cask info $@
+    fi
+	exit 0
+fi
+
+if [[ -f /etc/redhat-release ]]; then
+ yum info $@
 else
- apt-cache show $*
+ apt-cache show $@
 fi

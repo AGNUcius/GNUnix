@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -e
+
+if [[ $(uname) == 'Darwin' ]]; then
+    if [[ -f /usr/local/bin/brew ]]; then
+        echo 'Homebrew is already installed!'
+    else
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install )"
+    fi
+fi
+
+# RedHat/CentOS
+if [[ -f /etc/redhat-release ]]; then
+    echo 'nothing to do?'
+fi
+
+# UBUNTU/Debian
+if [[ -f /etc/lsb-release ]]; then
+    echo 'nothing to do?'
+fi
+
+# This assumes Cygwin or MSYS2 is installed
+# could support chocolatey without, using .cmd files
+uname | grep CYGWIN > /dev/null
+if [[ $? == 0 ]]; then
+    if [[ -f /usr/bin/apt-cyg ]]; then
+        echo 'apt-cyg is already installed!'
+    else
+        lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg > apt-cyg
+        install apt-cyg /bin
+    fi
+
+    if [[ -f /cygdrive/c/ProgramData/chocolatey/bin/choco ]]; then
+        echo 'Chocolatey is already installed!'
+    else
+        powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+        pkg.update
+    fi
+fi

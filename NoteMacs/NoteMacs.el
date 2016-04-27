@@ -25,6 +25,11 @@
 
 
 ;;; Customizations:
+(setenv "PATH" (concat "$HOME/bin:/usr/local/bin:"(getenv "PATH") ))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
+(defalias 'uniq 'delete-duplicate-lines)
+
 ;; Change the following values directly by replacing the value 't' with the value 'nil', or vice-versa.  These are not (yet) `defcustom' as maybe they should be.
 (defconst NoteMacs-NotEmacs nil "Make Emacs behave like Not Emacs including CUA keys, no infinite undo, and many conflicts with Emacs documentation.")
 (defconst NoteMacs-unified-keys t "Make keys more consistient across modes.  Transgresses letter but hopefully not spirit.")
@@ -85,8 +90,6 @@
 ;;     smtpmail-default-smtp-server "smtp.gmail.com"
 ;;     smtpmail-smtp-server "smtp.gmail.com"
 ;;     smtpmail-smtp-service 587)
-
-(setenv "PATH" (concat (getenv "PATH") ":~/bin"))
 
 ;; fix git's weird pager behavior
 (setenv "PAGER" "cat")
@@ -211,7 +214,7 @@
 ;; from http://www.emacswiki.org/cgi-bin/wiki.pl?EshellFunctions
 (add-hook 'eshell-mode-hook
           (lambda ()
-			(setq eshell-path-env (concat eshell-path-env ":~/bin"))
+			(setq eshell-path-env (getenv "PATH"))
             (define-key eshell-mode-map "\C-a"
               (lambda ()
                 (interactive)
@@ -232,6 +235,7 @@
 (defun pan-up () (interactive) (scroll-down -1) (next-line))
 (defun pan-down () (interactive) (scroll-down 1) (next-line -1))
 (defun kill-current-buffer () (interactive) (kill-buffer (current-buffer)))
+
 
 (if NoteMacs-unified-keys
     (progn
@@ -457,6 +461,7 @@
                   (defun ediff-window-display-p nil))) ;force single frame
       ))
 
+
 ;;;These settings are for those accustomed to Not Emacs behavior.
 ;; This section is below other NoteMacs levels to ensure priority for key assignments (such as C-z) that are defined in both.
 (if NoteMacs-NotEmacs
@@ -546,7 +551,6 @@
  '(bookmark-bmenu-toggle-filenames nil)
  '(bookmark-sort-flag nil)
  '(browse-kill-ring-quit-action (quote kill-and-delete-window))
- '(browse-url-browser-function (quote browse-url-generic))
  '(browse-url-generic-program "chromium-browser")
  '(c-default-style "user")
  '(c-echo-syntactic-information-p t)
@@ -590,21 +594,25 @@
  '(gud-cdb-directories (quote (".\\" "..\\")))
  '(gud-chdir-before-run nil)
  '(hi-lock-mode t t (hi-lock))
- '(hippie-expand-try-functions-list (quote (try-expand-dabbrev try-expand-dabbrev-from-kill try-expand-dabbrev-all-buffers try-complete-file-name try-expand-list try-expand-line try-complete-lisp-symbol)))
+ '(hippie-expand-try-functions-list
+   (quote
+    (try-expand-dabbrev try-expand-dabbrev-from-kill try-expand-dabbrev-all-buffers try-complete-file-name try-expand-list try-expand-line try-complete-lisp-symbol)))
  '(hl-line-face (quote trailing-whitespace))
  '(hs-isearch-open t)
  '(ibuffer-expert nil)
  '(ibuffer-movement-cycle nil)
  '(ibuffer-use-other-window t)
+ '(indent-tabs-mode nil)
  '(iswitchb-mode t nil (iswitchb))
  '(jit-lock-chunk-size 5000)
- '(jit-lock-stealth-load 50)
  '(lazy-highlight-cleanup t)
  '(lazy-highlight-initial-delay 0)
  '(lazy-highlight-max-at-a-time nil)
  '(line-move-visual nil)
  '(list-command-history-max 128)
  '(ls-lisp-verbosity nil)
+ '(lua-comment-start "--")
+ '(lua-indent-level 4)
  '(mail-self-blind t)
  '(mail-user-agent (quote message-user-agent))
  '(make-backup-files nil)
@@ -613,7 +621,27 @@
  '(max-specpdl-size 1600)
  '(message-log-max 1500)
  '(message-send-mail-partially-limit nil)
- '(mode-line-format (quote (#("-" 0 1 (auto-composed t)) mode-line-mule-info mode-line-modified (-4 . #(" %p" 0 3 (auto-composed t))) (line-number-mode #("[%l,%c]" 0 7 (auto-composed t))) mode-line-buffer-identification #(" %[(" 0 4 (auto-composed t)) mode-name mode-line-process minor-mode-alist "%n" #(")%]--" 0 5 (auto-composed t)) (which-func-mode ("" which-func-format "--")) #("-%-" 0 3 (auto-composed t)))))
+ '(mode-line-format
+   (quote
+    (#("-" 0 1
+       (auto-composed t))
+     mode-line-mule-info mode-line-modified
+     (-4 .
+         #(" %p" 0 3
+           (auto-composed t)))
+     (line-number-mode
+      #("[%l,%c]" 0 7
+        (auto-composed t)))
+     mode-line-buffer-identification
+     #(" %[(" 0 4
+       (auto-composed t))
+     mode-name mode-line-process minor-mode-alist "%n"
+     #(")%]--" 0 5
+       (auto-composed t))
+     (which-func-mode
+      ("" which-func-format "--"))
+     #("-%-" 0 3
+       (auto-composed t)))))
  '(mode-require-final-newline nil)
  '(mouse-wheel-mode t nil (mwheel))
  '(newsticker-html-renderer (quote newsticker-htmlr-render))
@@ -634,7 +662,9 @@
  '(show-paren-mode t nil (paren))
  '(show-trailing-whitespace t)
  '(sunshine-location "Salt Lake City, UT")
- '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72)))
+ '(tab-stop-list
+   (quote
+    (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72)))
  '(tab-width 4)
  '(tags-revert-without-query t)
  '(tool-bar-mode nil nil (tool-bar))
@@ -647,7 +677,6 @@
  '(user-mail-address "")
  '(vc-default-back-end (quote RCS))
  '(view-read-only t)
- '(visible-bell t)
  '(w3m-session-crash-recovery nil)
  '(winner-mode t nil (winner))
  '(woman-use-own-frame nil)
@@ -672,6 +701,7 @@
          ("\\.java\\'" . java-mode)
          ("\\.lua\\'" . lua-mode)
          ("\\.make?\\'" . makefile-mode)
+		 ("\\.mm\\'" . objc-mode)
          ("\\.nsi\\'" . nsi-mode)
          ("\\.php3?\\'" . php-mode)
          ("\\.ps\\'" . ps-mode)
@@ -711,7 +741,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#505050" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight bold :height 212 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
+ '(default ((t (:inherit nil :background "#505050" :foreground "#000000" :height 240))))
  '(cursor ((t (:background "green"))))
  '(font-lock-comment-face ((t (:foreground "#202020"))))
  '(font-lock-keyword-face ((t (:foreground "#000080" :background "#494950"))))

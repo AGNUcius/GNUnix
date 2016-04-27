@@ -1,17 +1,17 @@
 #!/bin/bash
 
 ip=$1; shift
-user=${1:-Administrator}; shift
-pass=${1:-Rackware123}; shift
+user=$1; shift
+pass=$1; shift
 share=${1:-c$}; shift
 
-if [[ $ip == "" ]]; then
+if [[ $pass == "" ]]; then
 	echo "Param1: IP"
-	echo "Param2: user (defaults to Administrator)"
-	echo "Param3: pass (defaults to Rackware123)"
+	echo "Param2: user"
+	echo "Param3: pass"
 	echo "Param4: sharename (defaults to c$)"
 	exit 22
 fi
 
 [[ -d /mnt/${ip} ]] || sudo mkdir /mnt/${ip}
-sudo mount -t cifs "//${ip}/${share}" /mnt/${ip} -o user=${user},pass=${pass}
+sudo mount -t cifs "//${ip}/${share}" /mnt/${ip} -o user=${user},pass=${pass},rw,uid=1000,gid=1000

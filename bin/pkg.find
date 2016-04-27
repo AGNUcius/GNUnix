@@ -1,6 +1,26 @@
+#!/bin/bash
 
-if [ -f /etc/redhat-release ]; then
- yum search all $*
-else
- apt-cache search "$*" | grep -i "$*"
+if [[ $(uname) == 'Darwin' ]]; then
+    export HOMEBREW_GITHUB_API_TOKEN=24d01dfc692625c85af24ca7725bdcb28ffae18e
+    brew search "$@"
+    if [[ $? != 0 ]]; then
+        brew cask search "$@"
+    fi
+fi
+
+# RedHat/CentOS
+if [[ -f /etc/redhat-release ]]; then
+    yum search all "$@"
+fi
+
+# UBUNTU/Debian
+if [[ -f /etc/lsb-release ]]; then
+    apt-cache search "$@" | grep -i "$@"
+fi
+
+uname | grep CYGWIN > /dev/null
+if [[ $? == 0 ]]; then
+    apt-cyg listall "$@"
+    echo '----------------Chocolatey packages----------------'
+    choco search "$@"
 fi

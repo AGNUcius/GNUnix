@@ -1,7 +1,24 @@
-# Update all installed software
-if [ -f /etc/redhat-release ]; then
- sudo yum update
-else
- sudo apt-get update
- sudo apt-get upgrade
+#!/bin/bash
+
+if [[ $(uname) == 'Darwin' ]]; then
+    brew doctor
+    brew update
+    brew upgrade --cleanup
+fi
+
+# RedHat/CentOS
+if [[ -f /etc/redhat-release ]]; then
+    sudo yum update
+fi
+
+# UBUNTU/Debian
+if [[ -f /etc/lsb-release ]]; then
+    sudo apt-get update
+    sudo apt-get upgrade
+fi
+
+uname | grep CYGWIN > /dev/null
+if [[ $? == 0 ]]; then
+    apt-cyg update
+    choco upgrade all -y
 fi

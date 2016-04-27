@@ -1,5 +1,27 @@
-if [ -f /etc/redhat-release ]; then
- sudo yum erase $*
-else
- sudo apt-get --purge remove $*
+#!/bin/bash
+
+if [[ $(uname) == 'Darwin' ]]; then
+    brew uninstall "$@"
+    if [[ $? != 0 ]]; then
+        brew cask uninstall "$@"
+    fi
+fi
+
+# RedHat/CentOS
+if [[ -f /etc/redhat-release ]]; then
+    sudo yum erase "$@"
+fi
+
+# UBUNTU/Debian
+if [[ -f /etc/lsb-release ]]; then
+    sudo apt-get --purge remove "$@"
+fi
+
+uname | grep CYGWIN > /dev/null
+if [[ $? == 0 ]]; then
+    if [[ $(apt-cyg list) == "$@" ]]; then
+        apt-cyg uninstall "$@"
+    else
+        choco uninstall "$@"
+    fi
 fi
