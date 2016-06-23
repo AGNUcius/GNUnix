@@ -25,10 +25,13 @@
 
 
 ;;; Customizations:
-(setenv "PATH" (concat "$HOME/bin:/usr/local/bin:"(getenv "PATH") ))
-(setq exec-path (append exec-path '("/usr/local/bin")))
+(setenv "PATH" (concat (getenv "HOME") "/bin:/usr/local/bin:" (getenv "PATH")))
+;(setq exec-path (concat exec-path (getenv "PATH")))
+
 
 (defalias 'uniq 'delete-duplicate-lines)
+(defalias 'omit-lines 'flush-lines)
+(defalias 'kill-lines 'flush-lines) ; see 'keep-lines for opposite
 
 ;; Change the following values directly by replacing the value 't' with the value 'nil', or vice-versa.  These are not (yet) `defcustom' as maybe they should be.
 (defconst NoteMacs-NotEmacs nil "Make Emacs behave like Not Emacs including CUA keys, no infinite undo, and many conflicts with Emacs documentation.")
@@ -93,10 +96,6 @@
 
 ;; fix git's weird pager behavior
 (setenv "PAGER" "cat")
-
-;; android dev
-(defun android-dev () (interactive)
-  (setq eshell-path-env (concat eshell-path-env ":/home/user/work/android/adt/sdk/tools:/home/user/work/android/adt/sdk/platform-tools")))
 
 ;; Mac OS X stuff
 (when (eq system-type 'darwin)
@@ -604,7 +603,6 @@
  '(ibuffer-use-other-window t)
  '(indent-tabs-mode nil)
  '(iswitchb-mode t nil (iswitchb))
- '(jit-lock-chunk-size 5000)
  '(lazy-highlight-cleanup t)
  '(lazy-highlight-initial-delay 0)
  '(lazy-highlight-max-at-a-time nil)

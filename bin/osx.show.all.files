@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ $1 == "" ]]; then
+    echo Arg1: YES or NO
+    exit 22
+fi
+
+defaults write com.apple.finder AppleShowAllFiles $1

@@ -1,10 +1,29 @@
-# Files in this pkg
-if [ -f /etc/redhat-release ]; then
- rpm -ql $*
-# rpm -qlp /path/to/fileToList.rpm
-# yumdownloader --urls
-# yum install yum-utils
-# repoquery --list packagename
-else
- dpkg -L $*
+#!/bin/bash
+
+if [[ $(uname) == 'Darwin' ]]; then
+    brew list "$@"
+    if [[ $? != 0 ]]; then
+        brew cask list "$@"
+    fi
+fi
+
+# RedHat/CentOS
+if [[ -f /etc/redhat-release ]]; then
+    rpm -ql "$@"
+    # yumdownloader --urls
+    # yum install yum-utils
+    # repoquery --list packagename
+fi
+
+# UBUNTU/Debian
+if [[ -f /etc/lsb-release ]]; then
+     dpkg -L "$@"
+fi
+
+uname | grep CYGWIN > /dev/null
+if [[ $? == 0 ]]; then
+    apt-cyg listall "$@"
+    # if [[ $? != 0 ]]; then
+    #     choco files "$@"
+    # fi
 fi

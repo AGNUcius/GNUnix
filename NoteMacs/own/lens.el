@@ -104,6 +104,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
 (defcustom lens-encoding "UTF-8" "XML encoding attribute") ;"ISO-8859-1"
 
+(defcustom lens-pure nil "do not add header and footer")
 
 ;;; CODE:
 (require 'time-date)
@@ -432,19 +433,19 @@ All terms less than this match only at the beginning of words (using `\\b')")
 			   )
 
 			  ;;top menu
-              (insert
-			   (concat
-				"<p class='header'>\n"
-				" <a href=\"-home.htm\">Home</a> |"
-				;; " <a href=\"-faq.htm\">FAQ</a> |"
-				" <a href=\"-diary.htm\">Diary</a> |"
-				" <a href=\"-projects.htm\">Projects</a> |"
-				" <a href=\"-todo.htm\">Todo</a> |"
-				" <a href=\"-pages.htm\">Pages</a> |"
-				" <a href=\"-about.htm\">About</a> |"
-				"</p>\n"
-				))
-
+			  (if (not lens-pure)
+				  (insert
+				   (concat
+					"<p class='header'>\n"
+					" <a href=\"-home.htm\">Home</a> |"
+					;; " <a href=\"-faq.htm\">FAQ</a> |"
+					" <a href=\"-diary.htm\">Diary</a> |"
+					" <a href=\"-projects.htm\">Projects</a> |"
+					" <a href=\"-todo.htm\">Todo</a> |"
+					" <a href=\"-pages.htm\">Pages</a> |"
+					" <a href=\"-about.htm\">About</a> |"
+					"</p>\n"
+					)))
 			  (insert "<p class='main'>")
 
 			  ;;images
@@ -458,12 +459,15 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
 			  ;;footer
               (goto-char (point-max))
-              (insert
-			   "</p>\n"
-			   "<p class='footer'>\n"
-			   " Page generated from <a href=\".txt/" file "\">" file "</a> by <a href=\".src/lens.el\">lens.el</a>."
-			   "</p>\n"
+			  (if (not lens-pure)
+				  (insert
+				   "</p>\n"
+				   "<p class='footer'>\n"
+				   " Page generated from <a href=\".txt/" file "\">" file "</a> by <a href=\".src/lens.el\">lens.el</a>."
+				   "</p>\n"))
 
+			  (insert
+			   "</p>"
 			   "</body>\n"
 			   "</html>\n")
 

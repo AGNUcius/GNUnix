@@ -1,0 +1,3 @@
+#!/bin/bash
+
+git for-each-ref --sort=-committerdate --format='%(committerdate) %(authorname) %(refname)' refs/remotes/origin/|grep -e ".$@"|head -n 100

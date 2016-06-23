@@ -1,16 +1,25 @@
 #!/bin/bash
 
 if [[ $(uname) == 'Darwin' ]]; then
-    export HOMEBREW_GITHUB_API_TOKEN=24d01dfc692625c85af24ca7725bdcb28ffae18e
-    brew info $@
+    brew info "$@"
     if [[ $? == 1 ]]; then
-        brew cask info $@
+        brew cask info "$@"
     fi
-	exit 0
 fi
 
+# RedHat/CentOS
 if [[ -f /etc/redhat-release ]]; then
- yum info $@
-else
- apt-cache show $@
+    yum info "$@"
+fi
+
+# UBUNTU/Debian
+if [[ -f /etc/lsb-release ]]; then
+    apt-cache show "$@"
+fi
+
+uname | grep CYGWIN > /dev/null
+if [[ $? == 0 ]]; then
+    apt-cyg show "$@"
+    # echo '----------------Chocolatey packages----------------'
+    # choco info "$@"
 fi

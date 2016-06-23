@@ -1,9 +1,10 @@
+#!/bin/bash
 set -e -o pipefail #exit on any error
 
-if [[ $# -lt 1 ]]; then
-	echo SomeFile.iso
+if [[ $2 == "" ]]; then
+	echo "Shared folder"
+    echo "Mount Directory"
 	exit 22
 fi
 
-[[ -d /mnt/$1 ]] || sudo mkdir /mnt/$1
-sudo mount -o loop $1 /mnt/$1
+sudo mount -t vboxsf -o rw,uid=1000,gid=1000 "$1" "$2"

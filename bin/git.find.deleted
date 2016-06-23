@@ -1,0 +1,3 @@
+#!/bin/bash
+
+git log --diff-filter=D --summary | sed -n -e '/^commit/h' -e '\:/:{' -e G -e 's/\ncommit \(.*\)/ \1/gp' -e } > deleted

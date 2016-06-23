@@ -1,9 +1,14 @@
 #!/bin/bash
 
 if [[ $# -lt 1 ]]; then
-	echo branch
+	echo 'arg1: branch'
+    echo '[optional switches to "git diff"]'
+    echo 'Example:'
+    echo '  git.diff.branch master --stat'
+    echo 'Note: --ignore-all-space enabled'
 	exit 22
 fi
 branch=$1; shift
 
-git diff --stat "$@" ${branch}...HEAD
+git diff "$@" --ignore-all-space ${branch}...HEAD
+
