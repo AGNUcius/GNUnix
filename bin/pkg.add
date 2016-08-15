@@ -21,6 +21,6 @@ uname | grep CYGWIN > /dev/null
 if [[ $? == 0 ]]; then
     apt-cyg install "$@"
     if [[ $? != 0 ]]; then
-        choco install "$@"
+        choco install -y "$@"
     fi
 fi

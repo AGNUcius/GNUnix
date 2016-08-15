@@ -6,7 +6,7 @@
 	default = current
 
 [core]
-	editor = emacs
+	editor = emacsclient
 	pager =
 
 [merge]

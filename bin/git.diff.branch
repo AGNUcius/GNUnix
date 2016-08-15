@@ -11,4 +11,3 @@ fi
 branch=$1; shift
 
 git diff "$@" --ignore-all-space ${branch}...HEAD
-

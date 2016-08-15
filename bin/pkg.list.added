@@ -4,6 +4,8 @@ if [[ $(uname) == 'Darwin' ]]; then
     brew leaves
     echo '----------------Cask packages----------------'
     brew cask list
+    echo '----------------pkgutil pkgs----------------'
+    pkgutil --pkgs
 fi
 
 # RedHat/CentOS

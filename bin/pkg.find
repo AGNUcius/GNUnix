@@ -1,9 +1,14 @@
 #!/bin/bash
 
 if [[ $(uname) == 'Darwin' ]]; then
-    brew search "$@"
-    if [[ $? != 0 ]]; then
-        brew cask search "$@"
+    which brew
+    if [[ $? == 0 ]]; then
+        brew search "$@"
+        if [[ $? != 0 ]]; then
+            brew cask search "$@"
+        fi
+    else
+        pkg.SETUP
     fi
 fi
 

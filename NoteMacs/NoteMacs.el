@@ -25,7 +25,12 @@
 
 
 ;;; Customizations:
-(setenv "PATH" (concat (getenv "HOME") "/bin:/usr/local/bin:" (getenv "PATH")))
+;; Emacs cannot see ~/.bashrc settings when launched as X Window app
+(setenv "PATH" (concat (getenv "PATH") ":" (getenv "HOME") "/bin:"
+                       (getenv "HOME") "/bin/nim/bin:"
+                       (getenv "HOME") "/.nimble/bin:"
+                       "/usr/local/bin:" ))
+
 ;(setq exec-path (concat exec-path (getenv "PATH")))
 
 
@@ -676,6 +681,7 @@
  '(vc-default-back-end (quote RCS))
  '(view-read-only t)
  '(w3m-session-crash-recovery nil)
+ '(warning-suppress-types (quote ((\(undo\ discard-info\)))))
  '(winner-mode t nil (winner))
  '(woman-use-own-frame nil)
  '(x-stretch-cursor t))
