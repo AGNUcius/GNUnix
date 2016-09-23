@@ -26,10 +26,9 @@
 
 ;;; Customizations:
 ;; Emacs cannot see ~/.bashrc settings when launched as X Window app
-(setenv "PATH" (concat (getenv "PATH") ":" (getenv "HOME") "/bin:"
-                       (getenv "HOME") "/bin/nim/bin:"
-                       (getenv "HOME") "/.nimble/bin:"
-                       "/usr/local/bin:" ))
+(setenv "PATH" (concat "/usr/local/bin:"
+                       (getenv "PATH") ":"
+                       (getenv "HOME") "/bin"))
 
 ;(setq exec-path (concat exec-path (getenv "PATH")))
 
@@ -585,7 +584,6 @@
  '(eol-mnemonic-mac ":")
  '(eol-mnemonic-undecided "?")
  '(eol-mnemonic-unix "/")
- '(fill-column 50)
  '(garbage-collection-messages t)
  '(gdb-show-main t)
  '(generic-define-unix-modes t)
@@ -624,27 +622,6 @@
  '(max-specpdl-size 1600)
  '(message-log-max 1500)
  '(message-send-mail-partially-limit nil)
- '(mode-line-format
-   (quote
-    (#("-" 0 1
-       (auto-composed t))
-     mode-line-mule-info mode-line-modified
-     (-4 .
-         #(" %p" 0 3
-           (auto-composed t)))
-     (line-number-mode
-      #("[%l,%c]" 0 7
-        (auto-composed t)))
-     mode-line-buffer-identification
-     #(" %[(" 0 4
-       (auto-composed t))
-     mode-name mode-line-process minor-mode-alist "%n"
-     #(")%]--" 0 5
-       (auto-composed t))
-     (which-func-mode
-      ("" which-func-format "--"))
-     #("-%-" 0 3
-       (auto-composed t)))))
  '(mode-require-final-newline nil)
  '(mouse-wheel-mode t nil (mwheel))
  '(newsticker-html-renderer (quote newsticker-htmlr-render))
@@ -664,8 +641,7 @@
  '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-mode t nil (paren))
  '(show-trailing-whitespace t)
- '(sunshine-location "Salt Lake City, UT")
- '(tab-stop-list
+  '(tab-stop-list
    (quote
     (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72)))
  '(tab-width 4)
@@ -752,6 +728,7 @@
  '(region ((t (:inverse-video t))))
  '(trailing-whitespace ((t (:background "#606060"))))
  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
+
 
 ;; ;skyblue
 ;; (custom-set-faces

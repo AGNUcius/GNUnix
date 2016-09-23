@@ -1,4 +1,5 @@
 #!/bin/bash
+# git remote delete ... something # cleanup misnamed/renamed branches
 git fetch origin
 git clean -dfx
 git reset --hard @{upstream}
