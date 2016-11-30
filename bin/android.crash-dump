@@ -1,0 +1,7 @@
+#!/bin/bash
+# Related: android.logs
+
+adb shell run-as com.sling cat /data/data/com.sling/files/movenetworks/ap.crash.log
+
+# 
+adb shell run-as com.sling cat /data/anr/traces.txt

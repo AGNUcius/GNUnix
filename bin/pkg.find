@@ -4,9 +4,8 @@ if [[ $(uname) == 'Darwin' ]]; then
     which brew
     if [[ $? == 0 ]]; then
         brew search "$@"
-        if [[ $? != 0 ]]; then
-            brew cask search "$@"
-        fi
+        echo '----------------Cask packages----------------'        
+        brew cask search "$@"
     else
         pkg.SETUP
     fi

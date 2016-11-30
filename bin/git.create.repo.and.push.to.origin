@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ $# < 1 ]]; then
+	echo arg1: origin url
+    exit 22
+fi
+
+git init
+git add --all
+git commit -m "init"
+git remote add origin "$1"
+git push origin master

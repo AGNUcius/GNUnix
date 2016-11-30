@@ -1,0 +1,9 @@
+#!/bin/bash
+
+git fetch > /dev/null 2>&1
+#git for-each-ref --count=30 --sort=-committerdate refs/remotes/ --format='%(color:blue)%(HEAD)%(color:reset) %(color:yellow)%(refname:short)%(color:reset) - %(color:white)%(objectname:short)%(color:reset) - %(contents:subject) - %(color:cyan)%(authorname)%(color:reset) %(color:green)%(committerdate:relative)%(color:reset)'
+
+# black, red, green, yellow, blue, magenta, cyan, and white
+git for-each-ref --count=30 --sort=-committerdate refs/remotes/ --format='%(color:cyan)%(authorname)%(color:reset): %(color:green)%(contents:subject)%(color:reset) %(color:white)%(committerdate:relative)%(color:reset)  %(color:black)%(refname:short)%(color:reset) %(color:magenta)%(objectname:short)%(color:reset)'
+
+# for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format="%ci %cr" $branch | head -n 1` \\t$branch; done | sort -r

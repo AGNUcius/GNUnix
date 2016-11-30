@@ -7,7 +7,7 @@ fi
 
 # RedHat/CentOS
 if [[ -f /etc/redhat-release ]]; then
-    sudo yum clean
+    sudo yum clean all
 fi
 
 # UBUNTU/Debian

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+ip="$(android.ip)"
+
+# restart in tcpip mode on port 5555
+adb tcpip 5555
+adb connect "$ip:5555"

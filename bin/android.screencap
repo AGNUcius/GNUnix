@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -x
+adb shell screencap -p /sdcard/screen.png
+adb pull /sdcard/screen.png
+adb shell rm /sdcard/screen.png
+open screen.png
