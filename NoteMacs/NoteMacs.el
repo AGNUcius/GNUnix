@@ -33,6 +33,53 @@
 ;(setq exec-path (concat exec-path (getenv "PATH")))
 
 
+;; (require 'helm)
+;; (require 'helm-config)
+
+;; ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+;; ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+;; ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+;; (global-set-key (kbd "C-c h") 'helm-command-prefix)
+;; (global-unset-key (kbd "C-x c"))
+
+;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+;; (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
+;; (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
+;; (when (executable-find "curl")
+;;   (setq helm-google-suggest-use-curl-p t))
+
+;; (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+;;       helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+;;       helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+;;       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+;;       helm-ff-file-name-history-use-recentf t
+;;       helm-echo-input-in-header-line t)
+
+;; (defun spacemacs//helm-hide-minibuffer-maybe ()
+;;   "Hide minibuffer in Helm session if we use the header line as input field."
+;;   (when (with-helm-buffer helm-echo-input-in-header-line)
+;;     (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
+;;       (overlay-put ov 'window (selected-window))
+;;       (overlay-put ov 'face
+;;                    (let ((bg-color (face-background 'default nil)))
+;;                      `(:background ,bg-color :foreground ,bg-color)))
+;;       (setq-local cursor-type nil))))
+
+
+;; (add-hook 'helm-minibuffer-set-up-hook
+;;           'spacemacs//helm-hide-minibuffer-maybe)
+
+;; (setq helm-autoresize-max-height 0)
+;; (setq helm-autoresize-min-height 20)
+;; (helm-autoresize-mode 1)
+
+;; (helm-mode 1)
+
+
+
+
+
 (defalias 'uniq 'delete-duplicate-lines)
 (defalias 'omit-lines 'flush-lines)
 (defalias 'kill-lines 'flush-lines) ; see 'keep-lines for opposite
@@ -48,8 +95,33 @@
 (add-to-list 'load-path "~/NoteMacs/own")
 (add-to-list 'load-path "~/NoteMacs/site")
 (add-to-list 'load-path "~/NoteMacs/site/git-modes")
-(add-to-list 'load-path "~/NoteMacs/site/magit")
+
+
+;; (ido-mode 1)
+;; (ido-everywhere 1)
+;; (ido-ubiquitous-mode 1)
+;; (global-set-key (kbd "M-x") 'smex)
+;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; ;; This is your old M-x.
+;; (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+
 (autoload 'magit-status "magit" nil t)
+
+;; (defun magit-diff-master (&optional args)
+;;   "Show diff range master...HEAD"
+;;   (interactive (list (magit-diff-read-args)))
+;;   (magit-diff "master...HEAD" args))
+
+;; (defun magit-diff-mbase (&optional args)
+;;   "Show diff of $(git merge-base master HEAD) to working tree."
+;;   (interactive (list (magit-diff-read-args)))
+;;   (magit-diff-working-tree
+;;    (magit-git-string "merge-base" "master" "HEAD") args))
+
+;; (magit-define-popup-action 'magit-diff-popup
+;;   ?m "Diff merge-base master" 'magit-diff-mbase)
+
 
 (add-to-list 'load-path "~/NoteMacs/site/mu4e")
 (autoload 'mu4e "mu4e" nil t)
@@ -195,9 +267,7 @@
         ;; save-excursion
         ;; backward-char
         ;; ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-        ((message "no paren here")))
-  )
-
+        ((message "no paren here"))))
 (define-key global-map [(control \()] 'match-paren)
 
 
@@ -579,6 +649,9 @@
  '(dmoccur-maximum-size 5000)
  '(ediff-ignore-similar-regions t t)
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(elfeed-feeds
+   (quote
+    ("http://nedroid.com/feed" "http://www.50ply.com/atom.xml" "http://www.terminally-incoherent.com/blog/feed" "http://nullprogram.com/feed")))
  '(emacs-lisp-mode-hook (quote (turn-on-eldoc-mode checkdoc-minor-mode)))
  '(enable-recursive-minibuffers t)
  '(eol-mnemonic-mac ":")
@@ -595,6 +668,7 @@
  '(grep-template "grep <X> <C> -inH -e <R> <F>")
  '(gud-cdb-directories (quote (".\\" "..\\")))
  '(gud-chdir-before-run nil)
+ '(helm-youtube-key (quote AIzaSyCYWv1p8mX8QX0eac0QZfQ7GjXPztvJW1A))
  '(hi-lock-mode t t (hi-lock))
  '(hippie-expand-try-functions-list
    (quote
@@ -641,7 +715,7 @@
  '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-mode t nil (paren))
  '(show-trailing-whitespace t)
-  '(tab-stop-list
+ '(tab-stop-list
    (quote
     (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72)))
  '(tab-width 4)

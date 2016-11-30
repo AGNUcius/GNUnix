@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ $1 == "" ]]; then
+	echo "arg1: 'enable' or 'disable'"
+else
+    sudo spctl "--master-${1}"
+fi
+
+echo "Current state: $(spctl --status)"

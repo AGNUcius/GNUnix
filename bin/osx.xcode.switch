@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $1 == "" ]]; then
+	echo "arg1: '7' or '8'"
+else
+    rm /Applications/Xcode.app
+    ln -s "/Applications/Xcode${1}.app" /Applications/Xcode.app
+    sudo xcode-select --switch "/Applications/Xcode${1}.app/Contents/Developer"
+fi
+
+xcode-select --print-path

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+adb shell monkey -p "$1" 1
+
+# adb shell am start "$1/$1.MainActivity"

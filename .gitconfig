@@ -1,6 +1,7 @@
 [user]
 	name = Patrick Anderson
-	email = agnucius@gmail.com
+    # email = agnucius@gmail.com
+    email = patrick.anderson@echostar.com
 
 [push]
 	default = current
@@ -13,19 +14,34 @@
 	tool = ediff
 
 [alias]
+    st = status
+    lo = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	lg = log --oneline --abbrev-commit --all --graph --decorate --color
     graph = log --graph --date-order -C -M '--pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\"' --all --date=rfc
-	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat --date=rfc
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ n[%cn]" --decorate --numstat --date=rfc
     undelete = log --graph --oneline --decorate $(git rev-parse $(git fsck --no-reflog | grep "dangling commit" | cut -f 3 -d ' ') --not HEAD)
 	find = grep --ignore-case --line-number -I
-	oldest-ancestor = !bash -c 'diff --old-line-format=' --new-line-format=' <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
-	branchdiff = !sh -c \"git diff `git oldest-ancestor`..\"
-	branchlog = !sh -c \"git log `git oldest-ancestor`..\"
+
 [color]
 	ui = auto
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/sourcetree/2.2.4/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# example:
+# android.key KEYCODE_VOLUME_UP
+
+adb shell input text "$@"

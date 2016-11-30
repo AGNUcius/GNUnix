@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# pmset sleepnow # go to sleep
+# pmset displaysleepnow # put displays to sleep
+# osascript -e'tell app"system events"to restart' # restart
+# osascript -e'tell app"system events"to log out' # log out

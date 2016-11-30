@@ -3,6 +3,7 @@
 # for examples
 
 export PATH="$PATH:$HOME/bin"
+export ANDROID_HOME=/usr/local/opt/android-sdk
 BASHRC=YES
 
 # Alias definitions.

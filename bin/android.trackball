@@ -1,0 +1,31 @@
+#!/bin/bash
+
+case "$1" in
+    up)
+        a=roll
+        x=0
+        y=-1
+        ;;
+    down)
+        a=roll
+        x=0
+        y=1
+        ;;
+    right)
+        a=roll
+        x=1
+        y=0
+        ;;
+    left)
+        a=roll
+        x=-1
+        y=0
+        ;;
+    click | press | push | enter)
+        a=press
+        x=
+        y=
+        ;;
+esac
+
+adb shell input trackball $a $x $y
