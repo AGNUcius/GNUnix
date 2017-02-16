@@ -1,0 +1,149 @@
+OSXNotes.net/shell.txt
+
+d=~/Library/KeyBindings;mkdir $d;echo '{"~x"=(selectParagraph:,cut:);}'>$d/DefaultKeyBinding.dict # make option-X cut a line
+brew install bash;echo /usr/local/bin/bash|sudo tee -a /etc/shells;chsh -s /usr/local/bin/bash # install Bash 4 and make it the default login shell
+find . -name \*.flac|parallel ffmpeg -i {} -aq 2 {.}.mp3;find . -name \*.cue|parallel mp3splt -c {} {.}.mp3 # convert FLAC to V2 MP3 and split files with cue files
+x(){ printf %s\\n "${@-$(cat)}"|parallel unar; } # extract archives in parallel (unar is a command line version of The Unarchiver)
+im(){ local l f=/tmp/$(date +%s).html;while read l;do printf %s "<a href=${l/#\//file:///}><img src=$l height=${1-476}></a>";done>$f;open $f; } # generate an HTML file for viewing or selecting images
+osascript -e'tell app"itunes"' -e'next track' -e'set player position to duration of current track/2' -eend # start playing the next track from the middle in iTunes
+osascript -e'tell app"itunes" to set player position to player position+30' # go 30 seconds forward in iTunes
+COPYFILE_DISABLE= tar -cjf dir.tbz dir # create a tar archive with no AppleDouble files
+zip dir.zip -x \*.DS_Store -r dir # create a zip archive with no AppleDouble files (Archive Utility adds a __MACOSX directory when the archived files contain metadata such as extended attributes)
+brew install duti;echo 'net.sourceforge.skim-app.skim .pdf all'>~/.duti;duti ~/.duti # make Skim the default application for PDF files
+echo $'org.gnu.Emacs public.plain-text all\norg.gnu.Emacs public.unix-executable all'>~/.duti;duti ~/.duti # make Emacs the default application for text files with no extension and executable scripts
+brew tap homebrew/dupes;brew install coreutils findutils gawk gnu-sed gnu-tar wget homebrew/dupes/grep # install GNU command line utilities
+mdimport -A # show a list of all metadata attributes
+mdfind 'kMDItemFSName=*.zip' # search for files with a .zip extension
+mdfind kMDItemContentType=com.apple.application-bundle # search for applications
+mdfind kMDItemContentTypeTree=public.movie # search for video files
+mdfind 'kMDItemFSContentChangeDate>$time.now(-86400)' -onlyin ~/Library/Caches/Metadata/Safari/History # search for recent Safari history items
+mdfind 'kMDItemURL=*substring*' -onlyin ~/Library/Caches/Metadata/Safari/History|gxargs -rd\\n mdls -nkMDItemURL # search for Safari history items whose URL contains a substring
+mdfind 'kMDItemDateAdded>$time.today(-7)' # search for files that were moved or first indexed within the previous seven days
+mdfind 'kMDItemFSSize>1e8' # search for files whose size is over 100 MB
+mdfind 'kMDItemContentType=*' -onlyin . # list all indexed files in the current directory
+touch /tmp/a.mkv;mdls -nkMDItemContentTypeTree /tmp/a.mkv # show the UTI and parent UTIs for the mkv extension
+mdfind com_apple_backup_excludeItem=com.apple.backupd # find files that are excluded from Time Machine backups
+mdls -nkMDItem{Path,WhereFroms} ~/Downloads/* # show the URLs that files were downloaded from
+sudo tmutil disablelocal # disable local Time Machine snapshots
+tmutil status # display the progress of a backup
+sudo ln -s "$(tmutil machinedirectory)" /tm # create a symlink for the Time Machine machine directory
+tmutil compare ~/Documents "$(tmutil machinedirectory)"/Latest/*$HOME/Documents # show changes to ~/Documents since the last backup
+tmutil calculatedrift "$(tmutil machinedirectory)" # show the size of changes between backups
+launchctl unload /System/Library/LaunchAgents/com.apple.Finder.plist # quit Finder
+st(){ osascript -e'set text item delimiters to linefeed' -e'tell app"safari"to url of tabs of window 1 as text'; } # list the URLs of tabs in the frontmost Safari window
+s1(){ osascript -e'tell app"safari"to url of document 1'; } # print the URL of the current tab in Safari
+osascript -e'tell app"safari"to source of document 1' # show the source of the current tab in Safari
+osascript -e'tell app"safari"to do javascript"document.body.innerHTML"in document 1' # show the innerHTML property of the body element of the current tab in Safari
+sjs(){ osascript -e'on run{a}' -e'tell app"safari"to do javascript a in document 1' -eend "$1"; } # run JavaScript in the current tab in Safari
+osascript -e'set o to""' -e'tell app"safari"to repeat with t in(get tabs of window 1)' -e'set o to o&source of t' -eend # concatenate the source of each tab in the frontmost window in Safari
+scm(){ osascript -e'on run{a}' -e'tell app"safari"to close tabs of window 1 whose url contains a' -eend "$1"; } # close tabs whose URL matches a substring in the frontmost window in Safari
+osascript -erepeat -e'tell app"safari"to do javascript"window.scroll(0,9999999)"in document 1' -edelay\ 0.1 -eend # scroll the frontmost tab in Safari down indefinitely
+defaults read ~/Library/Safari/Bookmarks.plist|sed -n 's/^ *URLString = "\(.*\)";/\1/p' # list the URLs of bookmarks and reading list items in Safari
+hi(){ mdfind "$*" -onlyin ~/Library/Caches/Metadata/Safari/History|gxargs -rd\\n mdls -nkMDItemURL|cut -d\" -f2; } # search for Safari history items
+osascript -e'tell window 1 of app"safari"to close(tabs where index>=(get index of current tab))' # close the current tab and tabs right to it in Safari
+security find-internet-password -s accounts.google.com -w # search for Google account passwords
+find ~/Library/Scripts -name \*.scpt|parallel osadecompile {}\>{.}.applescript # convert compiled scripts to uncompiled scripts
+screencapture -l$(osascript -e'tell app"safari"to id of window 1') a.png # save a screenshot of the frontmost Safari window
+find . -Btime -1 # find files created within the last 24 hours
+mdfind 'kMDItemFSCreationDate>=$time.iso(2015-01-01T00:00:00Z)' -onlyin . # find files created in 2015 or later in UTC
+find . -acl # find files with an ACL
+find . -xattrname com.apple.ResourceFork # find files with a resource fork
+find . -flags +uchg # find locked files
+xattr -rd com.apple.quarantine ~/Downloads # unquarantine files
+xattr -cr . # remove all extended attributes in the directory tree (-d can only be used to delete a single extended attribute but -c deletes all extended attributes)
+ls -l@eO # list files and show extended attributes, ACLs, and file flags
+ls -lU # list files and show creation times in place of modification times
+ls -tU # sort files by creation time
+chmod -NR . # remove ACLs recursively
+diskutil mount $disk # mount a single disk
+diskutil mountVolume $disk # mount all volumes on a disk
+diskutil unmountAll $disk # unmount all volumes on a disk
+diskutil eject $disk # unmount all volumes on a disk and eject the disk
+diskutil mount Recovery\ HD;hdiutil mount /Volumes/Recovery\ HD/com.apple.recovery.boot/BaseSystem.dmg # mount the recovery partition
+mkdir /tmp/efi;sudo mount -t msdos /dev/disk0s1 /tmp/efi # mount the EFI partition
+osascript -e'tell app"finder"to eject' # eject removable disks
+sudo installer -pkg file.pkg -target / # install a package
+sudo repair_packages --list-standard-pkgs # list the packages that are checked when verifying or repairing permissions
+sudo repair_packages --repair --standard-pkgs # repair permissions
+pmset -g assertions # show if there are power assertions that prevent idle sleep or display sleep
+pmset -g log # show a log of power management events
+pmset sleepnow # go to sleep
+pmset displaysleepnow # put displays to sleep
+osascript -e'tell app"system events"to restart' # restart
+osascript -e'tell app"system events"to log out' # log out
+textutil -convert html *.rtf # convert RTF files to HTML
+pandoc -f markdown_strict file.md|textutil -inputencoding UTF-8 -format html -convert rtf -stdin -stdout|pbcopy # copy a Markdown file as rich text (non-ASCII characters are not preserved without `-inputencoding UTF-8`)
+sudo codesign -fs - /Applications/Chess.app/ # replace the code signature of Chess with an ad-hoc signature (this also disables sandboxing)
+find ~/Library/Containers/com.apple.TextEdit -type f # find regular files in TextEdit's sandbox container
+mdfind kMDItemContentType=public.unix-executable -onlyin /System|xargs strings|grep -Ei '^[a-z0-9.-]{10,100}$' # search for potential defaults keys
+strings /Applications/iTunes.app/Contents/MacOS/iTunes|grep -E '^[a-zA-Z0-9.-]{10,100}$'|awk '!a[$0]++' # search for potential defaults keys for iTunes
+kextstat|grep -v com.apple # list non-Apple kernel extensions
+sips -s format png file.icns -o file.png # convert icns to png
+cat /Library/Receipts/InstallHistory.plist # list installed packages
+lsbom $(pkgutil --bom installer.pkg) # show what files are added by an installer
+pkgutil --info com.adobe.pkg.FlashPlayer # show what files have been installed by Flash Player
+brew install imagesnap;i=1;while sleep 1;do imagesnap $((i++)).png;done # save images from a webcam
+osascript -e'id of app"finder"' # show Finder's bundle identifier
+osascript -e'text returned of(display dialog""default answer"")' # display a text dialog
+sed 's/$/[[slnc 1000]]/'|say # speak lines of text with a one second pause between each line
+defaults write com.apple.finder NSUserKeyEquivalents -dict-add 'Show Package Contents' @\\r;killall Finder # make command-return show package contents in Finder
+defaults delete com.apple.dock persistent-apps;killall Dock # remove all applications from the Dock
+$(locate lsregister) -dump # display the contents of the Launch Services database
+sudo systemstats # show for example periods of high I/O and memory activity and what processes have been launched most often
+sudo powermetrics # show for example CPU package energy use and processes sorted by a weighted average of package idle wakeups and CPU use
+lsappinfo listen +becameFrontmost forever # show when the frontmost application changes
+lsappinfo visibleProcessList|cut -d\" -f4 # print the name of the second frontmost application
+sudo find / -name .localized -delete # disable using localized folder names when the OS language is not English
+defaults write com.apple.TextEdit AppleAntiAliasingThreshold -int 999 # disable antialiasing in TextEdit
+find ~/Music \( -name \*.pls -o -name \*.m3u -o -name \*.m3u8 \) -delete # delete playlist files
+stat -f'%N %z %Sm' file # show the filename, size in bytes, and modification time of a file
+apropos dtrace # list dtrace scripts
+sudo opensnoop # show opened files
+sudo execsnoop # show new processes
+sudo iosnoop # show IO events
+sudo iotop # show processes with the highest IO use
+sudo kill.d # show signals sent to processes
+brew install webkit2png;webkit2png http://www.example.com # save a screenshot of a website
+defaults write -g AppleFontSmoothing -int 1 # use a lighter text rendering style
+defaults write -g NSUserKeyEquivalents -dict-add 'Select Previous Tab' @j 'Select Next Tab' @k # make command-J and command-K change tabs
+defaults write -g NSScrollAnimationEnabled -bool false # disable smooth scrolling
+defaults write -g NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false # make applications like TextEdit and Preview not show a file dialog on launch
+defaults write -g NSAllowContinuousSpellChecking -bool false # disable spell checking in most text views
+defaults write -g NSAutomaticWindowAnimationsEnabled -bool false # disable the animations for opening and closing windows that were added in 10.7
+defaults write -g NSDocumentSaveNewDocumentsToCloud -bool false # do not use iCloud as the default location in save dialogs
+defaults write com.apple.CrashReporter DialogType none # disable crash report dialogs
+defaults write com.apple.LaunchServices LSQuarantine -bool false # disable the dialogs shown when opening files downloaded from the internet
+osascript -e'tell app"itunes"to refresh selection' # update the tags of the selected items in iTunes after the tags have been edited outside iTunes
+grep 'BSD process name' /Library/Logs/DiagnosticReports/*.panic # see what processes have caused kernel panics
+osascript -e'tell app"itunes"to set rating of current track to 20' # set the rating of the current track to one star in iTunes
+mdfind -onlyin . kMDItemUserTags=\* # find files that have tags
+sbda(){ if [ $# -ge 1 ];then printf %s\\n "$@";else cat;fi|gxargs -rd\\n mdls -rnkMDItem{DateAdded,Path}|tr \\0 \\n|paste - -|sort -r|cut -f2; } # sort files by date added (date moved or first indexed)
+lsdo(){ if [ $# -ge 1 ];then printf %s\\n "$@";else cat;fi|gxargs -rd\\n mdls -rnkMDItem{LastUsedDate,Path}|tr \\0 \\n|paste - -; } # show when files were last opened
+no(){ osascript -e'on run{a}' -e'display notification""with title a' -eend "${1-notification}"; } # display a notification
+quit(){ osascript -e'on run a' -e'repeat with x in a' -e'quit app x' -eend -eend "$@"; };qo(){ local x;for x;do quit "$x";open -Fa"$x";done; } # quit or quit and reopen applications
+ko(){ local x;pkill -xi "$@";for x;do open -Fa"$x";done; } # terminate and reopen applications (`pkill -xi` is a case-insensitive alternative to killall and `open -F` disables restoring state)
+kill $(lsappinfo info -app $(lsappinfo front) -only pid|cut -d= -f2) # terminate the frontmost application
+xcrun swift # start a Swift REPL
+defaults write -g com.apple.mouse.scaling -float 6 # increase the mouse tracking speed to twice the maximum value selectable from System Preferences (log out and back in to apply the changes)
+brew update;brew upgrade # update Homebrew and upgrade all formulas
+find /usr/local/bin ! -lname ../Cellar/\* -ls # find files in /usr/local/bin that were not added by Homebrew
+sqlite3 ~/Library/Safari/History.db 'select url from history_items' # list the URLs of Safari history items (quit Safari and wait for a while to unlock the database)
+sqlite3 ~/Library/Application\ Support/Google/Chrome/Default/History 'select urls.url from urls' # list the URLs of Chrome history items (quit Chrome and wait for a while to unlock the database)
+copy(){ osascript -e'on run{a}' -e'set the clipboard to posix file a' -eend "$(greadlink -f "$1")"; } # copy a file (this only works with a single file)
+mdls -nkMDItemWhereFroms ~/Downloads/*.download|sed -n 's/^ *"\(.*\)"/\1/p'|xargs open # attempt to dowload incomplete downloads again
+xjs(){ osascript -e'on run{a}' -e'tell app"google chrome"to tell active tab of window 1 to execute javascript a' -eend "$1"; } # run JavaScript in the current tab in Chrome
+osascript -e'tell app"safari"to tell document 1 to do javascript"o=\"\";a=document.querySelectorAll(\".someclass a\");for(i=0;e=a[i];i++)o+=e.href+\"\\n\";o"' # make a list of the href attributes of elements that match a CSS selector in the current tab in Safari
+opens(){ local l;while IFS= read -r l;do open "$l";sleep ${1-0.5};done; } # open multiple URLs in a row without `LSOpenURLsWithRole() failed` errors
+gpp(){ gnuplot -e "set term png;set output '/tmp/plot.png';$1";qlmanage -p /tmp/plot.png&>/dev/null; } # generate a gnuplot plot and view it with Quick Look
+osascript -e'tell app"itunes"to delete playlists whose size is 0 and special kind is none' # delete empty playlists in iTunes
+osascript -e'tell app"safari"to do javascript"document.body.innerHTML"in document 1'|ggrep -Po 'href="\K[^"]*'|recode html|grep substring|xargs open # open links in the current document in Safari whose URL contains a substring
+while [ $(osascript -e'tell app"google chrome"to loading of tabs of window 1 contains true') = true ];do sleep 1;done # wait until all tabs of the frontmost Chrome window have finished loading
+ima(){ local l;printf %s\\n "${@-$(cat)}"|while IFS= read -r l;do printf "\e]1337;File=inline=1:$(if [[ $l = *://* ]];then curl "$l";else cat "$l";fi|base64)\a\n";done; } # display images in iTerm 2 version 2.9 and later
+osascript -e'tell app"system events"to keystroke"c"using command down';sleep 1;pbpaste|awk 1 >>~/n/notes # copy text and append the clipboard to a text file
+sudo killall -HUP mDNSResponder # reset the DNS cache in 10.10.4 and later and from 10.7 to 10.9.5
+sudo discoveryutil mdnsflushcache # reset the DNS cache from 10.10 to 10.10.3 and from 10.6 to 10.6.8
+osascript -e'tell app"itunes"' -e'repeat with t in(get file tracks of library playlist 1)' -e'if location of t is missing value then delete t' -eend -eend # remove items whose files have been deleted from the iTunes library
+syslog|grep backup # show for example how large recent Time Machine snapshots are and when snapshots have been deleted
+x=$(networksetup -listallhardwareports|awk '/Hardware Port: Wi-Fi/{getline;print$2}');sudo ifconfig $x down;sudo ifconfig $x up # turn Wi-Fi off and back on
+sudo networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4 # use Google's public DNS servers in order to for example access blocked websites (this does the same thing as changing the DNS servers from System Preferences)
+bind -x '"\e\C-l":printf \\e\]50\;ClearScrollback\\a';bind '"\C-l":"\e\C-l\C-j"' #  make control-l clear the scrollback buffer and accept a line in iTerm 2 in Bash 4.0 and later

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ $1 == "" ]]; then
+	echo 'arg1: off or on'
+else
+    sudo mdutil -a -i $1
+    if [[ $1 == 'on' ]]; then
+        sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+    else
+        sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+    fi
+fi
+
+echo "Current state: $(mdutil -s)"

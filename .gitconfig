@@ -1,6 +1,7 @@
 [user]
 	name = Patrick Anderson
     email = agnucius@gmail.com
+    # email = patrick.anderson@echostar.com
 
 [push]
 	default = current
@@ -12,22 +13,34 @@
 [merge]
 	tool = ediff
 
+[log]
+    date = relative
+
+[format]
+    pretty = format:%C(yellow)%h %C(blue)%>(12)%ad %C(green)%<(7)%aN%C(black)%d %C(reset)%s %C(reset)
+
 [alias]
+    lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    ls = !"git lg1 -40"
+
+    shortlog = format:%C(yellow)%h%C(magenta)% G? %C(blue)%>(12,trunc)%ad %C(green)%<(7,trunc)%aN%C(reset)%s%C(red)% gD% D
     st = status
     lo = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	lg = log --oneline --abbrev-commit --all --graph --decorate --color
+	# lg = log --oneline --abbrev-commit --all --graph --decorate --color
     graph = log --graph --date-order -C -M '--pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\"' --all --date=rfc
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ n[%cn]" --decorate --numstat --date=rfc
     undelete = log --graph --oneline --decorate $(git rev-parse $(git fsck --no-reflog | grep "dangling commit" | cut -f 3 -d ' ') --not HEAD)
 	find = grep --ignore-case --line-number -I
+    news = !git for-each-ref --sort='-authordate' --format='%(refname)%09%(authordate)' refs/heads | sed -e 's-refs/heads/--'
+    recent = !git for-each-ref --count 30 --sort=-committerdate refs/remotes/ --format='%(color:reset)%(color:yellow)%(subject)  %(color:reset)%(color:green)%(refname:short)  %(color:reset)%(color:black)%(committerdate:relative)  %(color:reset)%(color:magenta)%(authorname)'
 
+# black, red, green, yellow, blue, magenta, cyan, and white
 [color]
 	ui = auto
-
-[color]
-  branch = auto
-  diff = auto
-  status = auto
+    branch = auto
+    diff = auto
+    status = auto
 
 [color "branch"]
   current = yellow reverse

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cat $1 | feedgnuplot --lines \
+                     --legend 0 current \
+                     --legend 1 working \
+                     --legend 2 fullOscAverage \
+                     --legend 3 fullAdjusted \
+                     --hardcopy $1.png --terminal png
+
+open $1.png
+

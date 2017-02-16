@@ -1,9 +1,11 @@
 #!/bin/bash
+git fetch origin refs/heads/*:refs/remotes/origin/*
+echo '................................................................'
 
-git fetch > /dev/null 2>&1
-#git for-each-ref --count=30 --sort=-committerdate refs/remotes/ --format='%(color:blue)%(HEAD)%(color:reset) %(color:yellow)%(refname:short)%(color:reset) - %(color:white)%(objectname:short)%(color:reset) - %(contents:subject) - %(color:cyan)%(authorname)%(color:reset) %(color:green)%(committerdate:relative)%(color:reset)'
-
-# black, red, green, yellow, blue, magenta, cyan, and white
-git for-each-ref --count=30 --sort=-committerdate refs/remotes/ --format='%(color:cyan)%(authorname)%(color:reset): %(color:green)%(contents:subject)%(color:reset) %(color:white)%(committerdate:relative)%(color:reset)  %(color:black)%(refname:short)%(color:reset) %(color:magenta)%(objectname:short)%(color:reset)'
+git for-each-ref --sort='-committerdate' refs/remotes --format='%(color:cyan)%(authorname)  %(color:green)%(committerdate:relative)  %(color:white)"%(contents:subject)"  %(color:black)%(refname:short)  %(color:red)%(objectname:short)%(color:reset)' "$@"
 
 # for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format="%ci %cr" $branch | head -n 1` \\t$branch; done | sort -r
+# for k in `git branch -r | sed s/^..//`; do echo -e `git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k --`\\t"$k";done | sort
+# for k in `git branch -r | perl -pe 's/^..(.*?)( ->.*)?$/\1/'`; do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k -- | head -n 1`\\t$k; done | sort -r
+# git branch -vr --sort='-committerdate'
+

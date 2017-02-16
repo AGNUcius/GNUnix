@@ -77,7 +77,8 @@
 ;; (helm-mode 1)
 
 
-
+(setq-default fringes-outside-margins t)
+(setq-default left-margin-width 1 right-margin-width 1)
 
 
 (defalias 'uniq 'delete-duplicate-lines)
@@ -600,6 +601,10 @@
   (message "C-Tab buffer switching unavailable"))
 
 
+;; (global-set-key [(control tab)]       'cycbuf-switch-to-next-buffer)
+;; (global-set-key [(shift control tab)]        'cycbuf-switch-to-previous-buffer)
+
+
 ;;; Customized variables
 ;;  press f1 v RET  while over any variable name
 (custom-set-variables
@@ -608,8 +613,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(Info-scroll-prefer-subnodes nil)
- '(ange-ftp-dumb-unix-host-regexp "netbsd\\|freeshell")
- '(ange-ftp-generate-anonymous-password "none@aol.com")
  '(appt-message-warning-time 2)
  '(apropos-do-all t)
  '(archive-zip-use-pkzip nil)
@@ -649,9 +652,6 @@
  '(dmoccur-maximum-size 5000)
  '(ediff-ignore-similar-regions t t)
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
- '(elfeed-feeds
-   (quote
-    ("http://nedroid.com/feed" "http://www.50ply.com/atom.xml" "http://www.terminally-incoherent.com/blog/feed" "http://nullprogram.com/feed")))
  '(emacs-lisp-mode-hook (quote (turn-on-eldoc-mode checkdoc-minor-mode)))
  '(enable-recursive-minibuffers t)
  '(eol-mnemonic-mac ":")
@@ -700,16 +700,13 @@
  '(mouse-wheel-mode t nil (mwheel))
  '(newsticker-html-renderer (quote newsticker-htmlr-render))
  '(next-line-add-newlines nil)
- '(package-selected-packages (quote (bm)))
+ '(package-selected-packages
+   (quote
+    (cycbuf ace-isearch magit pdf-tools lua-mode helm-youtube google-this bm)))
  '(parens-require-spaces nil)
  '(pc-selection-mode t)
- '(rcirc-default-nick "AGNUcius")
- '(rcirc-default-server "irc.freenode.net")
- '(rcirc-default-user-full-name "AGNUcius")
- '(rcirc-default-user-name "AGNUcius")
- '(rcirc-startup-channels-alist (quote (("^irc.gnu.org$" "#rcirc"))))
+ '(read-buffer-completion-ignore-case t)
  '(read-quoted-char-radix 10)
- '(scroll-bar-mode (quote left))
  '(scroll-conservatively 50)
  '(scroll-preserve-screen-position t)
  '(scroll-step 1)
@@ -736,9 +733,6 @@
  '(winner-mode t nil (winner))
  '(woman-use-own-frame nil)
  '(x-stretch-cursor t))
-
-
-;         ("\\.\\(cmd\\|bat\\)\\'" . bat-generic-mode)
 
 ;;;; FILE->MODE ASSOCIATIONS:
 (setq auto-mode-alist
