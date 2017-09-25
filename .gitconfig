@@ -1,7 +1,7 @@
 [user]
 	name = Patrick Anderson
-    email = agnucius@gmail.com
-    # email = patrick.anderson@echostar.com
+    # email = agnucius@gmail.com
+    email = Patrick.Anderson@EchoStar.com
 
 [push]
 	default = current
@@ -13,27 +13,40 @@
 [merge]
 	tool = ediff
 
-[log]
-    date = relative
-
 [format]
-    pretty = format:%C(yellow)%h %C(blue)%>(12)%ad %C(green)%<(7)%aN%C(black)%d %C(reset)%s %C(reset)
+#pretty = format:%C(green)%cN %C(white)%cr %C(black)%s %C(blue)%h%C(reset)
+    pretty = %<(13,trunc)%cN %<(10,trunc)%cr | %s | %h | %D
+    # pretty = format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(12,trunc)%ad %C(auto,green)%<(7,trunc)%aN%C(auto,reset)%s%C(auto,red)% gD% D
 
 [alias]
+    a = add
+    b = branch
+    c = checkout
+    d = diff
+    f = fetch
+    l = log -30
+    m = merge
+    n = for-each-ref --count=30 --sort=-committerdate refs/remotes/ --format='%(color:green)%(committername) %(color:black)%(contents:subject) %(color:white) %(committerdate:relative) %(color:yellow)%(refname:short) %(color:blue)%(objectname:short)%(color:black)'
+    p = pull
+    s = status
+
+    gr = log --graph --full-history --all --color --pretty=tformat:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m"
+    ishow = ! bash -c 'git show --pretty="format:"  --name-only "$(git merge-base "$(git rev-parse --abbrev-ref HEAD)" master)..HEAD" | grep -v "^$" | sort | uniq' -
+    fshow = ! sh -c 'git show --pretty="format:" --name-only $1 | grep -v "^$" | uniq | sed -e "s#^#`git rev-parse --show-toplevel`/#"' -
     lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-    ls = !"git lg1 -40"
-
     shortlog = format:%C(yellow)%h%C(magenta)% G? %C(blue)%>(12,trunc)%ad %C(green)%<(7,trunc)%aN%C(reset)%s%C(red)% gD% D
-    st = status
     lo = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	# lg = log --oneline --abbrev-commit --all --graph --decorate --color
-    graph = log --graph --date-order -C -M '--pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\"' --all --date=rfc
+#    graph = log --graph --date-order -C -M '--pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\"' --all --date=rfc
+    graph = log --graph --all --decorate --oneline
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ n[%cn]" --decorate --numstat --date=rfc
     undelete = log --graph --oneline --decorate $(git rev-parse $(git fsck --no-reflog | grep "dangling commit" | cut -f 3 -d ' ') --not HEAD)
 	find = grep --ignore-case --line-number -I
-    news = !git for-each-ref --sort='-authordate' --format='%(refname)%09%(authordate)' refs/heads | sed -e 's-refs/heads/--'
     recent = !git for-each-ref --count 30 --sort=-committerdate refs/remotes/ --format='%(color:reset)%(color:yellow)%(subject)  %(color:reset)%(color:green)%(refname:short)  %(color:reset)%(color:black)%(committerdate:relative)  %(color:reset)%(color:magenta)%(authorname)'
+    # lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lg = log --graph --pretty='%h -%d %s (%cr) %C(white) %cn %C(reset)' --abbrev-commit --date=relative
+    
 
 # black, red, green, yellow, blue, magenta, cyan, and white
 [color]
@@ -57,3 +70,9 @@
   added = yellow
   changed = green
   untracked = cyan
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

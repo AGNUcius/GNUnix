@@ -1,11 +1,34 @@
 #!/bin/bash
 
-if [[ $1 == "" ]]; then
-	echo "arg1: '7' or '8'"
-else
-    rm /Applications/Xcode.app
-    ln -s "/Applications/Xcode${1}.app" /Applications/Xcode.app
-    sudo xcode-select --switch "/Applications/Xcode${1}.app/Contents/Developer"
-fi
+echo jk
+exit -1
 
-xcode-select --print-path
+/Applications/Xcode.app
+/Library/Developer/CommandLineTools
+/Library/Developer/CommandLineTools/SDKs
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
+
+
+copy   ~/work/build/toolchains/MacOS/MacOSX10.8.sdk.tar.gz   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Info.plist
+	<key>MinimumSDKVersion</key>
+	<string>10.08</string>
+
+
+if [[ "$1" == "" ]]; then
+	echo "arg1: '7' or '8'"
+    exit 22
+else
+    if [[ "$1" 
+    old=
+    new
+    mv /Applications/Xcode.app /Apps.off/Xcode${1}.app
+        mv /Applications/Xcode.app /Apps.off/Xcode${1}.app
+
+    ${1}
+    rm 
+    ln -s "/Applications/Xcode.app" /Applications/Xcode.app
+    sudo xcode-select --switch "/Applications/Xcode${1}.app/Contents/Developer"
+    xcode-select --install
+fi

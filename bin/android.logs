@@ -1,3 +1,4 @@
 #!/bin/bash
 
-adb logcat -d | tee logcat
+echo logging to ./logcat
+adb logcat > logcat

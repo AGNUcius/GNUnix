@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $1 == "" ]]; then
+if [[ "$1" == "" ]]; then
 	echo "arg1: '0' or '1'"
 else
     sudo sysctl "kern.timer.coalescing_enabled=${1}"

@@ -27,11 +27,8 @@
 ;;; Customizations:
 ;; Emacs cannot see ~/.bashrc settings when launched as X Window app
 (setenv "PATH" (concat "/usr/local/bin:"
-                       (getenv "PATH") ":"
-                       (getenv "HOME") "/bin"))
-
-;(setq exec-path (concat exec-path (getenv "PATH")))
-
+                       (getenv "HOME") "/bin:"
+                       (getenv "PATH")))
 
 ;; (require 'helm)
 ;; (require 'helm-config)
@@ -77,10 +74,29 @@
 ;; (helm-mode 1)
 
 
+;; (ivy-mode 1)
+;; (setq ivy-use-virtual-buffers t)
+;; (global-set-key "\C-s" 'swiper)
+;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
+;; (global-set-key (kbd "<f6>") 'ivy-resume)
+;; (global-set-key (kbd "M-x") 'counsel-M-x)
+;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+;; ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+;; ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+;; ;; (global-set-key (kbd "<f1> l") 'counsel-find-library)
+;; ;; (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+;; ;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+;; ;; (global-set-key (kbd "C-c g") 'counsel-git)
+;; ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
+;; ;; (global-set-key (kbd "C-c k") 'counsel-ag)
+;; ;; (global-set-key (kbd "C-x l") 'counsel-locate)
+;; ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+;; (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+
 (setq-default fringes-outside-margins t)
 (setq-default left-margin-width 1 right-margin-width 1)
 
-
+(defalias 'wc 'count-words)
 (defalias 'uniq 'delete-duplicate-lines)
 (defalias 'omit-lines 'flush-lines)
 (defalias 'kill-lines 'flush-lines) ; see 'keep-lines for opposite
@@ -209,7 +225,55 @@
 ;; (autoload 'findr-query-replace "findr" "Replace text in files." t)
 ;; (define-key global-map [(meta control r)] 'findr-query-replace)
 
-(define-key global-map [(meta control s)] 'grep-find)
+;; (define-key global-map [(meta control s)] 'grep-find)
+(define-key global-map [(meta control s)] 'ripgrep-regexp)
+
+;; (define-key global-map [(meta control s)]
+;;   (lambda (regexp)
+;;     (interactive "sregexp: ")
+;;     (let (
+;;           (buf (get-buffer-create "* ripgrep *")))
+;;       (with-current-buffer buf
+;;         (grep-mode))
+;;       (async-shell-command
+;;        (concat "rg --ignore-case --no-heading " regexp) buf))))
+
+;; (define-key global-map [(meta control s)]
+;;   (lambda (regexp)
+;;     (interactive "sregexp: ")
+;;     (let (
+;;           (buf (get-buffer-create "* ripgrep *")))
+;;       (with-current-buffer buf
+;;         (funcall 'grep-mode))
+;;       (shell-command
+;;        (concat "rg --ignore-case --no-heading " regexp) buf)
+;;       (switch-to-buffer buf))))
+
+;; (define-key global-map [(meta control s)]
+;;   (lambda (regexp)
+;;     (interactive "sregexp: ")
+;;     (setq rg-buf-name "*ripgrep*")
+;;     (setq rg-buf-buf (get-buffer-create rg-buf-name))
+;;     (with-current-buffer rg-buf-buf
+;;       (funcall 'grep-mode))
+;;     (start-process rg-buf-name rg-buf-buf "rg"
+;;                    (concat "--ignore-case --no-heading " regexp))
+;;     (switch-to-buffer rg-buf-buf)))
+
+;; (define-key global-map [(meta control s)]
+;;   (lambda (regexp)
+;;     (interactive "sregexp: ")
+;;     (let* (
+;;           (name "* ripgrep *")
+;;           (buf (get-buffer-create name)))
+;;       (set-buffer buf)
+;;       (erase-buffer)
+;;       (goto-char (point-min))
+;;       (insert "-*- mode: grep -*-")
+;;       (shell-command
+;;        (concat "rg --ignore-case --no-heading " regexp) buf)
+;; )))
+
 
 (autoload 'hexview-find-file "hexview-mode" nil t)
 (autoload 'time-insert "time-insert" nil t)
@@ -288,7 +352,7 @@
 ;; from http://www.emacswiki.org/cgi-bin/wiki.pl?EshellFunctions
 (add-hook 'eshell-mode-hook
           (lambda ()
-			(setq eshell-path-env (getenv "PATH"))
+			;; (setq eshell-path-env (getenv "PATH"))
             (define-key eshell-mode-map "\C-a"
               (lambda ()
                 (interactive)
@@ -439,6 +503,10 @@
       (define-key Buffer-menu-mode-map " " 'scroll-up)
       (define-key Buffer-menu-mode-map "u" 'scroll-down)
       (define-key Buffer-menu-mode-map "c" 'Buffer-menu-unmark)
+	  (define-key Buffer-menu-mode-map "D" '(lambda (&optional arg) (interactive)
+                                              (Buffer-menu-delete arg)
+                                              (Buffer-menu-switch-other-window)))
+
 	  (autoload 'dired-efap "dired-efap" "Make current `dired' filename editable." t)
 	  (define-key dired-mode-map [(f2)] 'dired-efap)))
 
@@ -586,6 +654,8 @@
 ;; Frame Title (Also see `mode-line-format')
 (setq frame-title-format `(,(user-login-name) "@" ,(system-name) " " global-mode-string " %f" ))
 
+;; (require 'powerline)
+;; (powerline-default-theme)
 
 ;;; Where to put this?
 ;;these require c-default-style be set to "user"
@@ -627,7 +697,6 @@
  '(bookmark-bmenu-toggle-filenames nil)
  '(bookmark-sort-flag nil)
  '(browse-kill-ring-quit-action (quote kill-and-delete-window))
- '(browse-url-generic-program "chromium-browser")
  '(c-default-style "user")
  '(c-echo-syntactic-information-p t)
  '(c-mode-common-hook (quote (hs-minor-mode)))
@@ -680,6 +749,7 @@
  '(ibuffer-use-other-window t)
  '(indent-tabs-mode nil)
  '(iswitchb-mode t)
+ '(large-file-warning-threshold nil)
  '(lazy-highlight-cleanup t)
  '(lazy-highlight-initial-delay 0)
  '(lazy-highlight-max-at-a-time nil)
@@ -688,6 +758,7 @@
  '(ls-lisp-verbosity nil)
  '(lua-comment-start "--")
  '(lua-indent-level 4)
+ '(magit-diff-arguments (quote ("--ignore-all-space" "--no-ext-diff" "--stat")))
  '(mail-self-blind t)
  '(mail-user-agent (quote message-user-agent))
  '(make-backup-files nil)
@@ -702,11 +773,13 @@
  '(next-line-add-newlines nil)
  '(package-selected-packages
    (quote
-    (cycbuf ace-isearch magit pdf-tools lua-mode helm-youtube google-this bm)))
+    (markdown-mode which-key powerline rust-mode nim-mode wgrep rg ripgrep magit-rockstar phi-grep counsel highlight-refontification helm-unicode flyspell-correct-helm f3 ace-isearch magit pdf-tools lua-mode helm-youtube google-this bm)))
  '(parens-require-spaces nil)
  '(pc-selection-mode t)
  '(read-buffer-completion-ignore-case t)
  '(read-quoted-char-radix 10)
+ '(ripgrep-arguments (quote ("-i")))
+ '(scroll-bar-mode (quote left))
  '(scroll-conservatively 50)
  '(scroll-preserve-screen-position t)
  '(scroll-step 1)
@@ -727,6 +800,7 @@
  '(user-full-name "")
  '(user-mail-address "")
  '(vc-default-back-end (quote RCS))
+ '(vc-git-annotate-switches "-w")
  '(view-read-only t)
  '(w3m-session-crash-recovery nil)
  '(warning-suppress-types (quote ((\(undo\ discard-info\)))))
@@ -791,7 +865,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :background "#505050" :foreground "#000000" :height 240))))
+ '(default ((t (:inherit nil :background "#505050" :foreground "#000000" :height 241 :family "Menlo" :foundry "nil" :slant normal :weight normal :width normal))))
  '(cursor ((t (:background "green"))))
  '(font-lock-comment-face ((t (:foreground "#202020"))))
  '(font-lock-keyword-face ((t (:foreground "#000080" :background "#494950"))))

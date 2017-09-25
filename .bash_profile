@@ -1,5 +1,7 @@
 # used for interactive or 'login' shells
 
+export PATH="$PATH:$HOME/bin:/usr/local/sbin"
+
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi

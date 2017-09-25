@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $1 == "" ]]; then
+if [[ "$1" == "" ]]; then
     echo "Arg1: <crash file>.crash"
     exit 22
 fi

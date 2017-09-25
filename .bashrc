@@ -2,7 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-export PATH="$PATH:$HOME/bin"
 export ANDROID_HOME=/usr/local/opt/android-sdk
 BASHRC=YES
 

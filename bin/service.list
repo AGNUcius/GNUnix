@@ -9,10 +9,11 @@ fi
 
 # fi
 
-# # UBUNTU/Debian
-# if [[ -f /etc/lsb-release ]]; then
-
-# fi
+# UBUNTU/Debian
+if [[ -f /etc/lsb-release ]]; then
+    service --status-all
+    systemctl
+fi
 
 # uname | grep CYGWIN > /dev/null
 # if [[ $? == 0 ]]; then
