@@ -1,0 +1,5 @@
+#!/bin/bash
+
+[[ -d log ]] || mkdir log
+echo writing log/android
+adb logcat > log/android

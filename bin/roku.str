@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ "$1" == "" ]]; then
+    echo "Arg1: IP of roku"
+    echo "Arg2: string"
+    exit 22
+fi
+
+str="$2"
+for ((i=0; i<${#str}; i++)); do
+    roku.key "$1" "${str:i:1}"
+done

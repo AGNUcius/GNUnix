@@ -1,0 +1,10 @@
+#!/bin/bash
+
+fork="$(git merge-base  --fork-point HEAD)"
+base="$(git merge-base $fork HEAD)"
+
+echo "fork=$fork"
+echo "base=$base"
+
+# git diff --name-only $base HEAD
+#git diff $base HEAD

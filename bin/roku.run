@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ "$2" == "" ]]; then
+    echo "Arg1: IP of roku"
+    echo "Arg2: App ID"
+   exit 22
+fi
+
+curl -d '' "http://$1:8060/launch/$2"

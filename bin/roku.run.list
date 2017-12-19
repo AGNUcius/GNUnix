@@ -1,0 +1,9 @@
+#!/bin/bash
+
+
+if [[ "$1" == "" ]]; then
+    echo "Arg1: IP of roku"
+   exit 22
+fi
+
+curl http://$1:8060/query/apps
