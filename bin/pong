@@ -1,5 +1,5 @@
 #!/bin/bash
-[[ $1 == '' ]] && echo ip && exit 22
+[[ "$1" == '' ]] && echo ip && exit 22
 nc -w 5 -z $1 22 && echo success on ssh && exit 0
 nc -w 5 -z $1 445 && echo success on smb && exit 0
 echo fail!
