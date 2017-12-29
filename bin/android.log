@@ -2,4 +2,5 @@
 
 [[ -d log ]] || mkdir log
 echo writing log/android
+#adb logcat --buffer-size=50M -f log/android
 adb logcat > log/android

@@ -5,5 +5,6 @@ if [[ "$1" == "" ]]; then
     exit 22
 fi
 
+adb kill-server
 adb tcpip 5555 # restart in tcpip mode on port 5555
 adb connect "$1:5555"
