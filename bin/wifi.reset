@@ -1,0 +1,3 @@
+#!/bin/bash
+nmcli radio all off
+nmcli radio all on

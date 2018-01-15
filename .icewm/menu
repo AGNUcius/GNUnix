@@ -20,7 +20,7 @@
 # hedgewars, gianas return, bontago
 # yo frankie, open ttd, cube trains
 
-prog "Urban Terror" urbanterror urbanterror
+prog "Chrome Stable" google-chrome-stable google-chrome-stable
 prog "Chrome Beta" google-chrome-beta google-chrome-beta
 prog Chromium chromium-browser chromium-browser
 prog FireFox firefox firefox
@@ -215,6 +215,7 @@ menu Programs Programs {
   prog triplane triplane triplane
   prog trophy trophy trophy
   prog tumiki-fighters tumiki-fighters tumiki-fighters -fullscreen
+  prog urbanterror urbanterror urbanterror
   prog val-and-rick val-and-rick val-and-rick
   prog vectoroids vectoroids vectoroids
   prog vor vor vor
