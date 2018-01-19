@@ -1,6 +1,8 @@
 #!/bin/bash
 # git remote delete <some-old-branch> # cleanup misnamed/renamed branches
-git status
+git stash
+git stash drop
 git fetch origin
 git clean -dfx
 git reset --hard @{upstream}
+git status

@@ -2,11 +2,7 @@
 
 android.key up
 android.key right
-sleep 1
-android.key down
-sleep 1
 android.key press
-sleep 1
 android.key press
 
 

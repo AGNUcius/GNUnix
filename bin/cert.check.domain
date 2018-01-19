@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ "$1" == "" ]]; then
+	echo 'arg1: host to interrogate (without protocol or port)'
+    exit 22
+else
+    openssl s_client -connect ${1}:443 < /dev/null 2>/dev/null | openssl x509 -text -in /dev/stdin
+fi
+
+
+
+

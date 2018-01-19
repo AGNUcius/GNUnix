@@ -588,14 +588,9 @@
        'calendar-load-hook
        (lambda ()
          (progn
-           (define-key calendar-mode-map "it" (lambda nil (interactive) (find-file "~/doc/.txt/-todo")))
-           ;;insert daily
-           (define-key calendar-mode-map "id"
+           (define-key calendar-mode-map "id" ;insert daily
              (lambda nil (interactive)
                (diary-prepend-entry diary-file)))
-           (define-key calendar-mode-map "is"
-             (lambda nil (interactive)
-               (diary-prepend-entry "~/work/doc/.txt/status")))
            )))
 
       (add-hook 'ediff-load-hook
@@ -604,8 +599,13 @@
       ))
 
 
-;;;These settings are for those accustomed to Not Emacs behavior.
-;; This section is below other NoteMacs levels to ensure priority for key assignments (such as C-z) that are defined in both.
+;; These settings are for those accustomed to Not Emacs behavior,
+;; meaning to act even more severly like Windows/CUA and so makes
+;; a great solution if you have that finger memory, but conflicts
+;; with Emacs keys in major ways.
+
+;; This section is below other NoteMacs levels to ensure priority
+;; for key assignments (such as C-z) that are defined in both.
 (if NoteMacs-NotEmacs
     (progn
       ;; ESC means "Cancel" ;could use C-g instead. was: alternate to Meta
@@ -664,12 +664,12 @@
 (c-set-offset 'substatement-open 0)
 
 ;; C-TAB cycle through open buffers/windows
+;; should use `package-install' here
 (if (file-exists-p "~/NoteMacs/site/pc-bufsw.el")
     (progn
       (require 'pc-bufsw)
       (pc-bufsw::bind-keys [C-tab] [C-S-tab]))
   (message "C-Tab buffer switching unavailable"))
-
 
 ;; (global-set-key [(control tab)]       'cycbuf-switch-to-next-buffer)
 ;; (global-set-key [(shift control tab)]        'cycbuf-switch-to-previous-buffer)
@@ -773,7 +773,7 @@
  '(next-line-add-newlines nil)
  '(package-selected-packages
    (quote
-    (markdown-mode which-key powerline rust-mode nim-mode wgrep rg ripgrep magit-rockstar phi-grep counsel highlight-refontification helm-unicode flyspell-correct-helm f3 ace-isearch magit pdf-tools lua-mode helm-youtube google-this bm)))
+    (nim-mode hide-lines flycheck-nimsuggest flycheck-rust flycheck-nim cycbuf ace-isearch magit pdf-tools lua-mode helm-youtube google-this bm)))
  '(parens-require-spaces nil)
  '(pc-selection-mode t)
  '(read-buffer-completion-ignore-case t)
@@ -807,6 +807,8 @@
  '(winner-mode t nil (winner))
  '(woman-use-own-frame nil)
  '(x-stretch-cursor t))
+
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
 ;;;; FILE->MODE ASSOCIATIONS:
 (setq auto-mode-alist
