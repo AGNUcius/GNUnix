@@ -1,0 +1,52 @@
+#!/usr/bin/python
+
+# based on https://github.com/paulmouzas/roku-remote.git
+# sudo easy_install pip
+# sudo pip install requests
+
+import requests, curses, socket, sys
+
+KEY_MAP = {}
+
+KEY_MAP.update({
+    27:               'BACK',   #Escape
+    10:               'SELECT', #Enter
+    curses.KEY_F1:    'INFO',
+    curses.KEY_HOME:  'HOME',
+    curses.KEY_UP:    'UP',
+    curses.KEY_DOWN:  'DOWN',
+    curses.KEY_LEFT:  'LEFT',
+    curses.KEY_RIGHT: 'RIGHT',
+    127: 'BACKSPACE'
+})
+
+def main():
+    if len(sys.argv) < 2:
+        print 'Arg1: IP of roku'
+        exit(22)
+
+    url = sys.argv[1]
+
+    try:
+        scr = curses.initscr()
+        curses.noecho()
+        scr.keypad(1)
+        scr.addstr(0, 0, 'Connected to %s' % url)
+        scr.addstr(1, 0, 'ESC:  Back')
+        scr.addstr(2, 0, 'RET:  Select')
+        scr.addstr(3, 0, 'SPC:  Play/Pause')
+        scr.addstr(4, 0, 'F1 :  Info')
+        scr.addstr(5, 0, 'HOME: Home')
+        scr.addstr(6, 0, '')
+
+        while True:
+            key = scr.getch()
+            cmd = KEY_MAP.get(key, '')
+            if cmd == '': cmd = 'Lit_%' + "%x" % key
+            requests.post('http://' + url + ':8060/keypress/' + cmd, '')
+
+    finally:
+        curses.endwin()
+
+if __name__ == '__main__':
+    main()
