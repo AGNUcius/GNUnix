@@ -1,87 +1,124 @@
-#!/usr/bin/python
+#!/usr/bin/python # remix of https://github.com/paulmouzas/roku-remote.git
 
-# remix https://github.com/paulmouzas/roku-remote.git
-
-# enable developer mode on your roku
+# use your remote to enable developer mode on the roku
 # HOME HOME HOME  UP UP  RIGHT LEFT  RIGHT LEFT  RIGHT
+
+# change
+# HOME HOME HOME HOME HOME  UP RIGHT DOWN LEFT  UP
 
 # sudo easy_install pip
 # sudo pip install requests
 
-import requests, curses, socket, sys
+import requests, curses, socket, sys, subprocess
 
 KEY_MAP = {}
 KEY_MAP.update({
     27:               'BACK',   #Escape
     10:               'SELECT', #Enter
+#   32:               'PLAY_PAUSE',
     curses.KEY_F1:    'INFO',
     curses.KEY_HOME:  'HOME',
     curses.KEY_UP:    'UP',
     curses.KEY_DOWN:  'DOWN',
     curses.KEY_LEFT:  'LEFT',
     curses.KEY_RIGHT: 'RIGHT',
+
+    curses.KEY_PPAGE: 'VolumeUp',
+    curses.KEY_NPAGE: 'VolumeDown',
+    ord('M'):         'VolumeMute',
+
     127:              'BACKSPACE'
 })
 
-DISCOVER_GROUP = ('239.255.255.250', 1900)
-DISCOVER_MESSAGE = '''\
+GROUP = ('239.255.255.250', 1900)
+MESSAGE = '''\
 M-SEARCH * HTTP/1.1\r\n\
 Host: %s:%s\r\n\
 Man: "ssdp:discover"\r\n\
 ST: roku:ecp\r\n\r\n\
-''' % DISCOVER_GROUP
+''' % GROUP
+
+
+def roku_name(ip):
+    resp = requests.get('http://' + ip + ':8060/query/device-info')
+    xml = resp.text
+    pos = xml.find('<user-device-name>')
+    name = ''
+    if pos != -1:
+        name = xml[pos + len('<user-device-name>'):].split('<')[0]
+
+    return name
 
 def find_roku():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.sendto(DISCOVER_MESSAGE, DISCOVER_GROUP)
-    data = s.recv(1024)
-    s.close()
-    return data
+    print 'Searching ...  (Ctrl-c to Cancel)'
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.sendto(MESSAGE, GROUP)
+    count = 0
+    try:
+        while True:
+            sock.settimeout(1)
+            data = sock.recv(4096)
+            if data == '': break
+            resp = data.split('\r\n')
+            for line in resp[1:]:
+                line = line.split()
+                if len(line) < 2: continue
+                var = line[0][:-1]; val = line[1]
+                if var == 'LOCATION':
+                    ip = val[len('http://'):]
+                    ip = ip.split(':')[0]
+                    print ip, ' ', roku_name(ip)
+                    count += 1
+                    break
 
-class HTTPResponse(object):
-    def __init__(self, response_text):
-        response = response_text.split('\r\n')
-        status_line = response[0].split()
-        self.http_version = status_line[0]
-        self.status_code = status_line[1]
-        self.status = status_line[2]
-        self.headers = {}
-        for line in response[1:]:
-            line = line.split()
-            if len(line) == 2:
-                header_name = line[0][:-1]
-                header_value = line[1]
-                self.headers[header_name.lower()] = header_value.lower()
+    except socket.timeout:
+        print "finished search"
+
+    sock.close()
+    return ip, count
 
 def main():
+    count = 0
     if len(sys.argv) < 2:
-        print 'Searching...'
-        print 'Ctrl-c to exit'
-
-        response_text = find_roku()
-        response = HTTPResponse(response_text)
-        url = response.headers['location']
+        ip, count = find_roku()
     else:
-        url = 'http://' + sys.argv[1] + ':8060/'
+        ip = sys.argv[1]; count = 1
+
+    if count < 1:
+        print 'could not find roku'
+        return 0
+
+    if count > 1:
+        print 'select ip from list'
+        return 0
+
+    url = 'http://' + ip + ':8060/'
 
     try:
         scr = curses.initscr(); curses.noecho(); scr.keypad(1)
-        scr.addstr(0, 16, 'Posting to %s' % url)
+        scr.addstr(0, 4, 'Posting to "%s" at %s' % (roku_name(ip), ip))
         scr.addstr(1, 0, 'ESC:  Back')
         scr.addstr(2, 0, 'RET:  Select')
         scr.addstr(3, 0, 'HOME: Home')
         scr.addstr(4, 0, 'SPC:  Play/Pause')
         scr.addstr(5, 0, 'F1 :  Info')
-        scr.addstr(6, 0, '')
+        scr.addstr(6, 0, 'U  :  Update Roku')
+        scr.addstr(7, 0, 'Q  :  QUIT')
+        scr.addstr(8, 0, '')
 
         while True:
             key = scr.getch()
+            if key == ord('U'):
+                subprocess.call(["roku.update", ip])
+                continue
+            if key == ord('Q'): break
             cmd = KEY_MAP.get(key, '')
             if cmd == '': cmd = 'Lit_%' + "%x" % key
             requests.post(url + 'keypress/' + cmd)
 
-    finally:
-        curses.endwin()
+    except:
+        print ''
 
+    curses.endwin()
 if __name__ == '__main__':
     main()

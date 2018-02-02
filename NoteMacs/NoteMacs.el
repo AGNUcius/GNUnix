@@ -26,8 +26,23 @@
 
 ;;; Customizations:
 ;; Emacs cannot see ~/.bashrc settings when launched as X Window app
+(setenv "ANT_HOME" "/usr/local/opt/ant")
+(setenv "MAVEN_HOME" "/usr/local/opt/maven")
+(setenv "GRADLE_HOME" "/usr/local/opt/gradle")
+(setenv "ANDROID_HOME" "/usr/local/share/android-sdk")
+(setenv "ANDROID_ROOT" "/usr/local/share/android-sdk")
+(setenv "ANDROID_NDK_HOME" "/usr/local/share/android-ndk")
+(setenv "ANDROID_NDK_ROOT" "/usr/local/share/android-ndk")
+(setenv "INTEL_HAXM_HOME" "/usr/local/Caskroom/intel-haxm")
+
+
 (setenv "PATH" (concat "/usr/local/bin:"
                        (getenv "HOME") "/bin:"
+                       (getenv "ANT_HOME") "/bin:"
+                       (getenv "MAVEN_HOME") "/bin:"
+                       (getenv "GRADLE_HOME") "/bin:"
+                       (getenv "ANDROID_HOME") "/bin:"
+                       (getenv "ANDROID_NDK_HOME") "/bin:"
                        (getenv "PATH")))
 
 ;; (require 'helm)
