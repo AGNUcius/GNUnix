@@ -38,11 +38,8 @@
 
 (setenv "PATH" (concat "/usr/local/bin:"
                        (getenv "HOME") "/bin:"
-                       (getenv "ANT_HOME") "/bin:"
-                       (getenv "MAVEN_HOME") "/bin:"
-                       (getenv "GRADLE_HOME") "/bin:"
-                       (getenv "ANDROID_HOME") "/bin:"
-                       (getenv "ANDROID_NDK_HOME") "/bin:"
+                       (getenv "HOME") "/down/Nim/bin:"
+                       (getenv "HOME") "/.nimble/bin:"
                        (getenv "PATH")))
 
 ;; (require 'helm)
@@ -882,7 +879,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :background "#505050" :foreground "#000000" :height 241 :family "Menlo" :foundry "nil" :slant normal :weight normal :width normal))))
+ ;;'(default ((t (:inherit nil :background "#505050" :foreground "#000000" :height 241 :family "Menlo" :foundry "nil" :slant normal :weight normal :width normal))))
+ '(default ((t (:inherit nil :background "#505050" :foreground "#000000" :height 240))))
  '(cursor ((t (:background "green"))))
  '(font-lock-comment-face ((t (:foreground "#202020"))))
  '(font-lock-keyword-face ((t (:foreground "#000080" :background "#494950"))))

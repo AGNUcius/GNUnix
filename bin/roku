@@ -1,10 +1,8 @@
-#!/usr/bin/python # remix of https://github.com/paulmouzas/roku-remote.git
+#!/usr/bin/python
+# remix of https://github.com/paulmouzas/roku-remote.git
 
-# use your remote to enable developer mode on the roku
+# enable developer mode on the roku
 # HOME HOME HOME  UP UP  RIGHT LEFT  RIGHT LEFT  RIGHT
-
-# change
-# HOME HOME HOME HOME HOME  UP RIGHT DOWN LEFT  UP
 
 # sudo easy_install pip
 # sudo pip install requests
@@ -15,19 +13,19 @@ KEY_MAP = {}
 KEY_MAP.update({
     27:               'BACK',   #Escape
     10:               'SELECT', #Enter
-#   32:               'PLAY_PAUSE',
     curses.KEY_F1:    'INFO',
+#   32:               'PLAY',   #Space  But if used here, not able to insert SPACE during text input
     curses.KEY_HOME:  'HOME',
+    curses.KEY_F1:    'INFO',
     curses.KEY_UP:    'UP',
     curses.KEY_DOWN:  'DOWN',
     curses.KEY_LEFT:  'LEFT',
     curses.KEY_RIGHT: 'RIGHT',
-
     curses.KEY_PPAGE: 'VolumeUp',
     curses.KEY_NPAGE: 'VolumeDown',
     ord('M'):         'VolumeMute',
-
-    127:              'BACKSPACE'
+#   127:              'BACKSPACE' #macos
+    curses.KEY_BACKSPACE: 'BACKSPACE' # *nix [tested: Fedora]
 })
 
 GROUP = ('239.255.255.250', 1900)
@@ -37,7 +35,6 @@ Host: %s:%s\r\n\
 Man: "ssdp:discover"\r\n\
 ST: roku:ecp\r\n\r\n\
 ''' % GROUP
-
 
 def roku_name(ip):
     resp = requests.get('http://' + ip + ':8060/query/device-info')
@@ -79,6 +76,7 @@ def find_roku():
 
 def main():
     count = 0
+    ip = ''
     if len(sys.argv) < 2:
         ip, count = find_roku()
     else:
@@ -114,11 +112,17 @@ def main():
             if key == ord('Q'): break
             cmd = KEY_MAP.get(key, '')
             if cmd == '': cmd = 'Lit_%' + "%x" % key
+            scr.addstr(8, 0, '         ')
+            scr.addstr(8, 0, cmd)
             requests.post(url + 'keypress/' + cmd)
 
     except:
         print ''
 
     curses.endwin()
+
 if __name__ == '__main__':
     main()
+
+
+# https://sdkdocs.roku.com/display/sdkdoc/External+Control+API
