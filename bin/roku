@@ -9,23 +9,25 @@
 
 import requests, curses, socket, sys, subprocess
 
+# https://www.gnu.org/software/guile-ncurses/manual/html_node/Getting-characters-from-the-keyboard.html
+# https://sdkdocs.roku.com/display/sdkdoc/External+Control+API
 KEY_MAP = {}
 KEY_MAP.update({
-    27:               'BACK',   #Escape
+    #curses.KEY_ENTER: 'SELECT', #Enter
     10:               'SELECT', #Enter
+    27:               'BACK',   #Escape
+    ord(' '):         'PLAY',   # disallows SPACE during text input
     curses.KEY_F1:    'INFO',
-#   32:               'PLAY',   #Space  But if used here, not able to insert SPACE during text input
     curses.KEY_HOME:  'HOME',
-    curses.KEY_F1:    'INFO',
     curses.KEY_UP:    'UP',
     curses.KEY_DOWN:  'DOWN',
     curses.KEY_LEFT:  'LEFT',
     curses.KEY_RIGHT: 'RIGHT',
     curses.KEY_PPAGE: 'VolumeUp',
     curses.KEY_NPAGE: 'VolumeDown',
-    ord('M'):         'VolumeMute',
-#   127:              'BACKSPACE' #macos
-    curses.KEY_BACKSPACE: 'BACKSPACE' # *nix [tested: Fedora]
+    curses.KEY_END:   'VolumeMute',
+    #curses.KEY_BACKSPACE: 'BACKSPACE' # doesn't work on macOS terminal
+    127:              'BACKSPACE'
 })
 
 GROUP = ('239.255.255.250', 1900)
@@ -37,8 +39,18 @@ ST: roku:ecp\r\n\r\n\
 ''' % GROUP
 
 def roku_name(ip):
-    resp = requests.get('http://' + ip + ':8060/query/device-info')
+    resp = ''
+    try:
+    	resp = requests.get('http://' + ip + ':8060/query/device-info', timeout=3)
+    except:
+        return '[TIMEOUT]'
+
     xml = resp.text
+    # <model-name>Roku 3</model-name>
+    # <model-number>4230X</model-number>
+    # <is-tv>false</is-tv>
+    # <is-stick>false</is-stick>
+    # <developer-enabled>false</developer-enabled>
     pos = xml.find('<user-device-name>')
     name = ''
     if pos != -1:
@@ -53,7 +65,7 @@ def find_roku():
     count = 0
     try:
         while True:
-            sock.settimeout(1)
+            sock.settimeout(5)
             data = sock.recv(4096)
             if data == '': break
             resp = data.split('\r\n')
@@ -69,7 +81,7 @@ def find_roku():
                     break
 
     except socket.timeout:
-        print "finished search"
+        print "Finished search."
 
     sock.close()
     return ip, count
@@ -83,11 +95,11 @@ def main():
         ip = sys.argv[1]; count = 1
 
     if count < 1:
-        print 'could not find roku'
+        print 'Could not find roku.'
         return 0
 
     if count > 1:
-        print 'select ip from list'
+        print 'Select IP from list.'
         return 0
 
     url = 'http://' + ip + ':8060/'
@@ -95,25 +107,20 @@ def main():
     try:
         scr = curses.initscr(); curses.noecho(); scr.keypad(1)
         scr.addstr(0, 4, 'Posting to "%s" at %s' % (roku_name(ip), ip))
-        scr.addstr(1, 0, 'ESC:  Back')
-        scr.addstr(2, 0, 'RET:  Select')
-        scr.addstr(3, 0, 'HOME: Home')
-        scr.addstr(4, 0, 'SPC:  Play/Pause')
+        scr.addstr(1, 0, 'RET:  Select')
+        scr.addstr(2, 0, 'ESC:  Back')
+        scr.addstr(3, 0, 'SPC:  Play/Pause')
+        scr.addstr(4, 0, 'HOME: Home')
         scr.addstr(5, 0, 'F1 :  Info')
-        scr.addstr(6, 0, 'U  :  Update Roku')
-        scr.addstr(7, 0, 'Q  :  QUIT')
-        scr.addstr(8, 0, '')
+        scr.addstr(6, 0, 'PGUP: Vol Up')
+        scr.addstr(7, 0, 'PGDN: Vol Down')
+        scr.addstr(8, 0, 'END:  Mute')
+        scr.addstr(9, 0, 'C-c:  EXIT')
 
         while True:
             key = scr.getch()
-            if key == ord('U'):
-                subprocess.call(["roku.update", ip])
-                continue
-            if key == ord('Q'): break
             cmd = KEY_MAP.get(key, '')
             if cmd == '': cmd = 'Lit_%' + "%x" % key
-            scr.addstr(8, 0, '         ')
-            scr.addstr(8, 0, cmd)
             requests.post(url + 'keypress/' + cmd)
 
     except:
@@ -123,6 +130,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-# https://sdkdocs.roku.com/display/sdkdoc/External+Control+API
