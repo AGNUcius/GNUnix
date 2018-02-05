@@ -1,6 +1,6 @@
 # used for interactive or 'login' shells
 
-export path="$path:$home/bin:/usr/local/sbin:$home/down/nim/bin:$home/.nimble/bin"
+export PATH="$PATH:$HOME/bin:/usr/local/sbin:$HOME/down/nim/bin:$HOME/.nimble/bin"
 
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
