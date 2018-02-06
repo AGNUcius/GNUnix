@@ -1,0 +1,80 @@
+#!/usr/bin/python # remix of https://github.com/paulmouzas/roku-remote.git
+# sudo easy_install pip
+# sudo pip install requests
+
+import requests, curses, socket, sys, subprocess
+
+# https://developer.android.com/reference/android/view/KeyEvent.html
+# https://GNU.org/software/guile-ncurses/manual/html_node/Getting-characters-from-the-keyboard.html
+KEY_MAP = {}
+KEY_MAP.update({
+    # curses.KEY_DC, curses.KEY_BACKSPACE
+    27:               'KEYCODE_BACK',  #Escape KEYCODE_ESCAPE
+    # curses.KEY_ENTER: 'KEYCODE_ENTER'
+    10:               'KEYCODE_ENTER', #Enter, KEYCODE_BUTTON_SELECT
+#    32:               'KEYCODE_MEDIA_PLAY_PAUSE',
+    curses.KEY_F1:    'KEYCODE_INFO', #KEYCODE_HELP, KEYCODE_MENU, KEYCODE_SETTINGS
+    curses.KEY_HOME:  'KEYCODE_HOME',
+
+    ord('M'): 'KEYCODE_MUTE',
+    ord('V'): 'KEYCODE_VOLUME_MUTE',
+    ord('U'): 'KEYCODE_VOLUME_UP',
+    ord('D'): 'KEYCODE_VOLUME_DOWN',
+
+    curses.KEY_UP:    'DPAD_UP',
+    curses.KEY_DOWN:  'DPAD_DOWN',
+    curses.KEY_LEFT:  'DPAD_LEFT',
+    curses.KEY_RIGHT: 'DPAD_RIGHT',
+    curses.KEY_PPAGE: 'KEYCODE_PAGE_UP',
+    curses.KEY_NPAGE: 'KEYCODE_PAGE_DOWN',
+#    11: 'KEYCODE_TAB',
+
+    ord('\''): 'KEYCODE_APOSTROPHE',
+    ord('@'): 'KEYCODE_AT',
+    ord('\\'): 'KEYCODE_BACKSLASH',
+    ord(','): 'KEYCODE_COMMA',
+    ord('='): 'KEYCODE_EQUALS',
+    ord('`'): 'KEYCODE_GRAVE',
+    ord('['): 'KEYCODE_LEFT_BRACKET',
+    ord('-'): 'KEYCODE_MINUS',
+    ord('.'): 'KEYCODE_PERIOD',
+    ord('+'): 'KEYCODE_PLUS',
+    ord('#'): 'KEYCODE_POUND',
+    ord(']'): 'KEYCODE_RIGHT_BRACKET',
+    ord(';'): 'KEYCODE_SEMICOLON',
+    ord('/'): 'KEYCODE_SLASH',
+    ord(' '): 'KEYCODE_SPACE',
+    ord('*'): 'KEYCODE_STAR',
+    127:              'KEYCODE_DEL' #KEYCODE_FORWARD_DEL
+})
+#KEYCODE_MUTE
+# KEYCODE_VOLUME_MUTE
+
+#KEYCODE_SEARCH
+#KEYCODE_POWER
+# KEYCODE_ZOOM_IN
+# KEYCODE_ZOOM_OUT
+
+def main():
+    try:
+        scr = curses.initscr(); curses.noecho(); scr.keypad(1)
+        scr.addstr(1, 0, 'ESC:  Back')
+        scr.addstr(2, 0, 'RET:  Select')
+        scr.addstr(3, 0, 'HOME: Home')
+        scr.addstr(4, 0, 'SPC:  Play/Pause')
+        scr.addstr(5, 0, 'F1 :  Info')
+
+        while True:
+            scr.addstr(6, 0, ' ')
+            key = scr.getch()
+            cmd = KEY_MAP.get(key, '')
+            if cmd == '': cmd = 'KEYCODE_' + "%c" % key
+            subprocess.call(["adb", "shell", "input", "keyevent", cmd.upper()])
+
+    finally:
+        curses.endwin()
+
+if __name__ == '__main__':
+    main()
+
+

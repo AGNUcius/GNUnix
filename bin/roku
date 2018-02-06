@@ -38,23 +38,28 @@ Man: "ssdp:discover"\r\n\
 ST: roku:ecp\r\n\r\n\
 ''' % GROUP
 
+def xml_get(xml, tag):
+    pos = xml.find(tag)
+    name = ''
+    if pos != -1:
+        name = xml[pos + len(tag):].split('<')[0]
+    return name
+
 def roku_name(ip):
     resp = ''
     try:
     	resp = requests.get('http://' + ip + ':8060/query/device-info', timeout=3)
     except:
-        return '[TIMEOUT]'
+        return '(TIMEOUT)'
 
     xml = resp.text
-    # <model-name>Roku 3</model-name>
-    # <model-number>4230X</model-number>
-    # <is-tv>false</is-tv>
-    # <is-stick>false</is-stick>
-    # <developer-enabled>false</developer-enabled>
-    pos = xml.find('<user-device-name>')
     name = ''
-    if pos != -1:
-        name = xml[pos + len('<user-device-name>'):].split('<')[0]
+    if xml_get(xml, '<is-tv>') == 'true':
+        name += '[TV] '
+    name += xml_get(xml, '<model-name>')
+    name += ' ' + xml_get(xml, '<model-number>')
+    name += '  Dev:' + xml_get(xml, '<developer-enabled>')
+    name += '  "' + xml_get(xml, '<user-device-name>') + '"'
 
     return name
 
@@ -81,7 +86,7 @@ def find_roku():
                     break
 
     except socket.timeout:
-        print "Finished search."
+        print 'Finished search.'
 
     sock.close()
     return ip, count
@@ -106,7 +111,7 @@ def main():
 
     try:
         scr = curses.initscr(); curses.noecho(); scr.keypad(1)
-        scr.addstr(0, 4, 'Posting to "%s" at %s' % (roku_name(ip), ip))
+        scr.addstr(0, 0, 'Posting to %s (%s)' % (roku_name(ip), ip))
         scr.addstr(1, 0, 'RET:  Select')
         scr.addstr(2, 0, 'ESC:  Back')
         scr.addstr(3, 0, 'SPC:  Play/Pause')

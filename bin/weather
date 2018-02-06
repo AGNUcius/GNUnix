@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for a in {5000..9999}; do
+    printf -v j "%04d" $a
+    wget "http://udottraffic.utah.gov/1_devices/aux1${j}.jpeg"
+done
