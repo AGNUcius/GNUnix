@@ -32,3 +32,8 @@ key "Super+z" xterm
 key "XF86AudioRaiseVolume" amixer set Master Playback 1+
 key "XF86AudioLowerVolume" amixer set Master Playback 1-
 key "XF86AudioMute" amixer set Master Playback toggle
+
+# key "XF86MonBrightnessUp" backlight up
+# key "XF86MonBrightnessDown" backlight down
+
+key "Print" import -window root screenshot.jpg

@@ -26,18 +26,36 @@
 ;;  program.  If not, see http://GNU.org/licenses
 
 ;;; Features
-;; autolink plain-text documents
+;; Link plain-text documents without markup;
+;; preserve whitespace; guess formatting
+
+;;  Header: =, ==, ===, ====
+;;  Shell: $, #
+;;  Bullet: :, *, .
+;;  Quote: >, >>, "''"
+;;  Comment: //, #, ;;, /**/
+;;  Paren: (), {}, []
+;;  Path: ~/, ./LocalFile, ../LocalFile, GNU.org
 
 ;;; Installation
-;; Try something like this in your .emacs:
+
+;; Copy this file to directory like ~/doc/.src/lens.el
+
+;; Put this in your .emacs:
 
 ;; (autoload 'lens-mode "~/doc/.src/lens.el" "lens" t)
-;; (setq auto-mode-alist'
-;;    (append
-;;     '((".lens" . lens-mode))
-;;     auto-mode-alist))
+;; (autoload 'lens-mode "lens" "" t)
 
-;; Now create a .lens file such as:
+;; (setq auto-mode-alist'
+;;       (append
+;;        '(("/\\.txt/.*" . lens-mode))
+;;        auto-mode-alist))
+
+;;; Example scenario
+;; Open ~/doc/.txt/profit to define that term.
+;; While editing that file in Emacs:  M-x lens
+;; The output file will be ~/doc/profit.htm
+;; All lowercase in filename to always match.
 
 ;;  Main entry points are `lens', `lens-mode', `lens-make-page'
 ;;  `lens-dired-make-marked-pages' and `lens-clean'
@@ -49,7 +67,7 @@
 ;; C-cC-c   `lens-make-page'
 ;; C-cC-p   preview generated HTML of this source file
 ;; RET      Follow link
-;; C-m      Insert line-feed (\n)
+;; C-m      Insert line-feed
 
 ;;;; Features
 
@@ -144,7 +162,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
   "email addrs")
 
 (defconst lens-implicit-HTTP
-  "\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|am\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|no\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n]*"
+  "\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\([a-zA-Z][a-zA-Z]\\)[^])}>:,; \t\n]*"
   ;;maybe use `regexp-opt' here?
   "Characters ])}>:,; \\t\\\n end the implicit HTTP URL.")
 
@@ -204,7 +222,8 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
 		 ;;  		 ("^.*?:" "<span class=\"h4\">\\&" "</span>");anything followed by a : is a title?
 
- 		 ("^Related:" "<span class=\"rel\">\\&</span>")
+         ("^Related:" "<span class=\"rel\">\\&</span>")
+ 		 ;;("\\(^Related:\\)\\(.*\\)" "<span class=\"rel tiny\">\\1</span><span class=\"tiny\">\\2</span>")
 		 ("^[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}:" "<hr/><span class=\"date\">\\&</span>")
  		 ("^>" "<span class=\"quot\">\\&" "</span>")
 
@@ -218,7 +237,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
 		 ;;("^[ \t]*\\([0-9]\\|[A-Z]\\|[a-z]\\)+\\(\\.\\|:\\)$" "<span class=\"bullet\">\\&</span>")
 
- 		 ("^[ \t]*\\(:\\|\\*\\|\\+\\|\\.\\)" "<span class=\"bullet\">\\&</span>")
+ 		 ("^[ \t]*\\(:\\|\\*\\|\\.\\)" "<span class=\"bullet\">\\&</span>")
 		 ;;("^[ \t]*:" "<span class=\"indent\">\\&</span>")
 
  		 ("^::" "<span class=\"cmnt\">\\&" "</span>") ;;Batch-file comments
@@ -227,7 +246,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
  		 ("(\\|{\\|\\[" "<small>\\&")
  		 (")\\|\\}\\|]" "\\&</small>")
 
- 		 ("\"'" "<span class=\"quot\">\\&")
+ 		 ("\"'" "<span class=\"quot2\">\\&")
  		 ("'\"" "\\&</span>")
 
 		 ;;This is not correct.  We should emit to align at column mod(4)
@@ -281,7 +300,8 @@ All terms less than this match only at the beginning of words (using `\\b')")
 
 
 		 ;;see `lens-implicit-HTTP'
-		 ("\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n]*"
+		 ;("\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\(aero\\|at\\|au\\|be\\|biz\\|ca\\|cat\\|cc\\|ch\\|com\\|coop\\|cx\\|cz\\|da\\|de\\|dk\\|edu\\|es\\|eu\\|fi\\|fr\\|gov\\|hu\\|ie\\|il\\|im\\|in\\|it\\|info\\|int\\|io\\|jp\\|jobs\\|lt\\|me\\|mil\\|mobi\\|museum\\|name\\|net\\|nl\\|nu\\|nz\\|org\\|pl\\|pro\\|pt\\|ro\\|ru\\|se\\|si\\|sk\\|tel\\|to\\|travel\\|tv\\|uk\\|us\\|ws\\|za\\)[^])}>:,; \t\n]*"
+          ("\\(\\([a-zA-Z0-9_-]\\)+\\.\\)+\\([a-zA-Z][a-zA-Z]\\)[^])}>:,; \t\n]*"
 		  "<a class=\"ext\" href=\"http://\\&\">\\&</a>")
 
 		 ;;XML entities
@@ -294,7 +314,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
  		 ("<b>" "&lt;b><span class=\"bold\">")
  		 ("</b>" "</span>&lt;/b>")
 
-		 ;;whitespace is now preserved in preferred.css/white-space:pre-wrap
+		 ;;whitespace
 		 ("\n" "<br/>\n")
 
 ;;;;;;;; ---- ADD TERMS ABOVE THIS LINE ---- ;;;;;;;;
@@ -440,7 +460,7 @@ All terms less than this match only at the beginning of words (using `\\b')")
 					" <a href=\"-home.htm\">Home</a> |"
 					;; " <a href=\"-faq.htm\">FAQ</a> |"
 					" <a href=\"-diary.htm\">Diary</a> |"
-					" <a href=\"-projects.htm\">Projects</a> |"
+					;; " <a href=\"-projects.htm\">Projects</a> |"
 					" <a href=\"-todo.htm\">Todo</a> |"
 					" <a href=\"-index.htm\">Index</a> |"
 					" <a href=\"-about.htm\">About</a> |"

@@ -17,8 +17,8 @@ if [[ -f /etc/lsb-release ]]; then
     sudo apt-get upgrade
 fi
 
-uname | grep CYGWIN > /dev/null
-if [[ $? == 0 ]]; then
-    apt-cyg update
-    choco upgrade all -y
-fi
+# uname | grep CYGWIN > /dev/null
+# if [[ $? == 0 ]]; then
+#     apt-cyg update
+#     choco upgrade all -y
+# fi

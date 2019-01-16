@@ -1,5 +1,3 @@
-# why doesn't this work?
-#export PATH=${PATH}:${HOME}/bin
 
 setxkbmap -option ctrl:nocaps
 xsetroot -solid '#505050'

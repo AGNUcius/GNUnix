@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [[ "$3" == "" ]]; then
+   echo "Arg1: Roku IP.Add.re.ss or MA:CA:DD:RE:SS"
+   echo "Arg2: username:password"
+   echo "Arg3: Package"
+   exit 22
+fi
+
+ROKU="$1"
+echo "$ROKU" | grep ':' > nul
+if [[ $? == 0 ]]; then
+    printf "$ROKU == "
+    ROKU=$(arp -a | grep -i "${ROKU}" | awk '{print $2}' | sed 's/[()]//g')
+    echo "$ROKU"
+fi
+
+USER="$2"
+PACK="$3"
+
+curl -vvv --user ${USER} --digest --fail-early --show-error --max-time 40 \
+	 --form "mysubmit=Replace" --form "archive=@${PACK}" \
+	 http://${ROKU}/plugin_install

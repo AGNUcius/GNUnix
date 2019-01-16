@@ -20,14 +20,16 @@
 # hedgewars, gianas return, bontago
 # yo frankie, open ttd, cube trains
 
-prog "Chrome Stable" google-chrome-stable google-chrome-stable
-prog "Chrome Beta" google-chrome-beta google-chrome-beta
+prog "Brave" brave brave
+prog "Chrome Stable" google-chrome-stable xterm -e nice google-chrome-stable
 prog Chromium chromium-browser chromium-browser
 prog FireFox firefox firefox
-prog Midori midori midori
+prog skypeforlinux skypeforlinux skypeforlinux
+
 separator
 menu Programs Programs {
  menu Office Office {
+  prog "Visual Studio Code" code code
   prog NoteMacs emacs emacs --maximized
   prog VideoLan vlc vlc
   prog "File Browser" xfe xfe
@@ -40,6 +42,8 @@ menu Programs Programs {
  }
 
  menu Art art {
+  prog Armory3D Armory3D /home/user/work/Armory/blender
+  prog AtomicEditor AtomicEditor /home/user/work/AtomicGameEngine/Artifacts/AtomicEditor/AtomicEditor
   menu Audio audio
   {
    prog Performous performous performous
@@ -108,8 +112,18 @@ menu Programs Programs {
 
  menu Network network {
   menu "Browse Web" chromium-browser {
-   prog Chrome chromium-browser chromium-browser
+   prog Chrome google-chrome-stable google-chrome-stable
+   prog Chromium chromium-browser chromium-browser
    prog FireFox firefox firefox
+  }
+  menu Chat chat {
+   prog utox utox utox
+   prog qtox qtox qtox
+   prog ratox ratox ratox
+   prog toxic toxic toxic
+   prog skype skype skype
+   prog skypeforlinux skypeforlinux skypeforlinux
+   prog pidgin pidgin pidgin
   }
   menu "Remote Desktop" rdesktop {
    prog "Connect to SLC with xvnc4viewer" SLC xterm -e ~/work/SLC.vnc
@@ -121,7 +135,7 @@ menu Programs Programs {
   }
   prog "Manage Printers" cups chromium-browser http://localhost:631
   prog qbittorrent qbittorrent qbittorrent
-  menu Chat pidgin {
+  menu Chat chat {
    prog utox utox utox
    prog qtox qtox qtox
    prog ratox ratox ratox
@@ -233,7 +247,7 @@ menu Programs Programs {
 
   prog "DOOM Ulimate" DOOM dosbox ~/play/games/dos/doom-ult/DOOM.EXE -fullscreen -exit
   prog "NeoGeo MrDo" mame mame -rompath ~/play/games/MAME/roms neomrdo
-  prog "Smokin' Guns" /usr/games/smokinguns/sg_48.png /usr/games/smokinguns/smokinguns.i386
+#  prog "Smokin' Guns" ~/games/SmokinGuns   /usr/games/smokinguns/smokinguns.i386
   prog "The Incredible Machine 2" TIM dosbox ~/play/games/dos/the-incredible-machine-2/TIM2.EXE -fullscreen -exit
   prog "Tubular Worlds" TUB dosbox ~/play/games/dos/tubular-worlds/TUBWORLD.BAT -fullscreen -exit
   prog "X Com 2 - Terror From The Deep" H2O dosbox ~/play/games/dos/X-Com-2-Terror-From-The-Deep/TERROR.COM -fullscreen -exit

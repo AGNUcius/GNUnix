@@ -9,7 +9,7 @@ fi
 
 # RedHat/CentOS
 if [[ -f /etc/redhat-release ]]; then
-    yum info "$@"
+    yum --cacheonly info "$@"
 fi
 
 # UBUNTU/Debian

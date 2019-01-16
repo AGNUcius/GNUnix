@@ -1,11 +1,8 @@
 # used for interactive or 'login' shells
 
-export PATH="$PATH:$HOME/bin:/usr/local/sbin:$HOME/down/nim/bin:$HOME/.nimble/bin"
-
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
-
 
 # fancy but sometimes slow git stuff:
 # if [[ $(uname) == 'Darwin' ]]; then
@@ -42,3 +39,5 @@ fi
 #     # export PS1='\u $(__git_ps1 "(%s)")\$ '
 #     # export PS1='[\u@mbp \w$(__git_ps1)]\$ '
 # fi
+
+export PATH="$HOME/.cargo/bin:$PATH"

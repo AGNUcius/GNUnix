@@ -1,11 +1,11 @@
 #!/usr/bin/python
-# remix of https://github.com/paulmouzas/roku-remote.git
 
-# enable developer mode on the roku
-# HOME HOME HOME  UP UP  RIGHT LEFT  RIGHT LEFT  RIGHT
+#### Roku Like a Pro
+## Keyboard control through UDP (SOCK_DGRAM)
 
-# sudo easy_install pip
-# sudo pip install requests
+# Based on github.com/paulmouzas/roku-remote.git
+
+# sudo easy_install pip; pip install requests
 
 import requests, curses, socket, sys, subprocess
 
@@ -72,6 +72,7 @@ def find_roku():
         while True:
             sock.settimeout(5)
             data = sock.recv(4096)
+
             if data == '': break
             resp = data.split('\r\n')
             for line in resp[1:]:
@@ -94,6 +95,7 @@ def find_roku():
 def main():
     count = 0
     ip = ''
+
     if len(sys.argv) < 2:
         ip, count = find_roku()
     else:

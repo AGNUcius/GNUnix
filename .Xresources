@@ -2,7 +2,8 @@
 ! xrdb -load ~/.Xresources
 
 *foreground: black
-*background: #505050
+! *background: #505050
+*background: #00ff00
 
 xterm*faceName: DejaVu Sans Mono
 xterm*faceSize: 16

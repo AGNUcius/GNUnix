@@ -1,19 +1,14 @@
 #!/bin/bash
+pkg.SETUP
 
 if [[ $(uname) == 'Darwin' ]]; then
-    which brew
-    if [[ $? == 0 ]]; then
-        brew search "$@"
-        echo '----------------Cask packages----------------'        
-        brew cask search "$@"
-    else
-        pkg.SETUP
-    fi
+    brew search "$@"
+    brew cask search "$@"
 fi
 
-# RedHat/CentOS
+# RedHat/CentOS/Fedora
 if [[ -f /etc/redhat-release ]]; then
-    yum search all "$@"
+    yum --cacheonly search --all "$@"
 fi
 
 # UBUNTU/Debian

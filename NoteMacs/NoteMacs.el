@@ -26,21 +26,20 @@
 
 ;;; Customizations:
 ;; Emacs cannot see ~/.bashrc settings when launched as X Window app
-(setenv "ANT_HOME" "/usr/local/opt/ant")
-(setenv "MAVEN_HOME" "/usr/local/opt/maven")
-(setenv "GRADLE_HOME" "/usr/local/opt/gradle")
-(setenv "ANDROID_HOME" "/usr/local/share/android-sdk")
-(setenv "ANDROID_ROOT" "/usr/local/share/android-sdk")
-(setenv "ANDROID_NDK_HOME" "/usr/local/share/android-ndk")
-(setenv "ANDROID_NDK_ROOT" "/usr/local/share/android-ndk")
-(setenv "INTEL_HAXM_HOME" "/usr/local/Caskroom/intel-haxm")
+(setenv "ANDROID_SDK" (concat (getenv "HOME") "/.android/sdk"))
+(setenv "ANDROID_HOME" (getenv "ANDROID_SDK"))
+(setenv "ANDROID_NDK" (concat (getenv "HOME") "/.android/ndk"))
 
+(setenv "GOPATH" (concat (getenv "HOME") "/go"))
 
-(setenv "PATH" (concat "/usr/local/bin:"
-                       (getenv "HOME") "/bin:"
-                       (getenv "HOME") "/down/Nim/bin:"
-                       (getenv "HOME") "/.nimble/bin:"
+(setenv "PATH" (concat ;;"/usr/local/bin:" ;;for brew on macOS
+                       (getenv "HOME") "/bin:" ;;GNUnix stuff
+                       (getenv "HOME") "/.cargo/bin:" ;;rust
+                       (getenv "GOPATH") "/bin:"
+                       (getenv "HOME") "/.npm-global/bin:"
                        (getenv "PATH")))
+
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; (require 'helm)
 ;; (require 'helm-config)
@@ -125,7 +124,6 @@
 (add-to-list 'load-path "~/NoteMacs/site")
 (add-to-list 'load-path "~/NoteMacs/site/git-modes")
 
-
 ;; (ido-mode 1)
 ;; (ido-everywhere 1)
 ;; (ido-ubiquitous-mode 1)
@@ -151,53 +149,12 @@
 ;; (magit-define-popup-action 'magit-diff-popup
 ;;   ?m "Diff merge-base master" 'magit-diff-mbase)
 
-
-(add-to-list 'load-path "~/NoteMacs/site/mu4e")
-(autoload 'mu4e "mu4e" nil t)
-
-;; $ mu index --maildir=~/Maildir
-;; $ mu index --rebuild
-;; $ mu index
-
-
-(when (> emacs-major-version 23)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives
-			   '("melpa" . "http://melpa.milkbox.net/packages/")
-			   'APPEND))
-
-(setq mu4e-maildir "~/Maildir")
-(setq mu4e-drafts-folder "/[Gmail].Drafts")
-(setq mu4e-sent-folder   "/[Gmail].Sent Mail")
-(setq mu4e-trash-folder  "/[Gmail].Trash")
-
-(setq mu4e-maildir-shortcuts
-      '( ("/INBOX"               . ?i)
-         ("/[Gmail].Sent Mail"   . ?s)
-         ("/[Gmail].Trash"       . ?t)
-         ("/[Gmail].All Mail"    . ?a)))
-
-;; ;; allow for updating mail using 'U' in the main view:
-;; (setq mu4e-get-mail-command "offlineimap")
-
-;; (setq
-;;  user-mail-address "renws1990@gmail.com"
-;;  user-full-name  "任文山 (Ren Wenshan)"
-;;  message-signature
-;;  (concat
-;;   "任文山 (Ren Wenshan)\n"
-;;   "Email: renws1990@gmail.com\n"
-;;   "Blog: wenshanren.org\n"
-;;   "Douban: www.douban.com/people/renws"
-;;   "\n"))
-
-;; ;; alternatively, for emacs-24 you can use:
-;; (setq message-send-mail-function 'smtpmail-send-it
-;;     smtpmail-stream-type 'starttls
-;;     smtpmail-default-smtp-server "smtp.gmail.com"
-;;     smtpmail-smtp-server "smtp.gmail.com"
-;;     smtpmail-smtp-service 587)
+;; (when (> emacs-major-version 23)
+;;   (require 'package)
+;;   (package-initialize)
+;;   (add-to-list 'package-archives
+;; 			   '("melpa" . "http://melpa.milkbox.net/packages/")
+;; 			   'APPEND))
 
 ;; fix git's weird pager behavior
 (setenv "PAGER" "cat")
@@ -234,9 +191,8 @@
 (define-key global-map [(meta control S)] 'findr)
 ;; (autoload 'findr-search "findr" "Find text in files." t)
 ;; (define-key global-map [(meta control s)] 'findr-search)
-;; (autoload 'findr-query-replace "findr" "Replace text in files." t)
-;; (define-key global-map [(meta control r)] 'findr-query-replace)
-
+(autoload 'findr-query-replace "findr" "Replace text in files." t)
+(define-key global-map [(meta control r)] 'findr-query-replace)
 ;; (define-key global-map [(meta control s)] 'grep-find)
 (define-key global-map [(meta control s)] 'ripgrep-regexp)
 
@@ -301,6 +257,7 @@
 (autoload 'csharp-mode "csharp-mode" "csharp-mode" t)
 (autoload 'malyon "malyon" "malyon" t)
 (autoload 'ascii-display "ascii" "Toggle on ASCII code display." t)
+(autoload 'brightscript-mode "brightscript-mode" "Roku scripting language" t)
 
 
 (load "dired-x")
@@ -603,13 +560,13 @@
            (define-key calendar-mode-map "id" ;insert daily
              (lambda nil (interactive)
                (diary-prepend-entry diary-file)))
-           )))
+           (define-key calendar-mode-map "it" ;insert todo
+             (lambda nil (interactive)
+               (find-file "~/doc/.txt/-todo"))))))
 
       (add-hook 'ediff-load-hook
                 (lambda ()
-                  (defun ediff-window-display-p nil))) ;force single frame
-      ))
-
+                  (defun ediff-window-display-p nil)))));force single frame
 
 ;; These settings are for those accustomed to Not Emacs behavior,
 ;; meaning to act even more severly like Windows/CUA and so makes
@@ -785,7 +742,7 @@
  '(next-line-add-newlines nil)
  '(package-selected-packages
    (quote
-    (nim-mode hide-lines flycheck-nimsuggest flycheck-rust flycheck-nim cycbuf ace-isearch magit pdf-tools lua-mode helm-youtube google-this bm)))
+    (charmap math-symbol-lists wanderlust markdown-mode rainbow-delimiters ripgrep nim-mode hide-lines flycheck-nimsuggest flycheck-rust flycheck-nim cycbuf ace-isearch magit pdf-tools lua-mode helm-youtube google-this bm)))
  '(parens-require-spaces nil)
  '(pc-selection-mode t)
  '(read-buffer-completion-ignore-case t)
@@ -809,8 +766,6 @@
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(url-global-history-save-interval 120)
  '(url-keep-history t)
- '(user-full-name "")
- '(user-mail-address "")
  '(vc-default-back-end (quote RCS))
  '(vc-git-annotate-switches "-w")
  '(view-read-only t)
@@ -825,7 +780,9 @@
 ;;;; FILE->MODE ASSOCIATIONS:
 (setq auto-mode-alist
       (append
-       '(("\\.\\(bas\\|frm\\|dsm\\|ctl\\|cls\\|vb.?\\)\\'" . visual-basic-mode)
+       '(
+         ("\\.brs$" . brightscript-mode)
+         ("\\.\\(bas\\|frm\\|dsm\\|ctl\\|cls\\|vb.?\\)\\'" . visual-basic-mode)
          ;; ("\\.cs\\'" . csharp-mode )
          ("\\.cs\\'" . java-mode)
          ("\\.\\(scm\\|smd\\|esh\\|ss\\)\\'" . scheme-mode)
@@ -874,47 +831,32 @@
 
 ;;try  M-x  list-colors-display
 ;; calm
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(default ((t (:inherit nil :background "#505050" :foreground "#000000" :height 240))))
+;;  '(cursor ((t (:background "green"))))
+;;  '(font-lock-comment-face ((t (:foreground "#202020"))))
+;;  '(font-lock-keyword-face ((t (:foreground "#000080" :background "#494950"))))
+;;  '(region ((t (:inverse-video t))))
+;;  '(trailing-whitespace ((t (:background "#606060"))))
+;;  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
+
+;; ;;daylight
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- ;;'(default ((t (:inherit nil :background "#505050" :foreground "#000000" :height 241 :family "Menlo" :foundry "nil" :slant normal :weight normal :width normal))))
- '(default ((t (:inherit nil :background "#505050" :foreground "#000000" :height 240))))
+ '(default ((t (:background "skyblue" :foreground "#000000" :height 240))))
  '(cursor ((t (:background "green"))))
- '(font-lock-comment-face ((t (:foreground "#202020"))))
- '(font-lock-keyword-face ((t (:foreground "#000080" :background "#494950"))))
+ '(font-lock-comment-face ((t (:foreground "#808080"))))
+ '(font-lock-keyword-face ((t (:foreground "#808080"))))
  '(region ((t (:inverse-video t))))
- '(trailing-whitespace ((t (:background "#606060"))))
+ '(trailing-whitespace ((t (:background "#eeeeee"))))
  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
-
-;; ;;daylight
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(default ((t (:inherit nil :background "skyblue" :foreground "#000000" :height 240))))
-;;  '(cursor ((t (:background "green"))))
-;;  '(font-lock-comment-face ((t (:foreground "#808080"))))
-;;  '(font-lock-keyword-face ((t (:foreground "#808080"))))
-;;  '(region ((t (:inverse-video t))))
-;;  '(trailing-whitespace ((t (:background "#eeeeee"))))
-;;  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
-
-;; ;skyblue
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(default ((t (:foreground "#000000" :background "skyblue" :height 175 :weight bold))))
-;;  '(cursor ((t (:background "yellow"))))
-;;  '(font-lock-comment-face ((t (:foreground "#262626"))))
-;;  '(font-lock-keyword-face ((t (:foreground "#000080" :background "#909099"))))
-;;  '(region ((t (:inverse-video t))))
-;;  '(trailing-whitespace ((t (:background "yellow"))))
-;;  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
 
 ;; ;darker
 ;; (custom-set-faces

@@ -1,4 +1,20 @@
+#!/bin/bash
 
-pkg dir file
-open
-close
+if [[ $(uname) == 'Darwin' ]]; then # macOS
+    exit 0
+fi
+
+if [[ -f /etc/redhat-release ]]; then # CentOS/Fedora/RedHat
+    yum whatprovides "$@"
+    exit 0
+fi
+
+if [[ -f /etc/lsb-release ]]; then # UBUNTU/Debian
+    dpkg-query -S "$@"
+    exit 0
+fi
+
+uname | grep CYGWIN > /dev/null
+if [[ $? == 0 ]]; then # Cygwin on Windows
+    exit 0
+fi

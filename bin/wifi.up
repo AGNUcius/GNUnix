@@ -1,2 +1,2 @@
 #!/bin/bash
-nmcli connection up $*
+nmcli connection up "$@"

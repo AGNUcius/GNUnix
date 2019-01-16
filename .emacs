@@ -13,5 +13,4 @@
 ;;  Execute the following from within cmd.exe  setx HOME %USERPROFILE%
 ;;  Or press the key-combo [Windows]-[Pause], then choose  | Advanced Settings | Environment Variables | New
 
-(put 'downcase-region 'disabled nil)
 (put 'scroll-left 'disabled nil)

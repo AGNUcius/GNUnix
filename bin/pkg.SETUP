@@ -1,6 +1,8 @@
 #!/bin/bash
 
-set -e
+# untested
+exit 0
+
 
 if [[ $(uname) == 'Darwin' ]]; then
     if [[ -f /usr/local/bin/brew ]]; then
@@ -16,12 +18,12 @@ if [[ -f /etc/redhat-release ]]; then
 fi
 
 # UBUNTU/Debian
-if [[ -f /etc/lsb-release ]]; then
+if [[ -f /usr/bin/apt-get ]]; then
     echo 'nothing to do?'
 fi
 
 # This assumes Cygwin or MSYS2 is installed
-# could support chocolatey without, using .cmd files
+# could support chocolatey using .cmd files
 uname | grep CYGWIN > /dev/null
 if [[ $? == 0 ]]; then
     if [[ -f /usr/bin/apt-cyg ]]; then
@@ -35,6 +37,5 @@ if [[ $? == 0 ]]; then
         echo 'Chocolatey is already installed!'
     else
         powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
-        pkg.update
     fi
 fi

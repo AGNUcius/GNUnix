@@ -15,7 +15,7 @@ if [[ -f /etc/lsb-release ]]; then
     systemctl
 fi
 
-# uname | grep CYGWIN > /dev/null
-# if [[ $? == 0 ]]; then
-
-# fi
+uname | grep CYGWIN > /dev/null
+if [[ $? == 0 ]]; then
+   sc query
+fi

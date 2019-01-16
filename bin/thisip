@@ -1,3 +1,4 @@
+#!/bin/bash
 
 thisip=
 for eth in $(/sbin/ifconfig | grep eth | cut -f 1 -d' '); do
