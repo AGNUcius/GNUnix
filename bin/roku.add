@@ -1,4 +1,4 @@
-#!/bin/bash
+#!bash
 
 if [[ "$3" == "" ]]; then
    echo "Arg1: Roku IP.Add.re.ss or MA:CA:DD:RE:SS"

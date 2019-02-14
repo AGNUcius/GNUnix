@@ -22,3 +22,8 @@ if [[ $? == 0 ]]; then
     echo '----------------Chocolatey packages----------------'
     choco search "$@"
 fi
+
+uname | grep MINGW > /dev/null
+if [[ $? == 0 ]]; then
+    pacman -Ss "$@"
+fi

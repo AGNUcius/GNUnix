@@ -1,43 +1,36 @@
-# used for interactive or 'login' shells
+# To the extent possible under law, the author(s) have dedicated all 
+# copyright and related and neighboring rights to this software to the 
+# public domain worldwide. This software is distributed without any warranty. 
+# You should have received a copy of the CC0 Public Domain Dedication along 
+# with this software. 
+# If not, see <http://creativecommons.org/publicdomain/zero/1.0/>. 
 
-if [ -f ~/.bashrc ]; then
-   source ~/.bashrc
+# ~/.bash_profile: executed by bash(1) for login shells.
+
+# The copy in your home directory (~/.bash_profile) is yours, please
+# feel free to customise it to create a shell
+# environment to your liking.  If you feel a change
+# would be benifitial to all, please feel free to send
+# a patch to the msys2 mailing list.
+
+# User dependent .bash_profile file
+
+# source the users bashrc if it exists
+if [ -f "${HOME}/.bashrc" ] ; then
+  source "${HOME}/.bashrc"
 fi
 
-# fancy but sometimes slow git stuff:
-# if [[ $(uname) == 'Darwin' ]]; then
-#     which brew 2>&1 > /dev/null
-#     if [[ $? != 0 ]]; then
-#         pkg.SETUP #install brew
-#         brew install git bash-completion
-#     fi
+# Set PATH so it includes user's private bin if it exists
+if [ -d "${HOME}/bin" ] ; then
+  PATH="${HOME}/bin:${PATH}"
+fi
 
-#     bc=$(brew --prefix)/etc/bash_completion
-#     if [ -f $bc ]; then
-#         source $bc
-#     fi
+# Set MANPATH so it includes users' private man if it exists
+# if [ -d "${HOME}/man" ]; then
+#   MANPATH="${HOME}/man:${MANPATH}"
 # fi
 
-# which git > /dev/null
-# if [[ $? == 0 ]]; then
-#     GIT_PS1_SHOWDIRTYSTATE=true
-#     GIT_PS1_SHOWCOLORHINTS=1
-#     GIT_PS1_SHOWDIRTYSTATE=1
-
-#     if [[ $(uname) == 'Darwin' ]]; then
-#         gc=/Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
-#         gp=/Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
-#     else
-#         gp=/usr/share/git/completion/git-prompt.sh
-#         gp=/usr/share/git/completion/git-completion.bash
-#     fi
-
-#     [[ -f $gc ]] && source $gc
-#     [[ -f $gp ]] && source $gp
-
-#     PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }__git_ps1 '\u:\w' '\\\$ '"
-#     # export PS1='\u $(__git_ps1 "(%s)")\$ '
-#     # export PS1='[\u@mbp \w$(__git_ps1)]\$ '
+# Set INFOPATH so it includes users' private info if it exists
+# if [ -d "${HOME}/info" ]; then
+#   INFOPATH="${HOME}/info:${INFOPATH}"
 # fi
-
-export PATH="$HOME/.cargo/bin:$PATH"

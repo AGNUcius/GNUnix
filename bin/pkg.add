@@ -17,10 +17,15 @@ if [[ -f /etc/lsb-release ]]; then
     sudo apt-get install -y "$@"
 fi
 
-uname | grep CYGWIN > /dev/null
+# uname | grep CYGWIN > /dev/null
+# if [[ $? == 0 ]]; then
+#     apt-cyg install "$@"
+#     if [[ $? != 0 ]]; then
+#         choco install -y "$@"
+#     fi
+# fi
+
+uname | grep MINGW > /dev/null
 if [[ $? == 0 ]]; then
-    apt-cyg install "$@"
-    if [[ $? != 0 ]]; then
-        choco install -y "$@"
-    fi
+    pacman -S "$@"
 fi

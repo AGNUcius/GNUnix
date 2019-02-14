@@ -22,3 +22,9 @@ fi
 #     apt-cyg update
 #     choco upgrade all -y
 # fi
+
+uname | grep MINGW > /dev/null
+if [[ $? == 0 ]]; then
+    pacman -Syu "$@"
+    pacman -Syy "$@"
+fi

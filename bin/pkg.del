@@ -17,11 +17,16 @@ if [[ -f /etc/lsb-release ]]; then
     sudo apt-get --purge remove "$@"
 fi
 
-uname | grep CYGWIN > /dev/null
+# uname | grep CYGWIN > /dev/null
+# if [[ $? == 0 ]]; then
+#     if [[ $(apt-cyg list) == "$@" ]]; then
+#         apt-cyg uninstall "$@"
+#     else
+#         choco uninstall "$@"
+#     fi
+# fi
+
+uname | grep MINGW > /dev/null
 if [[ $? == 0 ]]; then
-    if [[ $(apt-cyg list) == "$@" ]]; then
-        apt-cyg uninstall "$@"
-    else
-        choco uninstall "$@"
-    fi
+    pacman -Rs "$@"
 fi

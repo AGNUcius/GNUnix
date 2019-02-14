@@ -24,22 +24,15 @@
 ;; mv GNUnix/.* .
 
 
-;;; Customizations:
-;; Emacs cannot see ~/.bashrc settings when launched as X Window app
-(setenv "ANDROID_SDK" (concat (getenv "HOME") "/.android/sdk"))
-(setenv "ANDROID_HOME" (getenv "ANDROID_SDK"))
-(setenv "ANDROID_NDK" (concat (getenv "HOME") "/.android/ndk"))
+;; ;;; Customizations:
+;; ;; Emacs cannot see ~/.bashrc settings when launched as X Window app
+;; (setenv "ANDROID_SDK" (concat (getenv "HOME") "/.android/sdk"))
+;; (setenv "ANDROID_HOME" (getenv "ANDROID_SDK"))
+;; (setenv "ANDROID_NDK" (concat (getenv "HOME") "/.android/ndk"))
 
-(setenv "GOPATH" (concat (getenv "HOME") "/go"))
+;; (setenv "GOPATH" (concat (getenv "HOME") "/go"))
 
-(setenv "PATH" (concat ;;"/usr/local/bin:" ;;for brew on macOS
-                       (getenv "HOME") "/bin:" ;;GNUnix stuff
-                       (getenv "HOME") "/.cargo/bin:" ;;rust
-                       (getenv "GOPATH") "/bin:"
-                       (getenv "HOME") "/.npm-global/bin:"
-                       (getenv "PATH")))
-
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+;; (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; (require 'helm)
 ;; (require 'helm-config)
@@ -151,10 +144,10 @@
 
 ;; (when (> emacs-major-version 23)
 ;;   (require 'package)
-;;   (package-initialize)
-;;   (add-to-list 'package-archives
-;; 			   '("melpa" . "http://melpa.milkbox.net/packages/")
-;; 			   'APPEND))
+(package-initialize)
+(setq package-check-signature nil)
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 
 ;; fix git's weird pager behavior
 (setenv "PAGER" "cat")
@@ -187,14 +180,20 @@
 (define-key global-map [(meta control y)] 'browse-kill-ring)
 (autoload 'xml-beautify "xml-control" "unwind and indent" t)
 
-(autoload 'findr "findr" "Find file name." t)
-(define-key global-map [(meta control S)] 'findr)
+;; Find string in file
+;; (define-key global-map [(meta control s)] 'grep-find)
 ;; (autoload 'findr-search "findr" "Find text in files." t)
 ;; (define-key global-map [(meta control s)] 'findr-search)
+;; (define-key global-map [(meta control s)] 'ripgrep-regexp)
+(define-key global-map [(meta control s)] 'deadgrep)
+
 (autoload 'findr-query-replace "findr" "Replace text in files." t)
 (define-key global-map [(meta control r)] 'findr-query-replace)
-;; (define-key global-map [(meta control s)] 'grep-find)
-(define-key global-map [(meta control s)] 'ripgrep-regexp)
+
+;; Find filename
+(autoload 'findr "findr" "Find file name." t)
+(define-key global-map [(meta control S)] 'findr)
+
 
 ;; (define-key global-map [(meta control s)]
 ;;   (lambda (regexp)
@@ -701,7 +700,6 @@
  '(global-font-lock-mode t nil (font-lock))
  '(global-hl-line-mode t nil (hl-line))
  '(grep-command "grep -inH -e ")
- '(grep-find-command (quote ("find . -type f -exec grep -inH -e  {} +" . 35)))
  '(grep-find-template "find . <X> -type f <F> -exec grep <C> -inH -e <R> {} +")
  '(grep-template "grep <X> <C> -inH -e <R> <F>")
  '(gud-cdb-directories (quote (".\\" "..\\")))
@@ -742,7 +740,7 @@
  '(next-line-add-newlines nil)
  '(package-selected-packages
    (quote
-    (charmap math-symbol-lists wanderlust markdown-mode rainbow-delimiters ripgrep nim-mode hide-lines flycheck-nimsuggest flycheck-rust flycheck-nim cycbuf ace-isearch magit pdf-tools lua-mode helm-youtube google-this bm)))
+    (rg helm-rg deadgrep s charmap math-symbol-lists wanderlust markdown-mode rainbow-delimiters ripgrep nim-mode hide-lines flycheck-nimsuggest flycheck-rust flycheck-nim cycbuf ace-isearch magit pdf-tools lua-mode helm-youtube google-this bm)))
  '(parens-require-spaces nil)
  '(pc-selection-mode t)
  '(read-buffer-completion-ignore-case t)
@@ -769,6 +767,7 @@
  '(vc-default-back-end (quote RCS))
  '(vc-git-annotate-switches "-w")
  '(view-read-only t)
+ '(visible-bell t)
  '(w3m-session-crash-recovery nil)
  '(warning-suppress-types (quote ((\(undo\ discard-info\)))))
  '(winner-mode t nil (winner))
@@ -831,32 +830,39 @@
 
 ;;try  M-x  list-colors-display
 ;; calm
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(default ((t (:inherit nil :background "#505050" :foreground "#000000" :height 240))))
-;;  '(cursor ((t (:background "green"))))
-;;  '(font-lock-comment-face ((t (:foreground "#202020"))))
-;;  '(font-lock-keyword-face ((t (:foreground "#000080" :background "#494950"))))
-;;  '(region ((t (:inverse-video t))))
-;;  '(trailing-whitespace ((t (:background "#606060"))))
-;;  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
-
-;; ;;daylight
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background "skyblue" :foreground "#000000" :height 240))))
- '(cursor ((t (:background "red"))))
- '(font-lock-comment-face ((t (:foreground "#808080"))))
- '(font-lock-keyword-face ((t (:foreground "#808080"))))
+;; <<<<<<< Updated upstream
+;;  '(default ((t (:background "skyblue" :foreground "#000000" :height 240))))
+;;  '(cursor ((t (:background "red"))))
+;;  '(font-lock-comment-face ((t (:foreground "#808080"))))
+;;  '(font-lock-keyword-face ((t (:foreground "#808080"))))
+;; =======
+ '(default ((t (:inherit nil :background "#999999" :foreground "#000000" :height 200 :weight bold))))
+ '(cursor ((t (:background "green"))))
+ '(font-lock-comment-face ((t (:foreground "#007700"))))
+ '(font-lock-keyword-face ((t (:foreground "#00ff00"))))
+;; >>>>>>> Stashed changes
  '(region ((t (:inverse-video t))))
- '(trailing-whitespace ((t (:background "#eeeeee"))))
+ '(trailing-whitespace ((t (:background "#dddddd"))))
  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
+
+;; ;;daylight
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(default ((t (:background "skyblue" :foreground "#000000" :height 240))))
+;;  '(cursor ((t (:background "green"))))
+;;  '(font-lock-comment-face ((t (:foreground "#808080"))))
+;;  '(font-lock-keyword-face ((t (:foreground "#808080"))))
+;;  '(region ((t (:inverse-video t))))
+;;  '(trailing-whitespace ((t (:background "#eeeeee"))))
+;;  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
 
 ;; ;darker
 ;; (custom-set-faces
