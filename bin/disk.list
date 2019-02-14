@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# df -h
+sudo fdisk -l
+lsblk
+
+# mount 

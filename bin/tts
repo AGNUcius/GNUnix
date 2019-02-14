@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# flite -f "$@"
+# espeak -f "$@"
+# festival --tts "$@"
+espeak-ng -f  "$@"

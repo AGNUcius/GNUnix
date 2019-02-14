@@ -1,0 +1,11 @@
+#!/bin/bash
+# this is
+
+# # html->docx
+# libreoffice --headless --convert-to docx "$1"
+
+# docx->txt
+unoconv --doctype=txt "$@"
+
+# docx->pdf
+unoconv "$@"

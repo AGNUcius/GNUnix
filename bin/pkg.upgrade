@@ -1,0 +1,60 @@
+echo notes for now
+exit 1
+
+# https://fedoraproject.org/wiki/DNF_system_upgrade
+
+sudo dnf upgrade --refresh
+echo "reboot if kernel was upgraded"
+
+sudo dnf install dnf-plugin-system-upgrade
+
+releasever="$(lsb_release -r | awk '{print $2}')"
+let releasever++
+sudo dnf system-upgrade download --refresh --releasever=$releasever
+
+sudo dnf system-upgrade reboot
+
+# sudo rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-30-primary
+# sudo rpmconf -a
+sudo dnf check
+sudo dnf list extras
+sudo dnf autoremove
+sudo rpm --rebuilddb
+sudo dnf distro-sync
+# sudo dnf distro-sync --allowerasing
+sudo fixfiles onboot
+
+$ sudo dnf system-upgrade reboot
+# This will reboot your machine immediately. The system should boot again into Fedora using the same kernel, but this time, the upgrade process appears on the boot screen.
+
+# Optional post-upgrade tasks
+# These are tasks you can do after a successful upgrade. They are mostly intended for power users. If you are a general user who doesn't use terminal daily, you don't need to worry about this.
+
+# Update system configuration files
+# Most configuration files are stored in /etc. If there are any updates to them and you touched some of those files before, RPM creates new files with either .rpmnew suffix (the new default config file), or .rpmsave suffix (your old config file backed up). You can search for these files, go through the changes and make sure your custom changes are still included and the new defaults are applied as well. A tool that tried to simplify this is rpmconf. Install the package, and then use it as:
+
+# $ sudo rpmconf -a
+# See more information in its manual page.
+
+# Clean up old packages
+# You can see list of broken packages (unsatisfied dependencies, duplicated packages, etc) using this command:
+
+# $ sudo dnf check
+# Ideally there should be packages listed. If there are some, consider fixing the issues by removing them (or some of them). Always be careful and don't do anything you don't understand well (as somebody for an advice).
+
+# Some packages might stay on your system while they have been removed from the repositories. See them using:
+
+# $ sudo dnf list extras
+# If you don't use these, you can consider removing them: dnf remove $(dnf repoquery --extras --exclude=kernel,kernel-\*). Please note that this list is only valid if you have a fully updated system. Otherwise you'll see all installed packages which are no longer in the repositories, because there is a newer update available. So before acting on these, make sure you have run sudo dnf update and generate the list of extra packages again. Also, this list might contain packages installed from third-party repositories for which an updated repository hasn't been published yet. This often involves e.g. RPM Fusion or Dropbox.
+
+# You can remove no-longer-needed packages using:
+
+# $ sudo dnf autoremove
+# but beware that dnf decides that a package is no longer needed if you haven't explicitly asked to install it and nothing else requires it. That doesn't mean that package is not useful or that you don't use it. Only remove what you are certain you don't need. There's a known bug in PackageKit which doesn't mark packages as user-installed, see bug 1259865. If you use PackageKit (or GNOME Software, Apper, etc) for installation, this output might list even important apps and system packages, so beware.
+
+# $ sudo rpm --rebuilddb
+
+# If you see warnings that some actions were not allowed because of current SELinux policy, it might be a case of having some files incorrectly label with SELinux permissions. This might happen in case of some bug or if you had SELinux disabled in some point of time in the past. You can relabel the whole system by running:
+
+# $ sudo fixfiles onboot
+# and rebooting. The next boot will take a long time and will check and fix all SELinux labels on all your files.

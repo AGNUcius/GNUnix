@@ -8,16 +8,18 @@ if [[ "$3" == "" ]]; then
 fi
 
 ROKU="$1"
-echo "$ROKU" | grep ':' > nul
+echo "$ROKU" | grep ':' > /dev/null
 if [[ $? == 0 ]]; then
     printf "$ROKU == "
-    ROKU=$(arp -a | grep -i "${ROKU}" | awk '{print $2}' | sed 's/[()]//g')
+    ROKU=$(arp -a | grep -i "$ROKU" | awk '{print $2}' | sed 's/[()]//g')
     echo "$ROKU"
 fi
 
 USER="$2"
 PACK="$3"
 
-curl -vvv --user ${USER} --digest --fail-early --show-error --max-time 40 \
-	 --form "mysubmit=Replace" --form "archive=@${PACK}" \
-	 http://${ROKU}/plugin_install
+curl --user "$USER" --max-time 40 \
+	 --form "mysubmit=Install" --form "archive=@${PACK}" \
+     --verbose --silent --digest --fail --show-error \
+     --write-out "HTTPSTATUS:%{http_code}" --output /dev/null \
+	 http://${ROKU}/plugin_install 2>&1

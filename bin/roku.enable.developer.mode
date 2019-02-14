@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [[ "$1" == "" ]]; then
+    echo "Arg1: IP of roku"
+   exit 22
+fi
+
+roku.key $1 home
+roku.key $1 home
+roku.key $1 home
+roku.key $1 up
+roku.key $1 up
+
+roku.key $1 right
+roku.key $1 left
+roku.key $1 right
+roku.key $1 left
+roku.key $1 right

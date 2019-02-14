@@ -3,14 +3,14 @@
 #### Roku Like a Pro
 ## Keyboard control through UDP (SOCK_DGRAM)
 
-# Based on github.com/paulmouzas/roku-remote.git
+# Based on code from:
+# sdkdocs.roku.com/display/sdkdoc/External+Control+API
+# github.com/paulmouzas/roku-remote.git
 
 # sudo easy_install pip; pip install requests
-
 import requests, curses, socket, sys, subprocess
 
 # https://www.gnu.org/software/guile-ncurses/manual/html_node/Getting-characters-from-the-keyboard.html
-# https://sdkdocs.roku.com/display/sdkdoc/External+Control+API
 KEY_MAP = {}
 KEY_MAP.update({
     #curses.KEY_ENTER: 'SELECT', #Enter

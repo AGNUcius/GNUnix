@@ -851,7 +851,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:background "skyblue" :foreground "#000000" :height 240))))
- '(cursor ((t (:background "green"))))
+ '(cursor ((t (:background "red"))))
  '(font-lock-comment-face ((t (:foreground "#808080"))))
  '(font-lock-keyword-face ((t (:foreground "#808080"))))
  '(region ((t (:inverse-video t))))

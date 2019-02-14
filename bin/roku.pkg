@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ "$1" == "" ]]; then
+    echo "Arg1: Directory to Package"
+    exit 22
+fi
+
+set -e
+pushd "$1" # enter directory
+    zip -x '*.git*' -r "../${1}.zip" .
+popd

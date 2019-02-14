@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Dedoimedo.com/computers/fedora-22-iphone.html
+# Dedoimedo.com/computers/linux-iphone-6s-ios-11.html
+
+# if Fedora
+#     dnf install ifuse libplist libplist-python libimobiledevice-utils libimobiledevice-devel libimobiledevice usbmuxd
+
+# if Debian
+#     sudo apt-get install ideviceinstaller python-imobiledevice libimobiledevice-utils libimobiledevice6 libplist3 python-plist ifuse usbmuxd
+
+dmesg | grep -i usb
+
+read _ -n1 -r -p "Unlock Phone.
+Press space to continue..." key
+
+idevicepair pair
+
+# read _ -n1 -r -p "Press space to continue..." key
+
+# sudo usbmuxd -f -v
+
+# sudo mkdir /media/iPhone
+# sudo chown "$USER":"$GROUP" /media/iPhone
+# ifuse /media/iPhone/
+
+# systemctl enable usbmuxd
+# systemctl start usbmuxd

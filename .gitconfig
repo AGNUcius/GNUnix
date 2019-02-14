@@ -1,7 +1,7 @@
 [user]
 	name = Patrick Anderson
     # email = agnucius@gmail.com
-    email = Patrick.Anderson@EchoStar.com
+    email = pa169j@att.com
 
 [push]
 	default = current
@@ -21,7 +21,8 @@
 [alias]
     a = add
     b = branch
-    c = checkout
+    cl = clone
+    co = checkout
     d = diff
     f = fetch
     l = log -30
@@ -29,7 +30,6 @@
     n = for-each-ref --count=30 --sort=-committerdate refs/remotes/ --format='%(color:green)%(committername) %(color:black)%(contents:subject) %(color:white) %(committerdate:relative) %(color:yellow)%(refname:short) %(color:blue)%(objectname:short)%(color:black)'
     p = pull
     s = status
-    co = checkout
     gr = log --graph --full-history --all --color --pretty=tformat:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m"
     ishow = ! bash -c 'git show --pretty="format:"  --name-only "$(git merge-base "$(git rev-parse --abbrev-ref HEAD)" master)..HEAD" | grep -v "^$" | sort | uniq' -
     fshow = ! sh -c 'git show --pretty="format:" --name-only $1 | grep -v "^$" | uniq | sed -e "s#^#`git rev-parse --show-toplevel`/#"' -
@@ -70,9 +70,5 @@
   added = yellow
   changed = green
   untracked = cyan
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+[credential]
+	helper = store

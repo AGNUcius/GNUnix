@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ $1 == "" ]]; then
+    echo "Arg1: YouTube ID, such as '_CWpBlrVcjg'"
+    exit 22
+fi
+
+youtube-dl --list-formats "https://youtube.com/watch?v=$1"
