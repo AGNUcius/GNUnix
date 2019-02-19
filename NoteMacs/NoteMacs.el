@@ -1,7 +1,7 @@
 ;;; NoteMacs.el --- Make Emacs a little easier to use.
 
-;; Copyright (C): Product Futures Foundation
-;; Author: Patrick Anderson <AGNUcius@Gmail.com>
+;; Copyright (C): Future Products Foundation
+;; Author: Patrick T Anderson <Patrick.T.Anderson@gmail.com>
 
 ;; This file is Free Software.
 ;;  You can Use, Modify, Copy and Share it under the
@@ -740,7 +740,7 @@
  '(next-line-add-newlines nil)
  '(package-selected-packages
    (quote
-    (rg helm-rg deadgrep s charmap math-symbol-lists wanderlust markdown-mode rainbow-delimiters ripgrep nim-mode hide-lines flycheck-nimsuggest flycheck-rust flycheck-nim cycbuf ace-isearch magit pdf-tools lua-mode helm-youtube google-this bm)))
+    (solidity-flycheck solidity-mode rg helm-rg deadgrep s charmap math-symbol-lists wanderlust markdown-mode rainbow-delimiters ripgrep nim-mode hide-lines flycheck-nimsuggest flycheck-rust flycheck-nim cycbuf ace-isearch magit pdf-tools lua-mode helm-youtube google-this bm)))
  '(parens-require-spaces nil)
  '(pc-selection-mode t)
  '(read-buffer-completion-ignore-case t)
@@ -835,20 +835,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-;; <<<<<<< Updated upstream
-;;  '(default ((t (:background "skyblue" :foreground "#000000" :height 240))))
-;;  '(cursor ((t (:background "red"))))
-;;  '(font-lock-comment-face ((t (:foreground "#808080"))))
-;;  '(font-lock-keyword-face ((t (:foreground "#808080"))))
-;; =======
  '(default ((t (:inherit nil :background "#999999" :foreground "#000000" :height 200 :weight bold))))
  '(cursor ((t (:background "green"))))
  '(font-lock-comment-face ((t (:foreground "#007700"))))
  '(font-lock-keyword-face ((t (:foreground "#00ff00"))))
-;; >>>>>>> Stashed changes
  '(region ((t (:inverse-video t))))
  '(trailing-whitespace ((t (:background "#dddddd"))))
  '(w3m-anchor ((t (:inherit font-lock-keyword-face)))))
+
 
 ;; ;;daylight
 ;; (custom-set-faces

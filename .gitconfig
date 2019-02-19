@@ -20,6 +20,7 @@
 [alias]
     a = add
     b = branch
+    c = checkout
     cl = clone
     co = checkout
     d = diff

@@ -13,5 +13,5 @@ if [[ $? == 0 ]]; then
     echo "$ROKU"
 fi
 
-telnet $ROKU 8085
-
+echo "................WRITING ROKU.LOG................"
+telnet -f roku.log $ROKU 8085

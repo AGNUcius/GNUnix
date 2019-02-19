@@ -7,5 +7,6 @@ if [[ "$3" == "" ]]; then
    exit 22
 fi
 
-roku.pkg "$1" "$3.zip"
-roku.add "$@"
+set -e
+roku.pkg "$3" "$3.zip"
+roku.add "$1" "$2" "$3.zip"
